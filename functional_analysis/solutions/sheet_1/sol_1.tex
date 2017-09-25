@@ -1,0 +1,44 @@
+\input{../latex/header.tex}
+
+\title{Solutions Sheet 1}
+\author{Yannis B\"{a}hni}
+\address[Yannis B\"{a}hni]{University of Zurich, R\"{a}mistrasse 71, 8006 Zurich}
+\email[Yannis B\"{a}hni]{\href{mailto:yannis.baehni@uzh.ch}{yannis.baehni@uzh.ch}}
+
+\begin{document}
+\maketitle
+\thispagestyle{fancy}
+
+\begin{enumerate}[label = \textbf{Exercise \arabic*.},wide = 0pt, itemsep=1.5ex]
+\item For reference, the topology in part a) is the so called \bld{countable complement topology} (see \cite[45]{lee:topological_manifolds:2011}) and part b) can be found in \cite[169]{munkres:topology:2000}.
+	\begin{enumerate}[label = \alph*),wide = 0pt, itemsep=1.5ex]
+		\item Let $X$ be an arbitrary set. Clearly $\varnothing,X \in \Tcal$ since $X^c = \varnothing$ is countable. Let $(U_\iota)_{\iota \in I}$ be a family of sets in $\Tcal$. If $U_\iota = \varnothing$, then $\cup_{\iota \in I} U_\alpha = \varnothing \in \Tcal$. So assume that $U_{\iota_0} \neq \varnothing$ for some $\iota_0 \in A$. But then $U^c_{\iota_0}$ is countable, and so is $(\cup_{\iota \in I} U_\iota)^c = \cap_{\iota \in I}U_\alpha^c \subseteq U^c_{\iota_0}$. Lastly, let $U_1,\dots,U_n \in \Tcal$ for $n\in \mathbb{Z}$, $n \geq 1$. If $U_\iota = \varnothing$ for some $\iota$, then $\cap_{\iota = 1}^n U_\iota = \varnothing$ and thus $\cap_{\iota = 1}^n U_\iota \in \Tcal$. So assume that $U_\iota \neq \varnothing$ for $\iota = 1,\dots,n$. Then $(\cap_{\iota = 1}^n U_\iota)^c = \cup_{\iota = 1}^n U_\iota^c$ which is a finite union of countable sets, which is countable. Hence $\Tcal$ is indeed a topology on $X$.
+		\item Assume that there is a family $(A_\iota)_{\iota \in I}$ of closed subsets of $X$ having the finite intersection property such that $\cap_{\iota \in I} A_\iota = \varnothing$. Then since each $A_\iota$ is closed and $\cup_{\iota \in I} A^c_\iota = (\cap_{\iota \in I} A_\iota)^c = X$ we have that $(A^c_\iota)_{\iota \in I}$ is a cover for $X$. Now for any $J \subseteq I$ finite, the intersection $\cap_{\iota \in J} Aa_\iota$ is nonempty. This implies, that $\cup_{\iota \in J} A_\iota^c \neq X$ and thus the cover $(A^c_\iota)_{\iota \in I}$ of $X$ does not possess a finite subcover, hence $X$ is not compact.\\
+		Conversly, suppose that there exists a cover $(A_\iota)_{\iota \in I}$ which does not posses a finite subcover. Thus we have for any $J \subseteq I$ finite, that $\cup_{\iota \in J} A_\iota \neq X$ or equivalently, $\cap_{\iota \in J} A^c_\iota \neq \varnothing$. Thus the family $(A^c_\iota)_{\iota \in I}$ has the finite intersection property and each $A_\iota^c$ is closed since $A_\iota$ is open. But since $(A_\iota)_{\iota \in I}$ is a cover for $X$, we have that $\cap_{\iota \in I} A^c_\iota = \varnothing$.
+	\end{enumerate}
+\item
+	~
+	\begin{enumerate}[label = \alph*),wide = 0pt, itemsep=1.5ex]
+		\item Clearly, $\varnothing,X \in \Tcal_d$. Let $(U_\iota)_{\iota \in I}$ be a family of elements in $\Tcal_d$ and let $x \in \cup_{\iota \in I}U_\iota$. Then there exists $\iota \in I$ such that $x \in U_\iota$. Thus there exists $\varepsilon > 0$ such that $B_\varepsilon(x) \subseteq U_\iota$. Hence $B_\varepsilon(x) \subseteq \cup_{\iota \in I} U_\iota$. Lastly, let $U_1,\dots,U_n \in \Tcal$ for $n\in \mathbb{Z}$, $n \geq 1$, and $x \in \cap_{\iota = 1}^n U_\iota$. Hence there exist $\varepsilon_1,\dots,\varepsilon_n > 0$ such that $B_{\varepsilon_\iota}(x) \subseteq U_\iota$ and so $B_{\min_\iota \varepsilon_\iota}(x) \subseteq \cap_{\iota = 1}^n U_\iota$. Thus $\Tcal_d$ is a topology on $X$. 
+		\item Define $f : \intoo{0,\infty} \to \Rbb$ by $f(x) := 1/x$. Then clearly $d_2 = \widetilde{d_2}\vert_M$, where 
+		\begin{equation*}
+			\widetilde{d_2} : \intoo{0,\infty} \times \intoo{0,\infty} \xrightarrow{f \times f}{} f\del[1]{\intoo{0,\infty}} \times f\del[1]{\intoo{0,\infty}} \xrightarrow{\abs[0]{\cdot,\cdot}}{} \Rbb
+		\end{equation*}
+		\noindent and
+		\begin{equation*}
+			d_1 : M \times M \xrightarrow{f \times f}{} f(M) \times f(M) \xrightarrow{\widetilde{d_2}}{} \Rbb.
+		\end{equation*}
+		\noindent By \cite[62]{lee:topological_manifolds:2011} $f \times f$ is continuous and by \cite[260]{engelking:general_topology:1989} $\abs[0]{\cdot,\cdot}$ and $\widetilde{d_2}$ are continuous. Since two metrics induce the same topology if and only if they induce the same convergence (see \cite[250]{engelking:general_topology:1989}), we let $x \in M$ and $(x_n)_{n \in \mathbb{N}}$ be a sequence in $M$. Assume that $x_n \xrightarrow{d_1}{} x$. Then 
+		\begin{equation*}
+			d_2(x,x_n) = d_1\del[1]{f(x),f(x_n)} \to  d_1\del[1]{f(x),f(x)} = 0
+		\end{equation*}
+		\noindent and
+		\begin{equation*}
+			d_1(x,x_n) = d_2\del[1]{f(x),f(x_n)} \to  d_2\del[1]{f(x),f(x)} = 0
+		\end{equation*}
+		\noindent by \cite[260]{engelking:general_topology:1989}.\\
+		Now consider the sequence $(n)_{n \in \mathbb{N}}$ in $M$. Clearly, it is a Cauchy sequence since $(1/n)_{n \in \mathbb{N}}$ is a Cauchy sequence regarding the standard Euclidean metric and it cannot converge, since then it would also converge with respect to $d_1$ which is not the case. The completeness of $(M,d_1)$ directly follows from the fact that a closed subspace of a complete metric space is complete.		 
+	\end{enumerate}
+\end{enumerate}
+\printbibliography
+\end{document}

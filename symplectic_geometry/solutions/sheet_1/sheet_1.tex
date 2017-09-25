@@ -1,0 +1,192 @@
+\input{../latex/header.tex}
+
+\title{Homework 1: Symplectic Linear Algebra}
+\author{Yannis B\"ahni}
+\address[Yannis B\"ahni]{University of Zurich, R\"amistrasse 71, 8006 Zurich}
+\email[Yannis B\"ahni]{\href{mailto:yannis.baehni@uzh.ch}{yannis.baehni@uzh.ch}}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+\setcounter{section}{1}
+
+\begin{exercise}
+Let $(V,\Omega)$ be a symplectic vector space and $Y,W \subseteq V$ be linear subspaces.
+\begin{enumerate}[label = \textup{(}\alph*\textup{)}]
+\item $\dim Y + \dim Y^\Omega = \dim V$.
+\item $\del[1]{Y^\Omega}^\Omega = Y$.
+\item $Y \subseteq W \Leftrightarrow W^\Omega \subseteq Y^\Omega$.
+\item $\Omega\vert_{Y}$ nondegenerate $\Leftrightarrow Y \cap Y^\Omega = \cbr[0]{0} \Leftrightarrow V = Y \oplus Y^\Omega$.
+\item If $Y \subseteq Y^\Omega$, then $\dim Y \leq \frac{1}{2}\dim V$.
+\item If $\dim Y = 1$, then $Y$ is isotropic.
+\item If $Y$ is of codimension $1$, then $Y$ is coisotropic. 
+\item $Y$ lagrangian $\Leftrightarrow$ $Y$ isotropic and coisotropic $\Leftrightarrow$ $Y = Y^\Omega$.
+\end{enumerate}
+\end{exercise}
+
+\begin{solution}
+	For proving (a), consider the mapping $\Phi : V \to Y^*$ defined by $\Phi(v) := \Omega(v,\cdot)\vert_Y$. Clearly, $\ker \Phi = Y^\Omega$. Let $\varphi \in Y^*$. By exercise B.13 \cite[623]{lee:smooth_manifolds:2013}, there exists an extension $\wtilde{\varphi} \in V^*$ of $\varphi$, i.e. $\wtilde{\varphi}\vert_Y = \varphi$. Since $\wtilde{\Omega}$ is an isomorphism, there exists $v \in V$ such that $\wtilde{\varphi} = \Omega(v,\cdot)$. Which implies $\wtilde{\varphi}\vert_Y = \Omega(v,\cdot)\vert_Y$. Hence we get that $\Phi$ is surjective and thus the rank-nullity law \cite[627]{lee:smooth_manifolds:2013} implies that 
+\begin{equation*}
+	\dim V = \dim(\Phi(V)) + \dim(\ker\Phi) = \dim Y^* + \dim Y^\Omega = \dim Y + \dim Y^\Omega
+\end{equation*}
+\noindent since $V$ is finite dimensional.\\
+For proving (b), let $v \in Y$. Then for any $u \in Y^\Omega$ we have that $\Omega(v,u) = - \Omega(u,v) = 0$ and thus $Y \subseteq \del[1]{Y^\Omega}^\Omega$. Hence $Y$ is a linear subspace of $\del[1]{Y^\Omega}^\Omega$. Furthermore part (a) yields
+\begin{equation*}
+\dim Y = \dim V - \dim Y^\Omega = \dim \del[1]{Y^\Omega}^\Omega.
+\end{equation*}
+\noindent Thus exercise B.4. (b) \cite[620]{lee:smooth_manifolds:2013} implies that $\del[1]{Y^\Omega}^\Omega = Y$.\\
+For proving (c), suppose that $Y \subseteq W$ and let $v \in W^\Omega$. Then for any $u \in Y$ we have that $\Omega(v,u) = 0$ and thus $W^\Omega \subseteq Y^\Omega$. Conversly, suppose that $W^\Omega \subseteq Y^\Omega$. By part (b) we can also show that $\del[1]{Y^\Omega}^\Omega \subseteq \del[1]{W^\Omega}^\Omega$ holds. But this is easily seen.\\
+For proving (d), we show the two equivalences separately. The first equivalence follows immediately from the observation that
+\begin{equation*}
+	\ker \widetilde{\Omega\vert_{Y}} = \cbr[0]{v \in Y : \forall u \in Y\del[0]{\Omega\vert_Y(v,u) = 0}} = Y \cap Y^\Omega.
+\end{equation*}
+For showing the second equivalence, assume that $Y \cap Y^\Omega = \cbr[0]{0}$. Part (a) and exercise B.8 \cite[621]{lee:smooth_manifolds:2013} yield
+\begin{equation*}
+\dim(Y + Y^\Omega) = \dim Y + \dim Y^\Omega - \dim(Y \cap Y^\Omega) = \dim Y + \dim Y^\Omega = \dim V.
+\end{equation*}
+Thus again exercise B.4. (b) \cite[620]{lee:smooth_manifolds:2013} implies that $Y + Y^\Omega = V$. Therefore $V = Y \oplus Y^\Omega$. The other implication simply holds by the definition of the direct sum.\\
+(e) directly follows from (a) and exercise B.4. \cite[620]{lee:smooth_manifolds:2013} since
+\begin{equation*}
+\dim V = \dim Y + \dim Y^\Omega \geq 2\dim Y.
+\end{equation*}
+For proving (f), let $v \in Y \setminus \cbr[0]{0}$. Then every element of $Y$ can be written uniquely as $\lambda v$ for some $\lambda \in \Rbb$. Thus by the alternating property of $\Omega$ we get that
+\begin{equation*}
+	\Omega(\lambda v,\mu v) = \lambda \mu \Omega(v,v) = 0
+\end{equation*}
+\noindent for all $\lambda,\mu \in \Rbb$ and so $Y \subseteq Y^\Omega$.\\
+For proving (g), we observe that part (a) yields $\dim Y^\Omega = 1$. Thus $Y^\Omega$ is isotropic by part (f) and therefore $Y^\Omega \subseteq (Y^\Omega)^\Omega = Y$ by part (b).\\
+For proving (h), we first observe that the second equivalence is trivially true. We show that $Y$ is lagrangian if and only if $Y = Y^\Omega$. Assume that $Y$ is lagrangian. From part (a) immediately follows that $\dim Y = \dim Y^\Omega$. Since $Y \subseteq Y^\Omega$ we get that $Y = Y^\Omega$. Conversly, assume that $Y = Y^\Omega$. Using again part (a) we get that $2\dim Y = \dim V$.
+\end{solution}
+
+\begin{exercise}
+	Let $(V,\Omega)$ be a symplectic vector space and $E$ be a finite dimenisonal real vector space.
+\begin{enumerate}[label = \textup{(}\alph*\textup{)}]
+\item $(E \oplus E^*,\Omega_0)$ is a symplectic vector space where 
+	\begin{equation}
+		\Omega_0(u \oplus \alpha, v \oplus \beta) := \beta(u) - \alpha(v).
+	\end{equation}
+	Moreover, if $(e_i)$ is a symplectic basis for $E$, then $(e_i \oplus 0, 0 \oplus e_i^*)$ is a symplectic basis for $(E \oplus E^*,\Omega_0)$.
+\item If $Y$ is a lagrangian subspace of $V$, then $V$ is symplectomorphic to $(Y \oplus Y^*,\Omega_0)$. 
+\item If $Y$ is a lagrangian subspace of $V$, then any basis $(e_i)$ of $Y$ can be extended to a symplectic basis for $V$.
+\end{enumerate}
+\end{exercise}
+
+\begin{remark}
+	We intentionally switched the order of exercises which does feel in our view more natural. Clearly, the exericse was not mentioned to solve that way since we will use a more advanced concept from chapter 12. But we think that this solution adds some more generality to the theory.
+\end{remark}
+
+\begin{solution}
+	For proving (a), we observe that bilinearity and skew-symmetry is immediate from the definition of $\Omega_0$. Hence we have to show that $\Omega_0$ is nondegenerate. Assume that $u \oplus \alpha \in \ker \Omega_0$. Hence we have that $\beta(u) = \alpha(v)$ for all $v \oplus \beta \in E \oplus E^*$. Assume that $u \neq 0$. Then we find $\beta \in E^*$ such that $\beta(u) \neq 0$. Setting $v = 0$ yields a contradiction and thus $u = 0$. Assume that $\alpha \neq 0$. Hence we find $v \in E$ such that $\alpha(v) \neq 0$. Hence setting $\beta = 0$ again yields a contradiction. Thus $\alpha = 0$ and so $\Omega_0$ is nondegenerate. The symplectic form is canonical in the sense that its definition does not depend on a choice of a basis for $E \oplus E^*$. That $(e_i \oplus 0, 0 \oplus e_i^*)$ is a symplectic basis follows directly from 
+	\begin{equation*}
+		\Omega_0(e_i \oplus 0, e_j \oplus 0) = 0 = \Omega_0(0 \oplus e_i^*, 0 \oplus e_j^*)
+	\end{equation*}
+	\noindent and
+	\begin{equation*}
+		\Omega_0(e_i \oplus 0, 0 \oplus e_j^*) = e_j^*(e_i) = \delta_{ij}.
+	\end{equation*}
+	To prove (b), let $J$ be a compatible complex structure on $(V,\Omega)$ (the existence is assured by \cite[84]{dasilva:symplectic:2008}). Thus lemma \ref{lem:decomposition} implies that $V = Y \oplus J(Y)$. Define a mapping $\varphi: Y \oplus J(Y) \to Y \oplus Y^*$ by 
+\begin{equation*}
+\varphi\del[1]{x + J(y)} := x \oplus -\Phi\del[1]{J(y)}
+\end{equation*}
+\noindent where $\Phi : J(y) \to Y^*$ is the isomorphism constructed in lemma \ref{lem:decomposition}. $\Phi$ is easily seen to be an isomorphism. Moreover
+\begin{align*}
+(\varphi^*\Omega_0)\del[1]{x + J(y),x' + J(y')} &= \Omega_0\del[1]{\varphi(x + J(y)), \varphi(x' + J(y'))}\\
+&= \Omega_0\del[1]{x \oplus -\Omega\del[1]{J(y),\cdot}\big\vert_Y, x' \oplus -\Omega\del[1]{J(y'),\cdot}\big\vert_Y}\\
+&= -\Omega\del[1]{J(y'),x} + \Omega\del[1]{J(y),x'}\\
+&= \Omega\del[1]{x + J(y),x' + J(y')}.
+\end{align*}
+Hence $\varphi$ is a symplectomorphism.\\
+To prove (c), we observe that by part (a) and (b) and lemma \ref{lem:symplectic_basis}, $\del[1]{\varphi^{-1}(e_i \oplus 0), \varphi^{-1}(0 \oplus e_i^*)}$ is a symplectic basis for $V$, but $\varphi^{-1}\del[1]{u \oplus \alpha} = u - \Phi^{-1}(\alpha)$ and thus $(e_i)$ is part of the symplectic basis.
+\end{solution}
+
+\begin{exercise}
+	Let $V$ be a finite dimensional real vector space.
+\begin{enumerate}[label = \textup{(}\alph*\textup{)}]
+	\item Any $\Omega \in \Lambda^2(V^*)$ is of the form
+		\begin{equation}
+			\Omega = \sum_{i = 1}^n e_i^* \wedge f_i^*
+		\end{equation}
+		\noindent where $(u_i,e_i,f_i)$ is a basis for $V$ provided by the standard form theorem \cite[3]{dasilva:symplectic:2008}.
+	\item Assume $\dim V = 2n$ and $\Omega \in \Lambda^2(V^*)$. Then $\Omega$ is symplectic if and only if $\Omega^n \neq 0$.
+\end{enumerate}
+\end{exercise}
+
+\begin{solution}
+	For proving (a), we have that if $(v_i)$ is any basis for $V$, then
+	\begin{equation*}
+		\Omega = \sum_{i < j} \Omega(v_i,v_j) v_i^* \wedge v_j^*
+	\end{equation*}
+	\noindent by \cite[353]{lee:smooth_manifolds:2013}. Thus the statement directly follows from the standard form theorem.\\
+	For proving (b), let $(e_i,f_i)$ be a symplectic basis for $V$. By part (a) we have that 
+	\begin{equation*}
+		\Omega = \sum_{i = 1}^n e_i^* \wedge f_i^*.
+	\end{equation*}
+	We claim that
+	\begin{equation}
+		\PARENS{\sum_{i = 1}^n e_i^* \wedge f_i^*}^n = n! \PARENS{e_1^* \wedge f_1^* \wedge \dots \wedge e_n^* \wedge f_n^*}.
+		\label{eq:power}
+	\end{equation}
+	We do a proof by induction over $n$. The formula trivially holds for $n = 1$. So assume that it holds for some $n \geq 1$. The binomial theorem yields
+	\begin{align*}
+		\PARENS{\sum_{i = 1}^{n + 1} e_i^* \wedge f_i^*}^{n + 1} =& \PARENS{\sum_{i = 1}^{n + 1} e_i^* \wedge f_i^*}^n \wedge \PARENS{\sum_{i = 1}^{n + 1} e_i^* \wedge f_i^*}\\
+		=& \PARENS{\sum_{i = 1}^n e_i^* \wedge f_i^* + e_{n + 1}^* \wedge f_{n + 1}^*}^n \wedge \PARENS{\sum_{i = 1}^{n + 1} e_i^* \wedge f_i^*}\\
+		=& \PARENS{\sum_{k = 0}^n {n \choose k}  \PARENS{\sum_{i = 1}^n e_i^* \wedge f_i^*}^k \wedge \PARENS{ e_{n + 1}^* \wedge f_{n + 1}^*}^{n - k}} \wedge \PARENS{\sum_{i = 1}^{n + 1} e_i^* \wedge f_i^*}\\
+		=& \PARENS{\sum_{i = 1}^n e_i^* \wedge f_i^*}^n \wedge \PARENS{\sum_{i = 1}^{n + 1} e_i^* \wedge f_i^*}\\
+		& + n\PARENS{\sum_{i = 1}^n e_i^* \wedge f_i^*}^{n - 1} \wedge \PARENS{ e_{n + 1}^* \wedge f_{n + 1}^*} \wedge \PARENS{\sum_{i = 1}^{n + 1} e_i^* \wedge f_i^*}\\
+		=& n! \PARENS{e_1^* \wedge f_1^* \wedge \dots \wedge e_{n + 1}^* \wedge f_{n + 1}^*}\\
+		&+ n\PARENS{\sum_{i = 1}^n e_i^* \wedge f_i^*}^n \wedge \PARENS{ e_{n + 1}^* \wedge f_{n + 1}^*}\\
+		=&  (n + 1)! \PARENS{e_1^* \wedge f_1^* \wedge \dots \wedge e_{n + 1}^* \wedge f_{n + 1}^*}.
+	\end{align*}
+	The use of the binomial theorem is justified since elements of $\Lambda^2(V^*)$ commute under the wedge product by \cite[356]{lee:smooth_manifolds:2013}. Hence
+	\begin{equation*}
+		\Omega^n = n! \PARENS{e_1^* \wedge f_1^* \wedge \dots \wedge e_n^* \wedge f_n^*} \neq 0.
+	\end{equation*}
+	Conversly, assume that $\Omega^n \neq 0$. Assume that $\Omega$ is degenerate. Hence there exists a basis
+	\begin{equation*}
+		u_1,\dots,u_k,e_1,\dots,e_m,f_1,\dots,f_m
+	\end{equation*}
+	\noindent of $f$ such that $m < n$. But then part (a) together with (\ref{eq:power}) yield
+	\begin{equation*}
+		\Omega^n = m! \PARENS{e_1^* \wedge f_1^* \wedge \dots \wedge e_m^* \wedge f_m^*} \wedge \PARENS{\sum_{i = 1}^m e_i^* \wedge f_i^*}^{n - m} = 0.
+	\end{equation*}
+\end{solution}
+
+\appendix
+\begin{appendix}
+	\section{Lagrangian Subspaces, Compatible Structures and Symplectic Bases}
+	The next lemma is adapted from exercise 3. (a), homework 8 \cite[88]{dasilva:symplectic:2008}.
+	\begin{lemma}
+		Let $(V,\Omega)$ be a symplectic vector space, $J$ be a compatible complex structure on $V$ and $Y$ a lagrangian subspace of $V$. Then $J(Y)$ is a lagrangian subspace, $V = Y \oplus J(Y)$ and $J(Y) \cong Y^*$.
+		\label{lem:decomposition}
+	\end{lemma}
+
+	\begin{proof}
+		Clearly $\dim J(Y) = \dim Y = \frac{1}{2}\dim V$ since $J$ is invertible and $J(Y) \subseteq J(Y)^\Omega$ since $\Omega(J\cdot,J\cdot) = \Omega(\cdot,\cdot)$ and $Y = Y^\Omega$. Hence $J(Y)$ is lagrangian and thus 
+\begin{equation*}
+V = Y \oplus Y^\perp = Y \oplus J(Y)^\Omega = Y \oplus J(Y)
+\end{equation*}
+\noindent by exercise B.45. \cite[637]{lee:smooth_manifolds:2013}. Consider $\Phi : J(Y) \to Y^*$ defined by 
+\begin{equation*}
+\Phi\del[1]{J(y)} := \Omega\del[1]{J(y),\cdot}\big\vert_Y. 
+\end{equation*}
+Let $J(y) \in \ker \Phi$. Then $\Omega\del[1]{J(y),w} = 0$ for all $w \in Y$. Especially $\Omega\del[1]{J(y),y} = 0$. But this is only possible if $y = 0$. Thus $\Phi$ is injective and due to dimensional reasons surjective, hence an isomorphism. 
+	\end{proof}
+
+	\begin{lemma}
+		Let $(V,\Omega)$ and $(V',\Omega')$ be symplectic vector spaces and $\varphi : V \to V'$ a symplectomorphism. If $(e_i,f_i)$ is a symplectic basis for $V$, then $\del[1]{\varphi(e_i),\varphi(f_i)}$ is a symplectic basis for $V'$.
+		\label{lem:symplectic_basis}
+	\end{lemma}
+
+	\begin{proof}
+		We have that
+\begin{align*}
+	&\Omega'\PARENS{\varphi(e_i),\varphi(e_j)} = (\varphi^*\Omega')(e_i,e_j) = \Omega(e_i,e_j) = 0\\
+&\Omega'\PARENS{\varphi(f_i),\varphi(f_j)} = (\varphi^*\Omega')(f_i,f_j) = \Omega(f_i,f_j) = 0\\
+&\Omega'\PARENS{\varphi(e_i),\varphi(f_j)} = (\varphi^*\Omega')(e_i,f_j) = \Omega(e_i,f_j) = \delta_{ij}.
+\end{align*}
+	\end{proof}
+\end{appendix}
+
+\printbibliography
+\end{document}
