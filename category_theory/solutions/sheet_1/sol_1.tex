@@ -1,0 +1,43 @@
+\input{../latex/header.tex}
+
+\title{Solutions Sheet 1}
+\author{Yannis B\"{a}hni}
+\address[Yannis B\"{a}hni]{University of Zurich, R\"{a}mistrasse 71, 8006 Zurich}
+\email[Yannis B\"{a}hni]{\href{mailto:yannis.baehni@uzh.ch}{yannis.baehni@uzh.ch}}
+
+\begin{document}
+\maketitle
+\thispagestyle{fancy}
+
+\begin{enumerate}[label = \textbf{Exercise \arabic*.},wide = 0pt, itemsep=1.5ex]
+	\item ~
+		\begin{enumerate}[label = \textup{(}\alph*\textup{)}]
+			\item Clearly, this holds for the discrete topology, i.e. $\Tcal_a = 2^X$. Let $\Tcal_a'$ be another topology on $X$ satisfying the property. Consider the fucntions $f : (X,2^X) \to (X,\Tcal_a')$ and $g : (X,\Tcal_a') \to (X,2^X)$ defined by $f(x) := x$ and $g(x) := x$, respectively. Since both topologies on $X$ have the property, we get that $f$ and $g$ are continuous. Moreover
+				\begin{equation*}
+					g \circ f = \id_{(X,2^X)} \qquad \text{and} \qquad f \circ g = \id_{(X,\Tcal_a')}.
+				\end{equation*}
+				Thus $(X,2^X) \approx (X,\Tcal_a')$.
+			\item
+		\end{enumerate}
+	\item 
+	\item
+	\item Let $g,\wtilde{g} : Y \to X$ be inverses of $f$. Then we have
+		\begin{equation*}
+			g = g \circ \id_Y = g \circ (f \circ \wtilde{g}) = (g \circ f) \circ \wtilde{g} = \id_X \circ \wtilde{g} = \wtilde{g}.
+		\end{equation*}
+		Thus we can unambiguously write $f^{-1} := g$.
+	\item We have that 
+		\begin{align*}
+			&\PARENS{(g \circ f)^{-1} \circ g} \circ f = (g \circ f)^{-1} \circ (g \circ f) = \id_X\\
+			&\PARENS{(h \circ g)^{-1} \circ h} \circ g = (h \circ g)^{-1} \circ (h \circ g) = \id_Y\\
+			&h \circ \PARENS{g \circ (h \circ g)^{-1}} = (h \circ g) \circ (h \circ g)^{-1} = \id_W
+		\end{align*}
+		\noindent 
+	\item Assume $f : X \to Y$ has the left cancellation property. Let $x,y \in X$ such that $f(x) = f(y)$. Now let $Z := \cbr[0]{x,y}$. Define two functions $c_x,c_y : Z \to X$ by $c_x(z) := x$ and $c_y(z) := y$, respectively. Now
+		\begin{equation*}
+			f \circ c_x = f(x) = f(y) = f \circ c_y
+		\end{equation*}
+		\noindent holds by assumption. Thus the left cancellation property implies that $c_x = c_y$, hence $x = y$ and $f$ is injective. Conversly, assume that $f$ is injective. Let $\alpha,\beta : Z \to X$ such that $f \circ \alpha = f \circ \beta$ and $z \in Z$. Then we have that $f(\alpha(z)) = f(\beta(z))$ and thus by injectivity, $\alpha(z) = \beta(z)$. 
+\end{enumerate}
+\printbibliography
+\end{document}
