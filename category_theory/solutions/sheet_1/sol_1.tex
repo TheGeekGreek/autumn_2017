@@ -10,7 +10,7 @@
 \thispagestyle{fancy}
 
 \begin{enumerate}[label = \textbf{Exercise \arabic*.},wide = 0pt, itemsep=1.5ex]
-	\item ~
+	\item \label{exercise_1}~
 		\begin{enumerate}[label = \textup{(}\alph*\textup{)}]
 			\item The pair $(D(X),i)$ has the universal property
 				\begin{figure}[h!tb]
@@ -19,7 +19,7 @@
 						 & \forall (Y,\Tcal_Y).}
 					\end{displaymath}
 				\end{figure}\\
-				Assume, that there is another pair $(i',D'(X))$ with this property. Thus we get the two commuting diagrams
+				Assume, that there is another pair $(D'(X),i')$ with this property. Thus we get the two commuting diagrams
 
 				\begin{figure}[h!tb]
 					\begin{subfigure}{0.3\textwidth}
@@ -36,9 +36,62 @@
 						\end{displaymath}
 					\end{subfigure}
 				\end{figure}
+				Putting them together yields
+				\begin{figure}[h!tb]
+					\begin{subfigure}{0.3\textwidth}
+						\begin{displaymath}
+							\xymatrix{& D(X) \ar[d]^{\wbar{i'}}\\
+							X \ar[ur]^i \ar[r]^{i'}\ar[dr]_{i} & D'(X) \ar[d]^{\wbar{i}}\\
+						 		& D(X),}
+						\end{displaymath}
+					\end{subfigure}
+					\quad
+					\begin{subfigure}{0.3\textwidth}
+						\begin{displaymath}
+							\xymatrix{& D'(X) \ar[d]^{\wbar{i}}\\
+							X \ar[ur]^{i'} \ar[r]^{i}\ar[dr]_{i'} & D(X) \ar[d]^{\wbar{i'}}\\
+						 		& D'(X).}
+						\end{displaymath}
+					\end{subfigure}
+				\end{figure}\\
+				Hence
+				\begin{equation*}
+					(\wbar{i} \circ \wbar{i'}) \circ i = i \qquad \text{and} \qquad (\wbar{i'} \circ \wbar{i}) \circ i' = i'.
+				\end{equation*}
+				Since also $\id_{D(X)} \circ i = i$ and $\id_{D'(X)} \circ i' = i'$, uniqueness implies that 
+				\begin{equation*}
+					\wbar{i} \circ \wbar{i'} = \id_{D(X)} \qquad \text{and} \qquad \wbar{i'} \circ \wbar{i} = \id_{D'(X)}.
+				\end{equation*}
+				Thus $D(X) \cong D'(X)$ uniquely.
+			\item Let $I(X) := (X,\cbr[0]{\varnothing,X})$ be the \bld{indiscrete topological space}. Define a mapping $\pi : I(X) \to X$ by $\pi(x) := x$. Then the tuple $(I(X),\pi)$ has the following universal property:
+				\begin{figure}[h!tb]
+					\begin{displaymath}
+						\xymatrix{X & I(X) \ar[l]_\pi \\
+						 & \forall (Y,\Tcal_Y). \ar[ul]^{\forall \text{ functions } f}\ar[u]_{\exists ! \text{ continuous } \wbar{f}}}
+					\end{displaymath}
+				\end{figure}\\
+				Now the argumentation is the same as in part (a).
 		\end{enumerate}
-	\item 
-	\item
+	\item ~
+		\begin{enumerate}[label = \textup{(}\alph*\textup{)}]
+			\item First we show that $(\Zbb\sbr[0]{X},X)$ has the claimed property. Let $R$ be a unital ring with $r \in R$. Then there exists a unique homomorphism of rings $\varphi : \Zbb \to R$. Define $f : \Zbb\sbr[0]{X} \to R$ by 
+				\begin{equation*}
+					f\PARENS{\sum_{\iota = 0}^n a_\iota X^\iota} := \sum_{\iota = 0}^n \varphi(a_\iota)r^\iota.
+				\end{equation*}
+				Clearly, $f(X) = r$. Also it is easy to check that $f$ is a homomorphism of rings. Assume that $g : \Zbb\sbr[0]{X} \to R$ is a homomorphism of rings such that $g(X) = r$. Then
+				\begin{equation*}
+					g\PARENS{\sum_{\iota = 0}^n a_\iota X^\iota} = \sum_{\iota = 0}^n g(a_\iota)g(X)^\iota = \sum_{\iota = 0}^n g(a_\iota)r^\iota = \sum_{\iota = 0}^n \varphi(a_\iota)r^\iota = f\PARENS{\sum_{\iota = 0}^n a_\iota X^\iota}
+				\end{equation*}
+				\noindent by the uniqueness of $\varphi$ ($g$ induces a homomorphism of rings $\Zbb \to R$). Consider the following diagram:
+				\begin{figure}[h!tb]
+					\begin{displaymath}
+						\xymatrixcolsep{2cm}\xymatrix{(\Zbb\sbr[0]{X},X) \ar[r]^{\exists ! f, f(X) = a } & (A,a) \ar[r]^{\exists ! g, g(a) = X} & (\Zbb\sbr[0]{X},X) \ar[r]^{\exists ! f, f(X) = a } & (A,a)}.
+					\end{displaymath}	
+				\end{figure}\\
+				Now $\id_{(\Zbb\sbr[0]{X},X)}(X) = X$ and $g(f(X)) = X$, thus by uniqueness $g \circ f = \id_{(\Zbb\sbr[0]{X},X)}$ and similarly $f \circ g = \id_{(A,a)}$.
+			\item
+		\end{enumerate}
+	\item Existence was shown in the lecture, the so-called \bld{free group}. Uniqueness is shown exactly as in \ref{exercise_1}.
 	\item Let $g,\wtilde{g} : Y \to X$ be inverses of $f$. Then we have
 		\begin{equation*}
 			g = g \circ \id_Y = g \circ (f \circ \wtilde{g}) = (g \circ f) \circ \wtilde{g} = \id_X \circ \wtilde{g} = \wtilde{g}.
@@ -49,12 +102,38 @@
 			& \PARENS{(g \circ f)^{-1} \circ g \circ (h \circ g)^{-1}} \circ (h \circ g \circ f) = \id_X\\
 			& (h \circ g \circ f) \circ \PARENS{(g \circ f)^{-1} \circ g \circ (h \circ g)^{-1}} = \id_W.
 		\end{align*}
+		Moreover
 		\begin{align*}
-			&\PARENS{(g \circ f)^{-1} \circ g} \circ f = (g \circ f)^{-1} \circ (g \circ f) = \id_X\\
 			&\PARENS{(h \circ g)^{-1} \circ h} \circ g = (h \circ g)^{-1} \circ (h \circ g) = \id_Y\\
-			&h \circ \PARENS{g \circ (h \circ g)^{-1}} = (h \circ g) \circ (h \circ g)^{-1} = \id_W
+			&g \circ \PARENS{f \circ (g \circ f)^{-1}} = (g \circ f) \circ (g \circ f)^{-1} = \id_Z.
 		\end{align*}
-		\noindent 
+		\begin{lemma}
+			Let $\Ccat$ be a category and $f : X \to Y$. Assume that there exsist $g,\wtilde{g}: Y \to X$ such that $g \circ f = \id_X$ and $f \circ \wtilde{g} = \id_Y$. Then $f$ is an isomorphism with $f^{-1} = g = \wtilde{g}$.
+		\end{lemma}
+
+		\begin{proof}
+			We have that 
+			\begin{equation*}
+				g = g \circ \id_Y = g \circ (f \circ \wtilde{g}) = (g \circ f) \circ \wtilde{g} = \id_X \circ \wtilde{g} = \wtilde{g}.
+			\end{equation*}
+		\end{proof}
+		Thus $g$ is invertible. 
+		\begin{lemma}
+			Let $\Ccat$ be a category and $f : X \to Y$, $g : Y \to Z$ isomorphisms. Then also $g \circ f$ is an isomorphism with $(g \circ f)^{-1} = f^{-1} \circ g^{-1}$.
+		\end{lemma}
+	\begin{proof}
+		We have that 
+		\begin{equation*}
+			(f^{-1} \circ g^{-1}) \circ (g \circ f) = \id_X \qquad \text{and} \qquad (g \circ f) \circ (f^{-1} \circ g^{-1}) = \id_Z.
+		\end{equation*}
+		Hence the statement follows by the uniqueness of the inverse.
+	\end{proof}
+	Therefore also
+	\begin{equation*}
+		f = (h \circ g)^{-1} \circ (h \circ g \circ f) \qquad \text{and} \qquad h = (h \circ g \circ f) \circ (g \circ f)^{-1}
+	\end{equation*}
+	\noindent are isomorphisms.
+
 	\item Assume $f : X \to Y$ has the left cancellation property. Let $x,y \in X$ such that $f(x) = f(y)$. Now let $Z := \cbr[0]{x,y}$. Define two functions $c_x,c_y : Z \to X$ by $c_x(z) := x$ and $c_y(z) := y$, respectively. Now
 		\begin{equation*}
 			f \circ c_x = f(x) = f(y) = f \circ c_y
