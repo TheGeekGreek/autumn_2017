@@ -12,9 +12,124 @@
 \setcounter{section}{1}
 
 \begin{exercise}
+Let $(M,\omega)$ be a $2n$-dimensional symplectic manifold. 
+\begin{enumerate}[label = \textup{(}\alph*\textup{)}]
+\item $\omega^n$ is a volume form.
+\item Show that if $M$ is compact, then $\sbr[0]{\omega^n} \in H_{\dRrm}^{2n}(M)$ is nonzero.
+\item Conclude that $\sbr[0]{\omega} \neq 0$.
+\item $\Sbb^{2n}$ does not admit a symplectic structure for $n > 1$.
+\end{enumerate}
 \end{exercise}
 
 \begin{solution}
-
+	Part (a) immediately follows from the fact that for each $p \in M$ we have that $\omega_p^n \neq 0$. Thus $\omega^n$ is a nonvanishing form of top degree, hence a volume form.\\
+	For proving (b), assume that $\sbr[0]{\omega^n} = 0$. Hence $\omega^n$ is exact. Thus there exists $\mu \in \Omega^{2n - 1}(M)$ such that $\omega^n = d\mu$. But then Stoke's theorem \cite[411]{lee:smooth_manifolds:2013} together with positivity \cite[407]{lee:smooth_manifolds:2013} yields
+	\begin{equation*}
+		0 < \int_{M} \omega^n = \int_M d\mu = \int_{\partial M} \mu	= \int_\varnothing \mu = 0
+	\end{equation*}
+	\noindent since $M$ is oriented by part (a) and $\omega^n$ is a positively oriented orientation form (see \cite[381]{lee:smooth_manifolds:2013}).\\
+	For proving (c), observe that $\sbr[0]{\omega^n} = \sbr[0]{\omega} \cupprod \dots \cupprod \sbr[0]{\omega}$, where $\cupprod$ is the so-clalled cup product (see \cite[464]{lee:smooth_manifolds:2013}). So if $\sbr[0]{\omega} = 0$, we have by bilinearity also $\sbr[0]{\omega^n} = 0$, which contradicts part (b).\\
+For proving (d), by \cite[450]{lee:smooth_manifolds:2013} we have that 
+\begin{equation*}
+	H_{\dRrm}^p(\Sbb^n) \cong \ccases{
+		\Rbb & p = 0 \text{ or } p = n,\\
+		0 & 0 < p < n,
+	}
+\end{equation*}
+\noindent for $n \geq 1$. Let $n > 1$. Assume that $(\Sbb^n, \omega)$ is a symplectic manifold. Since $\Sbb^n$ is compact, part (c) implies that $\sbr[0]{\omega} \neq 0$. But $\sbr[0]{\omega} \in H_{\dRrm}^2(\Sbb^{2n}) \cong 0$.
 \end{solution}
+
+\begin{example}
+	Consider the symplectic manifold $(\Rbb^{2n},\omega_0)$, where $\omega_0$ is the standard symplectic structure on $\Rbb^{2n}$. Clearly, $\Rbb^{2n}$ is not compact and $\omega_0$ is exact since
+	\begin{equation*}
+		d \PARENS{\sum_{i = 1}^n x^i dy^i} = \sum_{i = 1}^n dx^i \wedge dy^i = \omega_0.
+	\end{equation*}
+\end{example}
+
+\begin{example}
+	Let $M$ be a smooth manifold. Then $(T^*M, \omega)$ is a symplectic manfiold, where $\omega$ is the canonical symplectic form on $T^*M$. It is an exact form, since $\omega = - d\alpha$, where $\alpha$ is the tautological $1$-form. Moreover, $T^*M$ is not compact by problem 10-19 \cite[271]{lee:smooth_manifolds:2013}.	
+\end{example}
+
+\begin{exercise}
+Let $(M,\omega)$ be a $2n$-dimensional symplectic manifold. 
+\begin{enumerate}[label = \textup{(}\alph*\textup{)}]
+\item 
+\end{enumerate}
+\end{exercise}
+
+\begin{solution}
+	For proving (a), we have using \cite[117]{lee:smooth_manifolds:2013}
+	\begin{equation*}
+		T_p\Sbb^n = \cbr[0]{v \in \Rbb^{n + 1} : \langle v,p \rangle = 0}
+	\end{equation*}
+	\noindent for each $p \in \Sbb^n$. Consider the \bld{Euler vector field $V$} defined by
+	\begin{equation*}
+		V := x^i \frac{\partial}{\partial x^i}.
+	\end{equation*}
+	Then $V$ is a unit normal vector field along $\Sbb^n$. Indeed, if $p \in \Sbb^n$ and $v \in T_p\Sbb^n$ we have that 
+	\begin{equation*}
+		\langle p,v \rangle_{\wbar{g}} = \langle p,v \rangle = 0
+	\end{equation*}
+	\noindent and
+	\begin{equation*}
+		\abs[0]{p}_{\wbar{g}} = \abs[0]{p} = 1.
+	\end{equation*}
+	Hence by \cite[390]{lee:smooth_manifolds:2013}, the volume form $\omega_{\mathring{g}}$ on $(\Sbb^n,\mathring{g})$ is given by
+	\begin{equation*}
+		\omega_{\mathring{g}} = \iota_{\Sbb^n}^*\PARENS{i_V\omega_{\wbar{g}}}.
+	\end{equation*}
+	More precisely, in the case $n = 2$ we have
+	\begin{align*}
+		i_V\omega_{\wbar{g}} &= i_V(dx \wedge dy \wedge dz)\\
+		&= (i_V dx) \wedge dy \wedge dz - dx \wedge i_V(dy \wedge dz)\\
+		&= (i_V dx) \wedge dy \wedge dz - dx \wedge (i_V dy) \wedge dz + dx \wedge dy \wedge (i_V dz)\\
+		&= x dy \wedge dz + y dz \wedge dx+ z dx \wedge dy.
+	\end{align*}
+	For $v,w \in T_p\Sbb^2$, $p \in \Sbb^2$, we have that
+	\begin{equation*}
+		\omega_{\mathring{g}}\vert_p(v,w) = (i_V\omega_{\wbar{g}})_{\iota(p)}\PARENS{d\iota_p(v),d\iota_p(w)} = (i_V\omega_{\wbar{g}})\vert_p(v,w) 
+	\end{equation*}
+	\noindent under the usual identification of $T_p\Sbb^n$ as a linear subspace of $T_p\Rbb^{n+1}$. Finally
+	\begin{align*}
+		\omega_{\mathring{g}}(v,w) &= (x dy \wedge dz + y dz \wedge dx+ z dx \wedge dy)(v,w)\\
+		&= x \det\begin{pmatrix}
+			dy(v) & dz(v)\\
+			dy(w) & dz(w)
+		\end{pmatrix}
+		+ y\det\begin{pmatrix}
+			dz(v) & dx(v)\\
+			dz(w) & dx(w)
+		\end{pmatrix}
+		+ z \det\begin{pmatrix}
+			dx(v) & dy(v)\\
+			dx(w) & dy(w)
+		\end{pmatrix}\\
+		&= x(v^2w^3 - w^2v^3) + y(v^3w^1 - w^3v^1) + z(v^1w^2 - w^1v^2)\\
+		&= \langle p, v \times w \rangle
+	\end{align*}
+	\noindent for $p := (x,y,z) \in \Sbb^2$ using \cite[356]{lee:smooth_manifolds:2013}.\\
+	For proving (b), consider cylindrical polar coordinates $(\theta,z)$ on $\Sbb^2$ given by
+	\begin{equation*}
+		(x,y,z) = (\sqrt{1 - z^2}\cos \theta,\sqrt{1 - z^2}\sin\theta,z).
+	\end{equation*}
+	Then we get
+	\begin{align*}
+		i_V \omega_{\wbar{g}} =& \id^*(i_V\omega_{\wbar{g}})\\
+		=& \id^*(x dy \wedge dz + y dz \wedge dx+ z dx \wedge dy)\\
+		=& \sqrt{1 - z^2}\cos \theta d(\sqrt{1 - z^2}\sin \theta) \wedge dz + \sqrt{1 - z^2}\sin \theta dz \wedge d(\sqrt{1 - z^2}\cos \theta)\\
+		&+ z d(\sqrt{1 - z^2}\cos \theta) \wedge d(\sqrt{1 - z^2}\sin \theta)\\
+		=& \sqrt{1 - z^2}\cos \theta \del[3]{\sqrt{1 - z^2}\cos \theta d\theta - \frac{z}{\sqrt{1 - z^2}}\sin \theta dz} \wedge dz\\ 
+		&- \sqrt{1 - z^2}\sin \theta dz \wedge \del[3]{\sqrt{1 - z^2}\sin \theta d\theta + \frac{z}{\sqrt{1 - z^2}}\cos\theta dz}\\
+		&- z  \del[3]{\sqrt{1 - z^2}\sin \theta d\theta + \frac{z}{\sqrt{1 - z^2}}\cos\theta dz}\\
+		&\wedge \del[3]{\sqrt{1 - z^2}\cos \theta d\theta - \frac{z}{\sqrt{1 - z^2}}\sin \theta dz}\\
+		=& (1 - z^2)\cos^2 \theta d\theta \wedge dz - (1 - z^2)\sin^2\theta dz \wedge d\theta + z^2 \sin^2 \theta d\theta \wedge dz \\
+		&- z^2 \cos^2 \theta dz \wedge d\theta\\
+		=& d\theta \wedge dz.
+	\end{align*}
+	For proving (c), just observe that
+	\begin{equation*}
+		\Vol(\Sbb^2) = \int_{\Sbb^2}\omega_{\mathring{g}} = \int_{\intoo{0,2\pi} \times \intoo{-1,1}} d\theta \wedge dz = 4\pi.	
+	\end{equation*}
+\end{solution}
+
 \end{document}

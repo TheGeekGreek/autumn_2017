@@ -161,6 +161,7 @@
 \DeclareMathOperator*\esssup{ess.sup}
 \DeclareMathOperator\id{id}
 \DeclareMathOperator\im{im}
+\DeclareMathOperator\Vol{Vol}
 %\usepackage{hhline}
 %\usepackage{booktabs} 
 %\usepackage{array}
@@ -254,5 +255,22 @@
 %Weierstrass-P symbol for power set
 \newcommand{\powerset}{\raisebox{.15\baselineskip}{\Large\ensuremath{\wp}}}
 \newcommand{\bld}[1]{\boldmath\textit{\textbf{#1}}\unboldmath}
-
+\usepackage{pict2e}
+\makeatletter
+\DeclareRobustCommand{\intprod}{%
+	\mathbin{\mathpalette\int@prod{(0.1,0)(0.9,0)(0.9,0.8)}}%
+}
+\newcommand{\int@prod}[2]{%
+	\begingroup
+	\sbox\z@{$\m@th#1+$}%
+	\setlength\unitlength{\wd\z@}%
+	\begin{picture}(1,1)
+	\roundcap
+	\polyline#2
+	\end{picture}%
+	\endgroup
+}
+\makeatother
+\newcommand{\Sbb}{\mathbb{S}}
+\newcommand{\dRrm}{\mathrm{dR}}
 \newcommand{\Rbb}{\mathbb{R}}
