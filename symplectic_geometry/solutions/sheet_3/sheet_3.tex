@@ -1,0 +1,119 @@
+\input{../latex/header.tex}
+
+\title{Homework 3: Exact Symplectic Manifolds}
+\author{Yannis B\"ahni}
+\address[Yannis B\"ahni]{University of Zurich, R\"amistrasse 71, 8006 Zurich}
+\email[Yannis B\"ahni]{\href{mailto:yannis.baehni@uzh.ch}{yannis.baehni@uzh.ch}}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+\setcounter{section}{1}
+
+\begin{exercise}
+Let $M$ and $N$ be smooth manifolds, $F : M \to N$ a diffeomorphism and $A \in \Gamma\del[1]{T^{(0,k)}TN}$, $k \in \Zbb$, $k \geq 1$. Then 
+\begin{equation}
+F^*A(X_1,\dots,X_k) = A(F_*X_1,\dots,F_*X_k) \circ F
+\end{equation}
+\noindent holds for all $X_1,\dots,X_k \in \Xfrak(M)$.
+\label{ex_properties_pullback}
+\end{exercise}
+
+\begin{solution}
+Let $p \in M$. Then
+\begin{align*}
+F^*A(X_1,\dots,X_k)(p) &= (F^*A)_p(X_1\vert_p,\dots,X_k\vert_p)\\
+&= A_{F(p)}\del[1]{d F_p(X_1\vert_p),\dots,d F_p(X_k\vert_p)}\\
+&= A_{F(p)}\del[1]{(F_*X_1)_{F(p)},\dots,(F_*X_k)_{F(p)}}\\
+&= A\del[1]{F_*X_1,\dots,F_*X_k}\del[1]{F(p)}.
+\end{align*}
+\end{solution}
+
+\begin{exercise} 
+\begin{enumerate}[label = \textup{(}\alph*\textup{)}]
+\item  
+\end{enumerate}
+\end{exercise}
+
+\begin{solution}
+	For (a), consider the tangent-cotangent isomorphism $\wtilde{\omega} : TM \to T^*M$. Set $X := \wtilde{\omega}^{-1}(-\alpha)$. As a composition of smooth functions, $X : M \to TM$ is smooth. Moreover, $X_p = \wtilde{\omega}^{-1}(-\alpha_p) \in T_pM$. Thus $X \in \Xfrak(M)$. Moreover 
+	\begin{equation*}
+		i_X \omega = \wtilde{\omega}\del[1]{\wtilde{\omega}^{-1}(-\alpha)} = - \alpha.  
+	\end{equation*}
+	Since $\wtilde{\omega}$ is an isomorphism, $X$ is unique. Cartan's magic formula together with the assumption $\omega = -d\alpha$ yields
+	\begin{equation*}
+		\Lcal_X \omega = di_X\omega + i_Xd\omega = di_X \omega = -d\alpha = \omega.
+	\end{equation*}
+	For proving (b), assume that $L_X \omega = \omega$ for some $X \in \Xfrak(M)$. Again, Cartan's magic formula yields
+	\begin{equation*}
+		\Lcal_X\omega = di_X\omega + i_Xd\omega = di_X\omega = \omega.
+	\end{equation*}
+	Now $i_X\omega \in \Omega^1(M)$ and thus $\omega$ is exact.\\
+	For proving (c), an application of the Fisherman's formula yields 
+	\begin{equation*}
+		\frac{d}{dt} (\exp tX)^* \omega = (\exp tX)^* \Lcal_X \omega = (\exp tX)^* \omega
+	\end{equation*}
+	\noindent and the property of the flow $\exp tX$ yields
+	\begin{equation*}
+		(\exp tX\vert_0)^*\omega = \id_M^* \omega = \omega.
+	\end{equation*}
+	Also we have that $\frac{d}{dt}e^t\omega = e^t\omega$ and $e^0\omega = \omega$. Hence $(\exp tX)^* \omega$ and $e^t\omega$ solve the same locally uniquely solvable initial value problem and are therefore locally equal.\\
+	For proving (d), observe that for $Y \in \Xfrak(M)$ we have that
+	\begin{align*}
+		\omega(g_*X,Y) \circ g &= (g^*\omega)(X,g_*^{-1}Y)\\
+		&= \omega\del[1]{X,g_*^{-1}Y}\\
+		&= i_X\omega\del[1]{g_*^{-1}Y}\\
+		&= -\alpha\del[1]{g_*^{-1}Y} \circ g^{-1}\\
+		&= -(g^*\alpha)\del[1]{g_*^{-1}Y}\\
+		&= -\alpha(Y) \circ g\\
+		&= i_X\omega(Y) \circ g\\
+		&= \omega(X,Y) \circ g.
+	\end{align*}
+	Thus $\wtilde{\omega}(g_*X) = \wtilde{\omega}(X)$ and since $\wtilde{\omega}$ is an isomorphism, we have that $g_*X = X$.\\
+	For proving (e), let us define $\rho_t := g \circ \exp tX \circ g^{-1}$. Then 
+	\begin{equation*}
+		\rho_0 = g \circ \exp tX \vert_{t = 0} \circ g^{-1} = \id_M
+	\end{equation*}
+	\noindent and
+	\begin{align*}
+		\frac{d}{dt} \rho_t(p) &= \frac{d}{dt}g\del[1]{\exp tX\del[1]{g^{-1}(p)}}\\
+		&= dg_{\exp tX\del[0]{g^{-1}(p)}}\frac{d}{dt}\exp tX\del[1]{g^{-1}(p)}\\
+		&= dg_{\exp tX\del[0]{g^{-1}(p)}}X\del[1]{\exp tX\del[1]{g^{-1}(p)}}\\
+		&= (g_*X)_{(g \circ \exp tX \circ g^{-1})(p)}.
+	\end{align*}
+	Thus $\rho_t$ is the flow of the vector field $g_* X$. By part (d) $g_* X$ coincides with $X$ and thus $\rho_t$ is also the flow of $X$. But flows are unique and thus 
+	\begin{equation*}
+		g \circ \exp tX \circ g^{-1} = \exp tX
+	\end{equation*}
+	\noindent from which the claim follows.\\
+	For (f), let us compute $\Lcal_X \omega_0$. We have
+	\begin{align*}
+		\Lcal_X\omega_0 &= di_X\omega_0\\
+		&= d \sum_{i = 1}^n \del[1]{(i_X dx_i) \wedge dy_i - dx_i \wedge (i_Xdy_i)}\\
+		&= \frac{1}{2}d \sum_{i = 1}^n (x_i dy_i - y_idx_i)\\
+		&= \frac{1}{2}\sum_{i = 1}^n (dx_i \wedge dy_i - dy_i \wedge dx_i)\\
+		&= \omega_0.
+	\end{align*}
+\end{solution}
+
+\begin{exercise} 
+\begin{enumerate}[label = \textup{(}\alph*\textup{)}]
+\item  
+\end{enumerate}
+\end{exercise}
+
+\begin{solution}
+	For showing (a), let us consider $X := f^i \frac{\partial}{\partial x^i} + g^i \frac{\partial}{\partial \xi^i}$. Then
+	\begin{align*}
+		i_X\omega &= i_X\sum_{i = 1}^n dx_i \wedge d\xi_i\\
+		&= \sum_{i = 1}^n \del[1]{(i_Xdx_i) \wedge d\xi_i - dx_i \wedge (i_X d\xi_i)}\\
+		&= \sum_{i = 1}^n \del[1]{f^i d\xi_i - g^i dx_i}. 
+	\end{align*}
+	Comparing this with $-\alpha$ yields $f^i = 0$ and $g^i = \xi^i$ for all $i = 1,\dots,n$. Hence
+	\begin{equation*}
+		X = \xi^i \frac{\partial}{\partial \xi^i}.
+	\end{equation*}
+\end{solution}
+
+\end{document}

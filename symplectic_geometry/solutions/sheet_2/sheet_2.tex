@@ -12,6 +12,7 @@
 \setcounter{section}{1}
 
 \begin{exercise}
+	\label{ex:1}
 Let $(M,\omega)$ be a $2n$-dimensional symplectic manifold. 
 \begin{enumerate}[label = \textup{(}\alph*\textup{)}]
 \item $\omega^n$ is a volume form.
@@ -28,7 +29,7 @@ Let $(M,\omega)$ be a $2n$-dimensional symplectic manifold.
 		0 < \int_{M} \omega^n = \int_M d\mu = \int_{\partial M} \mu	= \int_\varnothing \mu = 0
 	\end{equation*}
 	\noindent since $M$ is oriented by part (a) and $\omega^n$ is a positively oriented orientation form (see \cite[381]{lee:smooth_manifolds:2013}).\\
-	For proving (c), observe that $\sbr[0]{\omega^n} = \sbr[0]{\omega} \cupprod \dots \cupprod \sbr[0]{\omega}$, where $\cupprod$ is the so-clalled cup product (see \cite[464]{lee:smooth_manifolds:2013}). So if $\sbr[0]{\omega} = 0$, we have by bilinearity also $\sbr[0]{\omega^n} = 0$, which contradicts part (b).\\
+	For proving (c), observe that $\sbr[0]{\omega^n} = \sbr[0]{\omega} \cupprod \dots \cupprod \sbr[0]{\omega}$, where $\cupprod$ is the so-called cup product (see \cite[464]{lee:smooth_manifolds:2013}). So if $\sbr[0]{\omega} = 0$, we have by bilinearity also $\sbr[0]{\omega^n} = 0$, which contradicts part (b).\\
 For proving (d), by \cite[450]{lee:smooth_manifolds:2013} we have that 
 \begin{equation*}
 	H_{\dRrm}^p(\Sbb^n) \cong \ccases{
@@ -130,6 +131,17 @@ Let $(M,\omega)$ be a $2n$-dimensional symplectic manifold.
 	\begin{equation*}
 		\Vol(\Sbb^2) = \int_{\Sbb^2}\omega_{\mathring{g}} = \int_{\intoo{0,2\pi} \times \intoo{-1,1}} d\theta \wedge dz = 4\pi.	
 	\end{equation*}
+\end{solution}
+
+\begin{exercise}
+Let $(M,\omega)$ be a $2n$-dimensional symplectic manifold. 
+\begin{enumerate}[label = \textup{(}\alph*\textup{)}]
+\item 
+\end{enumerate}
+\end{exercise}
+
+\begin{solution}
+	For (a), observe that by exercise \ref{ex:1}, the manifold must be orientable. Thus surfaces like the sphere, torus and connected sums of these (classification theorem) do possess a symplectic structure, whereas the non-orientable surfaces like the real projective plane and the M\"obius strip do not possess any symplectic structures.
 \end{solution}
 
 \end{document}
