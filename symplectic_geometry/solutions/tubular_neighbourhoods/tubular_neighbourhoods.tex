@@ -1,0 +1,91 @@
+\input{../latex/header.tex}
+
+\title{The Tubular Neighbourhood Theorem}
+\author{Yannis B\"ahni}
+\address[Yannis B\"ahni]{University of Zurich, R\"amistrasse 71, 8006 Zurich}
+\email[Yannis B\"ahni]{\href{mailto:yannis.baehni@uzh.ch}{yannis.baehni@uzh.ch}}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+
+\section{Prerequisites}
+
+\begin{definition}
+	Let $(X,d)$ be a metric space and $A \subseteq X$. For $x \in X$, define the \bld{distance from $x$ to $A$}, written $\dist(x,A)$, by
+	\begin{equation*}
+		\dist(x,A) := \inf_{a \in A} d(x,a).
+	\end{equation*}
+\end{definition}
+
+\begin{lemma}
+	Let $(X,d)$ be a metric space and $A \subseteq X$ nonempty. Then $\dist(\cdot,A): X \to \Rbb$ is a continuous function.
+	\label{lem:distance_continuous}
+\end{lemma}
+
+\begin{proof}
+	We show that $\dist(\cdot,A)$ is in fact Lipschitz continuous. Let $x,y \in X$. Then for any $a \in A$ we have that
+	\begin{equation*}
+		\dist(x,A) \leq d(x,a) \leq d(x,y) + d(y,a).
+	\end{equation*}
+	Hence $\dist(x,A) - d(x,y)$ is a lower bound for $d(y,a)$ for any $a \in A$. But this means
+	\begin{equation*}
+		\dist(x,A) - d(x,y) \leq \dist(y,A).
+	\end{equation*}
+	Reversing the roles of $x$ and $y$ in the previous argument and applying the symmetry of the metric, we get that 
+	\begin{equation*}
+		\abs[0]{\dist(x,A) - \dist(y,A)} \leq d(x,y).
+	\end{equation*}
+\end{proof}
+
+\begin{lemma}
+	Let $(X,d)$ be a metric space and $K \subseteq X$ be compact and nonempty. If $\dist(x,K) = 0$ for some $x \in X$, then $x \in K$.
+	\label{lem:distance_compact}
+\end{lemma}
+
+\begin{proof}
+	For any $\varepsilon > 0$, we find $y \in K$ such that 
+	\begin{equation*}
+		\dist(x,K) \leq \dist(x,y) < \dist(x,K) + \varepsilon.
+	\end{equation*}
+	Thus we find a sequence $(y_n)_{n \in \Nbb}$, such that $\dist(x,y_n) \to 0$. Since $K$ is compact, there exists a subsequence $y_{n_k}$ in $K$ such that $y_{n_k} \to y$, where $y \in K$. But then 
+	\begin{equation*}
+		d(x,y) = \lim_{k \to \infty}d(x,y_{n_k}) = 0
+	\end{equation*}
+	\noindent which implies $x = y$ and so $x \in K$.
+\end{proof}
+
+\begin{theorem}[Inverse Function Theorem Generalization, Compact Case]
+	Let $M$ and $N$ be smooth manifolds, $K$ a compact subspace of $M$ and $F : M \to N$ a smooth mapping, such that $F \vert_K$ is injective and $dF_p$ is nonsingular for any $p \in K$. Then there exists a neighbourhood $U$ of $K$ in $M$ and a neighbourhood $V$ of $F(K)$ in $N$ such that $F\vert_U : U \to V$ is a diffeomorphism.
+	\label{thm:generalization_ift_compact}
+\end{theorem}
+
+\begin{proof}
+	By corollary 13.30 \cite[341]{lee:smooth_manifolds:2013}, every smooth manifold is metrizable. Hence we can equip $M$ with a metric $d$. Moreover, the metric topology on $M$ induced by $d$ is the same as the original manifold topology. By proposition 1.12 \cite[9]{lee:smooth_manifolds:2013}, every topological manifold is locally compact, hence by proposition 4.63 \cite[104--105]{lee:topological_manifolds:2011}, each point of $M$ has a precompact neighbourhood. Since $K \subseteq M$, we find for any $p \in K$ a precompact neighbourhood $V_p$ of $p$. Thus $(V_p)_{p \in K}$ is an open cover of $K$ and the compactness of $K$ implies that there exists a finite subcover $V_{p_1},\dots,V_{p_n}$ of $K$.\\
+	For any $\varepsilon > 0$, define
+	\begin{equation*}
+		U_\varepsilon := \cbr[0]{ p \in M : \dist(p,K) < \varepsilon}.
+	\end{equation*}
+	By lemma \ref{lem:distance_continuous}, $U_\varepsilon$ is open since $U_\varepsilon = \dist(\cdot,A)^{-1}(\intoo{-\infty,\varepsilon})$. Thus 
+	\begin{equation*}
+		W_\varepsilon := \bigcup_{i = 1}^n (V_{p_i} \cap U_\varepsilon)
+	\end{equation*}
+	\noindent is open and clearly $K \subseteq W_\varepsilon$ for any $\varepsilon > 0$. Hence $W_\varepsilon$ is a neighbourhood of $K$.\\
+	Assume now that $F$ is not injective on any neighbourhood of $K$. For any $n \in \Nbb$ we thus find $x_n,y_n \in W_{1/n}$ such that $x_n \neq y_n$ but $F(x_n) = F(y_n)$. Hence we have constructed two sequences $(x_n)_{n \in \Nbb}$ and $(y_n)_{n \in \Nbb}$ in $W_1$. Now by 
+	\begin{equation*}
+		W_\varepsilon = \bigcup_{i = 1}^n (V_{p_i} \cap U_\varepsilon) \subseteq \bigcup_{i = 1}^n V_{p_i} \subseteq \bigcup_{i = 1}^n \wbar{V}_{p_i} 
+	\end{equation*}
+	\noindent we get that $W_\varepsilon$ is contained in a compact set. Thus we find $p_1,p_2 \in \cup_{i = 1}^n \wbar{V}_{p_i}$ such that $x_{n_k} \to p$ and $y_{n_k} \to q$. But 
+	\begin{equation*}
+		\dist(p,K) = \lim_{k \to \infty}\dist(x_{n_k},A) \leq \lim_{k \to \infty}\frac{1}{n_k} = 0.
+	\end{equation*}
+	\noindent by the continuity of the distance function and so $\dist(p,K) = \dist(q,K) = 0$. But this implies $p,q \in K$ by lemma \ref{lem:distance_compact}. Moreover, since $F$ is continuous by \cite[34]{lee:smooth_manifolds:2013} we have that
+	\begin{equation*}
+		F(p) = \lim_{k \to \infty} F(x_{n_k}) = \lim_{k \to \infty}F(y_{n_k}) = F(q)
+	\end{equation*}
+	\noindent and so by injectivity of $F\vert_K$ we get that $p = q$.\\
+	Finally, since $dF_p$ is nonsingular, the inverse function theorem for manifolds \cite[79]{lee:smooth_manifolds:2013} guarantees the existence of connected neighbourhoods $U_0$ of $p$ and $V_0$ of $F(p)$ such that $F\vert_{U_0} : U_0 \to V_0$ is a diffeomorphism. Since $x_{n_k}$ and $y_{n_k}$ both converge to $p$ and $x_{n_k} \neq y_{n_k}$ for all $k \in \Nbb$ but $F(x_{n_k}) = F(y_{n_k})$, we get that $F$ cannot be a diffeomorphism, which is a contradiction. Hence there exists a neighbourhood $U$ of $K$ such that $F\vert_U$ is injective. Again, by applying the inverse function theorem for manifolds, for any $p \in K$ we find connected neighbourhoods $U_{0,p}$ of $p$ and $V_{0,p}$ of $F(p)$ such that $F\vert_{U_{0,p}} : U_{0,p} \to V_{0,p}$ is a diffeomorphism. Hence $F$ restricted to $\cup_{p \in K} U_{0,p}$ is a local diffeomorphism. Moreover, $F$ restricted to $U \cap \cup_{p \in K} U_{0,p}$ is a local diffeomorphism by proposition 4.6 (d) \cite[80]{lee:smooth_manifolds:2013}. Therefore $F : U \cap \cup_{p \in K} U_{0,p} \to F(U \cap \cup_{p \in M}U_{0,p})$ is a diffeomorphism by proposition 4.6 (f) \cite[80]{lee:smooth_manifolds:2013}.
+\end{proof}
+
+\end{document}

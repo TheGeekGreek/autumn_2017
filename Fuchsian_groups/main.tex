@@ -41,14 +41,14 @@ The main object of our study is the so-called \emph{hyperbolic plane}. There are
 \end{remark}
 
 \begin{definition}[Hyperbolic Length]
-	Let $I := \intcc{0,1}$ and $\gamma := x(t) + iy(t) \in C^1_{\pwrm}(I,\Hcal)$. Then the \bld{hyperbolic length} of $\gamma$, written $\h(\gamma)$, is defined to be
+	Let $I := \intcc{0,1}$ and $\gamma := x(t) + iy(t) \in C^1_{\pwrm}(I,\Hcal)$. Then the \bld{hyperbolic length of $\gamma$}, written $\h(\gamma)$, is defined to be
 	\begin{equation}
 		\h(\gamma) := \int_0^1 \frac{\sqrt{\del[1]{\frac{dx}{dt}}^2 + \del[1]{\frac{dy}{dt}}^2}}{y(t)} dt = \int_0^1 \frac{\abs[1]{\frac{d\gamma}{dt}}}{y(t)}dt.
 	\end{equation}
 \end{definition}
 
 \begin{definition}[Hyperbolic Distance]
-	Let $z,w \in \Hcal$. The \bld{hyperbolic distance} between $z$ and $w$, written $\rho(z,w)$, is defined to be
+	Let $z,w \in \Hcal$. The \bld{hyperbolic distance between $z$ and $w$}, written $\rho(z,w)$, is defined to be
 	\begin{equation}
 		\rho(z,w) := \inf_{\substack{\gamma \in C^1_\pwrm(I,\Hcal)\\ \gamma(0) = z\\ \gamma(1) = w}} \h(\gamma)
 	\end{equation}
@@ -73,10 +73,7 @@ Recall that $\Rbb^\times := \Rbb \setminus \cbr[0]{0}$.
 \end{remark}
 
 \begin{lemma}
-	We have that
-	\begin{equation}
-		\PSLrm(2,\Rbb) \cong \GLrm^+(2,\Rbb)/\cbr[0]{\lambda I : \lambda \in \Rbb^\times}.	
-	\end{equation}
+	$\PSLrm(2,\Rbb) \cong \GLrm^+(2,\Rbb)/\cbr[0]{\lambda I : \lambda \in \Rbb^\times}$.
 	\label{lem:isomorphism}
 \end{lemma}
 
@@ -113,7 +110,7 @@ If $X$ is a topological space and $G$ acts on $X$, we say that the action is an 
 \Im\del[1]{A \cdot z} = \frac{1}{2i}\del[1]{A \cdot z - \overline{A \cdot z}} = \frac{1}{2i}\frac{(ad - bc)(z - \wbar{z})}{\abs[0]{cz + d}^2} = \frac{\det(A)\Im(z)}{\abs[0]{cz + d}^2} > 0
 		\label{eq:imaginary_part}
 	\end{equation}
-	\noindent since $\det(A)$ and $\Im(z) > 0$. Furthermore it is easy to check that this defines indeed an action. It is an action by homeomorphisms since $z \mapsto A \cdot z$ is a bijection and clearly continuous as a well-defined rational function. 
+	\noindent since $\det(A)$, $\Im(z) > 0$. Furthermore it is easy to check that this defines indeed an action. It is an action by homeomorphisms since $z \mapsto A \cdot z$ is a bijection and clearly continuous as a well-defined rational function. 
 \end{proof}
 
 \begin{corollary}
@@ -121,11 +118,11 @@ If $X$ is a topological space and $G$ acts on $X$, we say that the action is an 
 \end{corollary}
 
 \begin{proof}
-	Since $\cbr[0]{\lambda I : \lambda \in \Rbb^\times} \subseteq \ker(\GLrm^+(2,\Rbb) \to S_\Hcal)$, the mapping $\GLrm^+(2,\Rbb) \to S_\Hcal$ factors uniquely through $\pi : \GLrm^+(2,\Rbb) \to \GLrm^+(2,\Rbb)/\cbr[0]{\lambda I : \lambda \in \Rbb^\times}$ by \cite[23]{grillet:abstract_algebra:2007} which is isomorhic to $\PSLrm(2,\Rbb)$ by lemma \ref{lem:isomorphism}.	
+	Since $\cbr[0]{\lambda I : \lambda \in \Rbb^\times} \subseteq \ker(\GLrm^+(2,\Rbb) \to S_\Hcal)$, the mapping $\GLrm^+(2,\Rbb) \to S_\Hcal$ factors uniquely through $\pi : \GLrm^+(2,\Rbb) \to \GLrm^+(2,\Rbb)/\cbr[0]{\lambda I : \lambda \in \Rbb^\times}$ by \cite[23]{grillet:abstract_algebra:2007} which is isomorphic to $\PSLrm(2,\Rbb)$ by lemma \ref{lem:isomorphism}.	
 \end{proof}
 
 \begin{definition}[M\"obius Transformations]
-	Define the group of \bld{M\"obius transformations} on $\Hcal$ by
+	Define the group of \bld{M\"obius transformations on $\Hcal$} by
 	\begin{equation}
 		\Mob(\Hcal) := \cbr[0]{z \mapsto A \cdot z : A \in \PSLrm(2,\Rbb)}.
 	\end{equation}
@@ -350,10 +347,10 @@ By proposition \ref{prop:metric} it is enough to show that $f$ is continuous wit
 	Define
 		\begin{center}
 		\begin{tabular}{ll}
-			$\partial \Ucal := \Sigma := \cbr[0]{z \in \Cbb : \abs[0]{z} = 1}$ & (\textbf{Principal Circle, Boundary of $\Ucal$}),\\
-			$\partial \Hcal := \what{\Rbb}$ & (\textbf{Boundary of $\Hcal$ in $\what{\Cbb}$}),\\
-			$\wbar{\Ucal} := \Ucal \cup \Sigma$ & (\textbf{Closure of $\Ucal$}),\\
-			$\wbar{\Hcal} := \Hcal \cup \what{\Rbb}$ & (\textbf{Closure of $\Hcal$}).\\
+			$\partial \Ucal := \Sigma := \cbr[0]{z \in \Cbb : \abs[0]{z} = 1}$ & (\textbf{Principal Circle, Boundary of $\Ubcal$}),\\
+			$\partial \Hcal := \what{\Rbb}$ & (\textbf{Boundary of $\Hbcal$ in $\bm{\what{\mathbb{C}}}$}),\\
+			$\wbar{\Ucal} := \Ucal \cup \Sigma$ & (\textbf{Closure of $\Ubcal$}),\\
+			$\wbar{\Hcal} := \Hcal \cup \what{\Rbb}$ & (\textbf{Closure of $\Hbcal$}).\\
 		\end{tabular}
 	\end{center}
 \end{definition}
@@ -461,7 +458,7 @@ We have already seen that M\"obius transformations are isometries on $\Hcal$. Is
 \end{proof}
 
 \begin{definition}
-	Let $f \in \Isom(\Hcal)$ and let $A \in \PSLrmstar(2,\Rbb)$ be the corresponding matrix. Then $\det(A)$ is called the \bld{orientation} of the isometry $f$. If $\det(A) = 1$, $f$ is said to be a \bld{orientation preserving} isometry, while if $\det(A) = -1$, $f$ is said to be a \bld{orientation reversing} isometry.
+	Let $f \in \Isom(\Hcal)$ and let $A \in \PSLrmstar(2,\Rbb)$ be the corresponding matrix. Then $\det(A)$ is called the \bld{orientation of the isometry $f$}. If $\det(A) = 1$, $f$ is said to be a \bld{orientation preserving isometry}, while if $\det(A) = -1$, $f$ is said to be a \bld{orientation reversing isometry}.
 \end{definition}
 
 \begin{remark}

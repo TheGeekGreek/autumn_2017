@@ -54,8 +54,8 @@
 %Title
 \usepackage[foot]{amsaddr}
 \usepackage{newtxtext}
-\usepackage[lite,subscriptcorrection,nofontinfo,eucal]{mtpro2}
-\usepackage{mathrsfs}
+\usepackage[subscriptcorrection,nofontinfo,mtpcal,mtphrb]{mtpro2}
+\usepackage{bm}
 \usepackage{xspace}
 \makeatletter
 \def\@textbottom{\vskip \z@ \@plus 1pt}
@@ -130,7 +130,6 @@
 \usepackage{commath}
 %Further math environments
 %Further math fonts (loads amsfonts implicitely)
-\usepackage{amssymb}
 %Redefinition of \text
 %\usepackage{amstext}
 \usepackage{upref}
@@ -258,5 +257,7 @@
 \newcommand{\pwrm}{\mathrm{pw}}
 \newcommand{\clos}[1]{\overline{#1}}
 \newcommand{\Hcal}{\mathcal{H}}
+\newcommand{\Hbcal}{\bm{\mathcal{H}}}
 \newcommand{\Ucal}{\mathcal{U}}
+\newcommand{\Ubcal}{\bm{\mathcal{U}}}
 \renewcommand{\det}{\mathrm{det}}
