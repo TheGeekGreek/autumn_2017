@@ -1,0 +1,65 @@
+\input{header.tex}
+
+\title{Introduction to Category Theory and its Applications}
+\author{Yannis B\"{a}hni}
+\address[Yannis B\"{a}hni]{University of Zurich, R\"{a}mistrasse 71, 8006 Zurich}
+\email[Yannis B\"{a}hni]{\href{mailto:yannis.baehni@uzh.ch}{\nolinkurl{yannis.baehni@uzh.ch}}}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\section{Representable Functors}
+\subsection{The Yoneda Lemma}
+
+\begin{proposition}
+	Let $\Ccal$ be a locally small category and $X \in \Ccal$ an object. Define $\Hom_\Ccal(X,-) : \Ccal \to \cat{Set}$ on objects $Y \in \Ccal$ by $\Hom_\Ccal(X,Y) := \Ccal(X,Y)$ and on morphisms $f : Y \to Z$ by post-composition with $f$, i.e. 
+	\begin{equation*}
+		\Hom_\Ccal(X,f) : \Hom_\Ccal(X,Y) \to \Hom_\Ccal(X,Z)
+	\end{equation*}
+	\noindent is defined by $\Hom_\Ccal(X,f)(g) := f \circ g$. Then $\Hom_\Ccal(X,-)$ is a functor.
+\end{proposition}
+
+\begin{proof}
+	
+\end{proof}
+
+\begin{proposition}
+	Let $\Ccal$ be a locally small category and $f \in \Ccal(X,X')$ a morphism. Define $\eta^f := \del[1]{\eta_A^f}_{A \in \Ccal}$ by letting $\eta^f_A : \Hom_\Ccal(X',A) \to \Hom_\Ccal(X,A)$ be pre-composition with $f$, i.e. $\eta_A^f(g) := g \circ f$. Then $\eta^f : \Hom_\Ccal(X',-) \Rightarrow \Hom_\Ccal(X,-)$.
+\end{proposition}
+
+\begin{proof}
+	
+\end{proof}
+
+\begin{proposition}
+	Let $\Ccal$ be a locally small category. Define $H^\bullet : \Ccal^\oprm \to \sbr{\Ccal,\cat{Set}}$ on objects $X \in \Ccal$ by $H^\bullet(X) := \Hom_\Ccal(X,-)$ and on morphisms $f \in \Ccal^\oprm$ by $H^\bullet(f) := \eta^f$. Then $H^\bullet$ is a functor.
+	\label{prop:H_bullet}
+\end{proposition}
+
+\begin{proof}
+	
+\end{proof}
+
+\begin{definition}[Representable and Corepresentable Functor]
+	Let $\Ccal$ be a locally small category. A covariant functor $F$ is said to be \bld{representable}, if there exists an object $X \in \Ccal$, such that $F \cong \Hom_\Ccal(X,-)$. A contravariant functor $F$ is said to be \bld{corepresentable}, if there exists $X \in \Ccal$ such that $F \cong \Hom_\Ccal(-,X)$, where $\Hom_\Ccal(-,X) := \Hom_{\Ccal^\oprm}(X,-)$. 
+\end{definition}
+
+The functor defined in the dualized statement of proposition \ref{prop:H_bullet} has its own name.
+
+\begin{definition}[Yoneda embedding of $\bm{\Ccal}$]
+	Let $\Ccal$ be a locally small category. Then the functor $H_\bullet := H^\bullet : \Ccal \to \sbr{\Ccal^\oprm,\cat{Set}}$ is called the \bld{Yoneda embedding of $\Ccal$}.  
+\end{definition}
+
+\begin{theorem}[Yoneda Lemma]
+	Let $\Ccal$ be a locally small category. For any functor $F : \Ccal \to \cat{Set}$ and for every object $X \in \Ccal$ there is a bijection
+	\begin{equation}
+		\sbr{\Ccal,\cat{Set}}\del[1]{\Hom_\Ccal(X,-),F} \cong F(X)	
+	\end{equation}
+	\noindent that associates to each $\alpha : \Hom_\Ccal(X,-) \Rightarrow F$ the element $\alpha_X(\id_X) \in F(X)$. Moreover, the correspondence is natural in both $X$ and $F$.
+	\label{thm:Yoneda}
+\end{theorem}
+
+\end{document}

@@ -1,0 +1,41 @@
+\chapter{Constructions}
+\section{Limits}
+
+\begin{definition}[Diagram]
+	Let $\Ccal$ be a category and $\cat{A}$ a small category. A functor $\cat{A} \to \Ccal$ is called a \bld{diagram in $\Ccal$ of shape $\cat{A}$}.
+\end{definition}
+
+\begin{definition}[Cone and Limit]
+	Let $\Ccal$ be a category and $D : \cat{A} \to \Ccal$ a diagram in $\Ccal$ of shape $\cat{A}$. A \bld{cone on $D$} is a tuple $\del[1]{C,(f_\alpha)_{\alpha \in \cat{A}}}$, where $C \in \Ccal$ is an object, called the \bld{vertex} of the cone, and a family of arrows in $\Ccal$
+	\begin{equation}
+		\del[1]{C \xrightarrow{f_\alpha} D(\alpha)}_{\alpha \in \cat{A}}.
+	\end{equation}
+	\noindent such that for all morphisms $f \in \cat{A}$, $f : \alpha \to \beta$, the triangle
+	\begin{equation*}
+		\xymatrix{
+			& D(\alpha) \ar[dd]^{D(f)}\\
+			C \ar[ur]^{f_\alpha}\ar[dr]_{f_\beta}\\
+			& D(\beta)}
+	\end{equation*}
+	\noindent commutes. A \bld{(small) limit of $D$} is a cone $\del[1]{L, (\pi_\alpha)_{\alpha \in \cat{A}}}$ with the property that for any other cone $\del[1]{C,(f_\alpha)_{\alpha \in \cat{A}}}$ there exists a unique morphism $\wbar{f} : A \to L$ such that $\pi_\alpha \circ \wbar{f} = f_\alpha$ holds for every $\alpha \in \cat{A}$.
+	\label{def:limit}
+\end{definition}
+
+\begin{remark}
+	In the setting of definition \ref{def:limit}, if $\del[1]{L, (\pi_\alpha)_{\alpha \in \cat{A}}}$ is a limit of $D$, we sometimes reffering to $L$ only as the limit of $D$ and we write
+	\begin{equation}
+		L = \lim_{\leftarrow \cat{A}} D.
+	\end{equation}
+\end{remark}
+
+\begin{definition}[Product]
+	Let $\Ccal$ be a category and $A$ a set. Define $\cat{A}$ to be the discrete category with $\ob(\cat{A}) := A$. Moreover, let $D$ be a diagram in $\Ccal$ of shape $\cat{A}$. A \bld{(small) product of $D$} is a limit of $D$. 
+	\label{def:product}
+\end{definition}
+
+\begin{remark}
+	In the setting of definition \ref{def:product}, $D$ yields a family $(X_\alpha)_{\alpha \in A}$ in $\Ccal$ and thus we we speak also of a product of the family $(X_\alpha)_{\alpha \in A}$. If a product exists in $\Ccal$, we write
+	\begin{equation}
+		\prod_{\alpha \in A} X_\alpha := \lim_{\leftarrow \cat{A}} D.
+	\end{equation}
+\end{remark}
