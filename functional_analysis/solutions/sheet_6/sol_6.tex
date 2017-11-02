@@ -1,0 +1,98 @@
+\input{header.tex}
+
+\title{Solutions Sheet 6}
+\author{Yannis B\"{a}hni}
+\address[Yannis B\"{a}hni]{University of Zurich, R\"{a}mistrasse 71, 8006 Zurich}
+\email[Yannis B\"{a}hni]{\href{mailto:yannis.baehni@uzh.ch}{\nolinkurl{yannis.baehni@uzh.ch}}}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+
+\setcounter{section}{1}
+
+\begin{enumerate}[label = \textbf{Exercise \arabic*.},wide = 0pt, itemsep = 1.5ex]
+	\item
+	\item
+	\item
+	\item Let $f \in X$. Define
+		\begin{equation*}
+			f^+ := \max(f,0) \qquad \text{and} \qquad f^- := \max(-f,0).
+		\end{equation*} 
+		Clearly $f^+,f^- \geq 0$, $f = f^+ - f^-$ and $\abs{f} = f^+ + f^-$. Moreover, since by assumption also $\abs{f} \in X$, by $f^+,f^- \leq \abs{f}$ we have also that $f^+,f^- \in B(E,\Rbb)$. Hence we can define $p : B(E,\Rbb) \to \Rbb$ by
+		\begin{equation*}
+			p(f) := \sup_{x \in E}f^+(x).
+		\end{equation*}
+
+		\begin{lemma}
+			$p : B(E,\Rbb) \to \Rbb$ is a sublinear functional such that $T(f) \leq p(f)$ for all $f \in X$.
+			\label{lem:sublinear_functional}
+		\end{lemma} 
+
+		\begin{proof}
+			Let $f,g \in B(E,\Rbb)$ and $\lambda \geq 0$. Then we have 
+			\begin{align*}
+				p(\lambda f) &= \sup_{x \in E}(\lambda f)^+(x)\\
+				&= \sup_{x \in E}\max(\lambda f(x), 0)\\
+				&= \sup_{x \in E} \frac{1}{2}\del[1]{\lambda f(x) + \abs[0]{\lambda f(x)}}\\
+				&= \sup_{x \in E} \frac{1}{2}\del[1]{\lambda f(x) + \lambda \abs{f(x)}}\\
+				&= \lambda \sup_{x \in E} f^+(x)\\
+				&= \lambda p(f)
+			\end{align*}
+			\noindent and
+			\begin{align*}
+				p(f + g) &= \sup_{x \in E}(f + g)^+(x)\\
+				&= \sup_{x \in E} \frac{1}{2}\del[1]{f(x) + g(x) + \abs[0]{f(x) + g(x)}}\\
+				&\leq \sup_{x \in E} \frac{1}{2}\del[1]{f(x) + g(x) + \abs[0]{f(x)} + \abs[0]{g(x)}}\\
+				&= \sup_{x \in E} \frac{1}{2}\del[1]{f(x) + \abs[0]{f(x)}} + \sup_{x \in E} \frac{1}{2}\del[1]{g(x) + \abs[0]{g(x)}}\\
+				&= p(f) + p(g).
+			\end{align*}
+			Let $f \in X$. Then we have 
+			\begin{align*}
+				T(f) &= T(f^+ - f^-)\\
+				&= T(f^+) - T(f^-)\\
+				&\leq T(f^+)\\
+				&\leq \abs[0]{T(f^+)}\\
+				&\leq \norm[0]{f^+}\\ 
+				&= \sup_{x \in E}\abs[0]{f^+(x)}\\
+				&= \sup_{x \in E} f^+(x)\\
+				&= p(f)
+			\end{align*}
+			\noindent since $T(f^-) \geq 0$.
+		\end{proof}
+		Lemma \ref{lem:sublinear_functional} together with the real version of Hahn-Banach yields the existence of a linear functional $\wbar{T} : B(E,\Rbb) \to \Rbb$ such that $\wbar{T}\vert_X = T$ and $\wbar{T}(f) \leq p(f)$ for all $f \in B(E,\Rbb)$.
+
+		\begin{lemma}
+			For all $f \in B(E,\Rbb)$ we have that $\abs[0]{\wbar{T}(f)} \leq \norm{f}$ and if $f \geq 0$ then also $\wbar{T}(f) \geq 0$.
+		\end{lemma}
+		\begin{proof}
+			We have that
+			\begin{equation*}
+				\wbar{T}(f) \leq p(f) = \sup_{x \in E}f^+(x) \leq \sup_{x \in E}\abs{f(x)} = \norm{f}
+			\end{equation*}
+			\noindent and
+			\begin{align*}
+				\wbar{T}(f)
+				&= -\wbar{T}(-f)\\
+				&\geq -p(-f)\\
+				&= -\sup_{x \in E}(-f)^+(x)\\
+				&= - \sup_{x \in E}\max(-f(x),0)\\
+				&= -\sup_{x \in E} f^-(x)\\
+				&\geq -\sup_{x \in E} \abs{f(x)}\\
+				&= -\norm{f}.
+			\end{align*}
+			Hence $\abs[0]{\wbar{T}(f)} \leq \norm{f}$. Assume that $f \geq 0$. Then $f = f^+$ and so
+			\begin{align*}
+				-\wbar{T}(f) &= \wbar{T}(-f)\\
+				&\leq p(-f)\\
+				&= \sup_{x \in E}(-f)^+(x)\\
+				&= \sup_{x \in E}\max(-f,0)\\
+				&= \sup_{x \in E}f^-(x)\\
+				&= 0
+			\end{align*}
+			\noindent yields $\wbar{T}(f) \geq 0$
+		\end{proof}
+\end{enumerate}
+
+\end{document}

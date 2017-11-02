@@ -47,7 +47,7 @@
 \begin{proof}
 	For any $\varepsilon > 0$, we find $y \in K$ such that 
 	\begin{equation*}
-		\dist(x,K) \leq \dist(x,y) < \dist(x,K) + \varepsilon.
+		\dist(x,K) \leq d(x,y) < \dist(x,K) + \varepsilon.
 	\end{equation*}
 	Thus we find a sequence $(y_n)_{n \in \Nbb}$, such that $\dist(x,y_n) \to 0$. Since $K$ is compact, there exists a subsequence $y_{n_k}$ in $K$ such that $y_{n_k} \to y$, where $y \in K$. But then 
 	\begin{equation*}
@@ -92,5 +92,16 @@
 	\end{equation*}
 	\noindent Then $K \subseteq U$, $U$ is open and $F(K) \subseteq F(U) = V$. Also $F(B_{r_p}(p))$ is open in $N$. Indeed, $F\vert_{U_{0,p}} : U_{0,p} \to V_{0,p}$ is a diffeomorphism and thus an open map. Since $B_{r_p}(p) = U_{0,p} \cap B_{r_p}(p)$, $B_{r_p}(p)$ is also open in $U_{0,p}$. So $F(B_{r_p}(p))$ is open in $V_{0,p}$. But this means that there exists an open set $B$ in $N$ such that $F(B_{r_p}(p)) = V_{0,p} \cap B$, the right hand side is open in $N$ and so is $F(B_{r_p}(p))$. Hence $V$ is open in $N$ as a union of open sets. Moreover, $F$ is bijective and a local diffeomorphism. Thus by proposition 4.6 (f) \cite[80]{lee:smooth_manifolds:2013} $F\vert_U : U \to V$ is a diffeomorphism.
 \end{proof}
+
+\begin{definition}[Normal Bundle]
+	Let $(M,g)$ be a Riemannian manifold and $S \subseteq M$ a Riemannian submanifold. Let $p \in S$. The \bld{normal space to $S$ at $p$} is defined by
+	\begin{equation}
+		N_pS := \cbr{v \in T_pM : \forall w \in T_pS(\langle v,w \rangle_g = 0) }
+	\end{equation}
+	\noindent and the \bld{normal bundle of $S$} as
+	\begin{equation}
+		NS := \coprod_{p \in S} N_pS.
+	\end{equation}
+\end{definition}
 
 \end{document}
