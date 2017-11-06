@@ -1,0 +1,61 @@
+\input{header.tex}
+
+\title{Solutions Sheet 7}
+\author{Yannis B\"{a}hni}
+\address[Yannis B\"{a}hni]{University of Zurich, R\"{a}mistrasse 71, 8006 Zurich}
+\email[Yannis B\"{a}hni]{\href{mailto:yannis.baehni@uzh.ch}{\nolinkurl{yannis.baehni@uzh.ch}}}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+
+\setcounter{section}{1}
+
+\begin{enumerate}[label = \textbf{Exercise \arabic*.},wide = 0pt, itemsep = 1.5ex]
+	\item
+	\item
+	\item 
+		\begin{lemma}
+			Let $y \in H$ and define a mapping $\varphi_y : H \to \Cbb$ by $\varphi_y(x) := \langle A(y),x \rangle$. Then $\varphi_y \in \Lcal(H,\Cbb)$.
+			\label{lem:family}
+		\end{lemma}
+
+		\begin{proof}
+			Clearly, $\varphi_y$ is linear since $\langle \cdot,\cdot \rangle$ is linear in the second component. Moreover, $\varphi_y$ is bounded. Indeed, using Cauchy-Schwarz yields
+			\begin{equation*}
+				\abs[0]{\varphi_y(x)} = \abs[0]{\langle A(y), x \rangle} \leq \norm{A(y)} \norm{x}
+			\end{equation*}
+			\noindent for all $x \in H$.
+		\end{proof}
+
+		Thus we may define a family
+		\begin{equation*}
+			\Fcal := \cbr{\varphi_y : y \in \partial B_1(0)} \subseteq \Lcal(H,\Cbb).
+		\end{equation*}
+
+		Let $x \in H$. Then for any $y \in \partial B_1(0)$ we have that
+		\begin{equation*}
+			\abs[0]{\varphi_y(x)} = \abs[0]{\langle A(y),x \rangle} = \abs[0]{\langle y,A(x) \rangle} \leq \norm{y} \norm{A(x)} = \norm{A(x)}
+		\end{equation*}
+		\noindent by symmetry and again Cauchy-Schwarz. Hence
+		\begin{equation*}
+			\sup_{T \in \Fcal}\abs[0]{T(x)} = \sup_{y \in \partial B_1(0)} \abs[0]{\varphi_y(x)} \leq \norm{A (x)}
+		\end{equation*}
+		\noindent for all $x \in H$. Since any Hilbert space is a Banach space, an application of \emph{Banach-Steinhaus} yields the existence of a constant $c > 0$ such that
+		\begin{equation*}
+			\sup_{T \in \Fcal}\norm[0]{T} = \sup_{y \in \partial B_1(0)} \norm[0]{\varphi_y} \leq c.
+		\end{equation*}
+		For $x \in H$ such that $A(x) \neq 0$ we have that
+		\begin{align*}
+			\norm{A(x)}^2 &= \langle A(x),A(x) \rangle\\
+			&= \norm{x} \langle A(x / \norm{x}), A(x)\rangle\\
+			&= \norm{x} \varphi_{x/\norm{x}}(A(x))\\
+			&\leq \norm{x} \abs[0]{\varphi_{x/\norm{x}}(A(x))}\\
+			&\leq \norm{x} \norm{A(x)} \norm[0]{\varphi_{x/\norm{x}}}\\
+			&\leq c\norm{x} \norm{A(x)}
+		\end{align*}
+		\noindent and thus dividing both sides by $\norm{A(x)}$ yields the boundedness of $A$.
+\end{enumerate}
+
+\end{document}

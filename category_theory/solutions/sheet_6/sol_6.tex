@@ -1,0 +1,28 @@
+\input{../latex/header.tex}
+
+\title{Solutions Sheet 6}
+\author{Yannis B\"{a}hni}
+\address[Yannis B\"{a}hni]{University of Zurich, R\"{a}mistrasse 71, 8006 Zurich}
+\email[Yannis B\"{a}hni]{\href{mailto:yannis.baehni@uzh.ch}{yannis.baehni@uzh.ch}}
+
+\begin{document}
+\maketitle
+\thispagestyle{fancy}
+\setcounter{section}{1}
+
+\begin{enumerate}[label = \textbf{Exercise \arabic*.},wide = 0pt, itemsep=1.5ex]
+	\item 
+		~
+		\begin{enumerate}[label = (\alph*)]
+			\item 
+				\begin{lemma}
+					Let $U : \cat{Grp} \to \cat{Set}$ be the forgetful functor and $F : \cat{Set} \to \cat{Grp}$ be the free functor. Then $F \dashv U$.
+				\end{lemma}
+
+				\begin{proof}
+					Let $S \in \obrm(\cat{Set})$ and $G \in \obrm(\cat{Grp})$. Let $\varphi \in \cat{Grp}\del[1]{F(S),G}$. Define a function $\wbar{\varphi} \in \cat{Set}\del[1]{S,U(G)}$ by $\wbar{\varphi}(s) := \varphi(\iota(s))$, where $\iota : S \hookrightarrow F(S)$ is the natural injection (see \cite[240]{lee:topological_manifolds:2011}). Moreover, for $f \in \cat{Set}\del[1]{S,U(G)}$ define $\wbar{f} \in \cat{Grp}\del[1]{F(S),G}$ to be the unique extension of $f$ (see \cite[240]{lee:topological_manifolds:2011}). Clearly $\wbar{\wbar{f}} = f$ and $\wbar{\wbar{g}} = g$.
+				\end{proof}
+		\end{enumerate}
+\end{enumerate}
+\printbibliography
+\end{document}

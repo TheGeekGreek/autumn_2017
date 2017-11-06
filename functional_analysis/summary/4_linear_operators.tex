@@ -1,0 +1,23 @@
+\section{Linear Operators}
+\subsection{Continuous Operators}
+\begin{definition}
+	Let $(X,\norm{\cdot}_X)$ and $(Y,\norm{\cdot}_Y)$ be two normed spaces. An \bld{operator} is a linear mapping $T : X \to Y$. Moreover, we say that an operator $T : X \to Y$ is \bld{bounded} if there exists $c > 0$ such that 
+	\begin{equation}
+		\norm{T(x)}_Y \leq c\norm{x}_X
+	\end{equation}
+	\noindent holds for all $x \in X$.
+\end{definition}
+
+\subsection{The Hahn-Banach Theorem}
+
+\begin{lemma}
+	Let $X$ be a vector space over $\Rbb$, $M \subsetneq X$ a linear subspace, $p : X \to \Rbb$ a sublinear functional, $f : M \to \Rbb$ linear and $x_0 \in X \setminus M$. Moreover, assume that $f \leq p$ on $M$. Then there exists $F : M + \Rbb x_0 \to \Rbb$ linear such that $F \leq p$ on $M + \Rbb x_0$ and $F\vert_M = f$.
+\end{lemma}
+
+\begin{theorem}[Hahn-Banach, real case]
+	Let $X$ be a vector space over $\Rbb$, $M \subseteq X$ a linear subspace and $f : M \to \Rbb$ linear. Moreover, let $p : X \to \Rbb$ be a sublinear functional such that $f \leq p$ on $M$. Then there exists $F : X \to \Rbb$ linear such that $F \leq p$ on $X$ and $F\vert_M = f$.	
+\end{theorem}
+
+\begin{theorem}[Hahn-Banach, complex case]
+	
+\end{theorem}
