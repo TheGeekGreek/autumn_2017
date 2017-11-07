@@ -56,6 +56,87 @@
 			&\leq c\norm{x} \norm{A(x)}
 		\end{align*}
 		\noindent and thus dividing both sides by $\norm{A(x)}$ yields the boundedness of $A$.
+
+	\item
+
+	\item
+		~
+		\begin{enumerate}[label = \textbf{\alph*.},wide = 0pt, itemsep = 1.5ex]
+			\item We define
+				\begin{equation*}
+					\Fcal := \cbr{B(\cdot,y) : y \in \partial B_1(0)}.
+				\end{equation*}
+
+				\begin{lemma}
+					We have that $\Fcal \subseteq \Lcal(X,\Kbb)$ and for all $x \in X$, there exists $c_x \geq 0$ such that $\sup_{T \in \Fcal}\abs{T(x)} \leq c_x$.
+				\end{lemma}
+
+				\begin{proof}
+					Let $y \in \partial B_1(0)$. Then $B(\cdot,y)$ is linear by definition of a bilinear functional. Moreover, for any $x \in X$ we have that
+					\begin{equation*}
+						\abs{B(x,y)} \leq c_y \norm{x}
+					\end{equation*}
+					\noindent for some $c_y \geq 0$ by continuity of $B$ in the first argument. Hence $\Fcal \subseteq \Lcal(X,\Kbb)$. Let $x \in X$. Then
+					\begin{equation*}
+						\abs{B(x,y)} \leq c_x \norm{y} = c_x
+					\end{equation*}
+					\noindent for some $c_x \geq 0$ by continuity of $B$ in the second argument. Thus
+					\begin{equation*}
+						\sup_{T \in \Fcal}\abs{T(x)} = \sup_{y \in \partial B_1(0)} \abs{B(x,y)} \leq c_x
+					\end{equation*}
+					\noindent for all $x \in X$.
+				\end{proof}
+
+				An application of \emph{Banach-Steinhaus} on the family $\Fcal$ yields the existence of a constant $c \geq 0$ such that
+				\begin{equation*}
+					\sup_{T \in \Fcal}\norm{T} \leq c.
+				\end{equation*}
+				Let $x,y \in X$. Then
+				\begin{align*}
+					\abs{B(x,y)} &= \norm{x}\norm{y} \abs[0]{B(x/\norm{x},y/\norm{y})}\\
+					&\leq \norm{x}\norm{y} \sup_{\norm[0]{\xi} = 1}\abs[0]{B(\xi,y/\norm{y})}\\
+					&\leq \norm{x}\norm{y} \sup_{\norm[0]{\zeta} = 1} \sup_{\norm[0]{\xi} = 1} \abs{B(\xi,\zeta)}\\
+					&= \norm{x}\norm{y} \sup_{\norm[0]{\zeta} = 1}\norm{B(\cdot,\zeta)}\\
+					&\leq c\norm{x}\norm{y}.
+				\end{align*}
+
+				\begin{lemma}
+					Equip $X \times X$ with the norm $\norm{(x,y)} := \norm{x} + \norm{y}$. Then $B$ is continuous.
+				\end{lemma}
+
+				\begin{proof}
+					Let $(x,y) \in X \times X$ and $(x_n,y_n)_{n \in \Nbb}$ be a sequence in $X \times X$ converging to $(x,y)$. We claim that $x_n \to x$ and $y_n \to y$ in $X$. Indeed
+					\begin{equation*}
+						\norm{x_n - x} \leq \norm{x_n - x} + \norm{y_n - y} = \norm{(x_n,y_n) - (x,y)} \to 0
+					\end{equation*}
+					\noindent as $n \to \infty$ and similarly
+					\begin{equation*}
+						\norm{y_n - y} \leq \norm{x_n - x} + \norm{y_n - y} = \norm{(x_n,y_n) - (x,y)} \to 0.
+					\end{equation*}
+					Moreover, since $y_n \to y$, $y_n$ is bounded, i.e. there exists some $M \geq 0$ such that $\norm{y_n} \leq M$ for all $n \in \Nbb$. Hence
+					\begin{align*}
+						\abs{B(x_n,y_n) - B(x,y)} &= \abs{B(x_n,y_n) - B(x,y_n) + B(x,y_n) - B(x,y)}\\
+						&= \abs{B(x_n - x,y_n) + B(x,y_n - y)}\\
+						&\leq \abs{B(x_n - x,y_n)} + \abs{B(x,y_n - y)}\\
+						&\leq c \norm{x_n - x}\norm{y_n} + c \norm{x}\norm{y_n - y}\\
+						&\leq cM \norm{x_n - x} + c\norm{x}\norm{y_n - y} \rightarrow 0
+					\end{align*}
+					\noindent as $n \to \infty$.
+				\end{proof}
+			\item
+				~
+				\begin{lemma}
+					$B$ is a bilinear functional on $\cal{P}$ which is continuous in each argument separately.
+				\end{lemma}
+
+				\begin{proof}
+					The bilinearity of $B$ directly follows from the linearity of the integral. Fix $q \in \cal{P}$. Then for any $p \in \cal{P}$ we have that
+					\begin{equation*}
+						\abs{B(p,q)} = \abs[3]{\int_0^1 p(t)q(t)dt} \leq \int_0^1 \abs{p(t)}\abs{q(t)}dt \leq \sup_{t \in \intcc{0,1}}\abs{q(t)} \int_0^1 \abs{p(t)}dt = c_q \norm{p}
+					\end{equation*}
+					\noindent since $q$ is continuous. Similarly, for each fixed $p \in \cal{P}$ we get that $\abs{B(p,q)} \leq c_p \norm{q}$ for all $q \in \cal{P}$.
+				\end{proof}
+		\end{enumerate}
 \end{enumerate}
 
 \end{document}
