@@ -14,10 +14,115 @@
 
 \begin{enumerate}[label = \textbf{Exercise \arabic*.},wide = 0pt, itemsep = 1.5ex]
 	\item
-	\item
+		\begin{lemma}
+			$q : X \to \Rbb$ is a sublinear functional and $f \leq q$ on $Y$.
+		\end{lemma}
+
+		\begin{proof}
+			Let $\lambda \geq 0$. Moreover, let $\cbr{A_1,\dots,A_n} \subseteq G$ for some $n \in \Nbb$. Then for any $x \in X$ we have that
+			\begin{align*}
+				\frac{1}{n} p\del[1]{A_1(\lambda x) + \dots + A_n(\lambda x)} &= \frac{1}{n} p\del[1]{\lambda A_1(x) + \dots + \lambda A_n(x)}\\
+				&= \frac{1}{n} p\del[1]{\lambda \del[1]{A_1(x) + \dots + A_n(x)}}\\
+				&= \lambda\frac{1}{n} p(A_1(x) + \dots + A_n(x))
+			\end{align*}
+			\noindent since each $A_i$ is linear and $p$ is a sublinear functional on $X$. Thus also $q(\lambda x) = \lambda q(x)$. Let $x,y \in X$. Furthermore, fix some $\varepsilon > 0$. By definition of the infimum, we find $A_1,\dots,A_n \in G$ and $B_1,\dots,B_m \in G$, such that
+			\begin{equation*}
+				q(x) \leq \frac{1}{n}p\del[1]{A_1(x) + \dots + A_n(x)} \leq q(x) + \frac{\varepsilon}{2}
+			\end{equation*}
+			\noindent and
+			\begin{equation*}
+				q(y) \leq \frac{1}{m}p\del[1]{B_1(y) + \dots + B_m(y)} \leq q(y) + \frac{\varepsilon}{2}.
+			\end{equation*}
+			We estimate
+			\begin{align*}
+				\frac{1}{n}p\del[1]{A_1(x) + \dots + A_n(x)} &= \frac{m}{mn}p\del[1]{A_1(x) + \dots + A_n(x)}\\
+				&= \frac{1}{mn} \sum_{k = 1}^m p\del[1]{A_1(x) + \dots + A_n(x)}\\
+				&\geq \frac{1}{mn} \sum_{k = 1}^m p\del[1]{B_k\del[1]{A_1(x) + \dots + A_n(x)}}\\
+				&= \frac{1}{mn} \sum_{k = 1}^m p\del[1]{B_kA_1(x) + \dots + B_kA_n(x)}
+			\end{align*}
+			\noindent by the linearity of elements in $G$, the closedness of $G$ under composition and the property that $p(Ax) \leq p(x)$ holds for all $x \in X$ and $A \in G$. Similarly we estimate
+			\begin{align*}
+				\frac{1}{m}p\del[1]{B_1(y) + \dots + B_m(y)} &= \frac{n}{mn}p\del[1]{B_1(y) + \dots + B_m(y)}\\
+				&= \frac{1}{mn} \sum_{k = 1}^n p\del[1]{B_1(y) + \dots + B_m(y)}\\
+				&\geq \frac{1}{mn} \sum_{k = 1}^n p\del[1]{A_k\del[1]{B_1(y) + \dots + B_m(y)}}\\
+				&= \frac{1}{mn} \sum_{k = 1}^n p\del[1]{A_kB_1(y) + \dots + A_kB_m(y)}.
+			\end{align*}
+			Hence the sublinearity of $p$ together with the commutativity of $G$ yields
+			\begin{align*}
+				q(x) + q(y) + \varepsilon \geq &  \frac{1}{n}p\del[1]{A_1(x) + \dots + A_n(x)} + \frac{1}{m}p\del[1]{B_1(y) + \dots + B_m(y)}\\
+				\geq & \frac{1}{mn} \sum_{k = 1}^m p\del[1]{B_kA_1(x) + \dots + B_kA_n(x)}\\ &+ \frac{1}{mn} \sum_{k = 1}^n p\del[1]{A_kB_1(y) + \dots + A_kB_m(y)}\\
+				=& \frac{1}{mn} \del{\sum_{k = 1}^m p\del{\sum_{\ell = 1}^nB_kA_\ell(x)} + \sum_{k = 1}^n p\del{\sum_{\ell = 1}^m A_kB_\ell(y)}}\\
+				\geq& \frac{1}{mn} \del{p\del{\sum_{k = 1}^m\sum_{\ell = 1}^nB_kA_\ell(x)} + p\del{\sum_{k = 1}^n\sum_{\ell = 1}^m A_kB_\ell(y)}}\\
+				\geq& \frac{1}{mn} p\del{\sum_{k = 1}^m\sum_{\ell = 1}^nB_kA_\ell(x) + \sum_{k = 1}^n\sum_{\ell = 1}^m A_kB_\ell(y)}\\
+				=& \frac{1}{mn} p\del{\sum_{k = 1}^m\sum_{\ell = 1}^nB_kA_\ell(x) + \sum_{k = 1}^n\sum_{\ell = 1}^m B_\ell A_k(y)}\\
+				=& \frac{1}{mn} p\del{\sum_{k = 1}^m\sum_{\ell = 1}^nB_kA_\ell(x) + \sum_{\ell = 1}^m\sum_{k = 1}^n B_\ell A_k(y)}\\
+				=& \frac{1}{mn} p\del{\sum_{k = 1}^m\sum_{\ell = 1}^nB_kA_\ell(x) + \sum_{k = 1}^m\sum_{\ell = 1}^n B_k A_\ell(y)}\\
+				=& \frac{1}{mn} p\del{\sum_{k = 1}^m\sum_{\ell = 1}^n\del[1]{B_kA_\ell(x) + B_kA_\ell(y)}}\\
+				=& \frac{1}{mn} p\del{\sum_{k = 1}^m\sum_{\ell = 1}^nB_kA_\ell(x + y)}\\
+				\geq& q(x + y).
+			\end{align*}
+			Since $\varepsilon$ was arbitrary, we conclude that
+			\begin{equation*}
+				q(x + y) \leq q(x) + q(y)
+			\end{equation*}
+			\noindent holds for all $x,y \in X$. Lastly, we show that $f \leq q$ on $Y$. Let $y \in Y$. Moreover, let $A_1,\dots,A_n \in G$. Then
+			\begin{align*}
+				f(y) &= \frac{1}{n}nf(y)\\
+				&= \frac{1}{n}\sum_{k = 1}^n f(y)\\
+				&= \frac{1}{n}\sum_{k = 1}^n f(A_ky)\\
+				&= \frac{1}{n}f(A_1y + \dots + A_ny)\\
+				&\leq \frac{1}{n}p(A_1y + \dots + A_ny)
+			\end{align*}
+			\noindent by the assumption that $f(Ay) = f(y)$, $Ay \in Y$, $f$ is linear and $f \leq p$ on $Y$ for all $y \in Y$ and $A \in G$. Taking the infimum over all finite sets of $G$ finally yields the result. 
+		\end{proof}
+
+		An application of \emph{Hahn-Banach} now yields the existence of a linear mapping $F : X \to \Rbb$ with $F\vert_Y = f$ and $F \leq q$ on $X$. Observe, that $q \leq p$ simply by choosing the finite set to be $\cbr{\id_X}$. Hence $F \leq p$ on $X$. Thus we have to show a final lemma.
+
+		\begin{lemma}
+			$\forall x \in X\forall A \in G\del[1]{F(Ax) = F(x)}$.
+		\end{lemma}
+
+		\begin{proof}
+			Fix $x \in X$ and $A \in G$. Let $n \in \Nbb$ and consider $\cbr{\id_X,A,A^2,\dots,A^{n-1}} \subseteq G$. On one hand we have that 
+			\begin{align*}
+				F(Ax) - F(x) &= F(Ax - x)\\
+				&\leq q(Ax - x)\\
+				&\leq \frac{1}{n} p\del{\sum_{k = 0}^{n - 1} A^k(Ax - x)}\\
+				&= \frac{1}{n} p\del{\sum_{k = 0}^{n - 1} \del[1]{A^{k+1}x - A^kx}}\\
+				&= \frac{1}{n}p(A^nx - x)\\
+				&\leq \frac{1}{n}\del{p(A^nx) + p(-x)}\\
+				&\leq \frac{1}{n}\del{p(x) + p(-x)}
+			\end{align*}
+			\noindent and on the other
+			\begin{align*}
+				F(Ax) - F(x) &= F(Ax - x)\\
+				&= -F(x - Ax)\\
+				&\geq -q(x - Ax)\\
+				&\geq -\frac{1}{n} p\del{\sum_{k = 0}^{n - 1} A^k(x - Ax)}\\
+				&= -\frac{1}{n} p\del{\sum_{k = 0}^{n - 1} \del[1]{A^kx - A^{k+1}x}}\\
+				&= -\frac{1}{n}p(x - A^nx)\\
+				&\geq -\frac{1}{n}\del{p(x) + p(-A^nx)}\\
+				&= -\frac{1}{n} \del{p(x) + p(A^n(-x))}\\
+				&\geq -\frac{1}{n}\del{p(x) + p(-x)}.
+			\end{align*}
+			Hence
+			\begin{equation*}
+				\abs{F(Ax) - F(x)} \leq \frac{1}{n}\del{p(x) + p(-x)}.
+			\end{equation*}
+			Since $n \in \Nbb$ was arbitrary, we conclude that
+			\begin{equation*}
+				\abs{F(Ax) - F(x)} = 0
+			\end{equation*}
+			\noindent and thus
+			\begin{equation*}
+				F(Ax) = F(x).
+			\end{equation*}
+		\end{proof}
+
+	\item See separate sheet.
 	\item 
 		\begin{lemma}
-			Let $y \in H$ and define a mapping $\varphi_y : H \to \Cbb$ by $\varphi_y(x) := \langle A(y),x \rangle$. Then $\varphi_y \in \Lcal(H,\Cbb)$.
+			Let $y \in H$ and define a mapping $\varphi_y : H \to \Kbb$ by $\varphi_y(x) := \langle A(y),x \rangle$. Then $\varphi_y \in \Lcal(H,\Kbb)$.
 			\label{lem:family}
 		\end{lemma}
 
@@ -31,7 +136,7 @@
 
 		Thus we may define a family
 		\begin{equation*}
-			\Fcal := \cbr{\varphi_y : y \in \partial B_1(0)} \subseteq \Lcal(H,\Cbb).
+			\Fcal := \cbr{\varphi_y : y \in \partial B_1(0)} \subseteq \Lcal(H,\Kbb).
 		\end{equation*}
 
 		Let $x \in H$. Then for any $y \in \partial B_1(0)$ we have that
