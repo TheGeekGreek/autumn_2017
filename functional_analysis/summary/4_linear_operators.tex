@@ -11,13 +11,59 @@
 \subsection{The Hahn-Banach Theorem}
 
 \begin{lemma}
-	Let $X$ be a vector space over $\Rbb$, $M \subsetneq X$ a linear subspace, $p : X \to \Rbb$ a sublinear functional, $f : M \to \Rbb$ linear and $x_0 \in X \setminus M$. Moreover, assume that $f \leq p$ on $M$. Then there exists $F : M + \Rbb x_0 \to \Rbb$ linear such that $F \leq p$ on $M + \Rbb x_0$ and $F\vert_M = f$.
+	Let $V$ be a real vector space, $S \subsetneq V$ a linear subspace, $p : V \to \Rbb$ a sublinear functional, $f : S \to \Rbb$ linear and $x_0 \in V \setminus S$. Moreover, assume that $f \leq p$ on $S$. Then there exists $F : S + \Rbb x_0 \to \Rbb$ linear such that $F \leq p$ on $S + \Rbb x_0$ and $F\vert_S = f$.
 \end{lemma}
 
-\begin{theorem}[Hahn-Banach, real case]
-	Let $X$ be a vector space over $\Rbb$, $M \subseteq X$ a linear subspace and $f : M \to \Rbb$ linear. Moreover, let $p : X \to \Rbb$ be a sublinear functional such that $f \leq p$ on $M$. Then there exists $F : X \to \Rbb$ linear such that $F \leq p$ on $X$ and $F\vert_M = f$.	
+\begin{theorem}[Hahn-Banach, $\Rbb$]
+	Let $V$ be a vector space over $\Rbb$, $S \subseteq V$ a linear subspace and $f : S \to \Rbb$ linear. Moreover, let $p : V \to \Rbb$ be a sublinear functional such that $f \leq p$ on $S$. Then there exists $F : V \to \Rbb$ linear such that $F \leq p$ on $V$ and $F\vert_S = f$.	
 \end{theorem}
 
-\begin{theorem}[Hahn-Banach, complex case]
-	
+\begin{theorem}[Hahn-Banach, $\mathbb{R}$ or $\mathbb{C}$]
+	Let $V$ be a vector space over $\mathbb{K}$, $q : V \to \Rbb$ a seminorm, $S \subseteq V$ a linear subspace and $f : S \to \mathbb{K}$ linear with $\abs{f} \leq q$ on $S$. Then there exists $F : V \to \mathbb{K}$ linear with $F \vert_S = f$ and $\abs{F} \leq q$ on $V$.		
+\end{theorem}
+
+\begin{corollary}[Extension]
+	Let $(X,\norm{\cdot})$ be a normed space over $\mathbb{K}$, $S \subseteq X$ a linear subspace and $f \in S^*$. Then there exists $F \in X^*$ such that $F\vert_S$ = f and $\norm{F}_{X^*} = \norm{f}_{S^*}$.
+\end{corollary}
+
+\begin{corollary}[Separation]
+	Let $(X,\norm{\cdot})$ be a normed space over $\mathbb{K}$ and $x_0 \in X \setminus \cbr{0}$. Then there exists $f \in X^*$ with $\norm{f} = 1$ and $f(x_0) = \norm{x_0}$.
+\end{corollary}
+
+\subsection{Reflexivity}
+
+\begin{proposition}
+	Let $X$ be a normed vector space over $\mathbb{K}$. Then the mapping $\Phi : X \to X^{**}$ defined by $\Phi(x) := \varphi_x$, where $\varphi_x : X^* \to \mathbb{R}$ is defined by $\varphi_x(f) := f(x)$, is a linear isometry.
+\end{proposition}
+
+\begin{theorem}
+	Let $X$ be a Banach space. Then $X$ is reflexive if and only if $X^*$ is reflexive.
+\end{theorem}
+
+\subsection{Hilbert Space Methods}
+
+\begin{theorem}[Riesz's Representation Theorem]
+	Let $(H,\inprod{\cdot}{\cdot})$ be a Hilbert space over $\mathbb{K}$. The mapping $\Psi : H \to H^*$ defined by $\del[1]{\Psi(x)}(y) := \inprod{x}{y}$ is an anti-linear isometric isomorphism.
+\end{theorem}
+
+\begin{corollary}
+	Every Hilbert space is reflexive.
+\end{corollary}
+
+\begin{theorem}[Lax-Milgram]
+	Let $H$ be a Hilbert space over $\mathbb{K}$ and let $a : H \times H \to \mathbb{K}$ be a sesquilinear form. Moreover, suppose that there are constants $0 < c_0 \leq C_0 < \infty$ such that
+	\begin{center}
+		\begin{tabular}{ll}
+			$\abs{a(x,y)} \leq C_0 \norm{x}\norm{y}$ & (\textbf{Continuity}),\\
+			$\Re a(x,x) \geq c_0\norm{x}^2$ & (\textbf{Coercivity}),
+		\end{tabular}
+	\end{center}
+	\noindent for all $x,y \in H$. Then there exists a unique $A \in \mathcal{L}(H)$ such that 
+	\begin{equation}
+		a(x,y) = \inprod{Ax}{y}
+	\end{equation}
+	\noindent for all $x,y \in H$. Moreover, $A$ is invertible with
+	\begin{equation}
+		\norm{A} \leq C_0 \qquad \text{and} \qquad \norm[0]{A^{-1}} \leq \frac{1}{c_0}.	
+	\end{equation}
 \end{theorem}
