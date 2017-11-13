@@ -19,7 +19,8 @@
 	\item
 		~
 		\begin{enumerate}[label = \textbf{\alph*.},wide = 0pt, itemsep = 1.5ex]
-			\item 
+			\item If $A = \varnothing$, we have that $\cap_{\alpha \in A} \mathcal{T}_\alpha = \mathcal{P}(X)$ since topologies on $X$ are subsets of $\mathcal{P}(X)$. Hence the intersection of the empty family of topologies on $X$ is the discrete topology.\\
+				Consider now $A \neq \varnothing$. Clearly, $\varnothing, X \in \cap_{\alpha \in A} \mathcal{T}_\alpha$ since $\varnothing,X \in \mathcal{T}_{\alpha}$ for all $\alpha \in A$. Let $U_1,\dots,U_n \in \cap_{\alpha \in A}\mathcal{T}_\alpha$. Hence $U_1,\dots,U_n \in \mathcal{T}_\alpha$ for all $\alpha \in A$ and so $U_1 \cap \dots \cap U_n \in \mathcal{T}_\alpha$ for all $\alpha \in A$. Hence $U_1 \cap \dots \cap U_n \in \cap_{\alpha \in A}\mathcal{T}_\alpha$. Finally, suppose that $(U_\beta)_{\beta \in B}$ is a family in $\cap_{\alpha \in A} \mathcal{T}_\alpha$. Hence for all $\alpha \in A$ we have that $U_\beta \in \mathcal{T}_\alpha$ for all $\beta \in B$. So $\cup_{\beta \in B} U_\beta \in \mathcal{T}_\alpha$ for all $\alpha \in A$ and therefore $\cup_{\beta \in B} U_\beta \in \cap_{\alpha \in A} \mathcal{T}_\alpha$.
 			\item Define
 				\begin{equation*}
 					\mathcal{B} := \cbr{U_1 \cap \dots \cap U_n : n \in \mathbb{N},U_i \in \mathcal{\altS} \text{ for all } i = 1,\dots,n}
