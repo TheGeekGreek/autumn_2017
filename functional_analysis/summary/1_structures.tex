@@ -1,0 +1,34 @@
+\section{Structures}
+\subsection{Topological Spaces}
+
+\begin{theorem}[Urysohn's Lemma] 
+	Suppose $X$ is a normal topological space. Given disjoint closed subsets $A,B \subseteq X$, there exists a continuous function $f : X \to \intcc{0,1}$ such that $f \vert_A = 0$ and $f \vert_B = 1$.
+\end{theorem}
+
+\subsection{Metric Spaces}
+
+\subsection{Normed Spaces}
+
+\begin{proposition}[Sequence Spaces]
+	For $1 \leq p < \infty$ define
+	\begin{equation}
+		\ell^p(\mathbb{K}) := \cbr[1]{x \in \mathbb{K}^\mathbb{N} : \textstyle{\sum_{k \in \mathbb{N}}} \abs{x_k} < \infty}
+	\end{equation}
+	\noindent and for $p = \infty$
+	\begin{equation}
+		\ell^\infty(\mathbb{K}) := \cbr[1]{x \in \mathbb{K}^\mathbb{N} : \textstyle{\sup_{k \in \mathbb{N}}} \abs{x_k} < \infty}.
+	\end{equation}
+	Moreover, for $x \in \ell^p(\mathbb{K})$ set
+	\begin{equation}
+		\norm{x}_p := \del[4]{\sum_{k \in \mathbb{N}} \abs{x_k}^p}^{1/p}
+	\end{equation}
+	\noindent for $1 \leq p < \infty$ and
+	\begin{equation}
+		\norm{x}_\infty := \sup_{k \in \mathbb{N}} \abs{x_k}.
+	\end{equation}
+	Then $(\ell^p,\norm{\cdot}_p)$ is a Banach space for all $1 \leq p \leq \infty$.
+\end{proposition}
+
+\begin{theorem}[Completion of Normed Spaces]
+	Every normed space $X$ has a completion which is unique up to isometric isomorphisms.
+\end{theorem}

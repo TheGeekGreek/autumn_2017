@@ -1,0 +1,10 @@
+\section{Adjoints}
+\subsection{Adjunctions}
+
+\begin{definition}
+	Let $\mathcal{C}$ and $\mathcal{D}$. An \bld{adjunction from $\mathcal{C}$ to $\mathcal{D}$} is a triple $(F,G,\varphi)$ consisting of two functors $F : \mathcal{C} \to \mathcal{D}$ and $G : \mathcal{D} \to \mathcal{C}$ and a function $\varphi$, which assigns to each $X \in \mathcal{C}$ and $Y \in \mathcal{D}$ a bijection
+	\begin{equation}
+		\varphi_{X,Y} : \mathcal{D}\del[1]{F(X),Y} \cong \mathcal{C}\del[1]{X,G(Y)}
+	\end{equation}
+	\noindent which is natural in both $X$ and $Y$.
+\end{definition}

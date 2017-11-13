@@ -14,3 +14,23 @@
 		\sup_{T \in \mathcal{F}} \norm{T} \leq c.
 	\end{equation}
 \end{theorem}
+
+\subsection{The Open Mapping and Closed Graph Theorems}
+
+\begin{theorem}[Open Mapping Theorem]
+	Let $X$ and $Y$ be two Banach spaces and $T \in \mathcal{L}(X,Y)$ surjective. Then $T(U)$ is open for all $U \subseteq X$ open.
+\end{theorem}
+
+\begin{theorem}[Inverse Mapping Theorem]
+	Let $X$ and $Y$ be two Banach spaces and $T \in \mathcal{L}(X,Y)$ bijective. Then $T^{-1} \in \mathcal{L}(Y,X)$.
+\end{theorem}
+
+\begin{theorem}[Closed Graph Theorem]
+	Let $X$ and $Y$ be Banach spaces and $T : X \to Y$ linear. The following statements are equivalent:
+	\begin{enumerate}[label = (\roman*)]
+		\item $T \in \mathcal{L}(X,Y)$.
+		\item The graph of $f$, $\Gamma(f)$, is closed in $(X \times Y, \norm{\cdot}_X + \norm{\cdot}_Y)$.
+	\end{enumerate}
+\end{theorem}
+
+
