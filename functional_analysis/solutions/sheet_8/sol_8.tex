@@ -14,7 +14,84 @@
 
 \begin{enumerate}[label = \textbf{Exercise \arabic*.},wide = 0pt, itemsep = 1.5ex]
 	\item
-	\item
+	\item We will show that there exists a unique solution to the integral equation $f \in L^2(X)$. 
+		\begin{lemma}
+			Let $L \in L^2(X \times X)$ and $f \in L^2(X)$. For $x \in X$ define
+			\begin{equation*}
+				g_f(x) := \int_X L(x,y)f(y)dy.
+			\end{equation*}
+			Then $g_f \in L^2(X)$.
+			\label{lem:L^2}
+		\end{lemma}
+
+		\begin{proof}
+			We have that
+			\begin{align*}
+				\norm[0]{g_f}_{L^2(X)}^2 &= \int_X \abs[0]{g_f(x)}^2 dx\\
+				&= \int_X \abs[3]{\int_X L(x,y)f(y)dy}^2 dx\\
+				&\leq \int_X \del[3]{\int_X \abs{L(x,y)f(y)}dy}^2 dx\\
+				&= \int_X \norm[0]{L(x,\cdot)f}_{L^1(X)}^2 dx\\
+			&\leq \int_X \norm[0]{L(x,\cdot)}_{L^2(X)}^2 \norm[0]{f}_{L^2(X)}^2 dx\\
+			&= \norm[0]{f}_{L^2(X)}^2 \int_X \int_X \abs[0]{L(x,y)}^2dy dx\\
+			&= \norm[0]{f}_{L^2(X)}^2 \norm[0]{L}_{L^2(X \times X)}^2
+			\end{align*}
+		\noindent by H\"older and Fubini.
+		\end{proof}
+		Now we have to solve the equation
+		\begin{equation*}
+			cf + u = g_f.
+		\end{equation*}
+		Define $a : L^2(X) \times L^2(X) \to \mathbb{C}$ by
+		\begin{equation*}
+			a(f,\varphi) := \langle cf - g_f, \varphi \rangle_{L^2(X)}.
+		\end{equation*}
+		If $a$ satisfies the assumptions of \emph{Lax-Milgram}, we find $A \in \mathcal{L}\del[1]{L^2(X)}$, such that 
+		\begin{equation*}
+			a(f,\varphi) = \langle A(f),\varphi \rangle_{L^2(X)}
+		\end{equation*}
+		\noindent holds for all $f,\varphi \in L^2(X)$. Hence
+		\begin{equation*}
+			  \langle cf - g_f, \varphi \rangle_{L^2(X)} = \langle A(f),\varphi \rangle_{L^2(X)}
+		\end{equation*}
+		\noindent holds for all $f,\varphi \in L^2(X)$. Moreover, since $A$ is invertible, we find a unique $f_0 \in L^2(X)$, such that $A(f_0) = -u$. Therefore
+		\begin{equation*}
+			R_{L^2(X)}(cf_0 - g_{f_0})(\varphi) = \langle cf_0 - g_{f_0}, \varphi \rangle_{L^2(X)} = \langle -u,\varphi \rangle_{L^2(X)} = R_{L^2(X)}(-u)(\varphi)
+		\end{equation*}
+		\noindent holds for all $\varphi \in L^2(X)$. Thus $R_{L^2(X)}(cf_0 - g_{f_0}) = R_{L^2(X)}(-u)$ and so the \emph{Riesz representation theorem} yields that
+		\begin{equation*}
+			cf_0 - g_{f_0} = -u.
+		\end{equation*}
+
+		\begin{lemma}
+			$a : L^2(X) \times L^2(X) \to \mathbb{C}$ is a continuous coercive sesquilinear form.
+		\end{lemma}
+
+		\begin{proof}
+			Clearly $a$ is sesquilinear, i.e. antilinear in the first and linear in the second argument, by the corresponding properties of the $L^2(X)$ inner product and the simple observation that
+			\begin{equation*}
+				g_{f + \lambda h} = g_f + \lambda g_h
+			\end{equation*}
+			\noindent for $\lambda \in \mathbb{C}$ and $f,h \in L^2(X)$. Let $\varphi \in L^2(X)$. Then Cauchy-Schwarz together with lemma \ref{lem:L^2} yields
+			\begin{align*}
+				\abs{a(f,\varphi)} &= \abs[0]{\langle cf - g_f,\varphi \rangle_{L^2(X)}}\\
+				&\leq \norm[0]{cf - g_f}_{L^2(X)}\norm[0]{\varphi}_{L^2(X)}\\
+				&\leq \del[1]{c\norm[0]{f}_{L^2(X)} + \norm[0]{g_f}_{L^2(X)}}\norm{\varphi}_{L^2(X)}\\
+				&\leq \del[1]{c\norm{f}_{L^2(X)} + \norm[0]{f}_{L^2(X)}\norm{L}_{L^2(X \times X)}} \norm{\varphi}_{L^2(X)}\\
+				&\leq 2c\norm{f}_{L^2(X)}\norm{\varphi}_{L^2(X)} 
+			\end{align*}
+			\noindent since $\norm{L}_{L^2(X \times X)} < c$. Lastly, since $\norm{L}_{L^2(X \times X)} < c$, we find $c_0$ such that we have $\norm{L}_{L^2(X \times X)} < c_0 < c$ by trichotomy. Thus again lemma \ref{lem:L^2} together with Cauchy-Schwarz implies that 
+			\begin{align*}
+				\Re a(f,f) &= \Re \langle cf - g_f,f \rangle_{L^2(X)}\\
+				&= \Re c\langle f,f \rangle_{L^2(X)} - \Re \langle g_f,f\rangle_{L^2(X)}\\
+				&= c\norm{f}_{L^2(X)}^2 - \Re \langle g_f,f\rangle_{L^2(X)}\\
+				&\geq c\norm{f}_{L^2(X)}^2 - \abs[0]{\langle g_f,f \rangle_{L^2(X)}}\\
+				&\geq c \norm{f}_{L^2(X)}^2 - \norm[0]{g_f}_{L^2(X)}\norm{f}_{L^2(X)}\\
+				&\geq c \norm{f}_{L^2(X)}^2 - \norm{f}_{L^2(X)}^2 \norm{L}_{L^2(X \times X)}\\
+				&\geq (c  -c_0)\norm{f}_{L^2(X)}^2.
+			\end{align*}
+			Now $2c > 0$ since $c > \norm{L}_{L^2(X \times X)}$, $c - c_0 > 0$ and $c - c_0 \leq c \leq 2c$ since $c_0 > 0$.
+		\end{proof}
+
 	\item 
 		~
 		\begin{enumerate}[label = \textbf{\alph*.},wide = 0pt, itemsep = 1.5ex]
@@ -94,6 +171,7 @@
 		\begin{equation*}
 			\lim_{n \to \infty} \abs{f(x_n) - f(x)} \leq \norm{f - f_k}\del[0]{M + \norm{x}} \xrightarrow{k \to \infty} 0.
 		\end{equation*}
+		Thus $f(x_n) \to f(x)$ for all $f \in X^*$ and so lemma 6.2.1 implies $x_n \rightharpoonup x$.
 \end{enumerate}
 \printbibliography
 \end{document}
