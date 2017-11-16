@@ -1,106 +1,83 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Author:																 %
+%-------																 %
+%Yannis Baehni at University of Zurich									 %
+%baehni.yannis@uzh.ch													 %
+%																		 %
+%Version log:															 %
+%------------															 %
+%06/02/16 . Basic structure												 %
+%04/08/16 . Layout changes including section, contents, abstract.		 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%Page Setup
 \documentclass[
-	11pt, 
+	12pt, 
 	oneside, 
 	a4paper,
-	reqno
+	reqno,
+	final
 ]{amsbook}
+
+\usepackage[
+	left = 3cm, 
+	right = 3cm, 
+	top = 3cm, 
+	bottom = 3cm
+]{geometry}
+
+%Headers and footers
+\usepackage{fancyhdr}
+	\pagestyle{fancy}
+	%Clear fields
+	\fancyhf{}
+	%Header right
+	\fancyhead[R]{
+		\footnotesize
+		Yannis B\"{a}hni\\
+		\href{mailto:yannis.baehni@uzh.ch}{yannis.baehni@uzh.ch}
+	}
+	%Header left
+	\fancyhead[L]{
+		\footnotesize
+		401-3001-61L Algebraic Topology I\\
+		Autumn Semester 2017
+	}
+	%Page numbering in footer
+	\fancyfoot[C]{\thepage}
+	%Separation line header and footer
+	\renewcommand{\headrulewidth}{0.4pt}
+	%\renewcommand{\footrulewidth}{0.4pt}
+	
+	\setlength{\headheight}{19pt} 
+
+%Title
+\usepackage[foot]{amsaddr}
+\usepackage{newtxtext}
+\usepackage[subscriptcorrection,nofontinfo,mtpcal,mtphrb]{mtpro2}
+\usepackage{bm}
+\usepackage{xspace}
+\makeatletter
+\def\@textbottom{\vskip \z@ \@plus 1pt}
+\let\@texttop\relax
+\usepackage{etoolbox}
+\patchcmd{\abstract}{\scshape\abstractname}{\textbf{\abstractname}}{}{}
 
 %Section, subsection and subsubsection font
 %------------------------------------------
-\makeatletter
 	\renewcommand{\@secnumfont}{\bfseries}
+	\renewcommand\section{\@startsection{section}{1}%
+  	\z@{.7\linespacing\@plus\linespacing}{.5\linespacing}%
+  	{\normalfont\bfseries\centering}}
 	\renewcommand\subsection{\@startsection{subsection}{2}%
     	\z@{.5\linespacing\@plus.7\linespacing}{-.5em}%
     	{\normalfont\bfseries}}%
 	\renewcommand\subsubsection{\@startsection{subsubsection}{3}%
     	\z@{.5\linespacing\@plus.7\linespacing}{-.5em}%
     	{\normalfont\bfseries}}%
-\makeatother
-%Math
-%----
-\usepackage{newtxtext}
-\usepackage[subscriptcorrection,nofontinfo,mtpcal,mtphrb]{mtpro2}
-\usepackage{commath}
-\usepackage{bm}
-%Main style theorem environment
-\newtheoremstyle{main} 		             	 		%Stylename
-  	{}	                                     		%Space above
-  	{}	                                    		%Space below
-  	{\itshape}			                     		%Body font
-  	{}        	                             		%Indent
-  	{\bfseries}   	                         		%Head font
-  	{.}            	                        		%Head punctuation
-  	{ }           	                         		%Head space 
-  	{\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}	%Head specification
-\theoremstyle{main}
-\newtheorem{definition}{Definition}[section]
-\newtheorem{proposition}{Proposition}[section]
-\newtheorem{corollary}{Corollary}[section]
-\newtheorem{theorem}{Theorem}[section]
-\newtheorem{lemma}{Lemma}[section]
-%Roman style theorems
-\newtheoremstyle{roman}
-	{}
-	{}
-  	{}
-  	{}
-	{\bfseries}
-	{.}
-  	{ }
-	{\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}
-\theoremstyle{roman}
-\newtheorem{example}{Example}[section]
-\newtheorem{solution}{Solution}[section]
-\newtheorem{remark}{Remark}[section]
-%Exercise style theorems
-\newtheoremstyle{exercise}
-  	{}
-  	{}
-  	{\small}
-  	{}
-  	{\bfseries}
-  	{.}
- 	{ }
-  	{\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}
-\theoremstyle{exercise}
-\newtheorem{exercise}{Exercise}[section]
-%Changing default style of proof environment
-\renewcommand*{\proofname}{\itshape Proof}
-%Special triple norm symbol
-\RequirePackage{ifthen}
-\providecommand{\trivert}[2][-1]{
-\ensuremath{\mathinner{
-\ifthenelse{\equal{#1}{-1}}{ % if
-\!\left\lVert#2\right\rVert}{}
-\ifthenelse{\equal{#1}{0}}{ % if
-	\mathopen{|\mkern-1.5mu|\mkern-1.5mu|}#2\mathclose{|\mkern-1.5mu|\mkern-1.5mu|}}{}
-\ifthenelse{\equal{#1}{1}}{ % if
-\!\bigl\lVert#2\bigr\rVert}{}
-\ifthenelse{\equal{#1}{2}}{ % if
-\!\Bigl\lVert#2\Bigr\rVert}{}
-\ifthenelse{\equal{#1}{3}}{ % if
-\!\biggl\lVert#2\biggr\rVert}{}
-\ifthenelse{\equal{#1}{4}}{ % if
-\!\Biggl\lVert#2\Biggr\rVert}{}
-}}
-}
-\let\trinorm=\trivert
 
-%Math Operators
-%--------------
-\AtBeginDocument{\renewcommand*\d{\mathop{}\!\mathrm{d}}}
-\renewcommand{\Re}{\operatorname{Re}}
-\renewcommand{\Im}{\operatorname{Im}}
-\DeclareMathOperator\Log{Log}
-\DeclareMathOperator\Arg{Arg}
-\DeclareMathOperator\sech{sech}
-\DeclareMathOperator*\esssup{ess.sup}
-\DeclareMathOperator\Int{Int}
-\DeclareMathOperator\id{id}
-\DeclareMathOperator\Hom{Hom}
-\DeclareMathOperator\GL{GL}
-\DeclareMathOperator\supp{supp}
-\DeclareMathOperator\ob{ob}
+		\renewenvironment{proof}{\textit{Proof}.}{\hfill\qedsymbol}
+
 %ToC
 %---
 \makeatletter
@@ -142,75 +119,161 @@
 \def\l@subsubsection{\@tocline{2}{0pt}{4.5pc}{5pc}{}}
 \makeatother
 
-%Enumerate
-%\usepackage{enumerate}
-\usepackage[dvipsnames]{xcolor}
+\advance\footskip0.4cm
+\textheight=54pc    %a4paper
+\textheight=50.5pc %letterpaper
+\advance\textheight-0.4cm
+\calclayout
 
-\usepackage{anyfontsize}
-%Bibliography
+%Font settings
+%\usepackage{anyfontsize}
+%Footnote settings
+\usepackage{footmisc}
+%	\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+\usepackage{commath}
+%Further math environments
+%Further math fonts (loads amsfonts implicitely)
+%Redefinition of \text
+%\usepackage{amstext}
+\usepackage{upref}
+%Graphics
+%\usepackage{graphicx}
+%\usepackage{caption}
+%\usepackage{subcaption}
+%Frames
+\usepackage{mdframed}
+\allowdisplaybreaks
+%\usepackage{interval}
+\newcommand{\toup}{%
+  \mathrel{\nonscript\mkern-1.2mu\mkern1.2mu{\uparrow}}%
+}
+\newcommand{\todown}{%
+  \mathrel{\nonscript\mkern-1.2mu\mkern1.2mu{\downarrow}}%
+}
+\AtBeginDocument{\renewcommand*\d{\mathop{}\!\mathrm{d}}}
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
+\DeclareMathOperator\Log{Log}
+\DeclareMathOperator\Arg{Arg}
+\DeclareMathOperator\id{id}
+\DeclareMathOperator\sech{sech}
+\DeclareMathOperator\Aut{Aut}
+\DeclareMathOperator\h{h}
+\DeclareMathOperator\sgn{sgn}
+\DeclareMathOperator\arctanh{arctanh}
+\DeclareMathOperator\supp{supp}
+\DeclareMathOperator\ob{ob}
+%\usepackage{hhline}
+%\usepackage{booktabs} 
+%\usepackage{array}
+%\usepackage{xfrac} 
+%\everymath{\displaystyle}
+%Enumerate
+\usepackage{tikz}
+\usetikzlibrary{external}
+\tikzexternalize % activate!
+\usetikzlibrary{patterns}
+\pgfdeclarepatternformonly{adjusted lines}{\pgfqpoint{-1pt}{-1pt}}{\pgfqpoint{40pt}{40pt}}{\pgfqpoint{39pt}{39pt}}%
+{
+  \pgfsetlinewidth{.8pt}
+  \pgfpathmoveto{\pgfqpoint{0pt}{0pt}}
+  \pgfpathlineto{\pgfqpoint{39.1pt}{39.1pt}}
+  \pgfusepath{stroke}
+}
+\usepackage{enumitem} 
+%\renewcommand{\labelitemi}{$\bullet$}
+%\renewcommand{\labelitemii}{$\ast$}
+%\renewcommand{\labelitemiii}{$\cdot$}
+%\renewcommand{\labelitemiv}{$\circ$}
+%Colors
+%\usepackage{color}
+%\usepackage[cmtip, all]{xy}
+%Main style theorem environment
+\newtheoremstyle{main} 		             	 		%Stylename
+  	{}	                                     		%Space above
+  	{}	                                    		%Space below
+  	{\itshape}			                     		%Body font
+  	{}        	                             		%Indent
+  	{\bfseries}   	                         		%Head font
+  	{.}            	                        		%Head punctuation
+  	{ }           	                         		%Head space 
+  	{\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}	%Head specification
+\theoremstyle{main}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheoremstyle{nonit} 		             	 		%Stylename
+  	{}	                                     		%Space above
+  	{}	                                    		%Space below
+  	{}			                     		%Body font
+  	{}        	                             		%Indent
+  	{\bfseries}   	                         		%Head font
+  	{.}            	                        		%Head punctuation
+  	{ }           	                         		%Head space 
+  	{\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}	%Head specification
+\theoremstyle{nonit}
+\newtheorem{remark}{Remark}[section]
+\newtheorem{examples}{Examples}[section]
+\newtheoremstyle{ex} 		             	 		%Stylename
+  	{}	                                     		%Space above
+  	{}	                                    		%Space below
+  	{\small}			                     		%Body font
+  	{}        	                             		%Indent
+  	{\bfseries}   	                         		%Head font
+  	{.}            	                        		%Head punctuation
+  	{ }           	                         		%Head space 
+  	{\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}	%Head specification
+\theoremstyle{ex}
+\newtheorem{exercise}{Exercise}[section]
+%German non-ASCII-Characters
+%Graphics-Tool
+%\usepackage{tikz}
+%\usepackage{tikzscale}
+%\usepackage{bbm}
+%\usepackage{bera}
+%Listing-Setup
+%Bibliographie
 \usepackage[backend=bibtex, style=alphabetic]{biblatex}
+%\usepackage[babel, german = swiss]{csquotes}
 \bibliography{bibliography}
+%PDF-Linking
+%\usepackage[hyphens]{url}
 \usepackage[bookmarksopen=true,bookmarksnumbered=true]{hyperref}
 %\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
+\urlstyle{rm}
 \hypersetup{
   colorlinks   = true, %Colours links instead of ugly boxes
   urlcolor     = blue, %Colour for external hyperlinks
   linkcolor    = blue, %Colour of internal links
   citecolor    = blue %Colour of citations
 }
-%Own commands
 \newcommand{\bld}[1]{\boldmath\textit{\textbf{#1}}\unboldmath}
-%\newcommand{\bld}[1]{\boldmath\textbf{#1}\unboldmath}
-
-\usepackage{setspace}
-\definecolor{ao(english)}{rgb}{0.0, 0.5, 0.0}
-
-\newlength{\textsize}
-\makeatletter
-\setlength{\textsize}{\f@size pt}
-\makeatother
-
-
-%Enumerations 
-%------------
-\usepackage{enumitem}
-\setlist[enumerate]{label=\textup{(}\roman*\textup{)}, leftmargin = 25pt}
-
 \newcommand{\eqclass}[1]{\sbr[0]{#1}}
 \newcommand{\cat}[1]{\mathsf{#1}}
-\newcommand{\Urm}{\mathrm{U}}
-\newcommand{\FSrm}{\mathrm{FS}}
 \newcommand{\Sbb}{\mathbb{S}}
 \newcommand{\Zbb}{\mathbb{Z}}
-\newcommand{\Cbb}{\mathbb{C}}
 \newcommand{\Nbb}{\mathbb{N}}
-\newcommand{\CPbb}{\mathbb{CP}}
+\newcommand{\Rbb}{\mathbb{R}}
+\newcommand{\Hbb}{\mathbb{H}}
+\newcommand{\Cbb}{\mathbb{C}}
+\newcommand{\Tcal}{\mathcal{T}}
+\newcommand{\SLrm}{\mathrm{SL}}
+\newcommand{\PSLrm}{\mathrm{PSL}}
+\newcommand{\SLrmstar}{\mathrm{S^*L}}
+\newcommand{\PSLrmstar}{\mathrm{PS^*L}}
+\newcommand{\GLrm}{\mathrm{GL}}
+\newcommand{\Mrm}{\mathrm{M}}
+\newcommand{\Isom}{\mathrm{Isom}}
+\newcommand{\Mob}{\mathrm{M\ddot{o}b}}
+\newcommand{\Ebb}{\mathbb{E}}
+\newcommand{\Cscr}{\mathscr{C}}
+\newcommand{\pwrm}{\mathrm{pw}}
 \newcommand{\clos}[1]{\overline{#1}}
-\newcommand{\dRrm}{\mathrm{dR}}
-\newcommand{\Xfrak}{\mathfrak{X}}
-\newcommand{\Ascr}{\mathscr{A}}
-\newcommand{\Bcal}{\mathcal{B}}
-\newcommand{\Ccal}{\mathcal{C}}
-
-\usepackage{subcaption}
-\usepackage[all]{xy}
-
-\usepackage{pict2e}
-\makeatletter
-\DeclareRobustCommand{\intprod}{%
-  \mathbin{\mathpalette\int@prod{(0.1,0)(0.9,0)(0.9,0.8)}}%
-}
-\DeclareRobustCommand{\intprodr}{%
-  \mathbin{\mathpalette\int@prod{(0.1,0.8)(0.1,0)(0.9,0)}}}
-
-\newcommand{\int@prod}[2]{%
-  \begingroup
-  \sbox\z@{$\m@th#1+$}%
-  \setlength\unitlength{\wd\z@}%
-  \begin{picture}(1,1)
-  \roundcap
-  \polyline#2
-  \end{picture}%
-  \endgroup
-}
-\makeatother
+\newcommand{\Hcal}{\mathcal{H}}
+\newcommand{\Hbcal}{\bm{\mathcal{H}}}
+\newcommand{\Ucal}{\mathcal{U}}
+\newcommand{\Ubcal}{\bm{\mathcal{U}}}
+\renewcommand{\det}{\mathrm{det}}
+\newcommand{\ab}{\mathrm{ab}}
