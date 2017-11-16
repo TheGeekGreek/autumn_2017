@@ -14,6 +14,70 @@
 
 \begin{enumerate}[label = \textbf{Exercise \arabic*.},wide = 0pt, itemsep = 1.5ex]
 	\item
+		~
+		\begin{enumerate}[label = \textbf{\alph*.},wide = 0pt, itemsep = 1.5ex]
+			\item See separate sheet.
+			\item Let $f \in L^1(X,\mathcal{A},\mu)$. Then $f$ is measurable and integrable. Moreover, $\abs{f}$ is integrable. Hence we may assume that $f \geq 0$. First, suppose that $f$ is simple, i.e. $f = \sum_{k = 1}^n a_k \chi_{A_k}$, where $a_k \geq 0$ and $A_k \in \mathcal{A}$ for all $k = 1,\dots,n$. Then we have that
+				\begin{equation*}
+					\int_X fd\mu = \sum_{k = 1}^n a_k\mu(A_k) = \sum_{k = 1}^n a_k \abs{A_k}
+				\end{equation*}
+				Clearly $f$ is integrable if and only if $\abs{A_k} < \infty$ for all $k = 1,\dots,n$. Hence $f$ is integrable if and only if $\supp f$ is finite. Now assume that $f \geq 0$ is measurable. Then by elementary measure theory there exists a monotone sequence $(\varphi_n)_{n \in \mathbb{N}}$ of simple functions such that $\varphi_n \to f$ pointwise. Then we have that
+				\begin{equation*}
+					\int_X f d\mu = \lim_{n \to \infty} \int_X \varphi_n d \mu = \sup_{n \in \mathbb{N}} \cbr{\int_X \varphi_n d\mu}
+				\end{equation*}
+				\noindent and thus since $f$ is integrable, $\int_X \varphi_n d\mu < \infty$ for all $n \in \mathbb{N}$. Hence by the previous discussion, $\supp \varphi_n$ is finite for all $n \in \mathbb{N}$ and by $\supp f \subseteq \cup_{n \in \mathbb{N}}\supp \varphi_n$ we get that $\supp f$ is at most countable. So if $f \in L^1(X,\mathcal{A},\mu)$ we have that $\supp f$ is at most countable, moreover since we are dealing with the counting measure, we have that
+				\begin{equation*}
+					\int_X fd \mu = \sum_{x \in \supp f} f(x)
+				\end{equation*}
+				\noindent where the righthandside is independent of the enumeration of $\supp f$ since also $\abs{f}$ is integrable and thus the righthandside converges absolutely. The discussion above implies that we can define a function $\Psi : L^1(X,\mathcal{A},\mu) \to \mathbb{R}$ by
+				\begin{equation*}
+					\Psi(f) := \sum_{x \in \intcc{0,1}} f(x).
+				\end{equation*}
+				\noindent The righthandside is actually an ordinary countable sum which converges since 
+				\begin{equation*}
+					\abs{\Psi(f)} = \abs[4]{\sum_{x \in \intcc{0,1}} f(x)} \leq \sum_{x \in \intcc{0,1}} \abs{f(x)} \leq \sum_{x \in X} \abs{f(x)} = \norm{f}_1.
+				\end{equation*}
+				This also shows that $\Psi$ is continuous. Obviously, $\Psi$ is linear (a union of countable supports is still countable). This establishes the following lemma.
+
+				\begin{lemma}
+					$\Psi \in \del[1]{L^1(X,\mathcal{A},\mu)}^*$.
+				\end{lemma}
+
+				\begin{proof}
+					See discussion above.
+				\end{proof}
+
+				\begin{lemma}
+					We have that $\Psi(f) = \int_X fg d\mu$ for all $f \in L^1(X,\mathcal{A},\mu)$ if and only if $g = \chi_{\intcc{0,1}}$.
+				\end{lemma}
+
+				\begin{proof}
+					If $g = \chi_{\intcc{0,1}}$, then we have that
+					\begin{equation*}
+						\int_X f\chi_{\intcc{0,1}} d\mu = \sum_{x \in \intcc{0,1}} f(x) = \Psi(f).
+					\end{equation*}
+					Conversly, suppose that $\Psi(f) = \int_x fg d\mu$ holds for all $f \in L^1(X,\mathcal{A},\mu)$ for some function $g$. Then we have 
+					\begin{equation*}
+						\sum_{x \in \intcc{0,1}} f(x) = \sum_{x \in X} f(x)g(x) 
+					\end{equation*}
+					\noindent for all $f \in L^1(X,\mathcal{A},\mu)$ or equivalently
+					\begin{equation*}
+						0 = \sum_{x \in \intcc{0,1}^c} f(x)g(x) + \sum_{x \in \intcc{0,1}} \del[1]{g(x) - 1}f(x).
+					\end{equation*}
+					Let $x_0 \in \intcc{0,1}^c$. Then $f := \chi_{\cbr{x_0}} \in L^1(X,\mathcal{A},\mu)$, since singletons are measurable. But then
+					\begin{equation*}
+						0 = f(x_0)g(x_0) = g(x_0)
+					\end{equation*}
+					\noindent and so $g = 0$ on $\intcc{0,1}^c$. If $x_0 \in \intcc{0,1}$, then we get that
+					\begin{equation*}
+						0 = \del[1]{g(x_0) - 1}f(x_0) = g(x_0) - 1
+					\end{equation*}
+					\noindent and thus $g = 1$ on $\intcc{0,1}$. Thus $g = \chi_{\intcc{0,1}}$.
+				\end{proof}
+				
+				The above lemma implies that $\Psi$ cannot be represented as $\int_X fg d\mu$ for all $f \in L^1(X,\mathcal{A},\mu)$ and some $g \in L^\infty(X,\mathcal{A},\mu)$, since $\chi_{\intcc{0,1}}$ is clearly bounded but not measurable. Indeed, $\intcc{0,1}$ as well as $\intcc{0,1}^c = \intoo{-\infty,0} \cup \intoo{1,\infty}$ is uncountable and thus $\intcc{0,1} \notin \mathcal{A}$ (a characteristic function $\chi_A$ is measurable if and only if $A$ is measurable).
+		
+		\end{enumerate}
 	\item We will show that there exists a unique solution to the integral equation $f \in L^2(X)$. 
 		\begin{lemma}
 			Let $L \in L^2(X \times X)$ and $f \in L^2(X)$. For $x \in X$ define
@@ -45,7 +109,7 @@
 		\begin{equation*}
 			a(f,\varphi) := \langle cf - g_f, \varphi \rangle_{L^2(X)}.
 		\end{equation*}
-		If $a$ satisfies the assumptions of \emph{Lax-Milgram}, we find $A \in \mathcal{L}\del[1]{L^2(X)}$, such that 
+		This is possible since $L^2(X)$ is a Hilbert space. If $a$ satisfies the assumptions of \emph{Lax-Milgram}, we find $A \in \mathcal{L}\del[1]{L^2(X)}$, such that 
 		\begin{equation*}
 			a(f,\varphi) = \langle A(f),\varphi \rangle_{L^2(X)}
 		\end{equation*}
