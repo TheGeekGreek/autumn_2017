@@ -32,3 +32,35 @@
 \begin{theorem}[Completion of Normed Spaces]
 	Every normed space $X$ has a completion which is unique up to isometric isomorphisms.
 \end{theorem}
+
+\subsection{Hilbert Spaces}
+
+\begin{lemma}[Cauchy-Schwarz Inequality]
+	Let $(H,\inprod{\cdot}{\cdot})$ be a pre-Hilbert space. Then
+	\begin{equation}
+		\abs[0]{\inprod{x}{y}}^2 \leq \inprod{x}{x}\inprod{y}{y}	
+	\end{equation}
+	\noindent for all $x,y \in H$.
+\end{lemma}
+
+\begin{theorem}
+	Let $(H,\inprod{\cdot}{\cdot})$ be a Hilbert space, $K \subseteq H$ a closed convex set in $H$ and $x_0 \in H$. Then there exists a unique $y \in K$ such that 
+	\begin{equation}
+		\norm{x_0 - y} = \dist(x_0,K) = \inf_{x \in K}\norm{x_0 - x}.
+	\end{equation}
+\end{theorem}
+
+\begin{theorem}[Orthogonal Complement]
+	Let $(H,\inprod{\cdot}{\cdot})$ be a Hilbert space and $M \subseteq H$ a closed linear subspace. Then $M^\perp \subseteq H$ is a closed linear subspace and $H = M \oplus M^\perp$.
+\end{theorem}
+
+\begin{theorem}
+	Let $(H,\inprod{\cdot}{\cdot})$ be a Hilbert space and $(x_\alpha)_{\alpha \in A}$ an orthonormal system. Then the following statements are equivalent:
+	\begin{enumerate}[label = \textup{(}\roman*\textup{)},wide = 0pt, itemsep = 1.5ex]
+		\item $(x_\alpha)_{\alpha \in A}$ is a Hilbert space basis.
+		\item For all $x \in H$ we have that $x = \sum_{\alpha \in A}\inprod{x_\alpha}{x}x_\alpha$.
+		\item For all $x \in H$ we have that $\norm{x}^2 = \sum_{\alpha \in A} \abs[0]{\inprod{x_\alpha}{x}}^2$.
+		\item $\inprod{x_\alpha}{x} = 0$ for all $\alpha \in A$ implies $x = 0$.
+		\item $(x_\alpha)_{\alpha \in A}$ is a maximal orthonormal system.
+	\end{enumerate}
+\end{theorem}

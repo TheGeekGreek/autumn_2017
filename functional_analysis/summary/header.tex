@@ -70,7 +70,7 @@
 \ifthenelse{\equal{#1}{-1}}{ % if
 \left\langle#2,#3\right\rangle}{}
 \ifthenelse{\equal{#1}{0}}{ % if
-(#2,#3)}{}
+\langle#2,#3\rangle}{}
 \ifthenelse{\equal{#1}{1}}{ % if
 \bigl\langle#2,#3\bigr\rangle}{}
 \ifthenelse{\equal{#1}{2}}{ % if
@@ -178,6 +178,7 @@
 \DeclareMathOperator\sgn{sgn}
 \DeclareMathOperator\arctanh{arctanh}
 \DeclareMathOperator*\esssup{ess.sup}
+\DeclareMathOperator\dist{dist}
 %\usepackage{hhline}
 %\usepackage{booktabs} 
 %\usepackage{array}

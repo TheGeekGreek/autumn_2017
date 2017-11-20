@@ -1,13 +1,15 @@
 \chapter{The Fundamental Group}
 \section{Homotopies}
 
-\begin{proposition}
-	Being homotopic is a congruence on $\cat{Top}$.
-\end{proposition}
+\section{The Fundamental Grupoid}
+
+\begin{theorem}
+	There is a functor $\mathsf{Top} \to \mathsf{Grpd}$. 
+\end{theorem}
 
 \begin{proof}
-	First we show that being homotopic induces an equivalence relation on 
-	\begin{equation*}
-		A := \bigcup_{(X,Y) \in \ob(\cat{Top})\times \ob(\cat{Top})} C(X,Y).
-	\end{equation*}
+	The proof is divided into several steps. Let us denote $\Pi : \mathsf{Top} \to \mathsf{Grpd}$ for the claimed functor.
+	\begin{enumerate}[label = \textit{Step \arabic*:},wide = 0pt, itemsep = 1.5ex]
+		\item \textit{Definition of $\Pi$ on objects.} Let $X$ be a topological space. Set $\ob(\Pi(X)) := X$ and $\Pi(X)(p,q) := \cbr{\sbr{u} : u \text{ is a path from } p \text{ to } q}$. Moreover, define composition by 
+	\end{enumerate}
 \end{proof}

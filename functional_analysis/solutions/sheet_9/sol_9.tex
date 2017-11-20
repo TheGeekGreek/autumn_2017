@@ -1,0 +1,96 @@
+\input{header.tex}
+
+\title{Solutions Sheet 9}
+\author{Yannis B\"{a}hni}
+\address[Yannis B\"{a}hni]{University of Zurich, R\"{a}mistrasse 71, 8006 Zurich}
+\email[Yannis B\"{a}hni]{\href{mailto:yannis.baehni@uzh.ch}{\nolinkurl{yannis.baehni@uzh.ch}}}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+
+\setcounter{section}{1}
+
+\begin{enumerate}[label = \textbf{Exercise \arabic*.},wide = 0pt, itemsep = 1.5ex]
+	\item 
+		\begin{lemma}
+			Let $1 \leq p < \infty$. Then $g_n,h_n,k_n \in L^p(\mathbb{R})$ for all $n \in \mathbb{N}$.	
+		\end{lemma}
+
+		\begin{proof}
+			We have that 
+			\begin{align*}
+				&\norm{g_n}_p^p = \int_\mathbb{R} \abs[0]{f(x - n)}^p dx = \int_\mathbb{R} \abs[0]{f(y)} dy = \norm{f}_p^p,\\
+				&\norm{h_n}_p^p = n^{-1}\int_\mathbb{R} \abs[0]{f(x/n)}^p dx = \int_\mathbb{R} \abs[0]{f(y)}^p dy = \norm{f}_p^p,\\
+				&\norm{k_n}_p^p = \int_\mathbb{R} \abs[0]{f(x) e^{inx}}^p dx = \int_\mathbb{R} \abs{f(x)}^p dx = \norm{f}_p^p 
+			\end{align*}
+			\noindent and since $f \in C_c^\infty(\mathbb{R})$ implies that $f \in L^p(\mathbb{R})$, the claim follows.
+		\end{proof}
+	\item
+		~
+		\begin{enumerate}[label = \textbf{\alph*.},wide = 0pt, itemsep = 1.5ex]
+			\item 
+			\item Suppose that $x_n \rightharpoonup x$ and $\norm{x_n} \to \norm{x}$. By lemma 6.2.1. we have that $f(x_n) \to f(x)$ for all $f \in H^*$. Using the \emph{Riesz representation theorem} this is equivalent to $\inprod{y}{x_n} \to \inprod{y}{x}$ for all $y \in H$. But then
+				\begin{equation*}
+					\norm{x - x_n}^2 = \inprod{x - x_n}{x - x_n} = \norm{x}^2 - 2\Re\inprod{x}{x_n} + \norm{x_n}^2 \to 0
+				\end{equation*}
+				\noindent since $\Re$ is a continuous function and $\inprod{x}{x_n} \to \norm{x}^2$.
+		\end{enumerate}
+
+	\item 
+		~
+		\begin{enumerate}[label = \textbf{\alph*.},wide = 0pt, itemsep = 1.5ex]
+			\item 
+				\begin{lemma}
+					Let $0 < \varepsilon < 1$ and define 
+					\begin{equation*}
+						I_\varepsilon(f) := \varepsilon^{-1}\int_0^\varepsilon f(x) dx
+					\end{equation*}
+					\noindent for $f \in L^\infty(0,1)$. Then $I_\varepsilon \in \del[1]{L^\infty(0,1)}^*$ and $\norm{I_\varepsilon} = 1$ for all $0 < \varepsilon < 1$.
+				\end{lemma}
+
+				\begin{proof}
+					 Let $f \in L^\infty(0,1)$. Then we have that $\abs{f} \leq \norm{f}_\infty$ $\lambda$-a.e. Hence 
+					 \begin{equation}
+						 \abs[0]{I_\varepsilon(f)} = \varepsilon^{-1} \abs[3]{\int_0^\varepsilon f(x) dx} \leq \varepsilon^{-1} \int_0^\varepsilon \abs{f(x)}dx \leq \norm{f}_\infty
+						 \label{eq:3.a.}
+					 \end{equation}
+					 \noindent and thus $I_\varepsilon$ is bounded and thus continuous. Clearly $I_\varepsilon$ is $\mathbb{C}$-linear by the $\mathbb{C}$-linearity of the integral. Moreover, using (\ref{eq:3.a.}) we get that
+					 \begin{equation*}
+						 \norm{I_\varepsilon} = \sup_{\norm[0]{f}_\infty = 1}\abs{I_\varepsilon(f)} \leq \sup_{\norm[0]{f} = 1}\norm{f}_\infty = 1.
+					 \end{equation*}
+					 Conversly, setting $f := \chi_{\intoo{0,1}} \in L^\infty(0,1)$, we get that $\abs{I_\varepsilon(f)} = 1$ and hence by $\norm{f} = 1$
+					 \begin{equation*}
+						 \norm{I_\varepsilon} = \sup_{\norm[0]{g}_\infty = 1} \abs{I_\varepsilon(g)} \geq \abs{I_\varepsilon(f)} = 1. 
+					 \end{equation*}
+				\end{proof}
+		\end{enumerate}
+
+	\item 
+		~
+		\begin{enumerate}[label = \textbf{\alph*.},wide = 0pt, itemsep = 1.5ex]
+			\item First we show that $\norm{\cdot}_\sigma$ is well defined. Let $x^* \in X^*$, then we have 
+				\begin{equation*}
+					\norm[0]{x^*}_\sigma = \sum_{k = 1}^\infty 2^{-k}\abs[0]{x^*(x_k)} \leq \sum_{k = 1}^\infty 2^{-k} \norm[0]{x^*} \norm{x_k} = \norm[0]{x^*}\sum_{k = 1}^\infty 2^{-k} = \norm[0]{x^*} < \infty
+				\end{equation*}
+				\noindent since $x_k \in S_X$ and $\sum_{k = 1}^\infty 2^{-k} = 1$. Hence $\norm[0]{x^*}_\sigma \leq \norm[0]{x^*}$ holds. Let $\lambda \in \mathbb{K}$. Then we have that
+				\begin{equation*}
+					\norm[0]{\lambda x^*}_\sigma = \sum_{k = 1}^\infty 2^{-k} \abs[0]{\lambda x^*(x_k)} = \sum_{k = 1}^\infty 2^{-k} \abs{\lambda} \abs[0]{x^*(x_k)} = \abs{\lambda} \sum_{k = 1}^\infty 2^{-k} \abs[0]{x^*(x_k)} = \abs{\lambda}\norm[0]{x^*}_\sigma.
+				\end{equation*}
+				Let $y^* \in X^*$. Then the triangle inequality follows from
+				\begin{align*}
+					\norm[0]{x^* + y^*}_\sigma &= \sum_{k = 1}^\infty 2^{-k}\abs[0]{x^*(x_k) + y^*(x_k)}\\
+					&\leq \sum_{k = 1}^\infty 2^{-k}\abs[0]{x^*(x_k)} + \sum_{k = 1}^\infty 2^{-k}\abs[0]{y^*(x_k)}\\
+					&= \norm[0]{x^*}_\sigma + \norm[0]{y^*}_\sigma.
+				\end{align*}
+				Lastly, clearly $\norm[0]{x^*} = 0$ if $x^* = 0$. Conversly, suppose that $\norm[0]{x^*} = 0$. Hence $x^*(x_k) = 0$ for all $k \in \mathbb{N}$. Let $Y \in X$. Since $\overline{\mathrm{span}\cbr[0]{x_k : k \in \mathbb{N}}} = X$, we find a sequence $(y_n)_{n \in \mathbb{N}}$ in $\mathrm{span}\cbr{x_k : k \in \mathbb{N}}$, such that $y_n \to y$. Moreover, for each $n \in \mathbb{N}$ we have that $y_n = \sum_{k = 1}^\infty \lambda^{(n)}_k x_k$ for $\lambda^{(n)}_k \in \mathbb{K}$ and $\lambda^{(n)}_k = 0$ for all but finitely many $k \in \mathbb{N}$. Hence
+				\begin{equation*}
+					x^*(y) = \lim_{n \to \infty}x^*(y_n) = \lim_{n \to \infty}\sum_{k = 1}^\infty \lambda^{(n)}_kx^*(x_k) = 0
+				\end{equation*}
+				\noindent by the continuity of $x^*$ and so $x^* = 0$.
+		\end{enumerate}
+
+\end{enumerate}
+\printbibliography
+\end{document}
