@@ -76,7 +76,39 @@
 							v(2s - 1) & \frac{1}{2} \leq t \leq 1
 						}.
 					\end{equation*}
-					Continuity follows again from the gluing lemma \ref{lem:gluing_lemma}.
+					Continuity follows again from the gluing lemma \ref{lem:gluing_lemma} whereas well definedness follows from the next lemma.
+
+					\begin{lemma}
+						Suppose that $\sbr{u_1},\sbr{u_2} \in \Pi(X)(p,q)$ and $\sbr{v_1},\sbr{v_2} \in \Pi(X)(q,r)$ such that $\sbr{u_1} = \sbr{u_2}$ and $\sbr{v_1} = \sbr{v_2}$. Then $\sbr{u_1 \ast v_1} = \sbr{u_2 \ast v_2}$.
+					\end{lemma}
+
+					\begin{proof}
+						By assumption we have $G : u_1 \simeq_{\partial I} u_2$ and $H : v_1 \simeq_{\partial I} v_2$. Define $F \in \mathsf{Top}(I \times I,X)$ by
+						\begin{equation*}
+							F(s,t) := \ccases{
+								G(2s,t) & 0 \leq s \leq \frac{1}{2},\\
+								H(2s - 1,t) & \frac{1}{2} \leq s \leq 1.
+							}
+						\end{equation*}
+						Again, continuity follows from the gluing lemma \ref{lem:gluing_lemma} and it is easy to check that $F : u_1 \ast v_1 \simeq_{\partial I} u_2 \ast v_2$.
+					\end{proof}
+				\item Let $p \in X$. Then define $\id_p \in \Pi(X)(p,p)$ by $\id_p := \sbr[0]{c_p}$, where $c_p$ is the constant path defined by $c_p(s) := p$ for all $s \in I$.
 			\end{itemize}
+
+			Let us now check that $\Pi(X)$ is indeed a category. 
+
+			\begin{lemma}
+					
+			\end{lemma}
 	\end{enumerate}
+\end{proof}
+
+\section{The Fundamental Group}
+
+\begin{lemma}
+	Let $\mathcal{\altG}$ be a locally small grupoid. Then for every $X \in \ob(\mathcal{\altG})$, $\mathcal{\altG}(X,X)$ can be equipped with a group structure.	
+\end{lemma}
+
+\begin{proof}
+	Since $\mathcal{\altG}$ is locally small, $\mathcal{\altG}(X,X)$ is a set for every $X \in \ob(\mathcal{\altG})$. Define a multiplication $\mathcal{\altG} \times \mathcal{\altG} \to \mathcal{\altG}$ by $gh := h \circ g$. 
 \end{proof}
