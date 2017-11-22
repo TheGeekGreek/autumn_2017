@@ -1,7 +1,21 @@
 \chapter{The Fundamental Group}
-\section{Homotopies}
-
 \section{The Fundamental Grupoid}
+
+\begin{lemma}[Gluing Lemma]
+	Let $X,Y \in \ob(\mathsf{Top})$, $(X_\alpha)_{\alpha \in A}$ a finite closed cover of $X$ and $(f_\alpha)_{\alpha \in A}$ a finite family of maps $f_\alpha \in \mathsf{Top}(X_\alpha,Y)$ such that $f_\alpha\vert_{X_\alpha \cap X_\beta} = f_\beta\vert_{X_\alpha \cap X_\beta}$ for all $\alpha,\beta \in A$. Then there exists a unique $f \in \mathsf{Top}(X,Y)$ such that $f\vert_{X_\alpha} = f_\alpha$ for all $\alpha \in A$.
+	\label{lem:gluing_lemma}
+\end{lemma}
+
+\begin{proof}
+	Let $x \in X$. Since $(X_\alpha)_{\alpha \in A}$ is a cover of $X$, we find $\alpha \in A$ such that $x \in X_\alpha$. Define $f(x) := f_\alpha(x)$. This is well defined, since if $x \in X_\alpha \cap X_\beta$ for some $\beta \in A$, we have that $f(x) = f_\beta(x) = f_\alpha(x)$. Clearly $f\vert_{X_\alpha} = f_\alpha$ for all $\alpha \in A$ and $f$ is unique. Let us show continuity. To this end, let $K \subseteq Y$ be closed. Then 
+	\begin{align*}
+		f^{-1}(K) &= X \cap f^{-1}(K)\\
+		&= \bigcup_{\alpha \in A} X_\alpha \cap f^{-1}(K)\\
+		&= \bigcup_{\alpha \in A} \del[1]{X_\alpha \cap f^{-1}(K)}\\
+		&= \bigcup_{\alpha \in A} \del[1]{X_\alpha \cap f_\alpha^{-1}(K)}. 
+	\end{align*}
+	Since each $f_\alpha$ is continuous, $f_\alpha^{-1}(K)$ is closed in $X_\alpha$ for each $\alpha \in A$ and thus since $X_\alpha$ is closed, $f^{-1}(K)$ is closed as a finite union of closed sets.
+\end{proof}
 
 \begin{theorem}
 	There is a functor $\mathsf{Top} \to \mathsf{Grpd}$. 
@@ -32,7 +46,7 @@
 				F(x,t) := f(x).
 				\end{equation*}
 				Then clearly $F : f \simeq_A f$. Hence $R_A$ is reflexive.\\
-				Let $g \in \mathsf{Top}(X,Y)$ and assume that $f R g$. Thus $G : f \simeq_A g$. Define $F \in \mathsf{Top}(X \times I,Y)$ by
+				Let $g \in \mathsf{Top}(X,Y)$ and assume that $f R_A g$. Thus $G : f \simeq_A g$. Define $F \in \mathsf{Top}(X \times I,Y)$ by
 				\begin{equation*}
 					F(x,t) := G(x,1-t).
 				\end{equation*}
@@ -44,9 +58,25 @@
 						F_2(x,2t-1) & \frac{1}{2} \leq t \leq 1.
 					}
 				\end{equation*}
-				Continuity of $F$ follows by an application of the gluing lemma. Then it is easy to check that $F : f \simeq_A h$ and hence $R_A$ is transitive.
+				Continuity of $F$ follows by an application of the gluing lemma \ref{lem:gluing_lemma}. Then it is easy to check that $F : f \simeq_A h$ and hence $R_A$ is transitive.
 			\end{proof}
 
-			Let $X \in \ob(\mathsf{Top})$ and $u$ a path in $X$ from $p$ to $q$. Define the \bld{path class $\sbr{u}$ of $u$} by $\sbr{u} := \sbr{u}_{R_{\partial I}}$.  
+			Let $X \in \ob(\mathsf{Top})$ and $u$ a path in $X$ from $p$ to $q$. Define the \bld{path class $\sbr{u}$ of $u$} by $\sbr{u} := \sbr{u}_{R_{\partial I}}$. Define now
+			\begin{itemize}
+				\item $\ob\del[1]{\Pi(X)} := X$.
+				\item $\Pi(X)(p,q) := \cbr{\sbr{u} : \text{$u$ is a path from $p$ to $q$}}$ for all $p,q \in X$.
+				\item And $\Pi(X)(q,r) \times \Pi(X)(p,q) \to \Pi(X)(p,r)$ by 
+					\begin{equation*}
+						(\sbr{v}, \sbr{u}) \mapsto \sbr{u \ast v}
+					\end{equation*}
+					Where $u \ast v \in \mathsf{Top}(p,r)$ is the \bld{concatenated path of $u$ and $v$}, defined by
+					\begin{equation*}
+						(u \ast v)(s) := \ccases{
+							u(2s) &    0 \leq t \leq \frac{1}{2},\\
+							v(2s - 1) & \frac{1}{2} \leq t \leq 1
+						}.
+					\end{equation*}
+					Continuity follows again from the gluing lemma \ref{lem:gluing_lemma}.
+			\end{itemize}
 	\end{enumerate}
 \end{proof}
