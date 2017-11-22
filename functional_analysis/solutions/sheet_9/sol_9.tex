@@ -13,7 +13,7 @@
 \setcounter{section}{1}
 
 \begin{enumerate}[label = \textbf{Exercise \arabic*.},wide = 0pt, itemsep = 1.5ex]
-	\item 
+	\item We may assume that $f \neq 0$ since otherwise we would have convergence in norm. Thus the continuity of $f$ implies $\norm{f}_p \neq 0$ for all $1 \leq p < \infty$ since also $\abs{f}^p$ is continuous.
 		\begin{lemma}
 			Let $1 \leq p < \infty$. Then $g_n,h_n,k_n \in L^p(\mathbb{R})$ for all $n \in \mathbb{N}$.	
 		\end{lemma}
@@ -27,6 +27,54 @@
 			\end{align*}
 			\noindent and since $f \in C_c^\infty(\mathbb{R})$ implies that $f \in L^p(\mathbb{R})$, the claim follows.
 		\end{proof}
+
+		\begin{lemma}
+			Let $1 < p < \infty$. Then $g_n,h_n,k_n \rightharpoonup 0$ in $L^p(\mathbb{R})$.
+		\end{lemma}
+
+		\begin{proof}
+			We make use of lemma 6.2.1 and theorem 2.2.6, which provides an antilinear isometric isomorphism $\del[1]{L^p(\mathbb{R})}^* \cong L^q(\mathbb{R})$ where $q$ is the dual exponent of $p$. Since $f \in C_c^\infty(\mathbb{R})$, there exists some $M > 0$ such that $\supp(f) \subseteq \intcc{-M,M}$. It is easy to verify that $\supp(g_n) \subseteq \intcc{-M + n, M + n}$ for all $n \in \mathbb{N}$. Let $\varphi \in L^q(\mathbb{R})$. Then H\"older's inequality implies  
+			\begin{align*}
+				\abs[3]{\int_\mathbb{R} \wbar{\varphi}(x)g_n(x)dx} &\leq \int_\mathbb{R} \abs{\varphi(x)g_n(x)}dx\\
+				&= \int_\mathbb{R} \abs[0]{\varphi(x)g_n(x)\chi_{\supp(g_n)}(x)}dx\\
+				&\leq \int_\mathbb{R}\abs[0]{\varphi(x)g_n(x)\chi_{\intcc{-M + n,M + n}}(x)}dx\\
+				&= \norm[0]{\varphi \chi_{\intcc{-M + n,M + n}}g_n}_1\\
+				&\leq \norm[0]{\varphi\chi_{\intcc{-M+n,M+n}}}_q\norm{g_n}_p\\
+				&=\norm[0]{\varphi\chi_{\intcc{-M+n,M+n}}}_q\norm{f}_p \to 0
+			\end{align*}
+			\noindent since dominated convergence yields
+			\begin{equation*}
+				\lim_{n \to \infty} \int_\mathbb{R} \abs{\varphi(x)}^q \chi_{\intcc{-M + n,M + n}}(x) dx = \int_\mathbb{R} \abs{\varphi(x)}^q \lim_{n \to \infty}\chi_{\intcc{-M + n,M + n}}(x) dx = 0
+			\end{equation*}
+			\noindent which application is justified by the fact that $ \abs{\varphi(x)}^q \chi_{\intcc{-M + n,M + n}}(x) \leq \abs{\varphi(x)}^q \in L^1(\mathbb{R})$ and $\chi_{\intcc{-M + n,M + n}}(x) \to 0$ for all $x \in \mathbb{R}$ (take $n$ just sufficiently large).\\
+			Observe that
+			\begin{align*}
+				\int_\mathbb{R} \wbar{\varphi}(x)k_n(x)dx &= \sqrt{\frac{2\pi}{2\pi}} \int_\mathbb{R} \wbar{\varphi}(x)f(x)e^{inx}dx\\
+				&= \sqrt{\frac{2\pi}{2\pi}} \int_\mathbb{R} \wbar{\varphi}(x)f(x)e^{inx}dx\\
+				&= \sqrt{\frac{2\pi}{2\pi}} \int_\mathbb{R} \wbar{\varphi}(x)f(x)e^{-i(-n)x}dx\\
+				&= \sqrt{2\pi} \widehat{\wbar{\varphi}f}(-n) \to 0
+			\end{align*}
+			\noindent by the Riemann-Lebesgue lemma since by H\"olders inequality, $\wbar{\varphi}f \in L^1(\mathbb{R})$.
+		\end{proof}
+
+		\begin{lemma}
+			Let $X$ be a normed space and $(x_n)_{n \in \mathbb{N}}$ a sequence in $X$ such that $x_n \rightharpoonup x$. If $x_n \to y$ for some $y \in X$, then $x = y$.
+		\end{lemma}
+
+		\begin{proof}
+			Suppose that $x_n \to y$. Then since $\mathcal{T}_W \subseteq \mathcal{T}_{\norm[0]{\cdot}}$, we have that $x_n \rightharpoonup y$. But $(X,\mathcal{T}_W)$ is Hausdorff and thus limits are unique. Hence $x = y$.
+		\end{proof}
+
+		\begin{corollary}
+			Let $1 < p < \infty$. Then $g_n$, $h_n$ and $k_n$ do not converge in norm.
+		\end{corollary}
+
+		\begin{proof}
+			Since all three sequences converge weakly to $0$, we only have to show that they do not converge towards $0$ in $L^p(\mathbb{R})$. However, this is immediate from the first lemma, since all sequences have constant norm $\norm{f}_p \neq 0$ and hence the limit should have also nonzero norm.
+		\end{proof}
+
+		Let us now investigate the case $p = 1$.
+
 	\item
 		~
 		\begin{enumerate}[label = \textbf{\alph*.},wide = 0pt, itemsep = 1.5ex]

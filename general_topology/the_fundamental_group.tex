@@ -10,6 +10,43 @@
 \begin{proof}
 	The proof is divided into several steps. Let us denote $\Pi : \mathsf{Top} \to \mathsf{Grpd}$ for the claimed functor.
 	\begin{enumerate}[label = \textit{Step \arabic*:},wide = 0pt, itemsep = 1.5ex]
-		\item \textit{Definition of $\Pi$ on objects.} Let $X$ be a topological space. Set $\ob(\Pi(X)) := X$ and $\Pi(X)(p,q) := \cbr{\sbr{u} : u \text{ is a path from } p \text{ to } q}$. Moreover, define composition by 
+		\item \textit{Definition of $\Pi$ on objects.} Let $X,Y \in \ob(\mathsf{Top})$, $f,g \in \mathsf{Top}(X,Y)$ and $A \subseteq X$. A map $F \in \mathsf{Top}(X \times I,Y)$ is called a \bld{homotopy from $X$ to $Y$ relative to $A$}, if 
+			\begin{itemize}
+				\item $F(x,0) = f(x)$, for all $x \in X$.
+				\item $F(x,1) = g(x)$, for all $x \in X$.
+				\item $F(x,t) = f(x) = g(x)$, for all $x \in A$ and for all $t \in I$.
+			\end{itemize}
+			If there exists a homotopy between $f$ and $g$ relative to $A$ we say that $f$ and $g$ are \bld{homotopic relative to $A$} and write $f \simeq_A g$. If we want to emphasize the homotpoy relative to $A$, we write $F : f \simeq_A g$.
+
+			\begin{lemma}
+				Let $X,Y \in \ob(\mathsf{Top})$ and $A \subseteq X$. Then being homotopic relative to $A$ is an equivalence relation on $\mathsf{Top}(X,Y)$.
+			\end{lemma}
+
+			\begin{proof}
+				Define a binary relation $R_A \subseteq \mathsf{Top}(X,Y) \times \mathsf{Top}(X,Y)$ by
+				\begin{equation*}
+					f R_A g \quad :\Leftrightarrow  \quad f \simeq_A g.
+				\end{equation*}
+				Let $f \in \mathsf{Top}(X,Y)$. Define $F \in \mathsf{Top}(X\times I,Y)$ by 
+				\begin{equation*}
+				F(x,t) := f(x).
+				\end{equation*}
+				Then clearly $F : f \simeq_A f$. Hence $R_A$ is reflexive.\\
+				Let $g \in \mathsf{Top}(X,Y)$ and assume that $f R g$. Thus $G : f \simeq_A g$. Define $F \in \mathsf{Top}(X \times I,Y)$ by
+				\begin{equation*}
+					F(x,t) := G(x,1-t).
+				\end{equation*}
+				Then it is easy to check that $F : g \simeq_A f$ and so $R_A$ is symmetric.\\
+				Finally, let $h \in \mathsf{Top}(X,Y)$ and suppose that $f R_A g$ and $g R_A h$. Hence $F_1 : f \simeq_A g$ and $F_2 : g \simeq_A h$. Define $F \in \mathsf{Top}(X\times I,Y)$ by
+				\begin{equation*}
+					F(x,t) := \ccases{
+						F_1(x,2t) & 0 \leq t \leq \frac{1}{2},\\
+						F_2(x,2t-1) & \frac{1}{2} \leq t \leq 1.
+					}
+				\end{equation*}
+				Continuity of $F$ follows by an application of the gluing lemma. Then it is easy to check that $F : f \simeq_A h$ and hence $R_A$ is transitive.
+			\end{proof}
+
+			Let $X \in \ob(\mathsf{Top})$ and $u$ a path in $X$ from $p$ to $q$. Define the \bld{path class $\sbr{u}$ of $u$} by $\sbr{u} := \sbr{u}_{R_{\partial I}}$.  
 	\end{enumerate}
 \end{proof}
