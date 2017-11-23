@@ -19,13 +19,12 @@
 		\end{lemma}
 
 		\begin{proof}
-			We have that 
+			This immediately follows from the computations
 			\begin{align*}
 				&\norm{g_n}_p^p = \int_\mathbb{R} \abs[0]{f(x - n)}^p dx = \int_\mathbb{R} \abs[0]{f(y)} dy = \norm{f}_p^p,\\
 				&\norm{h_n}_p^p = n^{-1}\int_\mathbb{R} \abs[0]{f(x/n)}^p dx = \int_\mathbb{R} \abs[0]{f(y)}^p dy = \norm{f}_p^p,\\
-				&\norm{k_n}_p^p = \int_\mathbb{R} \abs[0]{f(x) e^{inx}}^p dx = \int_\mathbb{R} \abs{f(x)}^p dx = \norm{f}_p^p 
-			\end{align*}
-			\noindent and since $f \in C_c^\infty(\mathbb{R})$ implies that $f \in L^p(\mathbb{R})$, the claim follows.
+				&\norm{k_n}_p^p = \int_\mathbb{R} \abs[0]{f(x) e^{inx}}^p dx = \int_\mathbb{R} \abs{f(x)}^p dx = \norm{f}_p^p .
+			\end{align*}	
 		\end{proof}
 
 		\begin{lemma}
@@ -47,6 +46,31 @@
 				\lim_{n \to \infty} \int_\mathbb{R} \abs{\varphi(x)}^q \chi_{\intcc{-M + n,M + n}}(x) dx = \int_\mathbb{R} \abs{\varphi(x)}^q \lim_{n \to \infty}\chi_{\intcc{-M + n,M + n}}(x) dx = 0
 			\end{equation*}
 			\noindent which application is justified by the fact that $ \abs{\varphi(x)}^q \chi_{\intcc{-M + n,M + n}}(x) \leq \abs{\varphi(x)}^q \in L^1(\mathbb{R})$ and $\chi_{\intcc{-M + n,M + n}}(x) \to 0$ for all $x \in \mathbb{R}$ (take $n$ just sufficiently large).\\
+			Let $\varepsilon > 0$. Since $1 < q < \infty$, by theorem 2.2.8 we find $\wtilde{\varphi} \in C^\infty_c(\mathbb{R})$ such that $\norm[0]{\varphi - \wtilde{\varphi}}_q \leq \varepsilon$. Since $f \in C_c^\infty(\mathbb{R})$, we find $M \geq 0$, such that $\abs{f} \leq M$. Hence
+			\begin{align*}
+				\abs[3]{\int_\mathbb{R}\wbar{\varphi}(x)h_n(x)dx} &\leq \int_\mathbb{R} \abs{\varphi(x)} \abs{h_n(x)}dx\\
+				&= \int_\mathbb{R} \abs[0]{\varphi(x) - \wtilde{\varphi}(x) + \wtilde{\varphi}(x)} \abs{h_n(x)}dx\\
+				&\leq \int_\mathbb{R} \abs[0]{\varphi(x) - \wtilde{\varphi}(x)}\abs{h_n(x)}dx + \int_\mathbb{R}\abs[0]{\wtilde{\varphi}(x)}\abs{h_n(x)}dx\\
+				&\leq \norm[0]{\varphi - \wtilde{\varphi}}_q\norm{h_n}_p + \int_\mathbb{R}\abs[0]{\wtilde{\varphi}(x)}\abs{h_n(x)}dx\\
+				&= \norm[0]{\varphi - \wtilde{\varphi}}_q\norm{f}_p + \int_\mathbb{R}\abs[0]{\wtilde{\varphi}(x)}\abs{h_n(x)}dx\\
+				&\leq \varepsilon\norm{f}_p + \int_\mathbb{R}\abs[0]{\wtilde{\varphi}(x)}\abs{h_n(x)}dx\\
+				&= \varepsilon\norm{f}_p +n^{-1/p} \int_\mathbb{R}\abs[0]{\wtilde{\varphi}(x)}\abs{f(x/n)}dx\\
+				&\leq \varepsilon\norm{f}_p +n^{-1/p}M \int_\mathbb{R}\abs[0]{\wtilde{\varphi}(x)}dx\\
+				&= \varepsilon\norm{f}_p +n^{-1/p}M\norm[0]{\wtilde{\varphi}}_1
+			\end{align*}
+			\noindent and thus
+			\begin{equation*}
+				\abs[3]{\int_\mathbb{R}\wbar{\varphi}(x)h_n(x)dx} \xrightarrow{n \to \infty} \varepsilon\norm{f}_p.
+			\end{equation*}
+			Since $\varepsilon$ was arbitrary, we conclude that
+			\begin{equation*}
+				\int_\mathbb{R}\wbar{\varphi}(x)h_n(x)dx \xrightarrow{n \to \infty} 0
+			\end{equation*}
+			\noindent and since $\varphi \in L^q(\mathbb{R})$ was arbitrary, we conclude that
+			\begin{equation*}
+				h_n \rightharpoonup 0
+			\end{equation*}
+			\noindent in $L^p(\mathbb{R})$.\\
 			Observe that
 			\begin{align*}
 				\int_\mathbb{R} \wbar{\varphi}(x)k_n(x)dx &= \sqrt{\frac{2\pi}{2\pi}} \int_\mathbb{R} \wbar{\varphi}(x)f(x)e^{inx}dx\\
@@ -73,12 +97,51 @@
 			Since all three sequences converge weakly to $0$, we only have to show that they do not converge towards $0$ in $L^p(\mathbb{R})$. However, this is immediate from the first lemma, since all sequences have constant norm $\norm{f}_p \neq 0$ and hence the limit should have also nonzero norm.
 		\end{proof}
 
-		Let us now investigate the case $p = 1$.
-
 	\item
 		~
 		\begin{enumerate}[label = \textbf{\alph*.},wide = 0pt, itemsep = 1.5ex]
-			\item 
+			\item Fix $1 < p < \infty$ and assume that $x^{(n)} \rightharpoonup x$ in $\ell^p(\mathbb{K})$. By lemma 6.2.1 this implies that $f\del[1]{x^{(n)}} \to f(x)$ for all $f \in \del[1]{\ell^p(\mathbb{K})}^*$. By \cite[59]{werner:funktionalanalysis:2011}, we have that $\del[1]{\ell^p(\mathbb{K})}^* \cong \ell^q(\mathbb{K})$ isometrically where $q$ is the dual exponent to $p$. Explicitely, $\varphi(y) \in \del[1]{\ell^p(\mathbb{K})}^*$ is given by
+				\begin{equation*}
+					\varphi(y)(x) \mapsto \sum_{k \in \mathbb{N}} y_kx_k
+				\end{equation*}
+				\noindent for $y \in \ell^q(\mathbb{K})$. Let $i \in \mathbb{N}$. Then $(\delta_{ik})_{k \in \mathbb{N}} \in \ell^q(\mathbb{K})$ and thus we have that 
+				\begin{equation*}
+					x^{(n)}_i = \sum_{k \in \mathbb{N}} \delta_{ik}x^{(n)}_k = \varphi\del[1]{(\delta_{ik})_{k \in \mathbb{N}}}\del[1]{x^{(n)}} \to \varphi\del[1]{(\delta_{ik})_{k \in \mathbb{N}}}\del[0]{x} = \sum_{k \in \mathbb{N}} \delta_{ik}x_k = x_i.
+				\end{equation*}
+				Moreover, $x^{(n)}$ is bounded by proposition 6.2.2. Conversly, consider the following lemma.
+
+				\begin{lemma}
+					Let $1 \leq p < \infty$. Define
+					\begin{equation*}
+						A_p := \cbr{x \in \ell^p(\mathbb{K}) : \supp x \text{ is finite}}.
+					\end{equation*}
+					Then $A_p$ is dense in $\ell^p(\mathbb{K})$.
+				\end{lemma}
+
+				\begin{proof}
+					Let $x \in \ell^p(\mathbb{K})$. Consider $\del[1]{x^{(n)}}_{n \in \mathbb{N}}$ defined by
+					\begin{equation*}
+						x^{(n)}_k := \ccases{
+							x_k & 1 \leq k \leq n,\\
+							0 & k > n
+						}.
+					\end{equation*}
+					By
+					\begin{equation*}
+						\norm[0]{x^{(n)}}_p^p = \sum_{k \in \mathbb{N}} \abs[0]{x^{(n)}_k}^p = \sum_{k \leq n}\abs[0]{x_k^{(n)}}^p < \infty
+					\end{equation*}
+					\noindent immediately follows that $x^{(n)} \in \ell^p(\mathbb{K})$ for all $n \in \mathbb{N}$ and hence $x^{(n)} \in A_p$. Moreover 
+					\begin{equation*}
+						\norm[0]{x - x^{(n)}}_p^p = \sum_{k \in \mathbb{N}} \abs[0]{x_k - x_k^{(n)}}^p = \sum_{k \geq n}\abs[0]{x_k}^p \to 0
+					\end{equation*}
+					\noindent implies that $A_p$ is dense in $\ell^p(\mathbb{K})$.
+				\end{proof}
+
+				We make use of exercise 5 on sheet 8. Since $\del[1]{x^{(n)}}_{n \in \mathbb{N}}$ is bounded, we have $\sup_{n \in \mathbb{N}}\norm[0]{x^{(n)}}_p < \infty$. By the previous lemma, $A_q$ is dense in $\ell^q(\mathbb{K})$ and thus also in $\del[1]{\ell^p(\mathbb{K})}^*$ via the explicit isometric isomorphism (to be precise, the image of $A_q$ under this mapping). Let $y \in A_q$. Then we find $N \in \mathbb{N}$, such that $y_k = 0$ for all $k > N$. Hence
+				\begin{equation*}
+					\varphi(y)\del[1]{x^{(n)}} = \sum_{k \in \mathbb{N}}y_k x^{(n)}_k = \sum_{k \leq N} y_k x^{(n)}_k \to \sum_{k \leq N}y_k x_k = \sum_{k \in \mathbb{N}} y_kx_k = \varphi(y)(x)
+				\end{equation*}
+				\noindent since by assumption $x^{(n)}_i \to x_i$ for all $i \in \mathbb{N}$ and the sum is finite. Thus by exercise 5 on sheet 8 we conclude that $x^{(n)} \rightharpoonup x$ in $\ell^p(\mathbb{K})$.
 			\item Suppose that $x_n \rightharpoonup x$ and $\norm{x_n} \to \norm{x}$. By lemma 6.2.1. we have that $f(x_n) \to f(x)$ for all $f \in H^*$. Using the \emph{Riesz representation theorem} this is equivalent to $\inprod{y}{x_n} \to \inprod{y}{x}$ for all $y \in H$. But then
 				\begin{equation*}
 					\norm{x - x_n}^2 = \inprod{x - x_n}{x - x_n} = \norm{x}^2 - 2\Re\inprod{x}{x_n} + \norm{x_n}^2 \to 0
