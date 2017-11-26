@@ -25,7 +25,7 @@
 	The proof is divided into several steps. Let us denote $\Pi : \mathsf{Top} \to \mathsf{Grpd}$ for the claimed functor.
 	\begin{enumerate}[label = \textit{Step \arabic*:},wide = 0pt, itemsep = 1.5ex]
 		\item \textit{Definition of $\Pi$ on objects.} Let $X,Y \in \ob(\mathsf{Top})$, $f,g \in \mathsf{Top}(X,Y)$ and $A \subseteq X$. A map $F \in \mathsf{Top}(X \times I,Y)$ is called a \bld{homotopy from $X$ to $Y$ relative to $A$}, if 
-			\begin{itemize}
+			\begin{itemize}[leftmargin = *]
 				\item $F(x,0) = f(x)$, for all $x \in X$.
 				\item $F(x,1) = g(x)$, for all $x \in X$.
 				\item $F(x,t) = f(x) = g(x)$, for all $x \in A$ and for all $t \in I$.
@@ -62,9 +62,10 @@
 			\end{proof}
 
 			Let $X \in \ob(\mathsf{Top})$ and $u$ a path in $X$ from $p$ to $q$. Define the \bld{path class $\sbr{u}$ of $u$} by $\sbr{u} := \sbr{u}_{R_{\partial I}}$. Define now
-			\begin{itemize}
+			\begin{itemize}[leftmargin = *]
 				\item $\ob\del[1]{\Pi(X)} := X$.
 				\item $\Pi(X)(p,q) := \cbr{\sbr{u} : \text{$u$ is a path from $p$ to $q$}}$ for all $p,q \in X$.
+				\item Let $p \in X$. Then define $\id_p \in \Pi(X)(p,p)$ by $\id_p := \sbr[0]{c_p}$, where $c_p$ is the constant path defined by $c_p(s) := p$ for all $s \in I$.
 				\item And $\Pi(X)(q,r) \times \Pi(X)(p,q) \to \Pi(X)(p,r)$ by 
 					\begin{equation*}
 						(\sbr{v}, \sbr{u}) \mapsto \sbr{u \ast v}
@@ -92,14 +93,95 @@
 						\end{equation*}
 						Again, continuity follows from the gluing lemma \ref{lem:gluing_lemma} and it is easy to check that $F : u_1 \ast v_1 \simeq_{\partial I} u_2 \ast v_2$.
 					\end{proof}
-				\item Let $p \in X$. Then define $\id_p \in \Pi(X)(p,p)$ by $\id_p := \sbr[0]{c_p}$, where $c_p$ is the constant path defined by $c_p(s) := p$ for all $s \in I$.
 			\end{itemize}
 
 			Let us now check that $\Pi(X)$ is indeed a category. 
+			
+			
+			Let $\sbr{u} \in \Pi(X)(p,q)$. We want to show that $u \simeq_{\partial I} c_p \ast u$. To this end, we consider figure \ref{fig:unit_axiom} and conclude that a suitable homotopy is given by $F \in \mathsf{Top}(I \times I,X)$ defined by
+			\begin{equation*}
+				F(s,t) := \ccases{
+					p & 0 \leq 2s \leq t,\\
+					\displaystyle u\del[3]{\frac{2s - t}{2 - t}} & t \leq 2s \leq 2.
+				}
+			\end{equation*}
+			\begin{figure}[h!tb]
+				\centering
+				\begin{tikzpicture}[scale = 3]
+    				% Draw axes
+    				\draw [<->,thick] (0,1.2) node[above] {$t$}
+        			|- (1.2,0) node[right] {$s$};
+    				% Draw two intersecting lines
+					\draw [thick] (0,0) -- (.5,1);
+					\draw [thick] (0,1) -- (1,1);
+					\draw [thick] (1,0) -- (1,1);
 
-			\begin{lemma}
+					\draw [thin] (.25,0) -- (.625,1);
+					\draw [thin] (.125,0) -- (.5625,1);
 					
-			\end{lemma}
+					\draw [thin] (.5,0) -- (.75,1);
+					\draw [thin] (.375,0) -- (.6875,1);
+					\draw [thin] (.625,0) -- (.8125,1);
+					\draw [thin] (.875,0) -- (.9375,1);
+					\draw [thin] (.75,0) -- (.875,1);
+					
+					
+					\draw (.5,0) node[below] {$u$};
+					\draw (.25,1) node[above] {$c_p$};
+					\draw (.75,1) node[above] {$u$};
+			\end{tikzpicture}
+			\caption{$u \simeq_{\partial I} c_p \ast u$.}
+			\label{fig:unit_axiom}
+			\end{figure}
+			Similarly, considering figure \ref{fig:associativity_axiom} leads to $F \in \mathsf{Top}(I \times I,X)$ defined by
+			\begin{equation*}
+				F(s,t) := \ccases{
+					\displaystyle u\del[3]{\frac{4s}{t + 1}} & -1 \leq 4s - 1 \leq t,\\
+					\displaystyle v(4s - t - 1) & t \leq 4s - 1 \leq t + 1,\\
+					\displaystyle w\del[3]{\frac{4s - t - 2}{4 - t - 2}} & t + 1 \leq 4s - 1 \leq 3.
+				}
+			\end{equation*}
+			\begin{figure}[h!tb]
+				\centering
+				\begin{tikzpicture}[scale = 3]
+    				% Draw axes
+    				\draw [<->,thick] (0,1.2) node[above] {$t$}
+        			|- (1.2,0) node[right] {$s$};
+    				% Draw two intersecting lines
+					\draw [thick] (.25,0) -- (.5,1);
+					\draw [thick] (.5,0) -- (.75,1);
+					\draw [thick] (0,1) -- (1,1);
+					\draw [thick] (1,0) -- (1,1);
+					
+					\draw [thin] (.125,0) -- (.25,1);
+					\draw [thin] (.0625,0) -- (.125,1);
+					\draw [thin] (.1875,0) -- (.375,1);
+					
+					\draw [thin] (.375,0) -- (.625,1);
+					\draw [thin] (.3125,0) -- (.5625,1);
+					\draw [thin] (.4375,0) -- (.6875,1);
+
+					\draw [thin] (.75,0) -- (.875,1);
+					\draw [thin] (.625,0) -- (.8125,1);
+					\draw [thin] (.875,0) -- (.9375,1);
+
+					\draw (.125,0) node[below] {$u$};
+					\draw (.375,0) node[below] {$v$};
+					\draw (.75,0) node[below] {$w$};
+					
+					\draw (.25,1) node[above] {$u$};
+					\draw (.625,1) node[above] {$v$};
+					\draw (.875,1) node[above] {$w$};
+			\end{tikzpicture}
+			\caption{$(u \ast v) \ast w \simeq_{\partial I} u \ast (v \ast w)$.}
+			\label{fig:associativity_axiom}
+			\end{figure}
+			
+			Lastly, we check that $\Pi(X)$ is a grupoid. To this end, for a path $u$ from $p$ to $q$, define its \bld{reverse path $\wbar{u}$} by
+			\begin{equation*}
+				\wbar{u}(s) := u(1 - s). 
+			\end{equation*}
+			We claim that $u \ast \wbar{u} \simeq_{\partial I} c_p$.
 	\end{enumerate}
 \end{proof}
 

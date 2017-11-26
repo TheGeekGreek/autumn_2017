@@ -1,0 +1,56 @@
+\chapter{Foundations}
+\section{Basic Category Theory}
+\subsection{Categories}
+
+We use the first order theory of Neumann-Bernays-G\"odel (BNG) as described in \cite[231]{mendelson:logic:2015}.
+
+\begin{definition}[Category]
+	A \bld{category $\mathcal{C}$} consists of 
+	\begin{itemize}[leftmargin = *]
+		\item A class $\ob(\mathcal{C})$, called the \bld{objects of $\mathcal{C}$}.
+		\item A class $\mor(\mathcal{C})$, called the \bld{morphisms of $\mathcal{C}$}.
+		\item Two functions $\dom : \mor(\mathcal{C}) \to \ob(\mathcal{C})$ and $\cod : \mor(\mathcal{C}) \to \ob(\mathcal{C})$, which assign to each morphism $f$ in $\mathcal{C}$ its \bld{domain} and \bld{codomain}, respectively.
+		\item For each $X \in \ob(\mathcal{C})$ a function $\ob(\mathcal{C}) \to \mor(\mathcal{C})$ which assigns a morphism $\id_X$ such that $\dom \id_X = \cod \id_X = X$.
+		\item A function 
+			\begin{equation}
+				\circ : \cbr{(g,f) \in \mor(\mathcal{C}) \times \mor(\mathcal{C}) : \dom g = \cod f} \to \mor(\mathcal{C}) 
+			\end{equation}
+			mapping $(g,f)$ to $g \circ f$, called \bld{composition}, such that $\dom(g \circ f) = \dom f$ and $\cod(g \circ f) = \cod g$.
+	\end{itemize}
+	Subject to the following axioms:
+	\begin{itemize}[leftmargin = *]
+		\item \bld{(Associativity Axiom)} For all $f,g,h \in \mor(\mathcal{C})$ with $\dom h = \cod g$ and $\dom g = \cod f$, we have that
+			\begin{equation}
+				(h \circ g) \circ f = h \circ (g \circ f).
+			\end{equation}
+		\item \bld{(Unit Axiom)} For all $f \in \mor(\mathcal{C})$ with $\dom f = X$ and $\cod f = Y$ we have that
+			\begin{equation}
+				f = f \circ \id_X = \id_Y \circ f.
+			\end{equation}
+	\end{itemize}
+\end{definition}
+
+\begin{remark}
+	Let $\mathcal{C}$ be a category. For $X,Y \in \ob(\mathcal{C})$ we will abreviate
+	\begin{equation*}
+		\mathcal{C}(X,Y) := \cbr{f \in \mor(\mathcal{C}) : \dom f = X \text{ and } \cod f = Y}.
+	\end{equation*}
+	Moreover, $f \in \mathcal{C}(X,Y)$ is depicted as
+	\begin{equation}
+		f : X \to Y.
+	\end{equation}
+\end{remark}
+
+\subsection{Functors}
+
+\begin{definition}[Functor]
+	Let $\mathcal{C}$ and $\mathcal{D}$ be categories. A \bld{functor $F : \mathcal{C} \to \mathcal{D}$} is a pair of functions $(F_1,F_2)$, $F_1 : \ob(\mathcal{C}) \to \ob(\mathcal{D})$, called the \bld{object function} and $F_2 : \mor(\mathcal{C}) \to \mor(\mathcal{D})$, called the \bld{morphism function}, such that for every morphism $f : X \to Y$ we have that $F_2(f) : F_1(X) \to F_1(Y)$ and $(F_1,F_2)$ is subject to the following \bld{compatibility conditions}:
+	\begin{itemize}
+		\item For all $X \in \ob(\mathcal{C})$, $F_2(\id_X) = \id_{F_1(X)}$.
+		\item For all $f \in \mathcal{C}(X,Y)$ and $g \in \mathcal{C}(Y,Z)$ we have that $F_2(g \circ f) = F_2(g) \circ F_2(f)$.
+	\end{itemize}
+\end{definition}
+
+\begin{remark}
+	Let $F : \mathcal{C} \to \mathcal{D}$ be a functor. It is convenient to denote the components $F_1$ and $F_2$ also with $F$.
+\end{remark}
