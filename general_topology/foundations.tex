@@ -45,7 +45,7 @@ We use the first order theory of Neumann-Bernays-G\"odel (BNG) as described in \
 
 \begin{definition}[Functor]
 	Let $\mathcal{C}$ and $\mathcal{D}$ be categories. A \bld{functor $F : \mathcal{C} \to \mathcal{D}$} is a pair of functions $(F_1,F_2)$, $F_1 : \ob(\mathcal{C}) \to \ob(\mathcal{D})$, called the \bld{object function} and $F_2 : \mor(\mathcal{C}) \to \mor(\mathcal{D})$, called the \bld{morphism function}, such that for every morphism $f : X \to Y$ we have that $F_2(f) : F_1(X) \to F_1(Y)$ and $(F_1,F_2)$ is subject to the following \bld{compatibility conditions}:
-	\begin{itemize}
+	\begin{itemize}[leftmargin = *]
 		\item For all $X \in \ob(\mathcal{C})$, $F_2(\id_X) = \id_{F_1(X)}$.
 		\item For all $f \in \mathcal{C}(X,Y)$ and $g \in \mathcal{C}(Y,Z)$ we have that $F_2(g \circ f) = F_2(g) \circ F_2(f)$.
 	\end{itemize}
@@ -53,4 +53,33 @@ We use the first order theory of Neumann-Bernays-G\"odel (BNG) as described in \
 
 \begin{remark}
 	Let $F : \mathcal{C} \to \mathcal{D}$ be a functor. It is convenient to denote the components $F_1$ and $F_2$ also with $F$.
+\end{remark}
+
+\subsection{Limits}
+
+\begin{definition}[Diagram]
+	Let $\mathcal{C}$ be a category and $\mathsf{A}$ a small category. A functor $\mathsf{A} \to \mathcal{C}$ is called a \bld{diagram in $\mathcal{C}$ of shape $\mathsf{A}$}.
+\end{definition}
+
+\begin{definition}[Cone and Limit]
+	Let $\mathcal{C}$ be a category and $D : \mathsf{A} \to \mathcal{C}$ a diagram in $\mathcal{C}$ of shape $\mathsf{A}$. A \bld{cone on $D$} is a tuple $\del[1]{C,(f_\alpha)_{\alpha \in \mathsf{A}}}$, where $C \in \mathcal{C}$ is an object, called the \bld{vertex} of the cone, and a family of arrows in $\mathcal{C}$
+	\begin{equation}
+		\del[1]{C \xrightarrow{f_\alpha} D(\alpha)}_{\alpha \in \mathsf{A}}.
+	\end{equation}
+	\noindent such that for all morphisms $f \in \cat{A}$, $f : \alpha \to \beta$, the triangle
+	\begin{equation*}
+		\xymatrix{
+			& D(\alpha) \ar[dd]^{D(f)}\\
+			C \ar[ur]^{f_\alpha}\ar[dr]_{f_\beta}\\
+			& D(\beta)}
+	\end{equation*}
+	\noindent commutes. A \bld{(small) limit of $D$} is a cone $\del[1]{L, (\pi_\alpha)_{\alpha \in \mathsf{A}}}$ with the property that for any other cone $\del[1]{C,(f_\alpha)_{\alpha \in \mathsf{A}}}$ there exists a unique morphism $\wbar{f} : A \to L$ such that $\pi_\alpha \circ \wbar{f} = f_\alpha$ holds for every $\alpha \in \mathsf{A}$.
+	\label{def:limit}
+\end{definition}
+
+\begin{remark}
+	In the setting of definition \ref{def:limit}, if $\del[1]{L, (\pi_\alpha)_{\alpha \in \cat{A}}}$ is a limit of $D$, we sometimes reffering to $L$ only as the limit of $D$ and we write
+	\begin{equation}
+		L = \lim_{\leftarrow \mathsf{A}} D.
+	\end{equation}
 \end{remark}

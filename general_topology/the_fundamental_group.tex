@@ -95,10 +95,7 @@
 					\end{proof}
 			\end{itemize}
 
-			Let us now check that $\Pi(X)$ is indeed a category. 
-			
-			
-			Let $\sbr{u} \in \Pi(X)(p,q)$. We want to show that $u \simeq_{\partial I} c_p \ast u$. To this end, we consider figure \ref{fig:unit_axiom} and conclude that a suitable homotopy is given by $F \in \mathsf{Top}(I \times I,X)$ defined by
+			Let us now check that $\Pi(X)$ is indeed a category. Let $\sbr{u} \in \Pi(X)(p,q)$. We want to show that $u \simeq_{\partial I} c_p \ast u$. To this end, we consider figure \ref{fig:unit_axiom} and conclude that a suitable homotopy is given by $F \in \mathsf{Top}(I \times I,X)$ defined by
 			\begin{equation*}
 				F(s,t) := \ccases{
 					p & 0 \leq 2s \leq t,\\
@@ -107,31 +104,100 @@
 			\end{equation*}
 			\begin{figure}[h!tb]
 				\centering
-				\begin{tikzpicture}[scale = 3]
-    				% Draw axes
-    				\draw [<->,thick] (0,1.2) node[above] {$t$}
-        			|- (1.2,0) node[right] {$s$};
-    				% Draw two intersecting lines
-					\draw [thick] (0,0) -- (.5,1);
-					\draw [thick] (0,1) -- (1,1);
-					\draw [thick] (1,0) -- (1,1);
+				\begin{subfigure}[b]{.3\textwidth}
+					\begin{tikzpicture}[scale = 3]
+    					% Draw axes
+    					\draw [<->,thick] (0,1.2) node[above] {$t$}
+        				|- (1.2,0) node[right] {$s$};
+    					% Draw two intersecting lines
+						\draw [thick] (0,0) -- (.5,1);
+						\draw [thick] (0,1) -- (1,1);
+						\draw [thick] (1,0) -- (1,1);
 
-					\draw [thin] (.25,0) -- (.625,1);
-					\draw [thin] (.125,0) -- (.5625,1);
+						\draw [thin] (.25,0) -- (.625,1);
+						\draw [thin] (.125,0) -- (.5625,1);
 					
-					\draw [thin] (.5,0) -- (.75,1);
-					\draw [thin] (.375,0) -- (.6875,1);
-					\draw [thin] (.625,0) -- (.8125,1);
-					\draw [thin] (.875,0) -- (.9375,1);
-					\draw [thin] (.75,0) -- (.875,1);
+						\draw [thin] (.5,0) -- (.75,1);
+						\draw [thin] (.375,0) -- (.6875,1);
+						\draw [thin] (.625,0) -- (.8125,1);
+						\draw [thin] (.875,0) -- (.9375,1);
+						\draw [thin] (.75,0) -- (.875,1);
 					
 					
-					\draw (.5,0) node[below] {$u$};
-					\draw (.25,1) node[above] {$c_p$};
-					\draw (.75,1) node[above] {$u$};
-			\end{tikzpicture}
-			\caption{$u \simeq_{\partial I} c_p \ast u$.}
-			\label{fig:unit_axiom}
+						\draw (.5,0) node[below] {$u$};
+						\draw (.25,1) node[above] {$c_p$};
+						\draw (.75,1) node[above] {$u$};
+					\end{tikzpicture}
+					\caption{$u \simeq_{\partial I} c_p \ast u$.}
+					\label{fig:unit_axiom}
+				\end{subfigure}
+				~
+				\begin{subfigure}[b]{.3\textwidth}
+					\begin{tikzpicture}[scale = 3]
+    					% Draw axes
+    					\draw [<->,thick] (0,1.2) node[above] {$t$}
+        				|- (1.2,0) node[right] {$s$};
+    					% Draw two intersecting lines
+						\draw [thick] (.25,0) -- (.5,1);
+						\draw [thick] (.5,0) -- (.75,1);
+						\draw [thick] (0,1) -- (1,1);
+						\draw [thick] (1,0) -- (1,1);
+					
+						\draw [thin] (.125,0) -- (.25,1);
+						\draw [thin] (.0625,0) -- (.125,1);
+						\draw [thin] (.1875,0) -- (.375,1);
+					
+						\draw [thin] (.375,0) -- (.625,1);
+						\draw [thin] (.3125,0) -- (.5625,1);
+						\draw [thin] (.4375,0) -- (.6875,1);
+
+						\draw [thin] (.75,0) -- (.875,1);
+						\draw [thin] (.625,0) -- (.8125,1);
+						\draw [thin] (.875,0) -- (.9375,1);
+
+						\draw (.125,0) node[below] {$u$};
+						\draw (.375,0) node[below] {$v$};
+						\draw (.75,0) node[below] {$w$};
+					
+						\draw (.25,1) node[above] {$u$};
+						\draw (.625,1) node[above] {$v$};
+						\draw (.875,1) node[above] {$w$};
+					\end{tikzpicture}
+					\caption{$(u \ast v) \ast w \simeq_{\partial I} u \ast (v \ast w)$.}
+					\label{fig:associativity_axiom}
+				\end{subfigure}
+				~
+				\begin{subfigure}[b]{.3\textwidth}
+					\begin{tikzpicture}[scale = 3]
+    					% Draw axes
+    					\draw [<->,thick] (0,1.2) node[above] {$t$}
+        				|- (1.2,0) node[right] {$s$};
+    					% Draw two intersecting lines
+						\draw [thick] (0,1) -- (.5,0);
+						\draw [thick] (.5,0) -- (1,1);
+						\draw [thick] (0,1) -- (1,1);
+						\draw [thick] (1,0) -- (1,1);
+
+						\draw [thin] (.25,0) -- (.25,.5);
+						\draw [thin] (.125,0) -- (.125,.75);				
+						\draw [thin] (.375,0) -- (.375,.25);
+
+						\draw [thin] (.625,0) -- (.625,.25);
+						\draw [thin] (.875,0) -- (.875,.75);
+						\draw [thin] (.75,0) -- (.75,.5);
+
+						\draw [thin] (.25,.5) -- (.75,.5);
+						\draw [thin] (.125,.75) -- (.875,.75);
+						\draw [thin] (.375,.25) -- (.625,.25);
+					
+						\draw (.5,1) node[above] {$c_p$};
+						\draw (.25,0) node[below] {$u$};
+						\draw (.75,0) node[below] {$\wbar{u}$};
+					\end{tikzpicture}
+					\caption{$u \ast \wbar{u} \simeq_{\partial I} c_p$.}
+					\label{fig:reverse_path}
+				\end{subfigure}
+				\caption{Visualization of the proof that $\Pi(X)$ is a grupoid object.}
 			\end{figure}
 			Similarly, considering figure \ref{fig:associativity_axiom} leads to $F \in \mathsf{Top}(I \times I,X)$ defined by
 			\begin{equation*}
@@ -141,49 +207,42 @@
 					\displaystyle w\del[3]{\frac{4s - t - 2}{4 - t - 2}} & t + 1 \leq 4s - 1 \leq 3.
 				}
 			\end{equation*}
-			\begin{figure}[h!tb]
-				\centering
-				\begin{tikzpicture}[scale = 3]
-    				% Draw axes
-    				\draw [<->,thick] (0,1.2) node[above] {$t$}
-        			|- (1.2,0) node[right] {$s$};
-    				% Draw two intersecting lines
-					\draw [thick] (.25,0) -- (.5,1);
-					\draw [thick] (.5,0) -- (.75,1);
-					\draw [thick] (0,1) -- (1,1);
-					\draw [thick] (1,0) -- (1,1);
-					
-					\draw [thin] (.125,0) -- (.25,1);
-					\draw [thin] (.0625,0) -- (.125,1);
-					\draw [thin] (.1875,0) -- (.375,1);
-					
-					\draw [thin] (.375,0) -- (.625,1);
-					\draw [thin] (.3125,0) -- (.5625,1);
-					\draw [thin] (.4375,0) -- (.6875,1);
-
-					\draw [thin] (.75,0) -- (.875,1);
-					\draw [thin] (.625,0) -- (.8125,1);
-					\draw [thin] (.875,0) -- (.9375,1);
-
-					\draw (.125,0) node[below] {$u$};
-					\draw (.375,0) node[below] {$v$};
-					\draw (.75,0) node[below] {$w$};
-					
-					\draw (.25,1) node[above] {$u$};
-					\draw (.625,1) node[above] {$v$};
-					\draw (.875,1) node[above] {$w$};
-			\end{tikzpicture}
-			\caption{$(u \ast v) \ast w \simeq_{\partial I} u \ast (v \ast w)$.}
-			\label{fig:associativity_axiom}
-			\end{figure}
-			
 			Lastly, we check that $\Pi(X)$ is a grupoid. To this end, for a path $u$ from $p$ to $q$, define its \bld{reverse path $\wbar{u}$} by
 			\begin{equation*}
 				\wbar{u}(s) := u(1 - s). 
 			\end{equation*}
-			We claim that $u \ast \wbar{u} \simeq_{\partial I} c_p$.
+			We claim that $u \ast \wbar{u} \simeq_{\partial I} c_p$. From figure \ref{fig:reverse_path} we deduce that $F \in \mathsf{Top}(I \times I,X)$ is given by
+			\begin{equation*}
+				F(s,t) := \ccases{
+					u(2s) & 0 \leq 2s \leq 1 - t,\\
+					u(1 - t) & 1 - t \leq 2s \leq t + 1,\\
+					\wbar{u}(2s - 1) & t + 1 \leq 2s \leq 2.
+				}
+			\end{equation*}
+		\item \textit{Definition of $\Pi$ on morphisms.} Let $f \in \mathsf{Top}(X,Y)$. Then $\Pi(f)$ is a functor from $\Pi(X)$ to $\Pi(Y)$. Define $\Pi(f)$ as follows:
+			\begin{itemize}[leftmargin = *]
+				\item Let $p \in \ob\del[1]{\Pi(X)}$. Then define $\Pi(f)(p) := f(p) \in \ob\del[1]{\Pi(Y)}$.
+				\item Let $\sbr{u} \in \Pi(X)(p,q)$. Then define $\Pi(f)\sbr{u} := \sbr[0]{f \circ u} \in $. We have to check that this definition is independent of the choice of the representative.
+
+					\begin{lemma}
+						Let $u$ and $v$ be paths from $p$ to $q$ in $X$ and suppose that $\sbr{u} = \sbr{v}$. Then for any $f \in \mathsf{Top}(X,Y)$ we also have that $\sbr[0]{f \circ u} = \sbr[0]{f \circ v}$.
+					\end{lemma}
+
+					\begin{proof}
+						Suppose that $H : u \simeq_{\partial I} v$. Define $F \in \mathsf{Top}(I \times I,Y)$ by
+						\begin{equation*}
+							F(s,t) := (f \circ F)(s,t).
+						\end{equation*}
+						Then $F : f \circ u \simeq_{\partial I} f \circ v$.
+					\end{proof}
+			\end{itemize}
 	\end{enumerate}
+	Checking that $\Pi$ satisfies the functorial properties is left as an exercise.
 \end{proof}
+
+\begin{exercise}
+	Check that $\Pi : \mathsf{Top} \to \mathsf{Grpd}$ is indeed a functor.
+\end{exercise}
 
 \section{The Fundamental Group}
 
