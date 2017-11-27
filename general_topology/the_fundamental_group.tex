@@ -1,5 +1,6 @@
 \chapter{The Fundamental Group}
-\section{The Fundamental Grupoid}
+\section*{The Fundamental Grupoid}
+\subsection*{Construction of the fundamental Grupoid}
 
 \begin{lemma}[Gluing Lemma]
 	Let $X,Y \in \ob(\mathsf{Top})$, $(X_\alpha)_{\alpha \in A}$ a finite closed cover of $X$ and $(f_\alpha)_{\alpha \in A}$ a finite family of maps $f_\alpha \in \mathsf{Top}(X_\alpha,Y)$ such that $f_\alpha\vert_{X_\alpha \cap X_\beta} = f_\beta\vert_{X_\alpha \cap X_\beta}$ for all $\alpha,\beta \in A$. Then there exists a unique $f \in \mathsf{Top}(X,Y)$ such that $f\vert_{X_\alpha} = f_\alpha$ for all $\alpha \in A$.
@@ -18,7 +19,8 @@
 \end{proof}
 
 \begin{theorem}
-	There is a functor $\mathsf{Top} \to \mathsf{Grpd}$. 
+	There is a functor $\mathsf{Top} \to \mathsf{Grpd}$.
+	\label{thm:fundamental_groupoid}
 \end{theorem}
 
 \begin{proof}
@@ -244,12 +246,51 @@
 	Check that $\Pi : \mathsf{Top} \to \mathsf{Grpd}$ is indeed a functor.
 \end{exercise}
 
-\section{The Fundamental Group}
+\subsection*{The Fundamental Group}
 
 \begin{lemma}
-	Let $\mathcal{\altG}$ be a locally small grupoid. Then for every $X \in \ob(\mathcal{\altG})$, $\mathcal{\altG}(X,X)$ can be equipped with a group structure.	
+	Let $\mathcal{\altG}$ be a locally small grupoid. Then for every $X \in \ob(\mathcal{\altG})$, $\mathcal{\altG}(X,X)$ can be equipped with a group structure.
+	\label{lem:groupoid_group}
 \end{lemma}
 
 \begin{proof}
-	Since $\mathcal{\altG}$ is locally small, $\mathcal{\altG}(X,X)$ is a set for every $X \in \ob(\mathcal{\altG})$. Define a multiplication $\mathcal{\altG} \times \mathcal{\altG} \to \mathcal{\altG}$ by $gh := h \circ g$. 
+	Since $\mathcal{\altG}$ is locally small, $\mathcal{\altG}(X,X)$ is a set for every $X \in \ob(\mathcal{\altG})$. Define a multiplication $\mathcal{\altG}(X,X) \times \mathcal{\altG}(X,X) \to \mathcal{\altG}(X,X)$ by $gh := h \circ g$. Clearly, this multiplication is associative. Moreover, the identity element is given by $\id_X \in \mathcal{\altG}(X,X)$ and since every $g \in \mathcal{\altG}(X,X)$ is an isomorphism, the multiplicative inverse is given by the inverse in $\mathcal{\altG}(X,X)$. 
+\end{proof}
+
+\begin{definition}[Fundamental Group]
+	Let $X \in \ob(\mathsf{Top})$ and $p \in X$. The \bld{fundamental group of $X$ with basepoint $p$}, written $\pi_1(X,p)$, is defined by
+	\begin{equation}
+		\pi_1(X,p) := \Pi(X)(p,p).
+	\end{equation}
+	\noindent where $\Pi : \mathsf{Top} \to \mathsf{Grpd}$ is the functor constructed in theorem \ref{thm:fundamental_groupoid}, equipped with the group structure of lemma \ref{lem:groupoid_group}.
+\end{definition}
+
+\begin{proposition}
+	There is a functor $\mathsf{Top}_\ast \to \mathsf{Grp}$.
+\end{proposition}
+
+\subsection*{$\pi_1(\mathbb{S}^1)$} 
+
+\begin{definition}[Exponential Quotient Map]
+	The mapping $\varepsilon : \mathbb{R} \to \mathbb{S}^1$ defined by
+	\begin{equation}
+		\varepsilon(x) := e^{2\pi i x}
+	\end{equation}
+	\noindent is called the \bld{exponential quotient map}.
+\end{definition}
+
+\begin{proposition}[Lifting Property of the Circle]
+	Let $n \in \mathbb{Z}$, $n \geq 0$, $X \subseteq \mathbb{R}^n$ compact and convex, $p \in X$, $f : (X,p) \to (\mathbb{S}^1,1)$ continuous and $m \in \mathbb{Z}$. Then there exists a unique map $\wtilde{f} \in \mathsf{Top}_\ast\del[1]{(X,p),(\mathbb{R},m)}$ such that 
+	\begin{equation*}
+		\centering
+		\xymatrix{
+			& (\mathbb{R},m) \ar[d]^\varepsilon\\
+			(X,p) \ar[r]_f\ar[ur]^{\wtilde{f}}	& (\mathbb{S}^1,1)
+		}
+		\end{equation*}
+		\noindent commutes. 
+	\end{proposition}
+
+\begin{proof}
+	
 \end{proof}

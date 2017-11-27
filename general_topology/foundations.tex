@@ -1,6 +1,6 @@
 \chapter{Foundations}
-\section{Basic Category Theory}
-\subsection{Categories}
+\section*{Basic Category Theory}
+\subsection*{Categories}
 
 We use the first order theory of Neumann-Bernays-G\"odel (BNG) as described in \cite[231]{mendelson:logic:2015}.
 
@@ -41,7 +41,7 @@ We use the first order theory of Neumann-Bernays-G\"odel (BNG) as described in \
 	\end{equation}
 \end{remark}
 
-\subsection{Functors}
+\subsection*{Functors}
 
 \begin{definition}[Functor]
 	Let $\mathcal{C}$ and $\mathcal{D}$ be categories. A \bld{functor $F : \mathcal{C} \to \mathcal{D}$} is a pair of functions $(F_1,F_2)$, $F_1 : \ob(\mathcal{C}) \to \ob(\mathcal{D})$, called the \bld{object function} and $F_2 : \mor(\mathcal{C}) \to \mor(\mathcal{D})$, called the \bld{morphism function}, such that for every morphism $f : X \to Y$ we have that $F_2(f) : F_1(X) \to F_1(Y)$ and $(F_1,F_2)$ is subject to the following \bld{compatibility conditions}:
@@ -55,7 +55,25 @@ We use the first order theory of Neumann-Bernays-G\"odel (BNG) as described in \
 	Let $F : \mathcal{C} \to \mathcal{D}$ be a functor. It is convenient to denote the components $F_1$ and $F_2$ also with $F$.
 \end{remark}
 
-\subsection{Limits}
+\subsection*{Subcategories}
+\begin{definition}[Subcategory]
+	Let $\mathcal{C}$ be a category. A \bld{subcategory $\mathcal{\altS}$ of $\mathcal{C}$} consists of
+	\begin{itemize}[leftmargin = *]
+		\item A subclass $\ob(\mathcal{\altS}) \subseteq \ob(\mathcal{C})$.
+		\item A subclass $\mor(\mathcal{\altS}) \subseteq \mor(\mathcal{C})$.
+	\end{itemize}
+	Subject to the following conditions:
+	\begin{itemize}[leftmargin = *]
+		\item For all $X \in \mathcal{\altS}$, $\id_S \in \mor(\mathcal{\altS})$.
+	\end{itemize}
+\end{definition}
+
+\begin{example}[$\mathsf{Top}_\ast$]
+	Define the objects of $\mathsf{Top}_\ast$ to be the class of all tuple $(X,p)$, where $X$ is a topological space and $p \in X$. Moreover, given objects $(X,p)$ and $(Y,q)$ in $\mathsf{Top}_\ast$, define $\mathsf{Top}_\ast\del[1]{(X,p),(Y,q)} := \cbr[0]{f \in \mathsf{Top}(X,Y) : f(p) = q}$. It is easy to check that $\mathsf{Top}_\ast$ is a category, called the \bld{category of pointed topological spaces}.
+
+\end{example}
+
+\subsection*{Limits}
 
 \begin{definition}[Diagram]
 	Let $\mathcal{C}$ be a category and $\mathsf{A}$ a small category. A functor $\mathsf{A} \to \mathcal{C}$ is called a \bld{diagram in $\mathcal{C}$ of shape $\mathsf{A}$}.

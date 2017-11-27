@@ -1,0 +1,122 @@
+\input{header.tex}
+
+\title{Solutions Sheet 10}
+\author{Yannis B\"{a}hni}
+\address[Yannis B\"{a}hni]{University of Zurich, R\"{a}mistrasse 71, 8006 Zurich}
+\email[Yannis B\"{a}hni]{\href{mailto:yannis.baehni@uzh.ch}{\nolinkurl{yannis.baehni@uzh.ch}}}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+
+\setcounter{section}{1}
+
+\begin{enumerate}[label = \textbf{Exercise \arabic*.},wide = 0pt, itemsep = 1.5ex]
+	\item
+		~
+		\begin{enumerate}[label = \textbf{\alph*.},wide = 0pt, itemsep = 1.5ex]
+			\item
+				\begin{lemma}
+					Let $\sbr{x} \in X/M$. Then
+					\begin{equation*}
+						\norm{\sbr{x}}_{X/M} = \inf_{m \in M} \norm{x - m}.
+					\end{equation*}
+				\end{lemma}
+
+				\begin{proof}
+					This immediately follows from
+					\begin{equation*}
+						\cbr[0]{ \norm{y} : y \in \sbr{x}} = \cbr[0]{ \norm{x - m} : m \in M}.
+					\end{equation*}
+					Indeed, if $y \in \sbr{x}$, by definition $x - y \in M$ and thus there exists some $m \in M$ such that $x - y = m$ or equivalently $y = x - m$. Conversly, $x - m \in \sbr{x}$.
+				\end{proof}
+				There are four things to check. 
+				\begin{itemize}[leftmargin = *]
+					\item \bld{(Well definedness)} Let $\sbr{x},\sbr[0]{y} \in X/M$ such that $\sbr{x} = \sbr[0]{y}$. Hence $x \sim y$ and thus we find $m_0 \in M$ such that $x - y = m_0$. Thus
+						\begin{equation*}
+							\norm[0]{\sbr{x}}_{X/M} = \inf_{m \in M}\norm{x - m} = \inf_{m \in M} \norm{y - (m - m_0)} = \inf_{\wtilde{m} \in M}\norm[0]{y - \wtilde{m}} = \norm[0]{\sbr[0]{y}}_{X/M}
+						\end{equation*}
+						\noindent since $M$ is a linear subspace.
+					\item \bld{(Positivity)} Let $\sbr{x} \in X/M$. If $\sbr{x} = 0$ we have that $x \in M$. But then 
+						\begin{equation*}
+							\norm{\sbr{x}}_{X/M} = \inf_{m \in M} \norm{x - m} = 0.
+						\end{equation*}
+						Conversly, assume that $\norm{\sbr{x}}_{X/M} = 0$. By the definition of the infimum, we can construct a sequence $(m_n)_{n \in \mathbb{N}}$ in $M$ such that $\norm{x - m_n} \to 0$. But then $m_n \to x$ and since $M$ is closed we have that $x \in M$. Hence $\sbr{x} = 0$.
+					\item \bld{(Homogeneity)} Let $\sbr{x} \in X/M$ and $\lambda \in \mathbb{K}$. The case $\lambda = 0$ is clear. So assume $\lambda \neq 0$. Then 
+						\begin{align*}
+							\norm{\lambda\sbr{x}}_{X/M} &= \norm{\sbr{\lambda x}}_{X/M}\\
+							&= \inf_{m \in M} \norm{\lambda x - m}\\
+							&= \inf_{m \in M} \abs{\lambda}\norm{x - m/\lambda}\\
+							&= \abs{\lambda} \inf_{m \in M} \norm{x - m/\lambda}\\
+							&= \abs{\lambda} \inf_{\wtilde{m} \in M} \norm[0]{x - \wtilde{m}}\\
+							&= \abs{\lambda} \norm{\sbr{x}}_{X/M}
+						\end{align*}
+					\noindent since $M$ is a linear subspace.
+				\item \bld{(Triangle inequality)} Let $\sbr{x},\sbr[0]{y} \in X/M$. Then 
+					\begin{align*}
+						\norm[0]{\sbr{x} + \sbr[0]{y}}_{X/M} &= \norm[0]{\sbr[0]{x + y}}_{X/M}\\
+						&= \inf_{m \in M} \norm[0]{x + y - m}\\
+						&= \inf_{m \in M} \norm[0]{x + y - 2m + m}\\
+						&\leq \inf_{m \in M} \norm[0]{x - m} + \inf_{m \in M}\norm[0]{y - m} + \inf_{m \in M}\norm{m}\\
+						&= \inf_{m \in M} \norm[0]{x - m} + \inf_{m \in M}\norm[0]{y - m}\\
+						&= \norm[0]{\sbr{x}}_{X/M} + \norm[0]{\sbr[0]{y}}_{X/M}
+					\end{align*}
+					\noindent since $M$ is a linear subspace and thus $0 \in M$.
+				\end{itemize}
+			\item Let $x \in X$. By part \textbf{a.} we have that
+				\begin{equation*}
+					\norm[0]{\pi(x)}_{X/M} = \norm{\sbr{x}}_{X/M} = \inf_{m \in M} \norm{x - m} \leq \inf_{m \in M}\norm{x} + \inf_{m \in M}\norm{m} = \norm{x}.
+				\end{equation*}
+			\item Let $(\sbr[0]{x_n})_{n \in \mathbb{N}}$ be a Cauchy sequence in $X/M$. Then $(x_n)_{n \in \mathbb{N}}$ is a Cauchy sequence in $X$. Indeed, for any $m \in M$ we have that 
+				\begin{equation*}
+					\norm{x_n - x_k} \leq \norm{x_n - x_k - m} + \norm{m}
+				\end{equation*}
+				And thus
+				\begin{equation*}
+					\norm{x_n - x_k} \leq \inf_{m \in M}\norm{x_n - x_k - m} + \inf_{m \in M}\norm{m} = \norm{\sbr{x_n - x_k}}_{X/M} = \norm{\sbr{x_n} - \sbr{x_k}}_{X/M} \xrightarrow{n,k \to \infty} 0.
+				\end{equation*}
+				Since $X$ is a Banach space, there exists $x \in X$ such that $x_n \to x$. Then $\sbr{x_n} \to \sbr{x}$. Indeed, by part \textbf{b.} we have
+				\begin{equation*}
+					\lim_{n \to \infty}\sbr{x_n} = \lim_{n \to \infty}\pi(x_n) = \pi(x) = \sbr{x}.
+				\end{equation*}
+			\item Define $\wtilde{T} : X/\ker T \to T(X)$ by 
+				\begin{equation*}
+					\wtilde{T}(\sbr{x}) := T(x).
+				\end{equation*}
+				This mapping is well defined. Indeed, if $\sbr{x} = \sbr[0]{y} \in X/\ker T$, we have that $x - y \in \ker T$ and thus
+				\begin{equation*}
+					\wtilde{T}(\sbr{x}) = T(x) = T(x - y + y) = T(x - y) + T(y) = T(y) = \wtilde{T}(\sbr[0]{y})
+				\end{equation*}
+				\noindent by the linearity of $T$. Also $\wtilde{T}$ is linear. Let $\lambda \in \mathbb{K}$. Then we have
+				\begin{equation*}
+					\wtilde{T}(\sbr{x} + \lambda \sbr[0]{y}) = \wtilde{T}(\sbr[0]{x + \lambda y}) = T(x + \lambda y) = T(x) + \lambda T(y) = \wtilde{T}(\sbr{x}) + \lambda \wtilde{T}(\sbr[0]{y}).
+				\end{equation*}
+				Clearly, $\wtilde{T}$ is surjective. Also $\wtilde{T}$ is injective since if $\sbr{x} \in \ker \wtilde{T}$, we have that 
+				\begin{equation*}
+					0 = \wtilde{T}(\sbr{x}) = T(x)
+				\end{equation*}
+				\noindent and thus $x \in \ker T$ which implies $\sbr{x} = 0$. Next we verify the commutativity of the diagram. Let $x \in X$. Then
+				\begin{equation*}
+					(\iota \circ \wtilde{T} \circ \pi)(x) = \iota\del[1]{\wtilde{T}(\sbr{x})} = \iota\del[1]{T(x)} = T(x).
+				\end{equation*}
+				Lastly we show that $\norm[0]{\wtilde{T}} = \norm{T}$ which in particular implies $\wtilde{T} \in \mathcal{L}\del[1]{X/\ker T,T(X)}$. Indeed, by part \textbf{b.} we have that $\norm[0]{\pi(x)}_{X/M} \leq \norm{x}$ for all $x \in X$ and thus
+				\begin{equation*}
+					\norm[0]{\wtilde{T}(\sbr{x})} \leq \norm[0]{\wtilde{T}}\norm{\sbr{x}}_{X/M} = \norm[0]{\wtilde{T}}\norm{\pi(x)}_{X/M} \leq \norm[0]{\wtilde{T}}\norm{x} = \norm{T}\norm{x}
+				\end{equation*}
+				\noindent for all $\sbr{x} \in X/M$.
+				\begin{itemize}[leftmargin = *]
+					\item \bld{($\norm{T} \leq \norm[0]{\wtilde{T}}$)} Observe that
+						\begin{equation*}
+							\cbr[0]{x \in X : \norm{x} \leq 1} \subseteq \cbr[0]{x \in X : \norm{\sbr{x}}_{X/M} \leq 1}
+						\end{equation*}
+						\noindent by the continuity of $\pi$. Thus
+						\begin{equation*}
+							\norm{T} = \sup_{\norm[0]{x} \leq 1} \norm{T(x)} \leq \sup_{\norm[0]{\sbr[0]{x}}_{X/M} \leq 1} \norm{T(x)} = \sup_{\norm[0]{\sbr[0]{x}}_{X/M} \leq 1} \norm[0]{T(\sbr{x})} = \norm[0]{\wtilde{T}}.
+						\end{equation*}
+				\end{itemize}
+	
+		\end{enumerate}
+\end{enumerate}
+\printbibliography
+\end{document}
