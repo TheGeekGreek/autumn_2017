@@ -257,17 +257,30 @@
 	Since $\mathcal{\altG}$ is locally small, $\mathcal{\altG}(X,X)$ is a set for every $X \in \ob(\mathcal{\altG})$. Define a multiplication $\mathcal{\altG}(X,X) \times \mathcal{\altG}(X,X) \to \mathcal{\altG}(X,X)$ by $gh := h \circ g$. Clearly, this multiplication is associative. Moreover, the identity element is given by $\id_X \in \mathcal{\altG}(X,X)$ and since every $g \in \mathcal{\altG}(X,X)$ is an isomorphism, the multiplicative inverse is given by the inverse in $\mathcal{\altG}(X,X)$. 
 \end{proof}
 
-\begin{definition}[Fundamental Group]
-	Let $X \in \ob(\mathsf{Top})$ and $p \in X$. The \bld{fundamental group of $X$ with basepoint $p$}, written $\pi_1(X,p)$, is defined by
-	\begin{equation}
-		\pi_1(X,p) := \Pi(X)(p,p).
-	\end{equation}
-	\noindent where $\Pi : \mathsf{Top} \to \mathsf{Grpd}$ is the functor constructed in theorem \ref{thm:fundamental_groupoid}, equipped with the group structure of lemma \ref{lem:groupoid_group}.
-\end{definition}
-
 \begin{proposition}
 	There is a functor $\mathsf{Top}_\ast \to \mathsf{Grp}$.
 \end{proposition}
+
+\begin{proof}
+	Define $\pi_1 : \mathsf{Top}_\ast \to \mathsf{Grp}$ on objects $(X,p) \in \mathsf{Top}_\ast$ by 
+	\begin{equation*}
+		\pi_1(X,p) := \Pi(X)(p,p).
+	\end{equation*}
+	By theorem \ref{thm:fundamental_groupoid} together with lemma \ref{lem:groupoid_group}, $\pi_1(X,p)$ is actually a group, called the \bld{fundamental group of $X$ with basepoint $p$}. On morphisms $f \in \mathsf{Top}_\ast\del[1]{(X,p),(Y,q)}$, define 
+	\begin{equation*}
+		\pi_1(f) := \Pi(f) : \Pi(X)(p,p) \to \Pi(Y)(q,q).
+	\end{equation*}
+	Let $\sbr{u},\sbr{v} \in \pi_1(X,p)$. Then 
+	\begin{align*}
+		\pi_1(\sbr{u}\sbr{v}) &= \Pi(f)(\sbr{u}\sbr{v})\\
+		&= \Pi(f)\sbr{u \ast v}\\
+		&= \sbr[0]{f \circ (u \ast v)}\\
+		&= \sbr[0]{(f \circ u) \ast (f \circ v)}\\
+		&= \Pi(f)\sbr{u} \Pi(f)\sbr{v}\\
+		&= \pi_1(f)\sbr{u}\pi_1(f)\sbr{v}.
+	\end{align*}
+	Thus $\pi_1(f)$ is a morphism in $\mathsf{Grp}$. Functoriality of $\pi_1$ immediately follows from the functoriality of $\Pi$.
+\end{proof}
 
 \subsection*{$\pi_1(\mathbb{S}^1)$} 
 
@@ -280,7 +293,7 @@
 \end{definition}
 
 \begin{proposition}[Lifting Property of the Circle]
-	Let $n \in \mathbb{Z}$, $n \geq 0$, $X \subseteq \mathbb{R}^n$ compact and convex, $p \in X$, $f : (X,p) \to (\mathbb{S}^1,1)$ continuous and $m \in \mathbb{Z}$. Then there exists a unique map $\wtilde{f} \in \mathsf{Top}_\ast\del[1]{(X,p),(\mathbb{R},m)}$ such that 
+	Let $n \in \mathbb{Z}$, $n \geq 0$, $X \subseteq \mathbb{R}^n$ compact and convex, $p \in X$, $f \in \mathsf{Top}_\ast\del[1]{(X,p),(\mathbb{S}^1,1)}$ and $m \in \mathbb{Z}$. Then there exists a unique map $\wtilde{f} \in \mathsf{Top}_\ast\del[1]{(X,p),(\mathbb{R},m)}$, called the \bld{lifting of $f$}, such that 
 	\begin{equation*}
 		\centering
 		\xymatrix{
@@ -289,8 +302,39 @@
 		}
 		\end{equation*}
 		\noindent commutes. 
+		\label{prop:lifting_circle}
 	\end{proposition}
 
 \begin{proof}
-	
+	\begin{enumerate}[label = \textit{Step \arabic*:},wide = 0pt, itemsep = 1.5ex]
+		\item \textit{Existence.} Since $X$ is compact and $f$ is continuous, $f$ is uniformly continuous on $X$. Thus we find $\delta > 0$ such that $\abs{f(x) - f(y)} < 2$, whenever $\abs{x - y} < \delta$, i.e. $f(x)$ and $f(y)$ are not antipodal points. Moreover, since $X$ is compact, $X$ is bounded and hence we find $N \in \mathbb{N}$, such that $\abs{x - y} < N\delta$ holds for all $x,y \in X$. Let $x \in X$. For $0 \leq k \leq N$, define $L_k : X \to X$ by
+			\begin{equation*}
+				L_k(x) := \del[3]{1 - \frac{k}{N}}p + \frac{k}{N}x.
+			\end{equation*}
+		Those are well defined functions since $X$ is convex. Moreover, each $L_k$ is continuous. Indeed, it is easy to check that $L_k$ is Lipschitz. Also, for each $0 \leq k < N$, $f\del[0]{L_k(x)}$ and $f\del[0]{L_{k + 1}(x)}$ are not antipodal for all $x \in X$. Indeed, it is easy to check that $\abs[0]{L_k(x) - L_{k + 1}(x)} < \delta$ holds for all $x \in X$. For $0 \leq k < N$ define $g_k : X \to \mathbb{S}^1 \setminus \cbr{-1}$ by
+			\begin{equation*}
+				g_k(x) := \frac{f(L_{k + 1}(x))}{f(L_k(x))}.
+			\end{equation*}
+		Clearly $g_k$ is well defined and continuous as a composition of continuous functions. Let $\Log : \mathbb{S}^1 \setminus \cbr{-1} \to \mathbb{C}$ denote the principal branch of the logarithm. Define $\wtilde{f} : X \to \mathbb{R}$ by
+			\begin{equation*}
+				\wtilde{f}(x) := m + \frac{1}{2\pi i} \sum_{k = 0}^{N - 1} \Log(g_k(x)).
+			\end{equation*}
+		Clearly, $\wtilde{f}$ is continuous and moreover we have that $\wtilde{f} = m$ since $g_k(p) = 1$ for all $0\leq k < N$. Finally, for any $x \in X$ we have that
+			\begin{equation*}
+				(\varepsilon \circ \wtilde{f})(x) = \varepsilon(m)\prod_{k = 0}^{N - 1} g_k(x) = \frac{f(L_N(x))}{f(L_0(x))} = \frac{f(x)}{f(p)} = f(x). 
+			\end{equation*}
+		\item \textit{Uniqueness.} Suppose $\wtilde{g} \in \mathsf{Top}_\ast\del[1]{(X,p),(\mathbb{R},m)}$ is another such function. Define $\varphi \in \mathsf{Top}_\ast\del[1]{(X,p),(\mathbb{R},0)}$ by
+			\begin{equation*}
+				\varphi(x) := \wtilde{f}(x) - \wtilde{g}(x).
+			\end{equation*}
+		Then clearly $\varepsilon \circ \varphi = 1$ and thus $\varphi(X) \subseteq \mathbb{Z}$. Since $X$ is convex, $X$ is connected and so $\varphi = 0$.
+	\end{enumerate}
+\end{proof}
+
+\begin{corollary}
+	Let $u,v \in \Omega(\mathbb{S}^1,1)$ such that $\sbr{u} = \sbr{v}$. If $\wtilde{u},\wtilde{v} : (I,0) \to (\mathbb{R},0)$ are the liftings of $u$ and $v$, respectively, then $\sbr[0]{\wtilde{u}} = \sbr[0]{\wtilde{v}}$.
+\end{corollary}
+
+\begin{proof}
+	Let $F : u \simeq_{\partial I} v$. By proposition \ref{prop:lifting_circle}, we find $\wtilde{F} \in \mathsf{Top}_\ast\del[1]{(I \times I, (0,0)),(\mathbb{R},0)}$, such that $\varepsilon \circ \wtilde{F} = F$. We claim that $\wtilde{F} : \wtilde{u} \simeq_{\partial I} \wtilde{v}$.
 \end{proof}
