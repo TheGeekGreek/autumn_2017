@@ -282,7 +282,7 @@
 	Thus $\pi_1(f)$ is a morphism in $\mathsf{Grp}$. Functoriality of $\pi_1$ immediately follows from the functoriality of $\Pi$.
 \end{proof}
 
-\subsection*{$\pi_1(\mathbb{S}^1)$} 
+\subsection*{$\pi_1(\mathbb{S}^1)$}  
 
 \begin{definition}[Exponential Quotient Map]
 	The mapping $\varepsilon : \mathbb{R} \to \mathbb{S}^1$ defined by
@@ -306,6 +306,7 @@
 	\end{proposition}
 
 \begin{proof}
+	We show first existence and then uniqueness.
 	\begin{enumerate}[label = \textit{Step \arabic*:},wide = 0pt, itemsep = 1.5ex]
 		\item \textit{Existence.} Since $X$ is compact and $f$ is continuous, $f$ is uniformly continuous on $X$. Thus we find $\delta > 0$ such that $\abs{f(x) - f(y)} < 2$, whenever $\abs{x - y} < \delta$, i.e. $f(x)$ and $f(y)$ are not antipodal points. Moreover, since $X$ is compact, $X$ is bounded and hence we find $N \in \mathbb{N}$, such that $\abs{x - y} < N\delta$ holds for all $x,y \in X$. Let $x \in X$. For $0 \leq k \leq N$, define $L_k : X \to X$ by
 			\begin{equation*}
@@ -336,5 +337,37 @@
 \end{corollary}
 
 \begin{proof}
-	Let $F : u \simeq_{\partial I} v$. By proposition \ref{prop:lifting_circle}, we find $\wtilde{F} \in \mathsf{Top}_\ast\del[1]{(I \times I, (0,0)),(\mathbb{R},0)}$, such that $\varepsilon \circ \wtilde{F} = F$. We claim that $\wtilde{F} : \wtilde{u} \simeq_{\partial I} \wtilde{v}$.
+	Let $F : u \simeq_{\partial I} v$. By proposition \ref{prop:lifting_circle}, we find $\wtilde{F} \in \mathsf{Top}_\ast\del[1]{(I \times I, (0,0)),(\mathbb{R},0)}$, such that $\varepsilon \circ \wtilde{F} = F$. We claim that $\wtilde{F} : \wtilde{u} \simeq_{\partial I} \wtilde{v}$. For $s \in I$ define $\wtilde{u}_0(s) := \wtilde{F}(s,0)$. Then $\wtilde{u}_0(0) = \wtilde{F}(0,0) = 0$ and since $\wtilde{u}_0$ is continuous we have that $\wtilde{u}_0 \in \mathsf{Top}_\ast\del[1]{(I,0),(\mathbb{R},0)}$. Moreover
+	\begin{equation*}
+		(\varepsilon \circ \wtilde{u}_0)(s) = \varepsilon\del[1]{\wtilde{F}(s,0)} = F(s,0) = u(s)
+	\end{equation*}
+	\noindent for all $s \in I$ and thus $\wtilde{u}_0$ is a lifting of $u$. But by proposition \ref{prop:lifting_circle}, liftings are unique and thus $\wtilde{u}_0 = \wtilde{u}$. Next define $\wtilde{w}_0(t) := \wtilde{F}(0,t)$ for all $t \in I$. Then $\wtilde{w}_0(0) = \wtilde{F}(0,0) = 0$ and so $\wtilde{w}_0 \in \mathsf{Top}_\ast\del[1]{(I,0),(\mathbb{R},0)}$. Moreover
+	\begin{equation*}
+		(\varepsilon \circ \wtilde{w}_0)(t) = \varepsilon\del[1]{\wtilde{F}(0,t)} = F(0,t) = u(0) = v(0) = 1.
+	\end{equation*}
+	\noindent for all $t \in I$. Thus
+	\begin{equation*}
+		\centering
+		\xymatrix{
+			& (\mathbb{R},0) \ar[d]^\varepsilon\\
+			(I,0) \ar[r]_{c_1}\ar[ur]^{\wtilde{w}_0} & (\mathbb{S}^1,1)
+		}
+	\end{equation*}
+	\noindent commutes. But also $c_0$ makes the above diagram commute. By uniqueness, $\wtilde{w}_0 = c_0$. Define $\wtilde{v}_0(s) := \wtilde{F}(s,1)$ for all $s \in I$. Then $\wtilde{v}_0(0) = \wtilde{F}(0,1) = \wtilde{w}_0(1) = 0$ and it is easy to check that $\wtilde{v}_0$ is a lift for $v$. Hence $\wtilde{v}_0 = \wtilde{v}$. Finally, define $\wtilde{w}_1(t) := \wtilde{F}(1,t)$ for all $t \in I$. Then $\wtilde{w}_1(0) = \wtilde{F}(1,0) = \wtilde{u}(1)$ and thus $\wtilde{w}_1 \in \mathsf{Top}_\ast\del[1]{(I,0),(\mathbb{R},\wtilde{u}(0))}$. Moreover
+	\begin{equation*}
+		(\varepsilon \circ \wtilde{w}_1)(t) = \varepsilon\del[1]{\wtilde{F}(1,t)} = F(1,t) = v(1) = u(1) = 1
+	\end{equation*}
+	\noindent for all $t \in I$. By proposition \ref{prop:lifting_circle}, we have again that $\wtilde{w}_1 = c_{\wtilde{u}(1)}$. So $F : \wtilde{u} \simeq_{\partial I} \wtilde{v}$.
 \end{proof}
+
+\begin{definition}[Degree]
+	Let $u \in \Omega(\mathbb{S}^1,1)$. The \bld{degree of $u$}, written $\deg u$, is defined by $\deg u := \wtilde{u}(1)$, where $\wtilde{u}$ is the unique lift of $u$ such that $\wtilde{u}(0) = 0$. 
+\end{definition}
+
+\begin{theorem}[Fundamental Group of the Circle]
+	$\pi_1(\mathbb{S}^1) \cong \mathbb{Z}$.
+\end{theorem}
+
+\begin{proof}
+	
+\end{proof}<++>
