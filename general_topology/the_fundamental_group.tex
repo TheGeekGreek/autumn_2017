@@ -282,6 +282,14 @@
 	Thus $\pi_1(f)$ is a morphism in $\mathsf{Grp}$. Functoriality of $\pi_1$ immediately follows from the functoriality of $\Pi$.
 \end{proof}
 
+\begin{lemma}
+	Let $X \in \ob(\mathsf{Top})$, $p \in X$ and $A$ be the path component of $X$ containing $p$. Then $\pi_1(\iota)$, where $\iota : A \hookrightarrow X$ denotes the inclusion, is an isomorphism.
+\end{lemma}
+
+\begin{proof}
+	Suppose $\sbr{u} \in \ker\pi_1(\iota)$. Then $\sbr{\iota \circ u} = \sbr[0]{c_p}$ and Hence $F : \iota \circ u \simeq_{\partial I} c_p$. Since $I \times I$ is path connected and $p \in F(I \times I)$, it follows that $F(I \times I) \subseteq A$ and thus $F : u \simeq_{\partial I} c_p$ in $A$ and hence $\sbr{u} = \sbr[0]{c_p}$. To see that $\pi_1(\iota)$ is surjective, just observe that $u(I) \subseteq A$ for $\sbr{u} \in \pi_1(X,p)$ since $u(I)$ is path connected and $p \in u(I)$.
+\end{proof}
+
 \subsection*{$\pi_1(\mathbb{S}^1)$}  
 
 \begin{definition}[Exponential Quotient Map]
@@ -334,6 +342,7 @@
 
 \begin{corollary}
 	Let $u,v \in \Omega(\mathbb{S}^1,1)$ such that $\sbr{u} = \sbr{v}$. If $\wtilde{u},\wtilde{v} : (I,0) \to (\mathbb{R},0)$ are the liftings of $u$ and $v$, respectively, then $\sbr[0]{\wtilde{u}} = \sbr[0]{\wtilde{v}}$.
+	\label{cor:degree}
 \end{corollary}
 
 \begin{proof}
@@ -369,5 +378,27 @@
 \end{theorem}
 
 \begin{proof}
-	
-\end{proof}<++>
+	Define $\deg : \pi_1(\mathbb{S}^1,1) \to \mathbb{Z}$ by $\deg \sbr{u} := \deg u$. This is well defined by corollary \ref{cor:degree}, since if $\sbr{u} = \sbr{v}$, then $\sbr[0]{\wtilde{u}} = \sbr[0]{\wtilde{v}}$ and in particular $\wtilde{u}(1) = \wtilde{v}(1)$. 
+	\begin{enumerate}[label = \textit{Step \arabic*:},wide = 0pt, itemsep = 1.5ex]
+		\item \textit{$\deg \in \mathsf{Grp}\del[1]{\pi_1(\mathbb{S}^1,1),(\mathbb{Z},+)}$.} Let $\sbr{u},\sbr{v} \in \pi_1(\mathbb{S}^1,1)$ and $m := \deg\sbr{u}$, $n := \deg \sbr{v}$. Moreover, let $\wtilde{u}$ and $\wtilde{v}$ denote the unique liftings of $u$ and $v$, respectively, such that $\wtilde{u}(0) = 0$ and $\wtilde{v}(0) = 0$. Define
+			\begin{equation*}
+				\wtilde{w}(s) := \ccases{
+				\wtilde{u}(2s) & 0 \leq s \leq \frac{1}{2},\\
+				m + \wtilde{v}(2s - 1) & \frac{1}{2} \leq s \leq 1.
+			}
+			\end{equation*}
+		Clearly $\wtilde{w}$ is continuous and $\wtilde{w}(0) = 0$. Hence $\wtilde{w} \in \mathsf{Top}_\ast\del[1]{(I,0),(\mathbb{R},0)}$. Also we have that $\varepsilon \circ \wtilde{w} = u \ast v$ and thus $\wtilde{w}$ is the lift of $u \ast v$. But $\wtilde{w}(1) = m + n$ and so
+			\begin{equation*}
+				\deg(\sbr{u}\sbr{v}) = \deg\sbr{u\ast v} = \deg (u \ast v) = \wtilde{w}(1) = m + n = \deg\sbr{u} + \deg \sbr{v}.
+			\end{equation*}
+		\item \textit{$\deg$ is injective.} Suppose $\deg\sbr{u} = 0$. Then $\wtilde{u}(1) = 0$ and thus $\wtilde{u} \in \Omega(\mathbb{R},0)$. Since $\mathbb{R}$ is contractible, we have that $\sbr[0]{\wtilde{u}} = \sbr{c_0}$ and thus
+			\begin{equation*}
+				\sbr{u} = \sbr[0]{\varepsilon \circ \wtilde{u}} = \pi_1(\varepsilon)\sbr[0]{\wtilde{u}} = \pi_1(\varepsilon)\sbr{c_0} = \sbr{c_1}.
+			\end{equation*}
+			Thus $\ker(\deg)$ is trivial.
+		\item \textit{$\deg$ is surjective.} Let $m \in \mathbb{Z}$. Then
+			\begin{equation*}
+				\deg\sbr[0]{\varepsilon^m} = \deg \varepsilon^m = \wwtilde{\varepsilon^m}(1) = m.
+			\end{equation*}
+	\end{enumerate}
+\end{proof}
