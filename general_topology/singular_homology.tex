@@ -84,12 +84,22 @@
 									0 & n < 0.}
 			\end{equation}
 			We will call elements of $C_n(X)$ \bld{singular $n$-chains}.
-		\item \textit{Construction of boundary operators.} Let $X \in \ob(\mathsf{Top})$ and $\sigma$ a singular $n$-simplex in $X$ for $n \geq 1$. We define $\varphi^n_k : \Delta^{n-1} \to \Delta^n$, called the \bld{$k$-th face map}, by
-			\begin{equation}
-				\varphi^n_k(s_0,\dots,s_{n - 1}) := \ccases{(0,s_0,\dots,s_{n - 1}) & k = 0,\\
-				(s_0,\dots,s_{k - 1},0,s_k,\dots,s_{n - 1}) & 1 \leq k \leq n - 1.
-			}
-			\end{equation}
+		\item \textit{Construction of boundary operators.} Let $X \in \ob(\mathsf{Top})$ and $\sigma$ a singular $n$-simplex in $X$ for $n \geq 1$. We define $\varphi^n_k : \Delta^{n-1} \to \Delta^n$, called the \bld{$k$-th face map}, to be the unique affine map determined by the vertex map
+			\begin{equation*}
+				\begin{matrix}
+					& \varphi_k^n\\
+					e_0 & \mapsto & e_0\\
+					\vdots & & \vdots\\
+					e_{k - 1} & \mapsto & e_{k - 1}\\
+					e_k & \mapsto & e_{k + 1}\\
+					\vdots & & \vdots\\
+					e_{n - 1} & \mapsto & e_n.
+				\end{matrix}
+			\end{equation*}
+			Explicitely, given $\sum_{i = 0}^{n - 1} s_i e_i \in \Delta^{n - 1}$, we have that (see \cite[152]{lee:topological_manifolds:2011})
+			\begin{equation*}
+				\varphi_k^n \del[4]{\sum_{i = 0}^{n - 1}s_i e_i} = \sum_{i = 0}^{n - 1}s_i \varphi_k^n(e_i).
+			\end{equation*}
 			Define now
 			\begin{equation}
 				\partial \sigma := \sum_{k = 0}^n (-1)^k \sigma \circ \varphi_k^n \in U\del[1]{C_{n - 1}(X)} 
@@ -101,9 +111,41 @@
 				&= \sum_{k = 0}^{n + 1} (-1)^k \partial_n\del[1]{\sigma \circ \varphi^{n + 1}_k}\\
 				&= \sum_{k = 0}^{n + 1}\sum_{j = 0}^n (-1)^{k + j} \sigma \circ \varphi^{n + 1}_k \circ \varphi^n_j\\
 				&= \sum_{0 \leq k \leq j \leq n}(-1)^{k + j} \sigma \circ \varphi^{n + 1}_k \circ \varphi^n_j + \sum_{0 \leq j < k \leq n + 1}(-1)^{k + j} \sigma \circ \varphi^{n + 1}_k \circ \varphi^n_j\\
-				&= \sum_{0 \leq j \leq k \leq n}(-1)^{k + j} \sigma \circ \varphi^{n + 1}_j \circ \varphi^n_k + \sum_{0 \leq j < k \leq n + 1}(-1)^{k + j} \sigma \circ \varphi^{n + 1}_k \circ \varphi^n_j\\
-				&= \sum_{0 \leq j < k \leq n + 1}\del[1]{(-1)^{k + j - 1} \sigma \circ \varphi^{n + 1}_j \circ \varphi^n_{k - 1} + (-1)^{k + j} \sigma \circ \varphi^{n + 1}_k \circ \varphi^n_j}\\
+				&= \sum_{0 \leq j \leq k \leq n}(-1)^{k + j} \sigma \circ \varphi^{n + 1}_j \circ \varphi^n_k + \sum_{0 \leq j <k \leq n + 1}(-1)^{k + j} \sigma \circ \varphi^{n + 1}_k \circ \varphi^n_j\\
+				&= \sum_{0 \leq j < k \leq n + 1}\del[1]{(-1)^{k + j - 1} \sigma \circ \varphi^{n + 1}_j \circ \varphi^n_{k - 1} + (-1)^{k + j} \sigma \circ \varphi^{n + 1}_k \circ \varphi^n_j}
 			\end{align*}
+			Since $\varphi_j^{n + 1} \circ \varphi_{k - 1}^n = \varphi_k^{n + 1} \circ \varphi_j^n$, it follows that
+			\begin{equation*}
+				\partial_n \circ \partial_{n + 1} = 0.
+			\end{equation*}
+			Indeed, consider the following chart of vertex maps:
+			\begin{equation*}
+				\begin{matrix}
+					& \varphi_{k - 1}^n & & \varphi_j^{n + 1}\\
+					e_0 & \mapsto & e_0 & \mapsto & e_0\\
+					\vdots & & \vdots & & \vdots\\
+					e_{j - 1} & \mapsto & e_{j - 1} & \mapsto & e_{j - 1}\\
+					e_j & \mapsto & e_j & \mapsto & e_{j + 1}\\
+					\vdots & & \vdots\\
+					e_{k - 1} & \mapsto & e_{k - 1} & \mapsto & e_{k + 1}\\
+					e_k & \mapsto & e_{k + 1} & \mapsto & e_{k + 2}\\
+					\vdots & & \vdots\\
+					e_{n - 1} & \mapsto & e_n & \mapsto & e_{n + 1}
+				\end{matrix}
+				\qquad\qquad\qquad
+				\begin{matrix}
+					& \varphi_j^n & & \varphi_k^{n + 1}\\
+					e_0 & \mapsto & e_0 & \mapsto & e_0\\
+					\vdots & & \vdots & & \vdots\\
+					e_{j - 1} & \mapsto & e_{j - 1} & \mapsto & e_{j - 1}\\
+					e_j & \mapsto & e_{j + 1} & \mapsto & e_{j + 1}\\
+					\vdots & & \vdots\\
+					e_{k - 1} & \mapsto & e_k & \mapsto & e_{k + 1}\\
+					e_k & \mapsto & e_{k + 1} & \mapsto & e_{k + 2}\\
+					\vdots & & \vdots\\
+					e_{n - 1} & \mapsto & e_n & \mapsto & e_{n + 1}
+				\end{matrix}.
+			\end{equation*}
 		\item \textit{Construction of chain maps.} Let $X,Y \in \ob(\mathsf{Top})$ and $f \in \mathsf{Top}(X,Y)$. For $n \geq 0$, define $f_n^\# : \mathsf{Top}(\Delta^n,X) \to U\del[1]{C_n(Y)}$ by $f^\# := f \circ \sigma$. Extending this map by linearity yields a homomorphism $f_n^\# : C_n(X) \to C_n(Y)$. Moreover, set $f_n^\# = 0$ for $n < 0$. Let $n \geq 1$ and $\sigma \in \mathsf{Top}(\Delta^n,X)$. Then on one hand we have
 			\begin{equation*}
 				(f_{n - 1}^\# \circ \partial_n)(\sigma) = f^\#_{n - 1}\del[4]{\sum_{k = 0}^n (-1)^k \sigma \circ \varphi^n_k} = \sum_{k = 0}^n (-1)^k f \circ \sigma \circ \varphi^n_k
@@ -124,12 +166,12 @@
 \end{definition}
 
 \begin{lemma}
-	Let $n \in \omega$. Then $\mathbb{S}^n$ is not a retract of $\mathbb{B}^{n + 1}$.	
+	Let $n \in \mathbb{Z}$, $n \geq 1$. Then $\mathbb{S}^n$ is not a retract of $\mathbb{B}^{n + 1}$.	
 \end{lemma}
 
 \begin{proof}
 	
-\end{proof}<++>
+\end{proof}
 
 \begin{theorem}[Brouwer Fixed Point Theorem]
 	Let $n \in \mathbb{Z}$, $n \geq 1$. Then every mapping $f \in \mathsf{Top}(\mathbb{B}^n,\mathbb{B}^n)$ has a fixed point.	
@@ -138,4 +180,4 @@
 
 \begin{proof}
 	
-\end{proof}<++>
+\end{proof}
