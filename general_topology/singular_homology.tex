@@ -4,7 +4,7 @@
 
 \begin{proposition}
 	The forgetful functor $U : \mathsf{AbGrp} \to \mathsf{Set}$ admits a left adjoint.
-	\label{prop:free_adj_forget}
+	\label{prop:F_set_abgrp}
 \end{proposition}
 
 \begin{proof}
@@ -12,7 +12,8 @@
 	\begin{equation*}
 		F(S) := \cbr[1]{f \in \mathbb{Z}^S : \supp f \text{ is finite}}.
 	\end{equation*}
-	Equipped with pointwise addition, $F(S)$ is an abelian group. There is a natural inclusion $\iota : S \hookrightarrow U\del[1]{F(S)}$ sending $x \in S$ to the function taking the value one at $x$ and zero else. Hence we may regard elements of $F(S)$ as formal linear combinations $\sum_{x \in S}m_x x$, where $m_x \in \mathbb{Z}$ for all $x \in S$. Let $G \in \ob(\mathsf{AbGrp})$ be an abelian group and $\varphi \in \mathsf{AbGrp}\del[1]{F(S), G}$ a morphism of groups. Define $\wbar{\varphi} \in \mathsf{Set}\del[1]{S,U(G)}$ by $\wbar{\varphi} := U(\varphi)$. Conversly, if we have $f \in \mathsf{Set}\del[1]{S,U(G)}$, define $\wbar{f} \in \mathsf{AbGrp}\del[1]{F(S),G}$ by $\wbar{f}\del[1]{\sum_{x \in S} m_x x} := \sum_{x \in S} m_x f(x)$. This is well defined since all but finitely many $m_x$ are zero and $G$ is abelian. It is easy to check that $\wbar{f}$ is indeed a morphism of groups. Let $\varphi \in \mathsf{AbGrp}\del[1]{F(S),G}$. Then
+	Equipped with pointwise addition, $F(S)$ is an abelian group. There is a natural inclusion $\iota : S \hookrightarrow U\del[1]{F(S)}$ sending $x \in S$ to the function taking the value one at $x$ and zero else. Hence we may regard elements of $F(S)$ as formal linear combinations $\sum_{x \in S}m_x x$, where $m_x \in \mathbb{Z}$ for all $x \in S$. On morphisms $f : S \to T$ in $\mathsf{Set}$, define $F(f) : F(S) \to F(T)$ simply by setting $F(f)\del[1]{\sum_{x \in S}m_x x} := \sum_{x \in S}m_x f(x)$.\\	
+	Let $G \in \ob(\mathsf{AbGrp})$ be an abelian group and $\varphi \in \mathsf{AbGrp}\del[1]{F(S), G}$ a morphism of groups. Define $\wbar{\varphi} \in \mathsf{Set}\del[1]{S,U(G)}$ by $\wbar{\varphi} := U(\varphi)$. Conversly, if we have $f \in \mathsf{Set}\del[1]{S,U(G)}$, define $\wbar{f} \in \mathsf{AbGrp}\del[1]{F(S),G}$ by $\wbar{f}\del[1]{\sum_{x \in S} m_x x} := \sum_{x \in S} m_x f(x)$. This is well defined since all but finitely many $m_x$ are zero and $G$ is abelian. It is easy to check that $\wbar{f}$ is indeed a morphism of groups. Let $\varphi \in \mathsf{AbGrp}\del[1]{F(S),G}$. Then
 	\begin{align*}
 		\wbar{\wbar{\varphi}}\del[4]{\sum_{x \in S} m_x x} &= \sum_{x \in S}m_x \wbar{\varphi}(x)\\
 		&= \sum_{x \in S} m_x U(\varphi)(x)\\
@@ -31,7 +32,7 @@
 \end{proof}
 
 \begin{exercise}
-	Check the naturality of the bijection in proposition \ref{prop:free_adj_forget}. Also check that $F : \mathsf{Set} \to \mathsf{AbGrp}$ is indeed a functor. $F$ is called the \bld{free functor from $\mathsf{Set}$ to $\mathsf{AbGrp}$}.	
+	In proposition \ref{prop:F_set_abgrp}, check that $F : \mathsf{Set} \to \mathsf{AbGrp}$ is indeed a functor, called the \bld{free functor from $\mathsf{Set}$ to $\mathsf{AbGrp}$}, and the naturality of the bijection in both arguments. 
 \end{exercise}
 
 \begin{definition}[Free Abelian Group]
@@ -76,11 +77,11 @@
 \begin{proof}
 	The proof is divided into several steps. Let us denote $C_\bullet : \mathsf{Top} \to \mathsf{Comp}$ for the claimed functor.
 	\begin{enumerate}[label = \textit{Step \arabic*:},wide = 0pt, itemsep = 1.5ex]
-		\item \textit{Construction of a sequence of abelian groups.} Let $v_0,\dots,v_k \in \mathbb{R}^n$ for some $n,k \in \mathbb{N}$. We say that $(v_0,\dots,v_k)$ is \bld{affinely independent} if $(v_1 - v_0,\dots, v_k - v_0)$ is linearly independent. We define the \bld{k-simplex spanned by $(v_0,\dots,v_k)$}, written $\sbr[0]{v_0,\dots,v_k}$, to be
+		\item \textit{Construction of a sequence of abelian groups.} Let $v_0,\dots,v_k \in \mathbb{R}^n$ for some $n,k \in \omega$. We say that $(v_0,\dots,v_k)$ is \bld{affinely independent} if $(v_1 - v_0,\dots, v_k - v_0)$ is linearly independent. We define the \bld{k-simplex spanned by $(v_0,\dots,v_k)$}, written $\sbr[0]{v_0,\dots,v_k}$, to be
 			\begin{equation}
 				\textstyle{\sbr[0]{v_0,\dots,v_k} := \cbr[1]{\sum_{i = 0}^k s_i v_i : s_i \geq 0 \text{ for all } i = 0,\dots,k \text{ and } \sum_{i = 0}^k s_i = 1}}.
 			\end{equation}
-			\noindent equipped with the subspace topology. Moreover, we define the \bld{standard $n$-simplex $\Delta^n$} to be the $n$-simplex spanned by $(e_0,\dots,e_n)$ where $(e_{i + 1})_i$ is the standard basis of $\mathbb{R}^{n+1}$. Let $X \in \ob(\mathsf{Top})$. Define a \bld{singular $n$-simplex in $X$} to be a map $\sigma \in \mathsf{Top}(\Delta^n,X)$. Let $n \in \mathbb{Z}$. Define
+			\noindent equipped with the subspace topology. Moreover, we define the \bld{standard $n$-simplex $\Delta^n$} to be the $n$-simplex spanned by $(e_0,\dots,e_n)$ where $e_0 := 0 \in \mathbb{R}^n$ and $(e_1,\dots,e_n)$ is the standard ordered basis of $\mathbb{R}^n$. Let $X \in \ob(\mathsf{Top})$. Define a \bld{singular $n$-simplex in $X$} to be a morphism $\sigma \in \mathsf{Top}(\Delta^n,X)$. Let $n \in \mathbb{Z}$. Define
 			\begin{equation}
 				C_n(X) := \ccases{F\del[1]{\mathsf{Top}(\Delta^n,X)} & n \geq 0,\\
 									0 & n < 0.}
@@ -209,13 +210,13 @@
 \end{proposition}
 
 \begin{proof}
-	Since $\partial_0 : C_0 \to 0$, $\ker \partial_0 = C_0$. Moreover, a map in $\mathsf{Top}(\Delta^0,X)$ can be identified with a point in $X$ and hence an element of $C_0$ can be written as $\sum_{x \in X}m_x x$. Define a mapping $\Phi : C_0 \to \mathbb{Z}$ by $\Phi\del[1]{\sum_{x \in X}m_x x} := \sum_{x \in X}m_x$. This mapping is well defined since all but finitely many $m_x$ are zero. It is also easy to check, that $\Phi$ is a morphism of groups and that $\Phi$ is surjective. We claim that $\ker \Phi = \im \partial_1$. Indeed, if $\sum_{x \in X} m_x x \in \ker \Phi$, then $\sum_{x \in X}m_x = 0$. Let $p \in X$. Since $X$ is path connected, we find for each $x \in X$ a path $u_x$ from $p$ to $x$. Consider the singular $1$-chain $\sum_{x \in X}m_x u_x'$. Then we have
+	Since $\partial_0 : C_0 \to 0$, $\ker \partial_0 = C_0$. Moreover, a map in $\mathsf{Top}(\Delta^0,X)$ can be identified with a point in $X$ and hence an element of $C_0$ can be written as $\sum_{x \in X}m_x x$. Define a mapping $\Phi : C_0 \to \mathbb{Z}$ by $\Phi\del[1]{\sum_{x \in X}m_x x} := \sum_{x \in X}m_x$. This mapping is well defined since all but finitely many $m_x$ are zero. It is also easy to check, that $\Phi$ is a morphism of groups and that $\Phi$ is surjective. We claim that $\ker \Phi = \im \partial_1$. Indeed, if $\sum_{x \in X} m_x x \in \ker \Phi$, then $\sum_{x \in X}m_x = 0$. Let $p \in X$. Since $X$ is path connected, we find for each $x \in X$ a path $\sigma_x$ from $p$ to $x$. Consider the singular $1$-chain $\sum_{x \in X}m_x \sigma_x$. Then we have
 	\begin{equation*}
-		\partial_1 \del[4]{\sum_{x \in X}m_x u_x'} = \sum_{x \in X}m_x (u_x' \circ \varphi^1_0 - u_x' \circ \varphi^1_1) = \sum_{x \in X}m_x (x - p) = \sum_{x \in X} m_x x.
+		\partial_1 \del[4]{\sum_{x \in X}m_x \sigma_x} = \sum_{x \in X}m_x \del[1]{\sigma_x(1)- \sigma_x(0)} = \sum_{x \in X}m_x (x - p) = \sum_{x \in X} m_x x.
 	\end{equation*}
 	Hence $\sum_{x \in X}m_x x \in \im \partial_1$. Conversly, it is enough to show the claim on basis elements $\sigma \in \mathsf{Top}(\Delta^1,X)$. We have
 	\begin{equation*}
-		\Phi(\partial_1 \sigma) = \Phi(\sigma \circ \varphi^1_0 - \sigma \circ \varphi^1_1) = \Phi\del[1]{\sigma(e_1) - \sigma(e_0)} = 1 - 1 = 0.
+		\Phi(\partial_1 \sigma) = \Phi\del[1]{\sigma(1) - \sigma(0)} = 1 - 1 = 0.
 	\end{equation*}
 	Hence the first isomorphism theorem \cite[23]{grillet:abstract_algebra:2007} implies that $H_0(X) \cong \mathbb{Z}$.
 \end{proof}
@@ -223,6 +224,79 @@
 \begin{proposition}[The Dimension Axiom]
 	Let $\ast \in \ob(\mathsf{Top})$ be a one point space. Then $H_n(\ast) = 0$ for all $n \in \mathbb{Z}$, $n > 0$.
 \end{proposition}
+
+\section*{The Hurewicz Theorem}
+\subsection*{Abelianizations}
+
+\begin{proposition}
+	The forgetful functor $U : \mathsf{AbGrp} \to \mathsf{Grp}$ admits a left adjoint.
+	\label{prop:Ab_grp_abgrp}
+\end{proposition}
+
+\begin{proof}
+	Let $G \in \ob(\mathsf{Grp})$. For $g,h \in G$, define the \bld{commutator of $g$ and $h$}, written $\sbr[0]{g,h}$, by $\sbr[0]{g,h} := ghg^{-1}h^{-1}$. Moreover, set 
+	\begin{equation*}
+		X_G := \cbr[0]{\sbr[0]{g,h} : g,h \in G}
+	\end{equation*}
+	\noindent and define the \bld{commutator subgroup of $G$}, written $\sbr{G,G}$, by $\sbr{G,G} := \langle X_G \rangle$.
+
+	\begin{lemma}
+		For all $G \in \ob(\mathsf{Grp})$, $\sbr{G,G} \unlhd G$.
+	\end{lemma}
+
+	\begin{proof}
+		We follow \cite[265]{lee:topological_manifolds:2011}. Clearly, $\sbr{G,G} \leq G$. By \cite[31]{karpfinger:algebra:2013} we have that 
+	\begin{equation*}
+		\langle X \rangle = \cbr[0]{x_1 \cdots x_n : n \in \omega \setminus \cbr{0}, x_1,\dots,x_n \in X_G \cup X^{-1}_G}.
+	\end{equation*}
+	It is easy to check that $X_G = X_G^{-1}$ and thus 
+	\begin{equation*}
+		\langle X \rangle = \cbr[0]{x_1 \cdots x_n : n \in \omega \setminus \cbr{0}, x_1,\dots,x_n \in X_G}.
+	\end{equation*}
+	Let $k \in G$ and $x_1 \cdots x_n \in \sbr{G,G}$. Since
+	\begin{equation*}
+		kx_1 \cdots x_n k^{-1} = kx_1 k^{-1} k x_2 k^{-1} k \cdots k x_n k^{-1}
+	\end{equation*}
+	\noindent it is enough to show that $k\sbr[0]{g,h}k^{-1} \in \sbr{G,G}$ for all $g,h \in G$. But this immediately follows from
+	\begin{equation*}
+		k\sbr[0]{g,h}k^{-1} = kghg^{-1}h^{-1}k^{-1} = \sbr[0]{kgk^{-1},khk^{-1}}.
+	\end{equation*}
+	Thus $\sbr{G,G} \unlhd G$.
+	\end{proof}
+
+	\begin{lemma}
+		$G \in \ob(\mathsf{AbGrp})$ if and only if $\sbr{G,G} = \cbr{1}$.
+		\label{lem:abelian_iff_commutator_trivial}
+	\end{lemma}
+
+	\begin{proof}
+		Let $G \in \ob(\mathsf{AbGrp})$. Then $\sbr[0]{g,h} = 1$ for all $g,h \in G$, which implies $X_G = \cbr{1}$ and thus $\langle X_G \rangle = \cbr{1}$. Conversly, since $X_G \subseteq \sbr{G,G} = \cbr{1}$, we have that $\sbr[0]{g,h} = 1$ for all $g,h \in G$ which is equivalent to $gh = hg$ for all $g,h \in G$.	
+	\end{proof}
+
+	\begin{corollary}
+		The quotient group $G/\sbr{G,G}$ is abelian.
+	\end{corollary}
+
+	\begin{proof}
+		By lemma \ref{lem:abelian_iff_commutator_trivial} it is enough to show that $\sbr[0]{G/\sbr{G,G},G/\sbr{G,G}}$ is trivial. We actually show that $X_{G/\sbr[0]{G,G}} = \cbr{1}$. This immediately follows from
+		\begin{equation*}
+			\sbr[0]{g\sbr{G,G},h\sbr{G,G}} = ghg^{-1}h^{-1}\sbr{G,G} = \sbr{G,G}
+		\end{equation*}
+		\noindent for $g\sbr{G,G},h\sbr{G,G} \in G/\sbr{G,G}$.
+	\end{proof}
+
+	Hence define $\Ab : \mathsf{Grp} \to \mathsf{AbGrp}$ on objects by
+	\begin{equation*}
+		\Ab(G) := G/\sbr{G,G}.
+	\end{equation*}
+	The abelian group $\Ab(G)$ is called the \bld{abelianization of $G$}. On morphisms $\varphi : G \to H$ in $\mathsf{Grp}$ define $\Ab(\varphi) : \Ab(G) \to \Ab(H)$ by setting $\Ab(\varphi)(g\sbr{G,G}) := \varphi(g)\sbr{H,H}$. It is easy to check that this is a well defined morphism of abelian groups.\\
+	Let $H \in \ob(\mathsf{AbGrp})$ and $\psi \in \mathsf{AbGrp}(\Ab(G),H)$. Define $\wbar{\psi} \in \mathsf{Grp}(G,U(H))$ by setting $\wbar{\psi}(g) := \psi(g\sbr{G,G})$. If $\varphi \in \mathsf{Grp}(G,U(H))$, define $\wbar{\varphi} \in \mathsf{AbGrp}(\Ab(G),H)$ by $\wbar{\varphi}(g\sbr{G,G}) := \varphi(g)$. It is easy to check that this mapping is actually well defined and that $\wbar{\wbar{\psi}} = \psi$ and $\wbar{\wbar{\varphi}} = \varphi$ holds.
+\end{proof}
+
+\begin{exercise}
+	In proposition \ref{prop:Ab_grp_abgrp}, check that $\Ab : \mathsf{Grp} \to \mathsf{AbGrp}$ is indeed a functor and the naturality of the bijection in both arguments. 
+\end{exercise}
+
 
 \section*{The Homotopy Axiom}
 

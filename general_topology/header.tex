@@ -86,7 +86,9 @@
 \setcounter{tocdepth}{3}
 % Add bold to \chapter titles in ToC and remove . after numbers
 \renewcommand{\tocchapter}[3]{%
-  	\indentlabel{\@ifnotempty{#2}{\bfseries\ignorespaces#1 #2. }}\bfseries#3}
+  	\indentlabel{\@ifnotempty{#2}{\bfseries\ignorespaces#1 #2: }}\bfseries#3}
+\renewcommand{\tocappendix}[3]{%
+  	\indentlabel{\@ifnotempty{#2}{\bfseries\ignorespaces#1 #2: }}\bfseries#3}
 % Remove . after numbers in \section and \subsection
 \renewcommand{\tocsection}[3]{%
   	\indentlabel{\@ifnotempty{#2}{\ignorespaces#1 #2\quad}}#3}
@@ -170,6 +172,7 @@
 \DeclareMathOperator\dom{dom}
 \DeclareMathOperator\cod{cod}
 \DeclareMathOperator\im{im}
+\DeclareMathOperator\Ab{Ab}
 %\usepackage{hhline}
 %\usepackage{booktabs} 
 %\usepackage{array}
