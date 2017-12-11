@@ -64,7 +64,8 @@
 \let\@texttop\relax
 \usepackage{etoolbox}
 \patchcmd{\abstract}{\scshape\abstractname}{\textbf{\abstractname}}{}{}
-
+\usepackage{chngcntr}
+\counterwithout{figure}{chapter}
 %Section, subsection and subsubsection font
 %------------------------------------------
 	\renewcommand{\@secnumfont}{\bfseries}

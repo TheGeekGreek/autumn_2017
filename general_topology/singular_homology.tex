@@ -1,5 +1,8 @@
 \chapter{Singular Homology}
 \section*{Construction of the Singular Homology Functor}
+
+Aim of this section is to construct for each $n \in \omega$ a functor $H_n : \mathsf{Top} \to \mathsf{AbGrp}$, called the \textit{$n$-th singular homology functor}.
+
 \subsection*{Free Abelian Groups}
 
 \begin{proposition}
@@ -180,7 +183,7 @@
 \end{proof}
 
 \begin{remark}
-	Let $(C_\bullet,\partial_\bullet)$ be a chain complex and $n \in \mathbb{Z}$. Then we will write $\langle x \rangle$ for an element in $H_n(C_\bullet,\partial_\bullet)$, the so-called \emph{homology class}. Hence if $(C_\bullet',\partial_\bullet')$ is another chain complex and $f_\bullet : C_\bullet \to C_\bullet'$ a chain map, then $H_n(f)\langle x \rangle = \langle f_nx\rangle$. 
+	Let $(C_\bullet,\partial_\bullet)$ be a chain complex and $n \in \mathbb{Z}$. Then we will write $\langle x \rangle$ for an element in $H_n(C_\bullet,\partial_\bullet)$, the so-called \emph{homology class}. Hence if $(C_\bullet',\partial_\bullet')$ is another chain complex and $f_\bullet : C_\bullet \to C_\bullet'$ a chain map, then $H_n(f)\langle c \rangle = \langle f_nc\rangle$. 
 \end{remark}
 
 \begin{definition}[Cycles and Boundaries]
@@ -210,7 +213,7 @@
 \end{proposition}
 
 \begin{proof}
-	Since $\partial_0 : C_0 \to 0$, $\ker \partial_0 = C_0$. Moreover, a map in $\mathsf{Top}(\Delta^0,X)$ can be identified with a point in $X$ and hence an element of $C_0$ can be written as $\sum_{x \in X}m_x x$. Define a mapping $\Phi : C_0 \to \mathbb{Z}$ by $\Phi\del[1]{\sum_{x \in X}m_x x} := \sum_{x \in X}m_x$. This mapping is well defined since all but finitely many $m_x$ are zero. It is also easy to check, that $\Phi$ is a morphism of groups and that $\Phi$ is surjective. We claim that $\ker \Phi = \im \partial_1$. Indeed, if $\sum_{x \in X} m_x x \in \ker \Phi$, then $\sum_{x \in X}m_x = 0$. Let $p \in X$. Since $X$ is path connected, we find for each $x \in X$ a path $\sigma_x$ from $p$ to $x$. Consider the singular $1$-chain $\sum_{x \in X}m_x \sigma_x$. Then we have
+	Since $\partial_0 : C_0(X) \to 0$, $\ker \partial_0 = C_0(X)$. Moreover, a map in $\mathsf{Top}(\Delta^0,X)$ can be identified with a point in $X$ and hence an element of $C_0(X)$ can be written as $\sum_{x \in X}m_x x$. Define a mapping $\Phi : C_0(X) \to \mathbb{Z}$ by $\Phi\del[1]{\sum_{x \in X}m_x x} := \sum_{x \in X}m_x$. This mapping is well defined since all but finitely many $m_x$ are zero. It is also easy to check, that $\Phi$ is a morphism of groups and that $\Phi$ is surjective. We claim that $\ker \Phi = \im \partial_1$. Indeed, if $\sum_{x \in X} m_x x \in \ker \Phi$, then $\sum_{x \in X}m_x = 0$. Let $p \in X$. Since $X$ is path connected, we find for each $x \in X$ a path $\sigma_x$ from $p$ to $x$. Consider the singular $1$-chain $\sum_{x \in X}m_x \sigma_x$. Then we have
 	\begin{equation*}
 		\partial_1 \del[4]{\sum_{x \in X}m_x \sigma_x} = \sum_{x \in X}m_x \del[1]{\sigma_x(1)- \sigma_x(0)} = \sum_{x \in X}m_x (x - p) = \sum_{x \in X} m_x x.
 	\end{equation*}
@@ -224,6 +227,12 @@
 \begin{proposition}[The Dimension Axiom]
 	Let $\ast \in \ob(\mathsf{Top})$ be a one point space. Then $H_n(\ast) = 0$ for all $n \in \mathbb{Z}$, $n > 0$.
 \end{proposition}
+
+\section*{The Homotopy Axiom}
+
+\begin{theorem}[The Homotopy Axiom]
+	Let $f,g \in \mathsf{Top}(X,Y)$ be freely homotopic. Then $H_n(f) = H_n(g)$ for all $n \in \mathbb{Z}$.
+\end{theorem}
 
 \section*{The Hurewicz Theorem}
 \subsection*{Abelianizations}
@@ -297,12 +306,151 @@
 	In proposition \ref{prop:Ab_grp_abgrp}, check that $\Ab : \mathsf{Grp} \to \mathsf{AbGrp}$ is indeed a functor and the naturality of the bijection in both arguments. 
 \end{exercise}
 
+\subsection*{The Hurewicz Morphism}
+Since elements of $H_1(X)$ are homology classes of loops, one might suspect that there is a connection between the fundamental group $\pi_1(X,p)$ of a path connected space $X$ at $p$ and the first singular homology group $H_1(X)$. However, since $H_1(X)$ is always abelian and $\pi_1(X,p)$ is not necessarily abelian, they cannot be equal. In this section we use a little trick which makes matters simpler: if $c$ is any singular $n$-chain, not necessarily an $n$-cycle, we can also take its equivalence class modulo $n$-boundaries. We shall denote this class also with $\langle c \rangle$. Clearly, if $c$ is an $n$-cycle, then $\langle c \rangle$ is the usual homology class.
 
-\section*{The Homotopy Axiom}
-
-\begin{theorem}[The Homotopy Axiom]
-	Let $f,g \in \mathsf{Top}(X,Y)$ be freely homotopic. Then $H_n(f) = H_n(g)$ for all $n \in \mathbb{Z}$.
+\begin{theorem}[Hurewicz Theorem]
+	Let $X \in \ob(\mathsf{Top})$ be path connected and $p \in X$. Then $\Ab(\pi_1(X,p)) \cong H_1(X)$.
 \end{theorem}
+
+\begin{proof}
+	We show the result in a sequence of lemmata.
+	\begin{lemma}
+		The mapping $h : \pi_1(X,p) \to H_1(X)$ defined by $h(\sbr{u}) := \langle u \rangle$ is well defined.
+	\end{lemma}
+
+	\begin{proof}
+		First of all, since $u \in \Omega(X,p)$, we have that $u \in C_1(X)$. Moreover, $\partial u = u(1) - u(0) = p - p = 0$. Thus $u$ has a homology class $\langle u \rangle$. Let us check that $h$ is well defined. Suppose that $\sbr{u} = \sbr{v}$. Hence $F : u \simeq_{\partial I} v$. Consider the fundamental loop $\omega \in \Omega(\mathbb{S}^1,1)$. By \cite[70]{lee:topological_manifolds:2011}, $\omega$ is a quotient map. Since $u,v \in \Omega(X,p)$, there exist $\wtilde{u},\wtilde{v} \in \mathsf{Top}(\mathbb{S}^1,X)$, such that $\wtilde{u} \circ \omega = u$ and $\wtilde{v} \circ \omega = v$ (see \cite[72]{lee:topological_manifolds:2011}). Since $I$ is a locally compact Hausdorff space \cite[107]{lee:topological_manifolds:2011} implies that $\omega \times \id_I$ is a quotient map. Thus $F$ passes to the quotient and yields a map $\wtilde{F} \in \mathsf{Top}(\mathbb{S}^1 \times I,X)$. Now it is easy to check that $\wtilde{F} : \wtilde{u} \simeq_{\cbr{1}} \wtilde{v}$. Thus an application of the homotopy axiom yields
+		\begin{equation*}
+			\langle u \rangle = \langle \wtilde{u} \circ \omega \rangle = H_1(\wtilde{u})\langle \omega \rangle = H_1(\wtilde{v})\langle \omega \rangle = \langle \wtilde{v} \circ \omega \rangle = \langle v \rangle.
+		\end{equation*}
+	\end{proof}
+
+	\begin{lemma}
+		Let $u$ be a path in $X$ from $p$ to $q$. Then $\langle \wbar{u}\rangle = - \langle u\rangle$.
+		\label{lem:reverse_path_homology}
+	\end{lemma}
+
+	\begin{proof}
+		From figure \ref{fig:additive_inverse}, we deduce that an appropriate definition of a singular $2$-simplex $\sigma$ would be
+		\begin{equation*}
+			\sigma(x,y) := u(x).
+		\end{equation*}
+		Indeed
+		\begin{equation*}
+			\partial \sigma = \wbar{u} - c_p + u 
+		\end{equation*}
+		\noindent and since $c_p$ is the boundary of $\sigma_p \in \mathsf{Top}(\Delta^2,X)$ defined by $\sigma_p(x,y) := p$, we have that $\wbar{u} + u$ is a boundary.
+		\begin{figure}[h!tb]
+			\centering
+			\begin{subfigure}[b]{.4\textwidth}
+				\centering
+				\begin{tikzpicture}[scale = 3]
+					\draw [thick] (0,0) -- (1,0);
+					\draw [thick] (0,0) -- (0,1);
+					\draw [thick] (0,1) -- (1,0);
+					\draw [thick,->] (0,0) -- (.5,0);
+					\draw [thick,->] (0,1) -- (.5,.5);
+				
+					\draw [thin] (.25,0) -- (.25,.75);
+					\draw [thin] (.5,0) -- (.5,.5);
+					\draw [thin] (.75,0) -- (.75,.25);
+
+					\draw (.5,0) node[below] {$u$};
+					\draw (.5,.55) node[above] {$u$};
+					\draw (0,.5) node[left] {$p$};
+					\draw (1,0) node[right] {$q$};
+				\end{tikzpicture}
+				\caption{$\langle \wbar{u} \rangle = - \langle u \rangle$.}
+				\label{fig:additive_inverse}
+			\end{subfigure}
+			~
+			\begin{subfigure}[b]{.4\textwidth}
+				\centering
+				\begin{tikzpicture}[scale = 3]
+					\draw [thick] (0,0) -- (1,0);
+					\draw [thick] (0,0) -- (0,1);
+					\draw [thick] (0,1) -- (1,0);
+					\draw [thick] (0,0) -- (.5,.5);
+					\draw [thick,->] (1,0) -- (.75,.25);
+					\draw [thick,->] (.5,.5) -- (.25,.75);
+					\draw [thick,->] (1,0) -- (.5,0);
+					\draw [thick,->] (0,0) -- (0,.5);
+				
+					\draw [thin] (.25,0) -- (.625,.375);
+					\draw [thin] (.5,0) -- (.75,.25);
+					\draw [thin] (.75,0) -- (.875,.125);
+
+					\draw [thin] (0,.25) -- (.375,.625);
+					\draw [thin] (0,.5) -- (.25,.75);
+					\draw [thin] (0,.75) -- (.125,.875);
+
+					\draw (.5,0) node[below] {$u$};
+					\draw (.65,.5) node[above] {$u \ast v$};
+					\draw (0,.5) node[left] {$v$};
+				\end{tikzpicture}
+				\caption{$\langle u \ast v \rangle = \langle u \rangle + \langle v \rangle$.}
+				\label{fig:hurewicz_homomorphism}
+			\end{subfigure}
+		\end{figure}
+	\end{proof}
+
+	\begin{lemma}
+		Let $u$ and $v$ be paths in $X$ from $p$ to $q$ and from $q$ to $r$, respectively. Then $\langle u \ast v \rangle = \langle u \rangle + \langle v \rangle$.
+		\label{lem:concatenation_addition}
+	\end{lemma}
+
+	\begin{proof}
+		Consider figure \ref{fig:hurewicz_homomorphism}. The thin lines correspond to where $y - x$ is constant. Hence define $\sigma : \Delta^2 \to X$ by
+		\begin{equation*}
+			\sigma(x,y) := \ccases{
+				u(y - x + 1) & 0 \leq y \leq x \leq 1,\\
+				v(y - x) & 0 \leq x \leq y \leq 1.
+			}
+		\end{equation*}
+		An application of the gluing lemma shows that $\sigma$ is actually a singular $2$-simplex. Moreover
+		\begin{equation*}
+			\partial \sigma = u \ast v - v + \wbar{u}.
+		\end{equation*}
+		Hence lemma \ref{lem:reverse_path_homology} yield
+		\begin{equation*}
+			0 = \langle u \ast v - v + \wbar{u}\rangle = \langle u \ast v \rangle - \langle v \rangle - \langle u \rangle.
+		\end{equation*}
+	\end{proof}
+
+	\begin{corollary}
+		$h$ is a morphism of groups.
+		\label{cor:h_homomorphism}
+	\end{corollary}
+
+	\begin{corollary}
+		Let $u,v,w$ be composable paths in $X$. Then $\langle (u \ast v) \ast w \rangle = \langle u \ast (v \ast w) \rangle$.
+		\label{cor:composable_associative_homology}
+	\end{corollary}
+
+	\begin{lemma}
+		$h$ is surjective.
+	\end{lemma}
+
+	\begin{proof}
+		Let $x \in X$. If $x = p$, define $\gamma_p := c_p$. If $x \neq p$, by the path connectedness of $X$ we can choose a path $\gamma_x$ from $p$ to $x$. Hence we get a map $\gamma : X \to \mathsf{Top}(\Delta^1,X)$. Extending by linearity yields a mapping $\gamma : C_0(X) \to C_1(X)$. Let $c := \sum_{k = 1}^n m_k \sigma_k$ be a $1$-cycle in $X$. Consider
+		\begin{equation*}
+			\sbr{u} := \sbr[0]{\gamma_{\sigma_1(0)} \ast \sigma_1 \ast \overline{\gamma_{\sigma_1(1)}}}^{m_1} \cdots \sbr[0]{\gamma_{\sigma_n(0)} \ast \sigma_n \ast \overline{\gamma_{\sigma_n(1)}}}^{m_n} \in \pi_1(X,p). 
+		\end{equation*}
+		Now lemma \ref{lem:reverse_path_homology} and \ref{lem:concatenation_addition}, corollary \ref{cor:h_homomorphism} and \ref{cor:composable_associative_homology} yields
+		\begin{align*}
+			h(\sbr{u}) &= \sum_{k = 1}^n m_k \langle\gamma_{\sigma_k(0)} \ast \sigma_k \ast \overline{\gamma_{\sigma_k(1)}}\rangle\\
+			&= \sum_{k = 1}^n m_k \del[1]{\langle\gamma_{\sigma_k(0)}\rangle + \langle\sigma_k\rangle + \langle \overline{\gamma_{\sigma_k(1)}}\rangle}\\
+			&= \sum_{k = 1}^n m_k \del[1]{\langle\gamma_{\sigma_k(0)}\rangle + \langle\sigma_k\rangle - \langle \gamma_{\sigma_k(1)}}\rangle\\
+			&= \langle c \rangle - \sum_{k = 1}^n m_k \langle \gamma_{\sigma_k(1) - \sigma_k(0)}\rangle\\
+			&= \langle c \rangle - \sum_{k = 1}^n m_k \langle \gamma_{\partial \sigma_k}\rangle\\
+			&= \langle c \rangle - \langle \gamma_{\partial c}\rangle\\
+			&= \langle c \rangle.
+		\end{align*}
+	\end{proof}
+	
+\end{proof}
+
 
 \section*{Applications}
 \subsection*{The Brouwer Fixed Point Theorem}
