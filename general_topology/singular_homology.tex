@@ -448,6 +448,24 @@ Since elements of $H_1(X)$ are homology classes of loops, one might suspect that
 			&= \langle c \rangle.
 		\end{align*}
 	\end{proof}
+
+	Lastly, we want to show that $\ker h = \sbr[0]{\pi_1(X,p),\pi_1(X,p)}$. Since then the first isomorphism theorem implies $\Ab(\pi_1(X,p)) \cong H_1(X)$. Since $H_1(X)$ is abelian, clearly $\sbr[0]{\pi_1(X,p),\pi_1(X,p)} \subseteq \ker h$ and thus $h$ factors uniquely $\wtilde{h} : \Ab(\pi_1(X,p)) \to H_1(X)$. The next lemma will be useful.
+	
+	\begin{lemma}
+		Let $\sigma : \Delta^2 \to X$ be a singular $2$-simplex. Define $\sigma^{(k)} := \sigma \circ \varphi^2_k$ for $k = 0,1,2$. Then $\sigma^{(0)} \ast \overline{\sigma^{(1)}} \ast \sigma^{(2)}$ is nullhomotopic relative to $\partial I$.
+	\end{lemma}
+
+	Let $\sigma \in \mathsf{Top}(\Delta^1,X)$. Define $g(x) := \sbr[0]{\sbr[0]{\gamma_{\sigma(0)}\ast \sigma \ast \overline{\gamma_{\sigma(1)}}}} \in \Ab(\pi_1(X,p))$. Extension by linearity yields a map $g : C_1(X) \to \Ab(\pi_1(X,p))$.
+
+	\begin{lemma}
+		$g$ vanishes on $\im \partial_2$.
+	\end{lemma}
+
+	\begin{proof}
+		
+	\end{proof}<++>
+
+
 	
 \end{proof}
 
