@@ -452,18 +452,40 @@ Since elements of $H_1(X)$ are homology classes of loops, one might suspect that
 	Lastly, we want to show that $\ker h = \sbr[0]{\pi_1(X,p),\pi_1(X,p)}$. Since then the first isomorphism theorem implies $\Ab(\pi_1(X,p)) \cong H_1(X)$. Since $H_1(X)$ is abelian, clearly $\sbr[0]{\pi_1(X,p),\pi_1(X,p)} \subseteq \ker h$ and thus $h$ factors uniquely $\wtilde{h} : \Ab(\pi_1(X,p)) \to H_1(X)$. The next lemma will be useful.
 	
 	\begin{lemma}
-		Let $\sigma : \Delta^2 \to X$ be a singular $2$-simplex. Define $\sigma^{(k)} := \sigma \circ \varphi^2_k$ for $k = 0,1,2$. Then $\sigma^{(0)} \ast \overline{\sigma^{(1)}} \ast \sigma^{(2)}$ is nullhomotopic relative to $\partial I$.
-	\end{lemma}
-
-	Let $\sigma \in \mathsf{Top}(\Delta^1,X)$. Define $g(x) := \sbr[0]{\sbr[0]{\gamma_{\sigma(0)}\ast \sigma \ast \overline{\gamma_{\sigma(1)}}}} \in \Ab(\pi_1(X,p))$. Extension by linearity yields a map $g : C_1(X) \to \Ab(\pi_1(X,p))$.
-
-	\begin{lemma}
-		$g$ vanishes on $\im \partial_2$.
+		Let $\sigma : \Delta^2 \to X$ be a singular $2$-simplex. Define $\sigma^{(k)} := \sigma \circ \varphi^2_k$ for $k = 0,1,2$. Then $\sbr[0]{\sigma^{(0)} \ast \overline{\sigma^{(1)}} \ast \sigma^{(2)}} = \sbr[0]{c_{\sigma(e_1)}}$.
+		\label{lem:nullhomotopic_loop}
 	\end{lemma}
 
 	\begin{proof}
-		
-	\end{proof}<++>
+		Let $u := \sigma^{(0)} \ast \overline{\sigma^{(1)}} \ast \sigma^{(2)}$. Since $\mathbb{B}^2 \approx \Delta^2$, we can consider $\sigma : \mathbb{B}^2 \to X$. One can check that the circle representative $\wtilde{u}$ of $u$ is the reparametrized restriction $\sigma \vert_{\mathbb{S}^1}$. Since reparametrizations are invariant under homotopies, we have that $u$ is a nullhomotopic loop.
+	\end{proof}
+
+	Let $\sigma \in \mathsf{Top}(\Delta^1,X)$. Define $g(\sigma) := \sbr[0]{\gamma_{\sigma(0)} \ast \sigma \ast \overline{\gamma_{\sigma(1)}}}_{\Ab}$, where $\sbr{u}_{\Ab}$ denotes the equivalence class of $\sbr{u}$ in $\Ab(\pi_1(X,p))$. Since $\Ab(\pi_1(X,p))$ is abelian, extension by linearity yields a map $g : C_1(X) \to \Ab(\pi_1(X,p))$.
+
+	\begin{lemma}
+		$g$ vanishes on $\im \partial_2$.
+		\label{lem:g_vanishes_on_boundaries}
+	\end{lemma}
+
+	\begin{proof}
+		Let $\sigma \in \mathsf{Top}(\Delta^2,X)$. Then lemma \ref{lem:nullhomotopic_loop} yields
+		\begin{align*}
+			g(\partial \sigma) &= g\del[1]{\sigma^{(0)}} g\del[1]{\sigma^{(1)}}^{-1}g\del[1]{\sigma^{(2)}}\\
+			&= \sbr[1]{\gamma_{\sigma(e_1)} \ast \sigma^{(0)} \ast \overline{\gamma_{\sigma(e_2)}} \ast \gamma_{\sigma(e_2)} \ast \overline{\sigma^{(1)}} \ast \overline{\gamma_{\sigma(e_0)}} \ast \gamma_{\sigma(e_0)} \ast \sigma^{(2)} \ast \overline{\gamma_{\sigma(e_1)}}}_{\Ab}\\
+			&= \sbr[1]{\gamma_{\sigma(e_1)} \ast \sigma^{(0)} \ast \overline{\sigma^{(1)}} \ast \sigma^{(2)} \ast \overline{\gamma_{\sigma(e_1)}}}_{\Ab}\\
+			&= \sbr[1]{\gamma_{\sigma(e_1)} \ast c_{\sigma(e_1)} \ast \overline{\gamma_{\sigma(e_1)}}}_{\Ab}\\
+			&= \sbr{c_p}_{\Ab}.
+		\end{align*}
+	\end{proof}
+
+	By lemma \ref{lem:g_vanishes_on_boundaries}, $g$ passes to the quotient and yields a map $\wtilde{g} : H_1(X) \to \Ab(\pi_1(X,p))$. Moreover
+	\begin{equation*}
+		(\wtilde{g} \circ \wtilde{h})\sbr{u}_{\Ab} = \wtilde{g}\del[1]{h\sbr{u}} = \wtilde{g}\langle u \rangle = g(u) = \sbr[0]{c_p \ast u \ast \overline{c_p}}_{\Ab} = \sbr{u}_{\Ab}
+	\end{equation*}
+	\noindent and thus $\wtilde{h}$ admits a retraction in $\mathsf{AbGrp}$ which implies that $\wtilde{h}$ is injective. Hence $\ker \wtilde{h}$ is trivial and thus if we write $\pi : \pi_1(X,p) \to \Ab(\pi_1(X,p))$ for the canoncial projection
+	\begin{equation*}
+		\ker h = \ker(\wtilde{h} \circ \pi) = (\wtilde{h} \circ \pi)^{-1}(0) = \pi^{-1}\del[1]{\wtilde{h}^{-1}(0)} = \pi^{-1}(0) = \sbr[0]{\pi_1(X,p),\pi_1(X,p)}. 
+	\end{equation*}
 
 
 	
