@@ -311,6 +311,7 @@ Since elements of $H_1(X)$ are homology classes of loops, one might suspect that
 
 \begin{theorem}[Hurewicz Theorem]
 	Let $X \in \ob(\mathsf{Top})$ be path connected and $p \in X$. Then $\Ab(\pi_1(X,p)) \cong H_1(X)$.
+	\label{thm:Hurewicz_theorem}
 \end{theorem}
 
 \begin{proof}
@@ -485,11 +486,12 @@ Since elements of $H_1(X)$ are homology classes of loops, one might suspect that
 	\noindent and thus $\wtilde{h}$ admits a retraction in $\mathsf{AbGrp}$ which implies that $\wtilde{h}$ is injective. Hence $\ker \wtilde{h}$ is trivial and thus if we write $\pi : \pi_1(X,p) \to \Ab(\pi_1(X,p))$ for the canoncial projection
 	\begin{equation*}
 		\ker h = \ker(\wtilde{h} \circ \pi) = (\wtilde{h} \circ \pi)^{-1}(0) = \pi^{-1}\del[1]{\wtilde{h}^{-1}(0)} = \pi^{-1}(0) = \sbr[0]{\pi_1(X,p),\pi_1(X,p)}. 
-	\end{equation*}
-
-
-	
+	\end{equation*}	
 \end{proof}
+
+\begin{definition}[Hurewicz Homomorphism]
+	Let $X \in \ob(\mathsf{Top})$ and $p \in X$. The homomorphism $h : \pi_1(X,p) \to H_1(X)$ defined in theorem \ref{thm:Hurewicz_theorem} is called the \bld{Hurewicz homomorphism}.
+\end{definition}
 
 
 \section*{Applications}
