@@ -1,0 +1,59 @@
+\chapter{Homological Algebra}
+\section*{Basic Definitions}
+
+\section*{Diagram Lemmas}
+\subsection*{The Snake Lemma}
+
+\begin{proposition}[Snake Lemma]
+	Suppose we are given a commutative diagram of abelian groups with exact rows:
+	\begin{equation*}
+		\begin{tikzcd}
+			& A \arrow[r,"i"]\arrow[d,"f"] & B \arrow[r,"j"]\arrow[d,"g"] & C \arrow[r]\arrow[d,"h"] & 0\\
+			0 \arrow[r] & A' \arrow[r,"i'"'] & B' \arrow[r,"j'"'] & C'
+		\end{tikzcd}
+	\end{equation*}
+	Then there exists $\delta \in \mathsf{AbGrp}(\ker h,\coker f)$ such that the sequence
+	\begin{equation}
+		\begin{tikzcd}
+			 \ker f \arrow[r] & \ker g \arrow[r] & \ker h \arrow[r,"\delta"] & \coker f \arrow[r] & \coker g \arrow[r] & \coker h
+		 \end{tikzcd}
+	\end{equation}
+	\noindent is exact.
+\end{proposition}
+
+\begin{proof}
+	Consider the augmented diagram in figure \ref{fig:snake_lemma}, where the morphisms $k$, $l$, $p$ and $q$ are induced by $i$, $j$, $i'$ and $j'$, respectively.
+	\begin{figure}[h!tb]
+		\centering
+		\begin{tikzcd}
+			& 0 \arrow[d] & 0 \arrow[d] & 0 \arrow[d]\\
+			& \ker f \arrow[d]\arrow[r,"k"] & \ker g \arrow[d]\arrow[r,"l"] & \ker h \arrow[d]\\
+			& A \arrow[r,"i"]\arrow[d,"f"] & B \arrow[r,"j"]\arrow[d,"g"] & C \arrow[r]\arrow[d,"h"] & 0\\
+			0 \arrow[r] & A' \arrow[r,"i'"']\arrow[d] & B' \arrow[r,"j'"']\arrow[d] & C' \arrow[d]\\
+			& \coker f \arrow[d]\arrow[r,"p"'] & \coker g \arrow[d]\arrow[r,"q"'] & \coker h \arrow[d]\\
+			& 0 & 0 & 0
+		\end{tikzcd}		
+		\caption{Proof of the snake lemma.}
+		\label{fig:snake_lemma}
+	\end{figure}
+
+	\begin{enumerate}[label = \textit{Step \arabic*:},wide = 0pt, itemsep = 1.5ex]
+		\item \textit{Exactness at $\ker g$.} Let $x \in \ker f$. Then $l(k(x)) = j(i(x)) = 0$ by exactness at $B$ and thus $\im k \subseteq \ker l$. Conversly, let $y \in \ker l$. Then $j(y) = 0$ and by exactness at $B$, there exists $x \in A$ such that $i(x) = y$. Moreover $0 = g(y) = g(i(x)) = i'(f(x))$ since $y \in \ker g$ and thus $f(x) = 0$ by injectivity of $i'$. Hence $\ker j \subseteq \im k$.
+		\item \textit{Exactness at $\coker g$.} Let $x + \im f \in \coker f$. Then
+			\begin{equation*}
+				q(p(x + \im f)) = j'(i'(x)) + \im h = \im h
+			\end{equation*}
+			\noindent by exactness at $B'$ implies $\im p \subseteq \ker q$. Conversly,
+	\end{enumerate}
+	\begin{figure}[h!tb]
+		\centering
+		\begin{tikzcd}
+			\ker f \arrow[r,"k"] & \ker g \arrow[r,"l"] & \ker h \arrow[d]\\
+			& B \arrow[d,"g"]& C \arrow[l]\\
+			A' \arrow[d] & B' \arrow[l]\\
+			\coker f \arrow[r,"p"'] & \coker g \arrow[r,"q"'] & \coker h\\
+		\end{tikzcd}		
+		\caption{Proof of the snake lemma.}
+		\label{fig:snake_lemma_delta}
+	\end{figure}
+\end{proof}
