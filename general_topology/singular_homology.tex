@@ -206,7 +206,8 @@ Aim of this section is to construct for each $n \in \omega$ a functor $H_n : \ma
 	For notational purposes we will often refer to the functor $H_n^{\mathrm{sing}}$ simply as $H_n$.
 \end{remark}
 
-\subsection*{First Properties of Singular Homolgy}
+\section*{First Properties of Singular Homolgy}
+\subsection*{$H_0$}
 
 \begin{proposition}[Zeroth Singular Homology Group]
 	Let $X \in \ob(\mathsf{Top})$ be non empty and path connected. Then $H_0(X) \cong \mathbb{Z}$.
@@ -227,6 +228,54 @@ Aim of this section is to construct for each $n \in \omega$ a functor $H_n : \ma
 \begin{proposition}[The Dimension Axiom]
 	Let $\ast \in \ob(\mathsf{Top})$ be a one point space. Then $H_n(\ast) = 0$ for all $n \in \mathbb{Z}$, $n > 0$.
 \end{proposition}
+
+\subsection*{Long Exact Sequence in Homology}
+\begin{theorem}[Long Exact Sequence in Homology]
+	Let
+	\begin{equation*}
+		\begin{tikzcd}
+			0 \arrow[r] & C_\bullet \arrow[r,"f_\bullet"] & C'_\bullet \arrow[r,"g_\bullet"] & C_\bullet'' \arrow[r] & 0
+		\end{tikzcd}
+	\end{equation*}
+	\noindent be a short exact sequence in $\mathsf{Comp}$. Then there exists a sequence $(\delta_n)_{n \in \mathbb{Z}}$, where for all $n \in \mathbb{Z}$, $\delta_n \in \mathsf{AbGrp}(H_n(C_\bullet''),H_{n - 1}(C_\bullet))$ and such that
+	\begin{equation*}
+		\begin{tikzcd}[column sep=7ex]
+			\cdots \arrow[r] & H_n(C_\bullet) \arrow[r,"H_n(f)"] & H_n(C'_\bullet) \arrow[r,"H_n(g)"] & H_n(C''_\bullet) \arrow[r,"\delta_n"] & H_{n - 1}(C_\bullet) \arrow[r] & \cdots
+		\end{tikzcd} 
+	\end{equation*}
+	\noindent is a long exact sequence in $\mathsf{AbGrp}$.
+	\label{thm:les_homology}
+\end{theorem}
+
+\begin{proof}
+	Let $n \in \mathbb{Z}$ and consider the following diagram of induced morphisms:
+	\begin{equation*}
+		\begin{tikzcd}
+			& C_n/\im\partial_{n + 1} \arrow[r,"f_n"]\arrow[d,"\partial_n"] & C_n'/\im\partial'_{n + 1} \arrow[r,"g_n"]\arrow[d,"\partial'_n"] & C_n''/\im\partial_{n + 1}'' \arrow[r]\arrow[d,"\partial''_n"] & 0\\
+			0 \arrow[r] & \ker \partial_{n - 1} \arrow[r,"f_{n - 1}"'] & \ker \partial_{n - 1}' \arrow[r,"g_{n - 1}"'] & \ker\partial_{n - 1}''
+		\end{tikzcd}		
+	\end{equation*}
+	It is left to the reader to show that the induced maps are actually well defined, the diagram commutes and the rows are exact. Hence an application of the snake lemma \ref{prop:snake_lemma} yields $\delta_n \in \mathsf{AbGrp}(\ker \partial_n'',\coker \partial_n)$ and an exact sequence
+	\begin{equation*}
+		\begin{tikzcd}
+			\ker \partial_n \arrow[r,"f_n"] & \ker \partial_n' \arrow[r,"g_n"] & \ker \partial_n'' \arrow[r,"\delta_n"] & \coker \partial_n \arrow[r,"f_{n - 1}"] & \coker \partial_n' \arrow[r,"g_{n - 1}"] & \coker \partial_n''
+		 \end{tikzcd}
+	\end{equation*}
+	It is easy to check that this exact sequence is the same as
+	\begin{equation*}
+		\begin{tikzcd}[column sep=3.5ex]
+			H_n(C_\bullet) \arrow[r,"H_n(f)"] & H_n(C'_\bullet) \arrow[r,"H_n(g)"] & H_n(C''_\bullet) \arrow[r,"\delta_n"] & H_{n - 1}(C_\bullet) \arrow[r,"H_{n-1}(f)"] & H_{n - 1}(C_\bullet') \arrow[r,"H_{n-1}(g)"] & H_{n - 1}(C_\bullet'').
+		 \end{tikzcd}
+	\end{equation*}
+\end{proof}
+
+\begin{exercise}
+	In the proof of theorem \ref{thm:les_homology} in the diagram, show that the induced maps are actually well defined, the diagram commutes and the two rows are exact.
+\end{exercise}
+
+\begin{definition}[Connecting Homomorphism]
+	The sequence $(\delta_n)_{n \in \mathbb{Z}}$ of morphisms in $\mathsf{AbGrp}$ of theorem \ref{thm:les_homology} is called the \bld{connecting homomorphism of the short exact sequence $0 \to C_\bullet \to C_\bullet' \to C_\bullet'' \to 0$}.
+\end{definition}
 
 \section*{The Homotopy Axiom}
 
@@ -492,6 +541,9 @@ Since elements of $H_1(X)$ are homology classes of loops, one might suspect that
 \begin{definition}[Hurewicz Homomorphism]
 	Let $X \in \ob(\mathsf{Top})$ and $p \in X$. The homomorphism $h : \pi_1(X,p) \to H_1(X)$ defined in theorem \ref{thm:Hurewicz_theorem} is called the \bld{Hurewicz homomorphism}.
 \end{definition}
+
+\section*{Barycentric Subdivision}
+
 
 
 \section*{Applications}

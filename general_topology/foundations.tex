@@ -76,6 +76,17 @@ We use the first order theory of Neumann-Bernays-G\"odel (BNG) as described in \
 	\end{itemize}
 \end{definition}
 
+\begin{example}[$\mathsf{Top}^2$]
+	Define the objects of $\mathsf{Top}^2$ to be the class of tuple $(X,A)$, where $X \in \ob(\mathsf{Top})$ and $A$ is a subspace of $X$. Moreover, given objects $(X,A)$ and $(Y,B)$ in $\mathsf{Top}^2$, a morphism between $(X,A)$ and $(Y,B)$ is a tuple $(f,g)$, where $f \in \mathsf{Top}(X,Y)$ and $g \in \mathsf{Top}(A,B)$, such that 
+	\begin{equation*}
+		\begin{tikzcd}
+			A \arrow[r,hook]\arrow[d,"g"'] & X \arrow[d,"f"]\\
+			B \arrow[r,hook] & Y
+		\end{tikzcd}
+	\end{equation*}
+	\noindent commutes.
+\end{example}
+
 \begin{example}[$\mathsf{Top}_\ast$]
 	Define the objects of $\mathsf{Top}_\ast$ to be the class of all tuple $(X,p)$, where $X$ is a topological space and $p \in X$. Moreover, given objects $(X,p)$ and $(Y,q)$ in $\mathsf{Top}_\ast$, define $\mathsf{Top}_\ast\del[1]{(X,p),(Y,q)} := \cbr[0]{f \in \mathsf{Top}(X,Y) : f(p) = q}$. It is easy to check that $\mathsf{Top}_\ast$ is a category, called the \bld{category of pointed topological spaces}.
 
@@ -126,3 +137,144 @@ We use the first order theory of Neumann-Bernays-G\"odel (BNG) as described in \
 	\end{enumerate}
 	\label{lem:closed_map_lemma}
 \end{lemma}
+
+\section*{Homological Algebra}
+\subsection*{Diagram Lemmas}
+\begin{proposition}[Snake Lemma]
+	Suppose we are given a commutative diagram in $\mathsf{AbGrp}$ with exact rows:
+	\begin{equation*}
+		\begin{tikzcd}
+			& A \arrow[r,"i"]\arrow[d,"f"] & B \arrow[r,"j"]\arrow[d,"g"] & C \arrow[r]\arrow[d,"h"] & 0\\
+			0 \arrow[r] & A' \arrow[r,"i'"'] & B' \arrow[r,"j'"'] & C'
+		\end{tikzcd}
+	\end{equation*}
+	Then there exists $\delta \in \mathsf{AbGrp}(\ker h,\coker f)$ such that the sequence
+	\begin{equation}
+		\begin{tikzcd}
+			 \ker f \arrow[r] & \ker g \arrow[r] & \ker h \arrow[r,"\delta"] & \coker f \arrow[r] & \coker g \arrow[r] & \coker h
+		 \end{tikzcd}
+	\end{equation}
+	\noindent is exact.
+	\label{prop:snake_lemma}
+\end{proposition}
+
+\begin{proof}
+	Consider the augmented diagram in figure \ref{fig:snake_lemma}, where the morphisms $k$, $l$, $p$ and $q$ are induced by $i$, $j$, $i'$ and $j'$, respectively.
+	\begin{figure}[h!tb]
+		\centering
+		\begin{tikzcd}
+			& 0 \arrow[d] & 0 \arrow[d] & 0 \arrow[d]\\
+			& \ker f \arrow[d]\arrow[r,"k"] & \ker g \arrow[d]\arrow[r,"l"] & \ker h \arrow[d]\\
+			& A \arrow[r,"i"]\arrow[d,"f"] & B \arrow[r,"j"]\arrow[d,"g"] & C \arrow[r]\arrow[d,"h"] & 0\\
+			0 \arrow[r] & A' \arrow[r,"i'"']\arrow[d] & B' \arrow[r,"j'"']\arrow[d] & C' \arrow[d]\\
+			& \coker f \arrow[d]\arrow[r,"p"'] & \coker g \arrow[d]\arrow[r,"q"'] & \coker h \arrow[d]\\
+			& 0 & 0 & 0
+		\end{tikzcd}		
+		\caption{Proof of the snake lemma.}
+		\label{fig:snake_lemma}
+	\end{figure}
+
+	\begin{enumerate}[label = \textit{Step \arabic*:},wide = 0pt]
+		\item \textit{Exactness at $\ker g$.} Let $a \in \ker f$. Then $l(k(a)) = j(i(a)) = 0$ by exactness at $B$ and thus $\im k \subseteq \ker l$. Conversly, let $b \in \ker l$. Then $j(b) = 0$ and by exactness at $B$, there exists $a \in A$ such that $i(a) = b$. Moreover $0 = g(b) = g(i(a)) = i'(f(a))$ since $b \in \ker g$ and thus $f(a) = 0$ by injectivity of $i'$. Hence $\ker j \subseteq \im k$.
+		\item \textit{Exactness at $\coker g$.} Let $a' + \im f \in \coker f$. Then
+			\begin{equation*}
+				q(p(a' + \im f)) = j'(i'(a')) + \im h = \im h
+			\end{equation*}
+			\noindent by exactness at $B'$ implies $\im p \subseteq \ker q$. Conversly, let $b' + \im g \in \ker q$. Then 
+			\begin{equation*}
+				0 = q(b' + \im g) = j'(b') + \im h
+			\end{equation*}
+			\noindent and thus $j'(b') \in \im h$. Hence there exists $c \in C$, such that $j'(b') = h(c)$. Since $j$ is surjective, we find $b \in B$ such that $j(b) = c$. Therefore $j'(b') = h(j(b))$. By commutativity we get $j'(b') = j'(g(b))$ which is equivalent to $j'(b' - g(b)) = 0$. Thus $b' - g(b) \in \ker j'$ and exactness at $B'$ yields the existence of $a' \in A'$ such that $i'(a') = b' - g(b)$. Now
+			\begin{equation*}
+				p(a' + \im f) = i'(a') + \im g = b' - g(b) + \im g = b' + \im g
+			\end{equation*}
+			\noindent and thus $\ker q \subseteq \im p$.
+		\item \textit{Definition of $\delta$.} Consider the snakelike path indicated in figure \ref{fig:snakelike_path}. Let $c \in \ker h$. Since $j$ is surjective, we find $b \in B$ such that $j(b) = c$. Since $c \in \ker h$, we get that $0 = h(c) = h(j(b)) = j'(g(b))$ and thus $g(b) \in \ker j'$ which implies $g(b) \in \im i'$ by exactness at $B'$. Hence there exists $a' \in A'$ such that $i'(a') = g(b)$. Actually this $a'$ is unique since $i'$ is injective. Define $\delta : \ker h \to \coker f$ by
+			\begin{equation*}
+				\delta(c) := a' + \im f.
+			\end{equation*}
+			\begin{figure}[h!tb]
+				\centering
+				\begin{subfigure}[b]{.5\textwidth}
+					\begin{tikzcd}
+						\ker f \arrow[r,"k"] & \ker g \arrow[r,"l"] & \ker h \arrow[d]\\
+						& B \arrow[d,"g"]& C \arrow[l]\\
+						A' \arrow[d] & B' \arrow[l]\\
+						\coker f \arrow[r,"p"'] & \coker g \arrow[r,"q"'] & \coker h
+					\end{tikzcd}		
+					\caption{Snakelike path.}
+					\label{fig:snakelike_path}
+				\end{subfigure}
+				~
+				\begin{subfigure}[b]{.5\textwidth}
+					\begin{tikzcd}
+						& & c \arrow[d,mapsto]\\
+						& b \arrow[d,mapsto]& c \arrow[l,mapsto]\\
+						a' \arrow[d,mapsto] & g(b) \arrow[l,mapsto]\\
+						a' + \im f
+					\end{tikzcd}		
+					\caption{Definition of $\delta$.}
+					\label{fig:definition_delta}					
+				\end{subfigure}
+				\caption{}
+			\end{figure}
+		\item \textit{Checking that $\delta$ is a morphism of groups.} Since $j$ is only surjective, we have to show that $\delta$ is a function. So suppose we choose $b_0 \in B$ instead of $b \in B$ in figure \ref{fig:definition_delta} with $b_0 \neq b$. We want to show that $\delta(c) = a' + \im f = a_0' + \im f$, or equivalently $a' - a_0' \in \im f$. Since $c = j(b) = j(b_0)$, we have that $b - b_0 \in \ker j$. Hence by exactness at $B$ there exists $a \in A$ such that $i(a) = b - b_0$. Applying $g$ and invoking commutativity yields
+			\begin{equation*}
+				g(b) - g(b_0) = g(i(a)) = i'(f(a))
+			\end{equation*}
+			Hence $i'(a') - i'(a_0')= i'(f(a))$ and thus the injectivity of $i'$ yields $a' - a_0' = f(a)$. In the same manner one can show that $\delta$ is a morphism of groups.
+		\item \textit{Exactness at $\ker h$.} Let $b \in \ker g$. Then $\im l \subseteq \ker \delta$ immeddiately follows from figure \ref{fig:im_l_subseteq_ker_delta}. Conversly, suppose $c \in \ker \delta$. From figure \ref{fig:ker_delta_subseteq_im_l} we get that
+			\begin{equation*}
+				g(b) = i'(a') = i'(f(a)) = g(i(a))
+			\end{equation*}
+			\noindent and thus $b - i(a) \in \ker g$. So $l(b - i(a)) = j(b) - j(i(a)) = j(b) = c$ by exactness at $B$ and thus $\ker \delta \subseteq \im l$.
+			\begin{figure}[h!tb]
+				\centering
+				\begin{subfigure}[b]{.5\textwidth}
+					\begin{tikzcd}
+						& & j(b) \arrow[d,mapsto]\\
+						& b \arrow[d,mapsto]& j(b) \arrow[l,mapsto]\\
+						0 \arrow[d,mapsto] & g(b) = 0 \arrow[l,mapsto]\\
+						\im f\\
+					\end{tikzcd}		
+					\caption{$\im l \subseteq \ker \delta$.}
+					\label{fig:im_l_subseteq_ker_delta}
+				\end{subfigure}
+				~
+				\begin{subfigure}[b]{.5\textwidth}
+					\begin{tikzcd}
+						& & c \arrow[d,mapsto]\\
+						a \arrow[d,mapsto] & b \arrow[d,mapsto]& c \arrow[l,mapsto]\\
+						a' = f(a) \arrow[d,mapsto] & g(b) \arrow[l,mapsto]\\
+						a' + \im f\\
+					\end{tikzcd}		
+					\caption{$\ker \delta \subseteq \im l$.}
+					\label{fig:ker_delta_subseteq_im_l}					
+				\end{subfigure}
+				\caption{}
+			\end{figure}
+
+		\item \textit{Exactness at $\coker f$.} Suppose that $a' + \im f \in \im \delta$. Then
+			\begin{equation*}
+				p(a' + \im f) = i'(a') + \im g = g(b) + \im g = \im g 
+			\end{equation*}
+			\noindent and thus $\im \delta \subseteq \ker p$. Conversly, suppose that $a' + \im f \in \ker p$. Hence $i'(a') \in \im g$ and we find $b \in B$ such that $g(b) = i'(a')$. Consider $j(b)$. By exactness at $B'$ follows
+			\begin{equation*}
+				h(j(b)) = j'(g(b)) = j'(i'(a')) = 0
+			\end{equation*}
+			So $j(b) \in \ker h$. Moreover, by construction $\delta(j(b)) = a' + \im f$ and thus $\ker p \subseteq \im \delta$.
+	\end{enumerate}
+\end{proof}
+
+\begin{proposition}[Five Lemma]
+	Suppose we are given a commutative diagram in $\mathsf{AbGrp}$ with exact rows and columns:
+	\begin{equation*}
+		\begin{tikzcd}
+			& 0\arrow[d] & & 0\arrow[d] & 0\arrow[d]\\
+			A \arrow[d,"f"]\arrow[r] & B \arrow[r]\arrow[d,"g"] & C \arrow[r]\arrow[d,"h"] & D \arrow[r]\arrow[d,"k"] & E \arrow[d,"l"]\\
+			A' \arrow[r]\arrow[d] & B' \arrow[r]\arrow[d] & C' \arrow[r] & D' \arrow[r]\arrow[d] & E'\\
+			0 & 0 & & 0
+		\end{tikzcd}
+	\end{equation*}
+	Then $h$ is an isomorphism.
+\end{proposition}

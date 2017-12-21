@@ -1,0 +1,102 @@
+\input{header.tex}
+
+\title{Additive and Abelian Categories}
+\author{Yannis B\"{a}hni}
+\address[Yannis B\"{a}hni]{University of Zurich, R\"{a}mistrasse 71, 8006 Zurich}
+\email[Yannis B\"{a}hni]{\href{mailto:yannis.baehni@uzh.ch}{\nolinkurl{yannis.baehni@uzh.ch}}}
+
+\begin{document}
+
+\begin{abstract}
+\end{abstract}
+
+\maketitle
+
+\tableofcontents
+
+\section{Preadditive Catgeories}
+Let $G,H \in \ob(\mathsf{AbGrp})$ and $\varphi,\psi \in \mathsf{AbGrp}(G,H)$. Define $\varphi + \psi$ pointwise. Since $H$ is abelian, it follows that $\varphi + \psi \in \mathsf{AbGrp}(G,H)$. Moreover, it is easy to check, that with this operation defined above, $\mathsf{AbGrp}(G,H)$ is an abelian group and 
+\begin{equation*}
+	\circ : \mathsf{AbGrp}(H,K) \times \mathsf{AbGrp}(G,H) \to \mathsf{AbGrp}(G,K)
+\end{equation*}
+\noindent is bilinear for each $K \in \ob(\mathsf{AbGrp})$. This motivates the following definition. 
+
+\begin{definition}[Preadditive Category]
+	A \bld{preadditive category} is a locally small category $\mathcal{C}$ in which all hom-sets $\mathcal{C}(X,Y)$ can be equipped with the structure of an abelian group and composition is bilinear, i.e. for all mophisms $f,f' : X \to Y$ and $g,g' : Y \to Z$ in $\mathcal{C}$ we have that
+	\begin{equation}
+		(g + g') \circ (f + f') = g \circ f + g \circ f' + g' \circ f + g' \circ f'.
+	\end{equation}
+\end{definition}
+
+\begin{examples}
+	$\mathsf{AbGrp}$, $\mathsf{Vect}_K$, $_{R}\mathsf{Mod}$ and $\mathsf{Mod}_R$.	
+\end{examples}
+
+\section{Additive Categories}
+Let us again consider $\mathsf{AbGrp}$. As in $\mathsf{Grp}$, the trivial group $0$ is both an initial and a terminal object. Unlike in $\mathsf{Grp}$, we have that $G \coprod H \cong G \prod H$ for all $G,H \in \ob(\mathsf{AbGrp})$. In a somewhat weaker sense, we will generalize this. Define $\iota_1 : G \to G \prod H$ and $\iota_2 : H \to G \prod H$ by
+\begin{equation*}
+	\iota_1(g) := (g,0) \qquad \text{and} \qquad \iota_2(h) := (0,h),
+\end{equation*}
+\noindent respectively. Then it is easy to verify that 
+\begin{equation*}
+	\pi_1\circ\iota_1 = \id_G, \quad \pi_2\circ\iota_2 = \id_H \quad \text{and} \quad \iota_1 \circ \pi_1 + \iota_2 \circ \pi_2 = \id_{G \prod H}
+\end{equation*}
+\noindent holds. Those observations motivate the following definitions.
+
+\begin{definition}[Null Object]
+	Let $\mathcal{C}$ be a category. A \bld{null object in $\mathcal{C}$} is a an object of $\mathcal{C}$ which is both initial and terminal.
+\end{definition}
+
+\begin{definition}[Biproduct Diagram]
+	Let $\mathcal{C}$ be a preadditive category and $X,Y \in \ob(\mathcal{C})$. A \bld{biproduct diagram for $X$ and $Y$} is a diagram
+	\begin{equation*}
+		\begin{tikzcd}
+			X \arrow[r, shift right = 1ex, "\iota_1"'] & Z \arrow[r,shift left = 1ex, "\pi_2"]\arrow[l,shift right = 1ex,"\pi_1"'] & Y \arrow[l,shift left = 1ex,"\iota_2"] 
+		\end{tikzcd}
+	\end{equation*}
+	\noindent such that
+	\begin{equation*}
+		\pi_1\circ\iota_1 = \id_X, \quad \pi_2\circ\iota_2 = \id_Y \quad \text{and} \quad \iota_1 \circ \pi_1 + \iota_2 \circ \pi_2 = \id_Z
+	\end{equation*}
+	\noindent holds.
+\end{definition}
+
+\begin{definition}[Additive Category]
+	An \bld{additive category} is a preadditive category which has a null object and a biproduct for each pair of its objects.	
+\end{definition}
+
+\begin{examples}
+	$\mathsf{AbGrp}$, $\mathsf{Vect}_K$, $_{R}\mathsf{Mod}$ and $\mathsf{Mod}_R$.	
+\end{examples}
+
+\section{Abelian Categories}
+
+\begin{definition}[Zero Arrow]
+	Let $\mathcal{C}$ be a category with a null object $0$. For $X,Y \in \ob(\mathcal{C})$, the unique composition $X \to 0 \to Y$ is called the \bld{zero arrow from $X$ to $Y$}, denoted by $0_{X,Y}$.
+\end{definition}
+
+\begin{definition}[Kernel and Cokernel]
+	Let $\mathcal{C}$ be a category with a null object $0$. A \bld{kernel of a morphism $f : X \to Y$} is defined to be an equalizer of
+	\begin{equation*}
+		\begin{tikzcd}
+			X \arrow[r, shift left = 1ex, "f"]\arrow[r,shift right = 1ex,"0_{X,Y}"'] & Y.
+		\end{tikzcd}
+	\end{equation*}
+	Dually, a \bld{cokernel of a morphism $f : X \to Y$} is a coequalizer of the above diagram. 
+\end{definition}
+
+\begin{definition}[Abelian Category]
+	An \bld{abelian category} is an additive category satisfying the following additional conditions:
+	\begin{enumerate}[label = \textup{(}\alph*\textup{)}, wide = 0pt]
+		\item Every morphism admits a kernel.
+		\item Every morphism admits a cokernel.
+		\item Every monic is a kernel.
+		\item Every epic is a cokernel.
+	\end{enumerate}
+\end{definition}
+
+\begin{examples}
+	$\mathsf{AbGrp}$, $_{R}\mathsf{Mod}$ and $\mathsf{Mod}_R$.	
+\end{examples}
+
+\end{document}
