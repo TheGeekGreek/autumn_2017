@@ -1,0 +1,53 @@
+\input{header.tex}
+
+\title{Additive and Abelian Categories}
+\author{Yannis B\"{a}hni}
+\address[Yannis B\"{a}hni]{University of Zurich, R\"{a}mistrasse 71, 8006 Zurich}
+\email[Yannis B\"{a}hni]{\href{mailto:yannis.baehni@uzh.ch}{\nolinkurl{yannis.baehni@uzh.ch}}}
+
+\begin{document}
+\addtocounter{section}{1}
+
+\begin{problem}
+	Let $n \in \omega$ and $a_{jk} \in \mathbb{C}$ for $j = 0,\dots,n + 1$, $k = 0,\dots,n$. Show that
+	\begin{equation*}
+		\sum_{j = 0}^{n+1}\sum_{k = 0}^n a_{jk} = \sum_{0 \leq j \leq k \leq n}a_{jk} + \sum_{0 \leq k < j \leq n+1} a_{jk}.
+	\end{equation*}
+\end{problem}
+
+\begin{solution}
+	Let $n = 0$. Then we have
+	\begin{equation*}
+		\sum_{j = 0}^{n+1}\sum_{k = 0}^n a_{jk} = a_{00} + a_{10} =  \sum_{0 \leq j \leq k \leq n}a_{jk} + \sum_{0 \leq k < j \leq n+1} a_{jk}.
+	\end{equation*}
+	Now assume that the formula holds true for some $n \in \omega$. Then
+	\begin{align*}
+		\sum_{j = 0}^{n+2}\sum_{k = 0}^{n+1} a_{jk} &= \sum_{j = 0}^{n + 2}\del[4]{\sum_{k = 0}^n a_{jk} + a_{j,n+1}}\\
+		&= \sum_{j = 0}^{n + 1}\del[4]{\sum_{k = 0}^n a_{jk} + a_{j,n+1}} + \del[4]{\sum_{k = 0}^n a_{n+2,k} + a_{n+2,n+1}}\\
+		&= \sum_{j = 0}^{n + 1}\sum_{k = 0}^n a_{jk} + \sum_{j = 0}^{n + 1}a_{j,n+1} + \sum_{k = 0}^{n+1} a_{n+2,k}\\
+		&= \sum_{0 \leq j \leq k \leq n}a_{jk} + \sum_{0 \leq k < j \leq n+1} a_{jk} + \sum_{j = 0}^{n + 1}a_{j,n+1} + \sum_{k = 0}^{n+1} a_{n+2,k}\\
+		&= \sum_{0 \leq j \leq k \leq n + 1}a_{jk} + \sum_{0 \leq k < j \leq n+2} a_{jk}.
+	\end{align*}
+\end{solution}
+
+\begin{problem}
+	Let $0 < x < 1$. Then
+	\begin{equation*}
+		\frac{\sin( \pi x )}{2} \int_{-\infty}^\infty \frac{dt}{\cosh(\pi t ) + \cos( \pi x )} = x.
+	\end{equation*}
+\end{problem}
+
+\begin{proof}
+	We compute
+	\begin{align*}
+		\frac{\sin( \pi x )}{2} \int_{-\infty}^\infty \frac{dt}{\cosh(\pi t ) + \cos( \pi x )} &= \frac{\sin( \pi x )}{2} \int_{-\infty}^\infty \frac{dt}{\frac{1}{2}( e^{\pi t} + e^{-\pi t} ) + \cos( \pi x )}\\
+		&= \frac{\sin( \pi x )}{\pi} \int_{0}^\infty \frac{ds}{s^2 + 2\cos( \pi x )s + 1}\\
+		&= \frac{\sin( \pi x )}{\pi} \int_{0}^\infty \frac{ds}{( s + \cos( \pi x ) )^2 + \sin^2( \pi x )}\\
+		&= \frac{1}{\pi\sin( \pi x )} \int_{0}^\infty \frac{ds}{\del{ \frac{s + \cos( \pi x )}{\sin( \pi x )}}^2 + 1}\\
+		&= \frac{1}{\pi} \int_{\cot( \pi x )}^\infty \frac{du}{u^2 + 1}\\
+		&= \frac{1}{\pi}\del[3]{ \frac{\pi}{2} - \arctan( \cot( \pi x )) }\\
+		&= x.
+\end{align*}
+\end{proof}
+
+\end{document}

@@ -8,11 +8,24 @@
 \begin{document}
 
 \begin{abstract}
+	We define preadditive, additive and abelian categories, where the latter is the natural generalization of $\mathsf{AbGrp}$ to study the basic results of homological algebra in. Moreover, we state and comment on two foundational results in the theory of abelian categories, namely the \emph{Mitchell Embedding Theorem} and the \emph{Eilenberg-Watts Theorem}, which roughly speaking, connect the category of modules with abelian categories.
 \end{abstract}
 
 \maketitle
 
 \tableofcontents
+
+\section{Introduction}
+Consider the following diagram in $\mathsf{AbGrp}$:
+\begin{equation*}
+	\begin{tikzcd}
+		& 0\arrow[d] & & 0\arrow[d] & 0\arrow[d]\\
+		\bullet \arrow[d]\arrow[r] & \bullet \arrow[r]\arrow[d] & \bullet \arrow[r]\arrow[d,"\varphi"] & \bullet \arrow[r]\arrow[d] & \bullet \arrow[d]\\
+		\bullet \arrow[r]\arrow[d] & \bullet \arrow[r]\arrow[d] & \bullet \arrow[r] & \bullet \arrow[r]\arrow[d] & \bullet\\
+		0 & 0 & & 0.
+	\end{tikzcd}
+\end{equation*}
+Those who are familiar with algebraic topology recognise it as the setting of the \emph{five lemma}. This basic result in \emph{homological algebra} simply says that $\varphi$ is an isomorphism. The basic proof technique used to establish this result is called \emph{diagram chasing}. It turns out, that abelian categories are the right generalization for this type of proof (for more details, see \cite[202--208]{maclane:categories:1978}).
 
 \section{Preadditive Catgeories}
 Let $G,H \in \ob(\mathsf{AbGrp})$ and $\varphi,\psi \in \mathsf{AbGrp}(G,H)$. Define $\varphi + \psi$ pointwise. Since $H$ is abelian, it follows that $\varphi + \psi \in \mathsf{AbGrp}(G,H)$. Moreover, it is easy to check, that with this operation defined above, $\mathsf{AbGrp}(G,H)$ is an abelian group and 
@@ -27,10 +40,6 @@ Let $G,H \in \ob(\mathsf{AbGrp})$ and $\varphi,\psi \in \mathsf{AbGrp}(G,H)$. De
 		(g + g') \circ (f + f') = g \circ f + g \circ f' + g' \circ f + g' \circ f'.
 	\end{equation}
 \end{definition}
-
-\begin{examples}
-	$\mathsf{AbGrp}$, $\mathsf{Vect}_K$, $_{R}\mathsf{Mod}$ and $\mathsf{Mod}_R$.	
-\end{examples}
 
 \section{Additive Categories}
 Let us again consider $\mathsf{AbGrp}$. As in $\mathsf{Grp}$, the trivial group $0$ is both an initial and a terminal object. Unlike in $\mathsf{Grp}$, we have that $G \coprod H \cong G \prod H$ for all $G,H \in \ob(\mathsf{AbGrp})$. In a somewhat weaker sense, we will generalize this. Define $\iota_1 : G \to G \prod H$ and $\iota_2 : H \to G \prod H$ by
@@ -51,7 +60,7 @@ Let us again consider $\mathsf{AbGrp}$. As in $\mathsf{Grp}$, the trivial group 
 	Let $\mathcal{C}$ be a preadditive category and $X,Y \in \ob(\mathcal{C})$. A \bld{biproduct diagram for $X$ and $Y$} is a diagram
 	\begin{equation*}
 		\begin{tikzcd}
-			X \arrow[r, shift right = 1ex, "\iota_1"'] & Z \arrow[r,shift left = 1ex, "\pi_2"]\arrow[l,shift right = 1ex,"\pi_1"'] & Y \arrow[l,shift left = 1ex,"\iota_2"] 
+			X \arrow[r, shift right, "\iota_1"'] & Z \arrow[r,shift left, "\pi_2"]\arrow[l,shift right,"\pi_1"'] & Y \arrow[l,shift left,"\iota_2"] 
 		\end{tikzcd}
 	\end{equation*}
 	\noindent such that
@@ -65,10 +74,6 @@ Let us again consider $\mathsf{AbGrp}$. As in $\mathsf{Grp}$, the trivial group 
 	An \bld{additive category} is a preadditive category which has a null object and a biproduct for each pair of its objects.	
 \end{definition}
 
-\begin{examples}
-	$\mathsf{AbGrp}$, $\mathsf{Vect}_K$, $_{R}\mathsf{Mod}$ and $\mathsf{Mod}_R$.	
-\end{examples}
-
 \section{Abelian Categories}
 
 \begin{definition}[Zero Arrow]
@@ -79,11 +84,31 @@ Let us again consider $\mathsf{AbGrp}$. As in $\mathsf{Grp}$, the trivial group 
 	Let $\mathcal{C}$ be a category with a null object $0$. A \bld{kernel of a morphism $f : X \to Y$} is defined to be an equalizer of
 	\begin{equation*}
 		\begin{tikzcd}
-			X \arrow[r, shift left = 1ex, "f"]\arrow[r,shift right = 1ex,"0_{X,Y}"'] & Y.
+			X \arrow[r, shift left, "f"]\arrow[r,shift right,"0_{X,Y}"'] & Y.
 		\end{tikzcd}
 	\end{equation*}
 	Dually, a \bld{cokernel of a morphism $f : X \to Y$} is a coequalizer of the above diagram. 
 \end{definition}
+
+\begin{lemma}
+	In $\mathsf{AbGrp}$, every monic is a kernel and every epic is a cokernel.
+\end{lemma}
+
+\begin{proof}
+	Let $m : G \to H$ be a monic in $\mathsf{AbGrp}$. Consider the fork
+	\begin{equation*}
+		\begin{tikzcd}
+			G \arrow[r,"m"] & H \arrow[r,shift left,"\pi"]\arrow[r,shift right,"0"'] & H/m(G).
+		\end{tikzcd}
+	\end{equation*}
+	\noindent Then one can check that this is in fact a universal fork. Similarly, one can check that
+	\begin{equation*}
+		\begin{tikzcd}
+			\ker e \arrow[r,shift left,"\iota"]\arrow[r,shift right,"0"'] & G \arrow[r,"e"] & H
+		\end{tikzcd}
+	\end{equation*}
+	\noindent is a universal cofork for any epic $e : G \to H$.
+\end{proof}
 
 \begin{definition}[Abelian Category]
 	An \bld{abelian category} is an additive category satisfying the following additional conditions:
@@ -96,7 +121,22 @@ Let us again consider $\mathsf{AbGrp}$. As in $\mathsf{Grp}$, the trivial group 
 \end{definition}
 
 \begin{examples}
-	$\mathsf{AbGrp}$, $_{R}\mathsf{Mod}$ and $\mathsf{Mod}_R$.	
+	$\mathsf{AbGrp}$, $\mathsf{Vect}_K$, $_{R}\mathsf{Mod}$ and $\mathsf{Mod}_R$.	
 \end{examples}
+
+\section{The Mitchell Embedding Theorem and its Consequences}
+
+\begin{definition}[Exact Functor]
+	A functor $F : \mathcal{C} \to \mathcal{D}$ between two abelian categories $\mathcal{C}$ and $\mathcal{D}$ is called \bld{exact}, if $F$ preserves all finite limits and all finite colimits.
+\end{definition}
+
+\begin{theorem}[Mitchell Embedding]
+	For every small abelian category there is an exact, full and faithful functor into $_{R}\mathsf{Mod}$ for some ring $R$.
+	\label{thm:mitchell_embedding}
+\end{theorem}
+
+A usefull application of the Mitchell embedding is that one can do proofs of basic homological algebra results in a familiar environment like $_{R}\mathsf{Mod}$ by diagram chasing. However, as \cite[202--208]{maclane:categories:1978} shows, this can also be done without using the Mitchell embedding.
+
+\section{The Eilenberg-Watts Theorem and its Consequences}
 
 \end{document}
