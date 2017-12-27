@@ -49,6 +49,35 @@ We use the first order theory of Neumann-Bernays-G\"odel (BNG) as described in \
 	A category $\mathcal{C}$ is said to be \bld{locally small} if for all $X,Y \in \mathcal{C}$, $\mathcal{C}(X,Y)$ is a set. If $\mathcal{C}$ is locally small, $\mathcal{C}(X,Y)$ is called a \bld{hom-set} for all $X,Y \in \mathcal{C}$. 
 \end{definition}
 
+\begin{definition}[Isomorphism]
+	Let $\mathcal{C}$ be a category. An \bld{isomorphism in $\mathcal{C}$} is a morphism $f : X \to Y$ in $\mathcal{C}$, such that there exists a morphism $g : Y \to X$ in $\mathcal{C}$ with 
+	\begin{equation*}
+		g \circ f = \id_X \qquad \text{and} \qquad f \circ g = \id_Y.
+	\end{equation*}
+\end{definition}
+
+In algebraic topology, there is a very useful construction on categories.
+
+\begin{definition}[Congruence]
+	Let $\mathcal{C}$ be a category. A \bld{congruence on $\mathcal{C}$} is an equivalence relation $\sim$ on 
+	\begin{equation*}
+		\bigcup_{(X,Y) \in \ob(\mathcal{C}) \times \ob(\mathcal{C})}\mathcal{C}(X,Y),
+	\end{equation*}
+	\noindent such that 
+	\begin{enumerate}[label = \textup{(}\alph*\textup{)},wide = 0pt]
+		\item If $f \in \mathcal{C}(X,Y)$ and $f {\sim} g$, then $g \in \mathcal{C}(X,Y)$.
+		\item If $f_0 : X \to Y$ and $g_0 : Y \to Z$ such that $f_0 {\sim} f_1$ and $g_0 {\sim} g_1$, then $g_0 \circ f_0 {\sim} g_1 \circ f_1$.
+	\end{enumerate}
+\end{definition}
+
+\begin{exercise}
+	Let $\mathcal{C}$ be a category. Show that for any congruence on $\mathcal{C}$, there exists a category $\mathcal{C}'$, called \bld{quotient category}, with $\ob(\mathcal{C}') = \ob(\mathcal{C})$, for any objects $X,Y \in \mathcal{C}'$
+	\begin{equation*}
+		\mathcal{C}'(X,Y) = \cbr[0]{\sbr[0]{f} : f \in \mathcal{C}(X,Y)},
+	\end{equation*}
+	\noindent and pointwise composition.
+\end{exercise}
+
 \subsection*{Functors}
 
 \begin{definition}[Functor]
@@ -279,6 +308,29 @@ We use the first order theory of Neumann-Bernays-G\"odel (BNG) as described in \
 	Then $h$ is an isomorphism.
 \end{proposition}
 
-\begin{proof}
-	
+\begin{proof} 
+	We show that $h$ is bijective.
+	\begin{enumerate}[label = \textit{Step \arabic*:}, wide = 0pt]
+		\item \textit{$h$ is injective.} See figure \ref{fig:h_injective}. Let $c \in \ker h$. Hence $h(c) = 0$ and since $\varphi_3$ is a morphism of groups, we have that $(\varphi_3 \circ h)(c) = 0$. By commutativity, $(k \circ \varphi_3)(c) = 0$ and thus since $k$ is injective, $\varphi_3(c) = 0$. Exactness at $C$ implies that there exists some $b \in B$ such that $\varphi_2(b) = c$. Moreover, by commutativity $\psi_2(g(b)) = 0$ and thus we find $a' \in A'$ such that $\psi_1(a') = g(b)$. Sujectivity of $f$ implies the existence of $a \in A$ such that $f(a) = a'$. Commutativity yields $g(b) = g(\varphi_1(a))$ and thus $b - \varphi_1(a) \in \ker g$. Since $g$ is injective, $b = \varphi_1(a)$ and thus $c = \varphi_2(\varphi_1(a)) = 0$.  
+			\begin{figure}[h!tb]
+				\centering
+				\begin{tikzcd}
+					a \arrow[d,mapsto]\arrow[r,mapsto] & b = \varphi_1(a) \arrow[r,mapsto]\arrow[d,mapsto] & c \arrow[r,mapsto]\arrow[d,mapsto] & 0 \arrow[d,mapsto]\\
+					a' \arrow[r,mapsto] & g(b) \arrow[r,mapsto] & h(c) = 0 \arrow[r,mapsto] & 0
+				\end{tikzcd}
+				\caption{Proof of injectivity of $h$.}
+				\label{fig:h_injective}
+			\end{figure}
+
+		\item \textit{$h$ is surjective.} See figure \ref{fig:h_surjective}. Let $c' \in C'$. Since $k$ is surjective, we find $d \in D$ such that $k(d) = \psi_3(c')$. Hence exactness at $D'$ together with commutativity yields $(l \circ \varphi_4)(d) = 0$. Since $l$ is injective, we get that $\varphi_4(d) = 0$. Thus by exactness at $D$ we find $c \in C$ such that $\varphi_3(c) = d$. Hence by commutativity, $(\psi_3 \circ h)(c) = \psi_3(c')$ or equivalently, $c' - h(c) \in \ker \psi_3$. By exactness at $C'$ we find $b' \in B'$ such that $\psi_2(b') = c' - h(c)$. Moreover, since $g$ is surjective, we find $b \in B$ such that $g(b) = b'$. Finally, commutativity yields $(h \circ \varphi_2)(b) = c' - h(c)$ or equivalently $c' = h(c + \varphi_2(b))$.
+			\begin{figure}[h!tb]
+				\centering
+				\begin{tikzcd}
+					c \arrow[r,mapsto] & d \arrow[r,mapsto]\arrow[d,mapsto] & 0 \arrow[d,mapsto]\\
+					c' \arrow[r,mapsto] & \psi_3(c') \arrow[r,mapsto] & 0
+				\end{tikzcd}
+				\caption{Proof of surjectivity of $h$.}
+				\label{fig:h_surjective}
+			\end{figure}
+	\end{enumerate}
 \end{proof}

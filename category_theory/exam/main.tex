@@ -16,16 +16,20 @@
 \tableofcontents
 
 \section{Introduction}
-Consider the following diagram in $\mathsf{AbGrp}$:
+Consider the following exact commutative diagram in $\mathsf{AbGrp}$:
 \begin{equation*}
 	\begin{tikzcd}
-		& 0\arrow[d] & & 0\arrow[d] & 0\arrow[d]\\
-		\bullet \arrow[d]\arrow[r] & \bullet \arrow[r]\arrow[d] & \bullet \arrow[r]\arrow[d,"\varphi"] & \bullet \arrow[r]\arrow[d] & \bullet \arrow[d]\\
-		\bullet \arrow[r]\arrow[d] & \bullet \arrow[r]\arrow[d] & \bullet \arrow[r] & \bullet \arrow[r]\arrow[d] & \bullet\\
-		0 & 0 & & 0.
+		& \bullet \arrow[r]\arrow[d,"f"] & \bullet \arrow[r]\arrow[d,"g"] & \bullet \arrow[r]\arrow[d,"h"] & 0\\
+		0 \arrow[r] & \bullet \arrow[r] & \bullet \arrow[r] & \bullet
 	\end{tikzcd}
 \end{equation*}
-Those who are familiar with algebraic topology recognise it as the setting of the \emph{five lemma}. This basic result in \emph{homological algebra} simply says that $\varphi$ is an isomorphism. The basic proof technique used to establish this result is called \emph{diagram chasing}. It turns out, that abelian categories are the right generalization for this type of proof (for more details, see \cite[202--208]{maclane:categories:1978}).
+Those who are familiar with algebraic topology recognise it as the setting of the \emph{snake lemma}. This basic result in \emph{homological algebra} yields the existence of a morphism of groups $\delta \in \mathsf{AbGrp}(\ker h,\coker f)$ such that the sequence
+\begin{equation*}
+	\begin{tikzcd}
+			\ker f \arrow[r] & \ker g \arrow[r] & \ker h \arrow[r,"\delta"] & \coker f \arrow[r] & \coker g \arrow[r] & \coker h
+	 \end{tikzcd}
+\end{equation*}
+\noindent is exact. The basic proof technique used to establish this result is called \emph{diagram chasing}. It turns out, that abelian categories are the right generalization for this type of proof.
 
 \section{Preadditive Catgeories}
 Let $G,H \in \ob(\mathsf{AbGrp})$ and $\varphi,\psi \in \mathsf{AbGrp}(G,H)$. Define $\varphi + \psi$ pointwise. Since $H$ is abelian, it follows that $\varphi + \psi \in \mathsf{AbGrp}(G,H)$. Moreover, it is easy to check, that with this operation defined above, $\mathsf{AbGrp}(G,H)$ is an abelian group and 
@@ -34,7 +38,7 @@ Let $G,H \in \ob(\mathsf{AbGrp})$ and $\varphi,\psi \in \mathsf{AbGrp}(G,H)$. De
 \end{equation*}
 \noindent is bilinear for each $K \in \ob(\mathsf{AbGrp})$. This motivates the following definition. 
 
-\begin{definition}[Preadditive Category]
+\begin{definition}[Preadditive Category \cite{maclane:categories:1978}]
 	A \bld{preadditive category} is a locally small category $\mathcal{C}$ in which all hom-sets $\mathcal{C}(X,Y)$ can be equipped with the structure of an abelian group and composition is bilinear, i.e. for all mophisms $f,f' : X \to Y$ and $g,g' : Y \to Z$ in $\mathcal{C}$ we have that
 	\begin{equation}
 		(g + g') \circ (f + f') = g \circ f + g \circ f' + g' \circ f + g' \circ f'.
@@ -52,11 +56,11 @@ Let us again consider $\mathsf{AbGrp}$. As in $\mathsf{Grp}$, the trivial group 
 \end{equation*}
 \noindent holds. Those observations motivate the following definitions.
 
-\begin{definition}[Null Object]
+\begin{definition}[Null Object \cite{maclane:categories:1978}]
 	Let $\mathcal{C}$ be a category. A \bld{null object in $\mathcal{C}$} is a an object of $\mathcal{C}$ which is both initial and terminal.
 \end{definition}
 
-\begin{definition}[Biproduct Diagram]
+\begin{definition}[Biproduct Diagram \cite{maclane:categories:1978}]
 	Let $\mathcal{C}$ be a preadditive category and $X,Y \in \ob(\mathcal{C})$. A \bld{biproduct diagram for $X$ and $Y$} is a diagram
 	\begin{equation*}
 		\begin{tikzcd}
@@ -70,32 +74,32 @@ Let us again consider $\mathsf{AbGrp}$. As in $\mathsf{Grp}$, the trivial group 
 	\noindent holds.
 \end{definition}
 
-\begin{definition}[Additive Category]
+\begin{definition}[Additive Category \cite{maclane:categories:1978}]
 	An \bld{additive category} is a preadditive category which has a null object and a biproduct for each pair of its objects.	
 \end{definition}
 
 \section{Abelian Categories}
 
-\begin{definition}[Zero Arrow]
-	Let $\mathcal{C}$ be a category with a null object $0$. For $X,Y \in \ob(\mathcal{C})$, the unique composition $X \to 0 \to Y$ is called the \bld{zero arrow from $X$ to $Y$}, denoted by $0_{X,Y}$.
+\begin{definition}[Zero Arrow \cite{maclane:categories:1978}]
+	Let $\mathcal{C}$ be a category with a null object $0$. For $X,Y \in \ob(\mathcal{C})$, the unique composition $X \to 0 \to Y$ is called the \bld{zero arrow from $X$ to $Y$}, denoted by $0 : X \to Y$.
 \end{definition}
 
-\begin{definition}[Kernel and Cokernel]
+\begin{definition}[Kernel and Cokernel \cite{maclane:categories:1978}]
 	Let $\mathcal{C}$ be a category with a null object $0$. A \bld{kernel of a morphism $f : X \to Y$} is defined to be an equalizer of
 	\begin{equation*}
 		\begin{tikzcd}
-			X \arrow[r, shift left, "f"]\arrow[r,shift right,"0_{X,Y}"'] & Y.
+			X \arrow[r, shift left, "f"]\arrow[r,shift right,"0"'] & Y.
 		\end{tikzcd}
 	\end{equation*}
 	Dually, a \bld{cokernel of a morphism $f : X \to Y$} is a coequalizer of the above diagram. 
 \end{definition}
 
 \begin{lemma}
-	In $\mathsf{AbGrp}$, every monic is a kernel and every epic is a cokernel.
+	In $\mathsf{Grp}$, every monic is a kernel and every epic is a cokernel.
 \end{lemma}
 
 \begin{proof}
-	Let $m : G \to H$ be a monic in $\mathsf{AbGrp}$. Consider the fork
+	Let $m : G \to H$ be a monic in $\mathsf{Grp}$. Consider the fork
 	\begin{equation*}
 		\begin{tikzcd}
 			G \arrow[r,"m"] & H \arrow[r,shift left,"\pi"]\arrow[r,shift right,"0"'] & H/m(G).
@@ -107,10 +111,10 @@ Let us again consider $\mathsf{AbGrp}$. As in $\mathsf{Grp}$, the trivial group 
 			\ker e \arrow[r,shift left,"\iota"]\arrow[r,shift right,"0"'] & G \arrow[r,"e"] & H
 		\end{tikzcd}
 	\end{equation*}
-	\noindent is a universal cofork for any epic $e : G \to H$.
+	\noindent is a universal cofork for any epic $e : G \to H$ in $\mathsf{Grp}$.
 \end{proof}
 
-\begin{definition}[Abelian Category]
+\begin{definition}[Abelian Category \cite{maclane:categories:1978}]
 	An \bld{abelian category} is an additive category satisfying the following additional conditions:
 	\begin{enumerate}[label = \textup{(}\alph*\textup{)}, wide = 0pt]
 		\item Every morphism admits a kernel.
@@ -126,11 +130,11 @@ Let us again consider $\mathsf{AbGrp}$. As in $\mathsf{Grp}$, the trivial group 
 
 \section{The Mitchell Embedding Theorem and its Consequences}
 
-\begin{definition}[Exact Functor]
+\begin{definition}[Exact Functor \cite{maclane:categories:1978}]
 	A functor $F : \mathcal{C} \to \mathcal{D}$ between two abelian categories $\mathcal{C}$ and $\mathcal{D}$ is called \bld{exact}, if $F$ preserves all finite limits and all finite colimits.
 \end{definition}
 
-\begin{theorem}[Mitchell Embedding]
+\begin{theorem}[Mitchell Embedding \cite{freyd:abelian_categories:1964}]
 	For every small abelian category there is an exact, full and faithful functor into $_{R}\mathsf{Mod}$ for some ring $R$.
 	\label{thm:mitchell_embedding}
 \end{theorem}
@@ -139,4 +143,6 @@ A usefull application of the Mitchell embedding is that one can do proofs of bas
 
 \section{The Eilenberg-Watts Theorem and its Consequences}
 
+
+\printbibliography
 \end{document}
