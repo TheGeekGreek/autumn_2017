@@ -1,6 +1,29 @@
 \chapter{The Fundamental Group}
 \section*{The Fundamental Grupoid}
-\subsection*{Construction of the fundamental Grupoid}
+\subsection*{$\pi_0$}
+
+\begin{lemma}
+	There exists a functor $\mathsf{Top} \to \mathsf{Set}$. Moreover, if $f,g \in \mathsf{Top}(X,Y)$ are freely homotopic, then $\pi_0(f) = \pi_0(g)$.
+	\label{lem:pi_0}
+\end{lemma}
+
+\begin{proof}
+	On objects $X \in \ob(\mathsf{Top})$, define $\pi_0(X)$ to be the set of equivalence classes of $X$ under path connectedness. On morphisms $f : X \to Y$, define $\pi_0(f) : \pi_0(X) \to \pi_0(Y)$ by $\pi_0(f)\sbr{x} := \sbr[0]{f(x)}$. This is well defined since if $\sbr{x} = \sbr[0]{y}$, there exists a path $u$ from $x$ to $y$ in $X$ and it is easy to check that $f \circ u$ is a path from $f(x)$ to $f(y)$. Checking that $\pi_0$ is indeed a functor is left as an exercise. Suppose $H : f \simeq g$ and let $x \in X$. Then $H(x,t)$ is a path from $f(x)$ to $g(x)$ and thus $\pi_0(f)\sbr{x} = \sbr[0]{f(x)} = \sbr[0]{g(x)} = \pi_0(g)\sbr{x}$.
+\end{proof}
+
+\begin{exercise}
+	Check the functoriality of $\pi_0 : \mathsf{Top} \to \mathsf{Set}$.
+\end{exercise}
+
+\begin{proposition}
+	If $X,Y \in \ob(\mathsf{Top})$ have the same homotopy type, then $\abs[0]{\pi_0(X)} = \abs[0]{\pi_0(Y)}$, i.e. $X$ and $Y$ have the same number of path components.
+\end{proposition}
+
+\begin{proof}
+	Since $X$ and $Y$ are of the same homotopy type, they are isomorphic in $\mathsf{hTop}$. By lemma \ref{lem:pi_0}, $\pi_0$ descends to $\mathsf{hTop}$ and since functors preserve isomorphisms, we have that $\pi_0(X) \cong \pi_0(Y)$. In $\mathsf{Set}$, isomorphisms are bijections and thus the statement follows.
+\end{proof}
+
+\subsection*{Construction of the Fundamental Grupoid}
 
 \begin{lemma}[Gluing Lemma]
 	Let $X,Y \in \ob(\mathsf{Top})$, $(X_\alpha)_{\alpha \in A}$ a finite closed cover of $X$ and $(f_\alpha)_{\alpha \in A}$ a finite family of maps $f_\alpha \in \mathsf{Top}(X_\alpha,Y)$ such that $f_\alpha\vert_{X_\alpha \cap X_\beta} = f_\beta\vert_{X_\alpha \cap X_\beta}$ for all $\alpha,\beta \in A$. Then there exists a unique $f \in \mathsf{Top}(X,Y)$ such that $f\vert_{X_\alpha} = f_\alpha$ for all $\alpha \in A$.
@@ -246,8 +269,14 @@
 	Check that $\Pi : \mathsf{Top} \to \mathsf{Grpd}$ is indeed a functor.
 \end{exercise}
 
+\begin{definition}[Free Homotopy]
+	Let $f,g \in \mathsf{Top}(X,Y)$. $f$ and $g$ are said to be \bld{freely homotopic} if $f \simeq_{\varnothing} g$.
+\end{definition}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Fundamental group																							%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{The Fundamental Group}
 
 \begin{lemma}
@@ -284,6 +313,10 @@
 	Thus $\pi_1(f)$ is a morphism in $\mathsf{Grp}$. Functoriality of $\pi_1$ immediately follows from the functoriality of $\Pi$.
 \end{proof}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%First Properties of the Fundamental Group																	%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{First Properties of the Fundamental Group}
 \begin{lemma}
 	Let $X \in \ob(\mathsf{Top})$, $p \in X$ and $A$ be the path component of $X$ containing $p$. Then $\pi_1(\iota)$, where $\iota : A \hookrightarrow X$ denotes the inclusion, is an isomorphism.
 \end{lemma}
@@ -293,11 +326,11 @@
 \end{proof}
 
 \begin{lemma}
+	\label{lem:fundamental_group_path_connected}
 	Let $X \in \ob(\mathsf{Top})$ be path connected and $p,q \in X$. Then 
 	\begin{equation*}
 		\pi_1(X,p) \cong \pi_1(X,q).	
-	\end{equation*}
-	\label{lem:fundamental_group_path_connected}
+	\end{equation*}	
 \end{lemma}
 
 \begin{proof}
@@ -315,6 +348,108 @@
 	\end{align*}
 \end{proof}
 
+\begin{lemma}[Square Lemma]
+	\label{lem:square_lemma}
+	Let $F \in \mathsf{Top}(I \times I,X)$. Then
+	\begin{equation*}
+		F(\cdot,0) \ast F(1,\cdot) \simeq_{\partial I} F(0,\cdot) \ast F(\cdot,1).	
+	\end{equation*}
+\end{lemma}
+
+\begin{proof}
+	Let us consider the paths $f_0$, $f_1$, $g_0$ and $g_1$ in $I \times I$ as indicated in figure \ref{fig:square_lemma_paths}. Then there is a straight line homotopy $H : I \times I \to I \times I$ between them as indicated in figure \ref{fig:square_lemma_homotopy}. Explicitly
+	\begin{equation*}
+		H(s,t) := (1 -t)(f_0 \ast f_1)(s) + t(g_0 \ast g_1)(s).
+	\end{equation*}
+	Then 
+	\begin{equation*}
+		(F \circ H)(s,t) = \ccases{
+			F\del[1]{2s(1 - t),2st} & 0 \leq s \leq \frac{1}{2},\\
+			F\del[1]{1 + 2t(s - 1), t + (1 - t)(2s - 1)} & \frac{1}{2} \leq s \leq 1,
+		}
+	\end{equation*}
+	\noindent is the homotopy we are looking for.
+	\begin{figure}[h!tb]
+		\centering
+		\begin{subfigure}[b]{.5\textwidth}
+			\centering
+			\begin{tikzpicture}[scale = 3]
+				\draw [thick] (0,0) -- (1,0);
+				\draw [thick] (0,0) -- (0,1);
+				\draw [thick] (0,1) -- (1,1);
+				\draw [thick] (1,0) -- (1,1);
+				\draw [thick,->] (0,1) -- (0.5,1);
+				\draw [thick,->] (0,0) -- (0,.5);
+				\draw [thick,->] (0,0) -- (.5,0);
+				\draw [thick,->] (1,0) -- (1,.5);
+									
+				\draw (.5,0) node[below] {$f_0$};
+				\draw (1,.5) node[right] {$f_1$};
+				\draw (0,.5) node[left] {$g_0$};
+				\draw (.5,1) node[above] {$g_1$};
+			\end{tikzpicture}
+			\caption{The paths $f_0$, $f_1$, $g_0$ and $g_1$ in $I \times I$.}
+			\label{fig:square_lemma_paths}
+		\end{subfigure}
+		~
+		\begin{subfigure}[b]{.5\textwidth}
+			\centering
+			\begin{tikzpicture}[scale = 3]
+    			% Draw axes
+    			\draw [<->,thick] (0,1.2) node[above] {$t$}
+        		|- (1.2,0) node[right] {$s$};
+    			% Draw two intersecting lines
+				\draw [thick] (0,1) -- (1,1);
+				\draw [thick] (1,0) -- (1,1);
+				\draw [thick,->] (0,1) -- (0.5,1);
+				\draw [thick,->] (0,0) -- (0,.5);
+				\draw [thick,->] (0,0) -- (.5,0);
+				\draw [thick,->] (1,0) -- (1,.5);
+	
+				\draw [thin] (.2,0) -- (0,.2);
+				\draw [thin] (.4,0) -- (0,.4);
+				\draw [thin] (.6,0) -- (0,.6);
+				\draw [thin] (.8,0) -- (0,.8);
+				\draw [thin] (1,0) -- (0,1);
+				\draw [thin] (.2,1) -- (1,.2);
+				\draw [thin] (.4,1) -- (1,.4);
+				\draw [thin] (.6,1) -- (1,.6);
+				\draw [thin] (.8,1) -- (1,.8);
+								
+				\draw (.5,0) node[below] {$f_0$};
+				\draw (1,.5) node[right] {$f_1$};
+				\draw (0,.5) node[left] {$g_0$};
+				\draw (.5,1) node[above] {$g_1$};
+			\end{tikzpicture}
+			\caption{$f_0 \ast f_1 \simeq_{\partial I} g_0 \ast g_1$.}
+			\label{fig:square_lemma_homotopy}
+		\end{subfigure}
+	\end{figure}
+\end{proof}
+
+\begin{proposition}
+	Let $f_0,f_1 \in \mathsf{Top}(X,Y)$ such that $F : f_0 \simeq f_1$. Moreover, let $p \in X$. Then the diagram
+	\begin{equation*}
+		\begin{tikzcd}
+			\pi_1(X,p) \arrow[r,"\pi_1(f_0)"]\arrow[dr] & \pi_1(Y,f_0(p)) \arrow[d,"\Phi_{F(p,\cdot)}"]\\
+			& \pi_1(Y,f_1(p))
+		\end{tikzcd}
+	\end{equation*}
+	\noindent commutes, where $\Phi_\cdot$ denotes the isomorphism in lemma \ref{lem:fundamental_group_path_connected}.
+\end{proposition}
+
+\begin{proof}
+	Let $\sbr{u} \in \pi_1(X,p)$. We have that
+	\begin{align*}
+		\pi_1(f_1)\sbr{u} = \del[1]{\Phi_{F(p,\cdot)} \circ \pi_1(f_0)}\sbr{u} & \Leftrightarrow \sbr[0]{f_1 \circ u} = \sbr[0]{\wbar{F}(p,\cdot) \ast (f_0 \circ u) \ast F(p,\cdot)}\\
+		& \Leftrightarrow \sbr[0]{F(p,\cdot) \ast (f_1 \circ u)} = \sbr[0]{(f_0 \circ u) \ast F(p,\cdot)}\\
+		& \Leftrightarrow \sbr[0]{F(p,\cdot) \ast F(u\cdot,1)} = \sbr[0]{F(u\cdot,0) \ast F(p,\cdot)}.
+	\end{align*}
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Fundamental group of the Circle																			%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{$\pi_1(\mathbb{S}^1)$}  
 
 \begin{definition}[Exponential Quotient Map and Fundamental Loop]
@@ -574,6 +709,7 @@
 	\begin{enumerate}[label = \textup{(}\alph*\textup{)}]
 		\item Show that being freely homotopic induces a congruence on $\mathsf{Top}$. The resulting quotient category is called the \bld{homotopy category} and is denoted by $\mathsf{hTop}$.
 		\item We say that two topological spaces $X$ and $Y$ are of the \bld{same homotopy type}, if they are isomorphic in $\mathsf{hTop}$. Moreover, a topological space $X$ is said to be \bld{contractible} if $\id_X$ is freely homotopic to a constant map. Show that a topological space $X$ has the same homotopy type as a one point space $\ast$ if and only if $X$ is contractible.
-	\end{enumerate}
-	
+	\end{enumerate}	
 \end{problem}
+
+
