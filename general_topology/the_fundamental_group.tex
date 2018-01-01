@@ -352,7 +352,7 @@
 	\label{lem:square_lemma}
 	Let $F \in \mathsf{Top}(I \times I,X)$. Then
 	\begin{equation*}
-		F(\cdot,0) \ast F(1,\cdot) \simeq_{\partial I} F(0,\cdot) \ast F(\cdot,1).	
+		F(0,\cdot) \ast F(\cdot,1) \simeq_{\partial I} F(\cdot,0) \ast F(1,\cdot).	
 	\end{equation*}
 \end{lemma}
 
@@ -364,8 +364,8 @@
 	Then 
 	\begin{equation*}
 		(F \circ H)(s,t) = \ccases{
-			F\del[1]{2s(1 - t),2st} & 0 \leq s \leq \frac{1}{2},\\
-			F\del[1]{1 + 2t(s - 1), t + (1 - t)(2s - 1)} & \frac{1}{2} \leq s \leq 1,
+			F\del[1]{2st,2s(1-t)} & 0 \leq s \leq \frac{1}{2},\\
+			F\del[1]{t + (1 - t)(2s - 1),1 + 2t(s - 1)} & \frac{1}{2} \leq s \leq 1,	
 		}
 	\end{equation*}
 	\noindent is the homotopy we are looking for.
@@ -383,10 +383,10 @@
 				\draw [thick,->] (0,0) -- (.5,0);
 				\draw [thick,->] (1,0) -- (1,.5);
 									
-				\draw (.5,0) node[below] {$f_0$};
-				\draw (1,.5) node[right] {$f_1$};
-				\draw (0,.5) node[left] {$g_0$};
-				\draw (.5,1) node[above] {$g_1$};
+				\draw (.5,0) node[below] {$g_0$};
+				\draw (1,.5) node[right] {$g_1$};
+				\draw (0,.5) node[left] {$f_0$};
+				\draw (.5,1) node[above] {$f_1$};
 			\end{tikzpicture}
 			\caption{The paths $f_0$, $f_1$, $g_0$ and $g_1$ in $I \times I$.}
 			\label{fig:square_lemma_paths}
@@ -416,10 +416,10 @@
 				\draw [thin] (.6,1) -- (1,.6);
 				\draw [thin] (.8,1) -- (1,.8);
 								
-				\draw (.5,0) node[below] {$f_0$};
-				\draw (1,.5) node[right] {$f_1$};
-				\draw (0,.5) node[left] {$g_0$};
-				\draw (.5,1) node[above] {$g_1$};
+				\draw (.5,0) node[below] {$g_0$};
+				\draw (1,.5) node[right] {$g_1$};
+				\draw (0,.5) node[left] {$f_0$};
+				\draw (.5,1) node[above] {$f_1$};
 			\end{tikzpicture}
 			\caption{$f_0 \ast f_1 \simeq_{\partial I} g_0 \ast g_1$.}
 			\label{fig:square_lemma_homotopy}
@@ -428,10 +428,11 @@
 \end{proof}
 
 \begin{proposition}
+	\label{prop:free_homotopy_pi_1}
 	Let $f_0,f_1 \in \mathsf{Top}(X,Y)$ such that $F : f_0 \simeq f_1$. Moreover, let $p \in X$. Then the diagram
 	\begin{equation*}
 		\begin{tikzcd}
-			\pi_1(X,p) \arrow[r,"\pi_1(f_0)"]\arrow[dr] & \pi_1(Y,f_0(p)) \arrow[d,"\Phi_{F(p,\cdot)}"]\\
+			\pi_1(X,p) \arrow[r,"\pi_1(f_0)"]\arrow[dr,"\pi_1(f_1)"'] & \pi_1(Y,f_0(p)) \arrow[d,"\Phi_{F(p,\cdot)}"]\\
 			& \pi_1(Y,f_1(p))
 		\end{tikzcd}
 	\end{equation*}
@@ -443,8 +444,26 @@
 	\begin{align*}
 		\pi_1(f_1)\sbr{u} = \del[1]{\Phi_{F(p,\cdot)} \circ \pi_1(f_0)}\sbr{u} & \Leftrightarrow \sbr[0]{f_1 \circ u} = \sbr[0]{\wbar{F}(p,\cdot) \ast (f_0 \circ u) \ast F(p,\cdot)}\\
 		& \Leftrightarrow \sbr[0]{F(p,\cdot) \ast (f_1 \circ u)} = \sbr[0]{(f_0 \circ u) \ast F(p,\cdot)}\\
-		& \Leftrightarrow \sbr[0]{F(p,\cdot) \ast F(u\cdot,1)} = \sbr[0]{F(u\cdot,0) \ast F(p,\cdot)}.
+		& \Leftrightarrow \sbr[0]{F(u(0),\cdot) \ast F(u\cdot,1)} = \sbr[0]{F(u\cdot,0) \ast F(u(1),\cdot)},
 	\end{align*}
+	\noindent where the last equality is true by the square lemma \ref{lem:square_lemma}.
+\end{proof}
+
+\begin{theorem}[Homotopy Invariance of $\pi_1$]
+	Suppose $X$ and $Y$ are of the same homotopy type with homotopy equivalence $f : X \to Y$. Then for any $p \in X$ we have that $\pi_1(f) : \pi_1(X,p) \to (Y,f(p))$ is an isomorphism.
+	\label{thm:homotopy_invariance_pi_1}
+\end{theorem}
+
+\begin{proof}
+	By assumption there exists $g \in \mathsf{Top}(Y,X)$ such that $F : g \circ f \simeq \id_X$ and $G : f \circ g \simeq \id_Y$. By the functoriality of $\pi_1$ and proposition \ref{prop:free_homotopy_pi_1}, the diagram
+	\begin{equation*}
+		\begin{tikzcd}
+			& \pi_1(Y,f(p)) \arrow[dr,"\pi_1(g)"]\\
+			\pi_1(X,p) \arrow[ur,"\pi_1(f)"]\arrow[dr,"\id_{\pi_1(X,p)}"']\arrow[rr,"\pi_1(g\circ f)"] & & \pi_1(X,g(f(p))) \arrow[dl,"\Phi_{F(p,\cdot)}"]\\
+			& \pi_1(X,p)
+		\end{tikzcd}
+	\end{equation*}
+	\noindent commutes. Since $\Phi_{F(p,\cdot)}$ is an isomorphism, $\pi_1(g \circ f)$ is an isomorphism, too. Hence $\pi_1(f)$ is injective. Using $G$ instead of $F$ and a similar argument yields that $\pi_1(f)$ is surjective.
 \end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -708,7 +727,7 @@
 	In this exercise we will introduce some additional notions regarding homotopies.
 	\begin{enumerate}[label = \textup{(}\alph*\textup{)}]
 		\item Show that being freely homotopic induces a congruence on $\mathsf{Top}$. The resulting quotient category is called the \bld{homotopy category} and is denoted by $\mathsf{hTop}$.
-		\item We say that two topological spaces $X$ and $Y$ are of the \bld{same homotopy type}, if they are isomorphic in $\mathsf{hTop}$. Moreover, a topological space $X$ is said to be \bld{contractible} if $\id_X$ is freely homotopic to a constant map. Show that a topological space $X$ has the same homotopy type as a one point space $\ast$ if and only if $X$ is contractible.
+		\item We say that two topological spaces $X$ and $Y$ are of the \bld{same homotopy type}, if they are isomorphic in $\mathsf{hTop}$. An explicit choice of an isomorphism is called a \bld{homotopy equivalence}. Moreover, a topological space $X$ is said to be \bld{contractible} if $\id_X$ is freely homotopic to a constant map. Show that a topological space $X$ has the same homotopy type as a one point space $\ast$ if and only if $X$ is contractible.
 	\end{enumerate}	
 \end{problem}
 
