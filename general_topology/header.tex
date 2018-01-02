@@ -185,6 +185,10 @@
 \usepackage{tikz}
 %\usepackgae{graphicx}
 \usepackage{subcaption}
+\makeatletter
+\def\@captionheadfont{}
+\makeatother
+\renewcommand{\thesubfigure}{\alph{subfigure}}
 \usepackage{enumitem} 
 %\renewcommand{\labelitemi}{$\bullet$}
 %\renewcommand{\labelitemii}{$\ast$}
@@ -284,3 +288,7 @@
 \newcommand{\Ubcal}{\bm{\mathcal{U}}}
 \renewcommand{\det}{\mathrm{det}}
 \newcommand{\ab}{\mathrm{ab}}
+
+\usepackage{trimclip}
+\newcommand{\crop}[1]{\clipbox*{0pt -.5ex {\width} {.7\height}}{#1}}
+\newcommand{\jota}{\crop{\raisebox{-2pt}{\scalebox{1}[1.5]{\rotatebox[origin=c]{-32}{\reflectbox{$\iota$}}}}}}

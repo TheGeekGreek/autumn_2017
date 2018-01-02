@@ -273,6 +273,25 @@
 	Let $f,g \in \mathsf{Top}(X,Y)$. $f$ and $g$ are said to be \bld{freely homotopic} if $f \simeq_{\varnothing} g$.
 \end{definition}
 
+\begin{example}[Straight Line Homotopy]
+	Let $V$ be a real vector space. A subset $S \subseteq V$ is said to be \bld{convex}, if the line segment $\cbr[0]{(1 - t)p + tq : 0 \leq t \leq 1}$ is contained in $S$ for all $p,q \in V$. Suppose now that $V$ is finite dimensional and $S \subseteq V$ is convex. Moreover, let $f,g \in \mathsf{Top}(X,S)$ for some $X \in \ob(\mathsf{Top})$. Define $H : X \times I \to S$ by
+	\begin{equation*}
+		H(x,t) := (1 - t)f(x) + tg(x).
+	\end{equation*}
+	Then $H$ is continuous and clearly $H : f \simeq g$. We call $H$ the \bld{straight line homotopy between $f$ and $g$}. Hence any two continuous maps defined on the same domain into a convex space are freely homotopic.
+\end{example}
+
+\begin{remark}
+	We will also write $f \simeq g$ for a free homotopy.
+\end{remark}
+
+\begin{definition}[Nullhomotopic]
+	A mapping $f \in \mathsf{Top}(X,Y)$ is said to be \bld{nullhomotopic}, if $f$ is freely homotopic to a constant map.
+\end{definition}
+
+\begin{definition}[Contractible]
+	A topological space $X$ is said to be \bld{contractible}, if $\id_X$ is nullhomotopic.
+\end{definition}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Fundamental group																							%
@@ -312,6 +331,10 @@
 	\end{align*}
 	Thus $\pi_1(f)$ is a morphism in $\mathsf{Grp}$. Functoriality of $\pi_1$ immediately follows from the functoriality of $\Pi$.
 \end{proof}
+
+\begin{definition}[Simply Connected]
+	A path connected topologial space $X$ is said to be \bld{simply connected}, if $\pi_1(X)$ is trivial.
+\end{definition}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %First Properties of the Fundamental Group																	%
@@ -357,7 +380,7 @@
 \end{lemma}
 
 \begin{proof}
-	Let us consider the paths $f_0$, $f_1$, $g_0$ and $g_1$ in $I \times I$ as indicated in figure \ref{fig:square_lemma_paths}. Then there is a straight line homotopy $H : I \times I \to I \times I$ between them as indicated in figure \ref{fig:square_lemma_homotopy}. Explicitly
+	The idea is to consider first the case $F = \id_{I \times I}$. Hence define the paths $f_0$, $f_1$, $g_0$ and $g_1$ in $I \times I$ as indicated in figure \ref{fig:square_lemma_paths}. Then there is a straight line homotopy $H : I \times I \to I \times I$ between them as indicated in figure \ref{fig:square_lemma_homotopy}. Explicitly
 	\begin{equation*}
 		H(s,t) := (1 -t)(f_0 \ast f_1)(s) + t(g_0 \ast g_1)(s).
 	\end{equation*}
@@ -382,7 +405,7 @@
 				\draw [thick,->] (0,0) -- (0,.5);
 				\draw [thick,->] (0,0) -- (.5,0);
 				\draw [thick,->] (1,0) -- (1,.5);
-									
+				
 				\draw (.5,0) node[below] {$g_0$};
 				\draw (1,.5) node[right] {$g_1$};
 				\draw (0,.5) node[left] {$f_0$};
@@ -449,6 +472,31 @@
 	\noindent where the last equality is true by the square lemma \ref{lem:square_lemma}.
 \end{proof}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Homotopy Invariance of \pi_1																				%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Homotopy Invariance of $\pi_1$}
+\begin{lemma}
+	Being freely homotopic is a congruence on $\mathsf{Top}$.
+	\label{lem:freely_homotopic_congruence}
+\end{lemma}
+
+\begin{proof}
+	(a) is immediate so we only have to check (b). Suppose $f_0 \in \mathsf{Top}(X,Y)$ and $g_0 \in \mathsf{Top}(Y,Z)$ such that $F : f_0 \simeq f_1$ and $G : g_0 \simeq g_1$. Consider $H_1 : X \times I \to Z$ defined by $H_1 := g_0 \circ F$. Then clearly $H_1 : g_0 \circ f_0 \simeq g_0 \circ f_1$. Moreover, we define $H_2 : X \times I \to Z$ by $H_2 := G(f_1 \cdot,\cdot)$. Then $H_2 : g_0 \circ f_1 \simeq g_1 \circ f_1$. And we conclude by transitivity. 
+\end{proof}
+
+\begin{definition}[$\mathsf{hTop}$]
+	The quotient category under the congruence of being freely homotopic is called the \bld{homotopy category}, and is denoted by $\mathsf{hTop}$.
+\end{definition}
+
+\begin{definition}[Homotopy Type]
+	Two topological spaces $X$ and $Y$ are of the \bld{same homotopy type}, if they are isomorphic in $\mathsf{hTop}$. An explicit choice of such an isomorphism is called a \bld{homotopy equivalence}.
+\end{definition}
+
+\begin{exercise}
+	Show that a topological space $X$ has the same homotopy type as a one-point space if and only if $X$ is contractible.
+\end{exercise}
+
 \begin{theorem}[Homotopy Invariance of $\pi_1$]
 	Suppose $X$ and $Y$ are of the same homotopy type with homotopy equivalence $f : X \to Y$. Then for any $p \in X$ we have that $\pi_1(f) : \pi_1(X,p) \to (Y,f(p))$ is an isomorphism.
 	\label{thm:homotopy_invariance_pi_1}
@@ -466,6 +514,10 @@
 	\noindent commutes. Since $\Phi_{F(p,\cdot)}$ is an isomorphism, $\pi_1(g \circ f)$ is an isomorphism, too. Hence $\pi_1(f)$ is injective. Using $G$ instead of $F$ and a similar argument yields that $\pi_1(f)$ is surjective.
 \end{proof}
 
+\begin{definition}
+		
+\end{definition}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Fundamental group of the Circle																			%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -480,17 +532,16 @@
 \end{definition}
 
 \begin{proposition}[Lifting Property of the Circle]
+	\label{prop:lifting_circle}
 	Let $n \in \mathbb{Z}$, $n \geq 0$, $X \subseteq \mathbb{R}^n$ compact and convex, $p \in X$, $f \in \mathsf{Top}_\ast\del[1]{(X,p),(\mathbb{S}^1,1)}$ and $m \in \mathbb{Z}$. Then there exists a unique map $\wtilde{f} \in \mathsf{Top}_\ast\del[1]{(X,p),(\mathbb{R},m)}$, called the \bld{lifting of $f$}, such that 
 	\begin{equation*}
-		\centering
-		\xymatrix{
-			& (\mathbb{R},m) \ar[d]^\varepsilon\\
-			(X,p) \ar[r]_f\ar[ur]^{\wtilde{f}}	& (\mathbb{S}^1,1)
-		}
-		\end{equation*}
-		\noindent commutes. 
-		\label{prop:lifting_circle}
-	\end{proposition}
+		\begin{tikzcd}
+			& (\mathbb{R},m) \arrow[d,"\varepsilon"]\\
+			(X,p) \ar[r,"f"']\arrow[ur,"\wtilde{f}"] & (\mathbb{S}^1,1)
+		\end{tikzcd}
+	\end{equation*}
+	\noindent commutes. 
+\end{proposition}
 
 \begin{proof}
 	We show first existence and then uniqueness.
@@ -535,13 +586,12 @@
 	\end{equation*}
 	\noindent for all $t \in I$. Thus
 	\begin{equation*}
-		\centering
-		\xymatrix{
-			& (\mathbb{R},0) \ar[d]^\varepsilon\\
-			(I,0) \ar[r]_{c_1}\ar[ur]^{\wtilde{w}_0} & (\mathbb{S}^1,1)
-		}
+		\begin{tikzcd}
+			& (\mathbb{R},0) \arrow[d,"\varepsilon"]\\
+			(I,0) \arrow[r,"c_1"']\arrow[ur,"\wtilde{w}_0"] & (\mathbb{S}^1,1)		
+		\end{tikzcd}
 	\end{equation*}
-	\noindent commutes. But also $c_0$ makes the above diagram commute. By uniqueness, $\wtilde{w}_0 = c_0$. Define $\wtilde{v}_0(s) := \wtilde{F}(s,1)$ for all $s \in I$. Then $\wtilde{v}_0(0) = \wtilde{F}(0,1) = \wtilde{w}_0(1) = 0$ and it is easy to check that $\wtilde{v}_0$ is a lift for $v$. Hence $\wtilde{v}_0 = \wtilde{v}$. Finally, define $\wtilde{w}_1(t) := \wtilde{F}(1,t)$ for all $t \in I$. Then $\wtilde{w}_1(0) = \wtilde{F}(1,0) = \wtilde{u}(1)$ and thus $\wtilde{w}_1 \in \mathsf{Top}_\ast\del[1]{(I,0),(\mathbb{R},\wtilde{u}(0))}$. Moreover
+	\noindent commutes. But also $c_0$ makes the above diagram commute. By uniqueness, $\wtilde{w}_0 = c_0$. Define $\wtilde{v}_0(s) := \wtilde{F}(s,1)$ for all $s \in I$. Then $\wtilde{v}_0(0) = \wtilde{F}(0,1) = \wtilde{w}_0(1) = 0$ and it is easy to check that $\wtilde{v}_0$ is a lift for $v$. Hence $\wtilde{v}_0 = \wtilde{v}$. Finally, define $\wtilde{w}_1(t) := \wtilde{F}(1,t)$ for all $t \in I$. Then $\wtilde{w}_1(0) = \wtilde{F}(1,0) = \wtilde{u}(1)$ and thus $\wtilde{w}_1 \in \mathsf{Top}_\ast\del[1]{(I,0),(\mathbb{R},\wtilde{u}(1))}$. Moreover
 	\begin{equation*}
 		(\varepsilon \circ \wtilde{w}_1)(t) = \varepsilon\del[1]{\wtilde{F}(1,t)} = F(1,t) = v(1) = u(1) = 1
 	\end{equation*}
@@ -558,30 +608,30 @@
 
 \begin{proof}
 	Define $\deg : \pi_1(\mathbb{S}^1,1) \to \mathbb{Z}$ by $\deg \sbr{u} := \deg u$. This is well defined by corollary \ref{cor:degree}, since if $\sbr{u} = \sbr{v}$, then $\sbr[0]{\wtilde{u}} = \sbr[0]{\wtilde{v}}$ and in particular $\wtilde{u}(1) = \wtilde{v}(1)$. 
-	\begin{enumerate}[label = \textit{Step \arabic*:},wide = 0pt, itemsep = 1.5ex]
-		\item \textit{$\deg \in \mathsf{Grp}\del[1]{\pi_1(\mathbb{S}^1,1),(\mathbb{Z},+)}$.} Let $\sbr{u},\sbr{v} \in \pi_1(\mathbb{S}^1,1)$ and $m := \deg\sbr{u}$, $n := \deg \sbr{v}$. Moreover, let $\wtilde{u}$ and $\wtilde{v}$ denote the unique liftings of $u$ and $v$, respectively, such that $\wtilde{u}(0) = 0$ and $\wtilde{v}(0) = 0$. Define
+	\begin{enumerate}[label = \textit{Step \arabic*:},wide = 0pt]
+		\item \textit{$\deg \in \mathsf{Grp}\del[1]{\pi_1(\mathbb{S}^1,1),(\mathbb{Z},+)}$.} Let $\sbr{u},\sbr{v} \in \pi_1(\mathbb{S}^1,1)$. Moreover, let $\wtilde{u}$ and $\wtilde{v}$ denote the unique liftings of $u$ and $v$, respectively, such that $\wtilde{u}(0) = 0$ and $\wtilde{v}(0) = 0$. Define $\wtilde{w} : I \to \mathbb{R}$ by
 			\begin{equation*}
 				\wtilde{w}(s) := \ccases{
 				\wtilde{u}(2s) & 0 \leq s \leq \frac{1}{2},\\
-				m + \wtilde{v}(2s - 1) & \frac{1}{2} \leq s \leq 1.
+				\deg u + \wtilde{v}(2s - 1) & \frac{1}{2} \leq s \leq 1.
 			}
 			\end{equation*}
-		Clearly $\wtilde{w}$ is continuous and $\wtilde{w}(0) = 0$. Hence $\wtilde{w} \in \mathsf{Top}_\ast\del[1]{(I,0),(\mathbb{R},0)}$. Also we have that $\varepsilon \circ \wtilde{w} = u \ast v$ and thus $\wtilde{w}$ is the lift of $u \ast v$. But $\wtilde{w}(1) = m + n$ and so
+			Then $\wtilde{w}$ is continuous by the gluing lemma and $\wtilde{w}(0) = 0$. Hence $\wtilde{w} \in \mathsf{Top}_\ast\del[1]{(I,0),(\mathbb{R},0)}$. Also we have that $\varepsilon \circ \wtilde{w} = u \ast v$ and thus $\wtilde{w}$ is the lift of $u \ast v$. But $\wtilde{w}(1) = \deg u + \deg v$ and so
 			\begin{equation*}
-				\deg(\sbr{u}\sbr{v}) = \deg\sbr{u\ast v} = \deg (u \ast v) = \wtilde{w}(1) = m + n = \deg\sbr{u} + \deg \sbr{v}.
+				\deg(\sbr{u}\sbr{v}) = \deg\sbr{u\ast v} = \deg (u \ast v) = \wtilde{w}(1) = \deg u + \deg v = \deg\sbr{u} + \deg \sbr{v}.
 			\end{equation*}
 		\item \textit{$\deg$ is injective.} Suppose $\deg\sbr{u} = 0$. Then $\wtilde{u}(1) = 0$ and thus $\wtilde{u} \in \Omega(\mathbb{R},0)$. Since $\mathbb{R}$ is contractible, we have that $\sbr[0]{\wtilde{u}} = \sbr{c_0}$ and thus
 			\begin{equation*}
-				\sbr{u} = \sbr[0]{\varepsilon \circ \wtilde{u}} = \pi_1(\varepsilon)\sbr[0]{\wtilde{u}} = \pi_1(\varepsilon)\sbr{c_0} = \sbr{c_1}.
+				\sbr{u} = \sbr[0]{\varepsilon \circ \wtilde{u}} = \pi_1(\varepsilon)\sbr[0]{\wtilde{u}} = \pi_1(\varepsilon)\sbr{c_0} = \sbr{\varepsilon \circ c_0} = \sbr{c_1}.
 			\end{equation*}
 			Thus $\ker(\deg)$ is trivial.
-		\item \textit{$\deg$ is surjective.} Let $m \in \mathbb{Z}$. Then
-			\begin{equation*}
-				\deg\sbr[0]{\varepsilon^m} = \deg \varepsilon^m = \wwtilde{\varepsilon^m}(1) = m.
-			\end{equation*}
+		\item \textit{$\deg$ is surjective.} Let $m \in \mathbb{Z}$. Then $\deg\sbr[0]{\varepsilon^m} = \deg \varepsilon^m = \wwtilde{\varepsilon^m}(1) = m$.
 	\end{enumerate}
 \end{proof}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%The Seifert-Van Kampen Theorem																				%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{The Seifert-Van Kampen Theorem}
 \subsection*{Coproducts and Pushouts in $\mathsf{Grp}$}
 
@@ -593,9 +643,9 @@
 \begin{proof}
 	Let $A \in \ob(\mathsf{Set})$ and $\mathsf{A}$ be the small category defined as the discrete category with $\ob(\mathsf{A}) := A$, i.e.
 	\begin{equation*}
-		\xymatrix{
+		\begin{tikzcd}
 			\bullet & \bullet & \bullet & \cdots & \bullet & \bullet & \bullet
-		}
+		\end{tikzcd}
 	\end{equation*}	
 	Let $D : \mathsf{A} \to \mathsf{Grp}$ be a functor. Hence we get a family $(G_\alpha)_{\alpha \in A}$ in $\mathsf{Grp}$, where $G_\alpha := D(\alpha)$ for all $\alpha \in A$. A \bld{word} in $(G_\alpha)_{\alpha \in A}$ is a finite sequence in $\coprod_{\alpha \in A}G_\alpha$. A word in $(G_\alpha)_{\alpha \in A}$ will simply be written as $(g_1,\dots, g_n)$, where $g_k \in G_\alpha$ for some $\alpha \in A$. The \bld{empty word} is denoted by $()$. Let $\mathcal{W}$ denote the set of all words in $(G_\alpha)_{\alpha \in A}$. On $\mathcal{W}$ define a multiplication by \bld{concatenation}
 	\begin{equation*}
@@ -652,18 +702,18 @@
 \end{exercise}
 
 \begin{proposition}[Pushouts in $\mathsf{Grp}$]
-	$\mathsf{Grp}$ has all pushouts.
 	\label{prop:pushouts_grp}
+	$\mathsf{Grp}$ has all pushouts.
 \end{proposition}
 
 \begin{proof}
 	Consider the diagram $D : \mathsf{A} \to \mathsf{Grp}$
 	\begin{equation*}
-		\xymatrix@R=0pc{
-			\bullet \ar[r]\ar[dd] & \bullet & & G \ar[r]^{\varphi_1}\ar[dd]_{\varphi_2} & H_1\\
+		\begin{tikzcd}[row sep=0em]
+			\bullet \arrow[r]\arrow[dd] & \bullet & & G \arrow[r,"\varphi_1"]\arrow[dd,"\varphi_2"'] & H_1\\
 			& & \xrightarrow{D}\\
-			\bullet & & & H_2
-		}
+			\bullet & & & H_2			
+		\end{tikzcd}
 	\end{equation*}
 	\noindent and define $N$ to be the normal subgroup of $H_1 \ast H_2$ generated by elements of the form $\sbr[0]{(\varphi_1(g^{-1}),\varphi_2(g))}$ for $g \in G$. Let $K := (H_1 \ast H_2)/N$. Then
 	\begin{equation*}
@@ -721,14 +771,22 @@
 	\label{thm:seifert-van_kampen}
 \end{theorem}
 
-\section*{Problems}
+\begin{proof}
+	Let $\jota_U : U \hookrightarrow X$ and $\jota_V : V \hookrightarrow X$ denote inclusions. We will show that $\del[1]{\pi_1(X,p), \pi_1(\jota_U),\pi_1(\jota_V)}$ is a pushout of the diagram
+	\begin{equation}
+		\begin{tikzcd}
+			\pi_1(U \cap V,p) \arrow[r,"\pi_1(\iota_U)"]\arrow[d,"\pi_1(\iota_V)"'] & \pi_1(U,p)\\
+			\pi_1(V,p)
+		\end{tikzcd}
+		\label{diag:pushout_diagram}
+	\end{equation}
+	\noindent in $\mathsf{Grp}$ and hence by proposition \ref{prop:pushouts_grp} and uniqueness, the statement follows. Clearly
+	\begin{equation*}
+		\begin{tikzcd}
+			\pi_1(U \cap V,p) \arrow[r,"\pi_1(\iota_U)"]\arrow[d,"\pi_1(\iota_V)"'] & \pi_1(U,p)\arrow[d,"\pi_1(\jota_U)"]\\
+			\pi_1(V,p) \arrow[r,"\pi_1(\jota_V)"'] & \pi_1(X,p)
+		\end{tikzcd}
+	\end{equation*}
+	\noindent commutes. Suppose now that $(G,\varphi_U,\varphi_V)$ is another cocone for the diagram (\ref{diag:pushout_diagram}). We want to show that there exists a unique homomorphism $\Phi : \pi_1(X,p) \to G$ such that $\Phi \circ \pi_1(\jota_U) = \varphi_U$ and $\Phi \circ \pi_1(\jota_V) = \varphi_V$. Let $\sbr{u} \in \pi_1(X,p)$. 
 
-\begin{problem}[The Quotient Category $\mathsf{hTop}$]
-	In this exercise we will introduce some additional notions regarding homotopies.
-	\begin{enumerate}[label = \textup{(}\alph*\textup{)}]
-		\item Show that being freely homotopic induces a congruence on $\mathsf{Top}$. The resulting quotient category is called the \bld{homotopy category} and is denoted by $\mathsf{hTop}$.
-		\item We say that two topological spaces $X$ and $Y$ are of the \bld{same homotopy type}, if they are isomorphic in $\mathsf{hTop}$. An explicit choice of an isomorphism is called a \bld{homotopy equivalence}. Moreover, a topological space $X$ is said to be \bld{contractible} if $\id_X$ is freely homotopic to a constant map. Show that a topological space $X$ has the same homotopy type as a one point space $\ast$ if and only if $X$ is contractible.
-	\end{enumerate}	
-\end{problem}
-
-
+\end{proof}
