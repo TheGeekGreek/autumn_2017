@@ -787,6 +787,15 @@
 			\pi_1(V,p) \arrow[r,"\pi_1(\jota_V)"'] & \pi_1(X,p)
 		\end{tikzcd}
 	\end{equation*}
-	\noindent commutes. Suppose now that $(G,\varphi_U,\varphi_V)$ is another cocone for the diagram (\ref{diag:pushout_diagram}). We want to show that there exists a unique homomorphism $\Phi : \pi_1(X,p) \to G$ such that $\Phi \circ \pi_1(\jota_U) = \varphi_U$ and $\Phi \circ \pi_1(\jota_V) = \varphi_V$. Let $\sbr{u} \in \pi_1(X,p)$. 
+	\noindent commutes. Suppose now that $(G,\varphi_U,\varphi_V)$ is another cocone for the diagram (\ref{diag:pushout_diagram}). We want to show that there exists a unique homomorphism $\Phi : \pi_1(X,p) \to G$ such that $\Phi \circ \pi_1(\jota_U) = \varphi_U$ and $\Phi \circ \pi_1(\jota_V) = \varphi_V$. Let $\sbr{u} \in \pi_1(X,p)$. Choose a partition $0 = x_0 < \dots < x_n = 1$ of $I$ such that $u(x_k) \in U \cap V$ for all $k = 0,\dots,n$ and such that all $u\vert_{\sbr[0]{x_{k - 1},x_k}}$ take values either in $U$ or in $V$ for all $k = 1,\dots, n$. The existence of such a partition follows from an application of the Lebesgue number lemma on the open cover $(u^{-1}(U),u^{-1}(V))$ of $I$. Indeed, if $\delta > 0$ is the corresponding Lebesgue number of the cover, we find $n \in \omega$, $n > 0$, such that $1/n < \delta$. Thus $\intcc[0]{(i-1)/n,
+	i/n}$ is contained in either $u^{-1}(U)$ or $u^{-1}(V)$ for all $i = 1,\dots,n$. Now choose those $i$ such that $u(i/n) \in U \cap V$. For $k = 1,\dots,n$, let $u_k : I \to X$ be defined by
+	\begin{equation*}
+		u_k(s) := u\del[0]{(1 - s)x_{k - 1} + sx_k}.
+	\end{equation*}
+	Moreover, for each $k = 1,\dots,n-1$ choose a path $\gamma_k$ in $U \cap V$ from $p$ to $x_k$ and set $\gamma_0, \gamma_n := c_p$. Define now
+	\begin{equation}
+		\Phi\sbr{u} := \prod_{k = 1}^n \wtilde{\varphi} \sbr[0]{\gamma_{k - 1} \ast u_k \ast \wbar{\gamma}_k}.
+		\label{eq:Phi}
+	\end{equation}
 
 \end{proof}
