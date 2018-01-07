@@ -1,4 +1,14 @@
 \chapter{Singular Homology}
+\section*{The Eilenberg-Steenrod Axioms}
+
+\begin{definition}[The Eilenberg-Steenrod Axioms]
+	A \bld{homology theory} consist of two sequences $(\mathcal{H}_n)_{n \in \omega}$ and $(\delta_n)_{n \in \omega}$, where for each $n \in \omega$, $\mathcal{H}_n : \mathsf{Top}^2 \to \mathsf{AbGrp}$ is a functor and $\delta_n : \mathcal{H}_n \to \mathcal{H}_{n - 1} \circ R$ is a natural transformation, with $R : \mathsf{Top}^2 \to \mathsf{Top}^2$ defined by $R(X,A) := (X,\varnothing)$, and subject to the following axioms:
+	\begin{itemize}[wide = 0pt]
+		\item \textbf{The Dimension Axiom.} Let $\ast$ be the terminal object in $\mathsf{Top}$. Then $\mathcal{H}_0(\ast) \cong \mathbb{Z}$ and $\mathcal{H}_n(\ast) = 0$ for all $n \in \omega$, $n > 0$. 
+	\end{itemize}
+\end{definition}
+
+
 \section*{Construction of the Singular Homology Functor}
 
 Aim of this section is to construct for each $n \in \omega$ a functor $H_n : \mathsf{Top} \to \mathsf{AbGrp}$, called the \textit{$n$-th singular homology functor}.
@@ -50,12 +60,12 @@ Aim of this section is to construct for each $n \in \omega$ a functor $H_n : \ma
 
 \begin{definition}[Chain Maps]
 	Let $(C_\bullet,\partial_\bullet)$ and $(C'_\bullet,\partial'_\bullet)$ be two chain complexes. A \bld{chain map $f_\bullet : C_\bullet \to C'_\bullet$} is a sequence $(f_n)_{n \in \mathbb{Z}}$ in $\mor(\mathsf{AbGrp})$ such that $f_n \in \mathsf{AbGrp}(C_n,C'_n)$ and the diagram
-	\begin{center}
-		\begin{displaymath}
-			\xymatrix{ C_n \ar[r]^{\partial_n}\ar[d]_{f_n} & C_{n - 1} \ar[d]^{f_{n - 1}} \\
-			C'_n \ar[r]_{\partial'_n} & C'_{n - 1}}
-		\end{displaymath}
-	\end{center}
+	\begin{equation*}
+		\begin{tikzcd}
+			C_n \arrow[r,"\partial_n"]\arrow[d,"f_n"'] & C_{n - 1} \arrow[d,"f_{n - 1}"] \\
+			C'_n \ar[r,"\partial'_n"'] & C'_{n - 1}
+		\end{tikzcd}
+	\end{equation*}
 	\noindent commutes for all $n \in \mathbb{Z}$.
 \end{definition}
 
@@ -199,38 +209,51 @@ Aim of this section is to construct for each $n \in \omega$ a functor $H_n : \ma
 	\begin{equation}
 		H_n \circ C_\bullet : \mathsf{Top} \to \mathsf{AbGrp}
 	\end{equation}
-	\noindent of the singular chain complex functor $C_\bullet$ in theorem \ref{thm:singular_complex} and the $n$-th homology functor of proposition \ref{prop:homology_functor} is called the \bld{singular homology functor}, written $H^{\mathrm{sing}}_n$.
+	\noindent of the singular chain complex functor $C_\bullet$ in theorem \ref{thm:singular_complex} and the $n$-th homology functor of proposition \ref{prop:homology_functor} is called the \bld{$n$-th singular homology functor}, written $H^{\mathrm{sing}}_n$.
 \end{definition}
 
 \begin{remark}
 	For notational purposes we will often refer to the functor $H_n^{\mathrm{sing}}$ simply as $H_n$.
 \end{remark}
 
-\section*{First Properties of Singular Homolgy}
-\subsection*{$H_0$}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Relative and Reduced Homology																				%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Relative and Reduced Homology}
+\begin{definition}[Subcomplex]
+	Let $(C_\bullet,\partial_\bullet)$ be a chain complex. A \bld{subcomplex} of $(C_\bullet,\partial_\bullet)$ is a chain complex $(C_\bullet',\partial_\bullet')$, such that $C_n' \subseteq C_n$ for all $n \in \mathbb{Z}$ and that $\iota : C_\bullet' \to C_\bullet$ defined by $\iota_n : C_n' \hookrightarrow C_n$ for all $n \in \mathbb{Z}$, is a chain map.
+\end{definition}
 
-\begin{proposition}[Zeroth Singular Homology Group]
-	Let $X \in \ob(\mathsf{Top})$ be non empty and path connected. Then $H_0(X) \cong \mathbb{Z}$.
+\begin{definition}[Quotient Complex]
+	Let $(C_\bullet',\partial_\bullet')$ be a subcomplex of $(C_\bullet,\partial_\bullet)$. Then define the \bld{quotient complex}, written $C_\bullet/C_\bullet'$, by setting
+	\begin{equation*}
+		(C_\bullet/C_\bullet')_n := C_n/C_n' \qquad \text{and} \qquad \partial_n := C_n/C_n' \to C_{n - 1}/C_{n - 1}',
+	\end{equation*}
+	\noindent the induced function, for all $n \in \mathbb{Z}$.
+\end{definition}
+
+\begin{proposition}
+	There is a functor $\mathsf{Top}^2 \to \mathsf{Comp}$.
 \end{proposition}
 
 \begin{proof}
-	Since $\partial_0 : C_0(X) \to 0$, $\ker \partial_0 = C_0(X)$. Moreover, a map in $\mathsf{Top}(\Delta^0,X)$ can be identified with a point in $X$ and hence an element of $C_0(X)$ can be written as $\sum_{x \in X}m_x x$. Define a mapping $\Phi : C_0(X) \to \mathbb{Z}$ by $\Phi\del[1]{\sum_{x \in X}m_x x} := \sum_{x \in X}m_x$. This mapping is well defined since all but finitely many $m_x$ are zero. It is also easy to check, that $\Phi$ is a morphism of groups and that $\Phi$ is surjective. We claim that $\ker \Phi = \im \partial_1$. Indeed, if $\sum_{x \in X} m_x x \in \ker \Phi$, then $\sum_{x \in X}m_x = 0$. Let $p \in X$. Since $X$ is path connected, we find for each $x \in X$ a path $\sigma_x$ from $p$ to $x$. Consider the singular $1$-chain $\sum_{x \in X}m_x \sigma_x$. Then we have
+	Let $(X,A) \in \ob(\mathsf{Top}^2)$. Then we have an inclusion $\iota : A \hookrightarrow X$. Moreover, we have that $C_n(\iota)$ is injective for all $n \in \mathbb{Z}$. Indeed, this is obvious for $n < 0$ and for $n \geq 0$, suppose that $\sum_k m_k \sigma_k \in \ker C_n(\iota)$, where the $\sigma_k$ are distinct. Then we have that $0 = C_n(\iota)\del[1]{\sum_k m_k \sigma_k} = \sum_k m_k \iota \circ \sigma_k$, where the $\iota \circ \sigma_k$ are also distinct. Thus we conclude $\sum_k m_k \sigma_k = 0$. Hence we can see $C_\bullet(A)$ as a subcomplex of $C_\bullet(X)$ and so we can define
 	\begin{equation*}
-		\partial_1 \del[4]{\sum_{x \in X}m_x \sigma_x} = \sum_{x \in X}m_x \del[1]{\sigma_x(1)- \sigma_x(0)} = \sum_{x \in X}m_x (x - p) = \sum_{x \in X} m_x x.
+		C_\bullet(X,A) := C_\bullet(X)/C_\bullet(A).
 	\end{equation*}
-	Hence $\sum_{x \in X}m_x x \in \im \partial_1$. Conversly, it is enough to show the claim on basis elements $\sigma \in \mathsf{Top}(\Delta^1,X)$. We have
-	\begin{equation*}
-		\Phi(\partial_1 \sigma) = \Phi\del[1]{\sigma(1) - \sigma(0)} = 1 - 1 = 0.
-	\end{equation*}
-	Hence the first isomorphism theorem \cite[23]{grillet:abstract_algebra:2007} implies that $H_0(X) \cong \mathbb{Z}$.
+	Moreover, on morphsisms $f \in \mathsf{Top}^2\del[1]{(X,A),(Y,B)}$ just let $C_\bullet(f)$ be the induced map.
 \end{proof}
 
-\begin{proposition}[The Dimension Axiom]
-	Let $\ast \in \ob(\mathsf{Top})$ be a one point space. Then $H_n(\ast) = 0$ for all $n \in \mathbb{Z}$, $n > 0$.
-\end{proposition}
+\begin{definition}[Reduced Homology Functor]
+	For $n \in \mathbb{Z}$, the functor 
+	\begin{equation}
+		H_n \circ C_\bullet : \mathsf{Top}^2 \to \mathsf{AbGrp}
+	\end{equation}
+	\noindent is called the \bld{$n$-th reduced singular homology functor.}
+\end{definition}
 
-\subsection*{Long Exact Sequence in Homology}
-\begin{theorem}[Long Exact Sequence in Homology]
+\begin{proposition}[Long Exact Sequence in Homology]
+	\label{thm:les_homology}
 	Let
 	\begin{equation*}
 		\begin{tikzcd}
@@ -244,8 +267,7 @@ Aim of this section is to construct for each $n \in \omega$ a functor $H_n : \ma
 		\end{tikzcd} 
 	\end{equation*}
 	\noindent is a long exact sequence in $\mathsf{AbGrp}$.
-	\label{thm:les_homology}
-\end{theorem}
+\end{proposition}
 
 \begin{proof}
 	Let $n \in \mathbb{Z}$ and consider the following diagram of induced morphisms:
@@ -273,10 +295,147 @@ Aim of this section is to construct for each $n \in \omega$ a functor $H_n : \ma
 	In the proof of theorem \ref{thm:les_homology} in the diagram, show that the induced maps are actually well defined, the diagram commutes and the two rows are exact.
 \end{exercise}
 
+\begin{corollary}[Long Exact Sequence in Reduced Homology]
+	Let $(X,A) \in \ob(\mathsf{Top}^2)$. Then there is a 
+\end{corollary}
+
 \begin{definition}[Connecting Homomorphism]
 	The sequence $(\delta_n)_{n \in \mathbb{Z}}$ of morphisms in $\mathsf{AbGrp}$ of theorem \ref{thm:les_homology} is called the \bld{connecting homomorphism of the short exact sequence $0 \to C_\bullet \to C_\bullet' \to C_\bullet'' \to 0$}.
 \end{definition}
 
+\begin{theorem}[The Exact Sequence Axiom]
+		
+\end{theorem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%First Properties of Singular Homology																		%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{First Properties of Singular Homolgy}
+
+\begin{proposition}
+	In $\mathsf{Grp}$, all small products exist.
+\end{proposition}
+
+\begin{proof}
+	It is easy to show that if $(G_\alpha)_{\alpha \in A}$ is a family of objects in $\mathsf{Grp}$, then the cartesian product $\prod_{\alpha \in A}G_\alpha$ with componentwise product $(gh)_\alpha := g_\alpha h_\alpha$ together with the natural projections $\pi_\alpha : \prod_{\alpha \in A} G_\alpha \to G_\alpha$, is a universal cone.
+\end{proof}
+
+\begin{definition}[Direct Product]
+	Small products in $\mathsf{Grp}$ are called \bld{direct products}, written $\Pi_{\alpha \in A} G_\alpha$.
+\end{definition}
+
+\begin{proposition}
+	In $\mathsf{AbGrp}$, all small coproduct exist.
+\end{proposition}
+
+\begin{proof}
+	It is easy to show that if $(G_\alpha)_{\alpha \in A}$ is a family of objects in $\mathsf{AbGrp}$, then the subgroup of $\Pi_{\alpha \in A} G_\alpha$ defined by the elements which entries are almost all zero together with the natural inclusions $\iota_\alpha$ is a universal cocone.
+\end{proof}
+
+\begin{definition}[Direct Sum]
+	The small coproducts in $\mathsf{AbGrp}$ are called \bld{direct sums}, written $\bigoplus_{\alpha \in A}G_\alpha$.
+\end{definition}
+
+\begin{definition}[Direct Sum Chain Complex]
+	Let $(C^\alpha_\bullet,\partial_\bullet^\alpha)_{\alpha \in A}$ be a family of chain complexes. Then the chain complex $\del[1]{\bigoplus_{\alpha \in A}C^\alpha_\bullet, \bigoplus_{\alpha \in A}\partial^\alpha_\bullet}$ defined by
+	\begin{equation*}
+		\del[4]{\bigoplus_{\alpha \in A}C_\bullet^\alpha}_n := \bigoplus_{\alpha \in A} C_n^\alpha \qquad \text{and} \qquad \del[4]{\bigoplus_{\alpha \in A}\partial_\bullet^\alpha}_n := \bigoplus_{\alpha \in A}\partial_n^\alpha, 
+	\end{equation*}
+	\noindent for all $n \in \mathbb{Z}$, is called the \bld{direct sum chain complex} of the family $(C_\bullet^\alpha,\partial_\bullet^\alpha)_{\alpha \in A}$.
+\end{definition}
+
+\begin{lemma}
+	\label{lem:H_n_preserves_small_coproducts}
+	Let $(C_\bullet^\alpha,\partial_\bullet^\alpha)_{\alpha \in A}$ be a family in $\mathsf{Comp}$. Then
+	\begin{equation*}
+		H_n\del[4]{\bigoplus_{\alpha \in A}C_\bullet^\alpha} \cong \bigoplus_{\alpha \in A}H_n(C_\bullet^\alpha),
+	\end{equation*}
+	\noindent for all $n \in \mathbb{Z}$.
+\end{lemma}
+
+\begin{exercise}
+	Prove lemma \ref{lem:H_n_preserves_small_coproducts}.
+\end{exercise}
+
+\begin{lemma}
+	\label{lem:H_n_direct_sum}
+	Let $X$ be a topological space and let $\cbr{X_\alpha}_{\alpha \in A}$ denote the set of path components of $X$. Then
+\begin{equation*}
+	H_n(X) \cong \bigoplus_{\alpha \in A}H_n(X_\alpha)
+\end{equation*}
+\noindent for all $n \in \omega$.
+\end{lemma}
+
+\begin{proof}
+	Let $\iota_\alpha : X_\alpha \hookrightarrow X$ denote inclusion for all $\alpha \in A$. Consider 
+	\begin{equation*}
+		\sum_{\alpha \in A}C_n(\iota_\alpha) : \bigoplus_{\alpha \in A} C_n(X_\alpha) \to C_n(X)
+	\end{equation*}
+	\noindent and let $\varphi : C_n(X_\alpha) \to \bigoplus_{\alpha \in A}C_n(X_\alpha)$ the map extended by linearity defined as follows on elements $\sigma \in \mathsf{Top}(\Delta^n,X)$: since $\Delta^n$ is path connected, we have that $\sigma(\Delta^n) \subseteq X_\alpha$ for some unique $\alpha \in A$. Just set $x_\alpha := \sigma_k : \Delta^n \to X_\alpha$ if $\sigma(\Delta^n) \subseteq X_\alpha$ and $x_\alpha := 0$ else. Thus it is easy to show that $\bigoplus_{\alpha \in A}C_n(X_\alpha) \cong C_n(X)$. Then we have $\bigoplus_{\alpha \in A}C_\bullet(X_\alpha) \cong C_\bullet(X)$ as chain complexes, and since functors preserve isomorphisms, the result follows from lemma \ref{lem:H_n_preserves_small_coproducts}.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%The Dimension Axiom																						%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{The Dimension Axiom}
+In general, it is hard to compute $H_n(X)$ for an arbitrary topological space $X$ and $n \in \omega$. However, as the next proposition shows, we can always compute $H_0(X)$ for a path connected space $X$. Combining this with lemma \ref{lem:H_n_direct_sum}, we know how $H_0(X)$ looks for an arbitrary topological space $X$.
+
+\begin{proposition}[Zeroth Singular Homology Group]
+	Let $X \in \ob(\mathsf{Top})$ be non empty and path connected. Then $H_0(X) \cong \mathbb{Z}$ and any generator is of the form $\langle x \rangle$ for some $x \in X$.
+\end{proposition}
+
+\begin{proof}
+	Since $\partial_0 : C_0(X) \to 0$, $\ker \partial_0 = C_0(X)$. Moreover, a map in $\mathsf{Top}(\Delta^0,X)$ can be identified with a point in $X$ and hence an element of $C_0(X)$ can be written as $\sum_{x \in X}m_x x$. Define a mapping $\Phi : C_0(X) \to \mathbb{Z}$ by $\Phi\del[1]{\sum_{x \in X}m_x x} := \sum_{x \in X}m_x$. This mapping is well defined since all but finitely many $m_x$ are zero. It is also easy to check, that $\Phi$ is a morphism of groups and that $\Phi$ is surjective. We claim that $\ker \Phi = \im \partial_1$. Indeed, if $\sum_{x \in X} m_x x \in \ker \Phi$, then $\sum_{x \in X}m_x = 0$. Let $p \in X$. Since $X$ is path connected, we find for each $x \in X$ a path $\sigma_x$ from $p$ to $x$. Consider the singular $1$-chain $\sum_{x \in X}m_x \sigma_x$. Then we have
+	\begin{equation*}
+		\partial_1 \del[4]{\sum_{x \in X}m_x \sigma_x} = \sum_{x \in X}m_x \del[1]{\sigma_x(1)- \sigma_x(0)} = \sum_{x \in X}m_x (x - p) = \sum_{x \in X} m_x x.
+	\end{equation*}
+	Hence $\sum_{x \in X}m_x x \in \im \partial_1$. Conversly, it is enough to show the claim on basis elements $\sigma \in \mathsf{Top}(\Delta^1,X)$. We have
+	\begin{equation*}
+		\Phi(\partial_1 \sigma) = \Phi\del[1]{\sigma(1) - \sigma(0)} = 1 - 1 = 0.
+	\end{equation*}
+	Hence the first isomorphism theorem \cite[23]{grillet:abstract_algebra:2007} implies that $H_0(X) \cong \mathbb{Z}$.
+	Let $x \in X$. Then $\mathbb{Z}\langle x \rangle = H_0(X)$. Indeed, if $\sum_{y \in X}m_y y \in C_0(X)$, we have that $\sum_{y \in X}m_y \langle y \rangle = \sum_{y \in X}m_y \langle x \rangle$, since $X$ is path connected we always find a path from $x$ to $y$ and hence $\langle x \rangle = \langle y \rangle$ for all $y \in X$. Suppose $\langle g \rangle$, where $g := \sum_{y \in X}m_y y \in C_0(X)$, is a generator of $H_0(X)$. Since isomorphisms map generators to generators,we have that $\Phi(g) = \pm 1$. Replacing $g$ with $-g$, if necessary, we can assume that $\Phi(g) = 1$. Moreover, $g = x + (g - x)$ for any $x \in X$. Then $g - x \in \im \partial_1$. Indeed, we have that $\Phi(g - x) = 1 - 1 = 0$.
+\end{proof}
+
+\begin{proposition}
+	Let $\ast \in \ob(\mathsf{Top})$ be a one point space. Then $H_n(\ast) = 0$ for all $n \in \omega$, $n > 0$.
+\end{proposition}
+
+\begin{proof}
+	Since $\ast$ is a one-point space, we have that there is only one singular $n$-simplex in $\ast$, say $\sigma_n$. We compute
+	\begin{equation*}
+		\partial_n \sigma_n = \sum_{k = 0}^n(-1)^k \sigma_n \circ \varphi^n_k = \sum_{k = 0}^n (-1)^k\sigma_{n - 1} = \ccases{
+			\sigma_{n - 1} & n \text{ even},\\
+			0 & n \text{ odd}.
+		}
+	\end{equation*}
+	Hence
+	\begin{equation*}
+		\ker \partial_n = \ccases{
+			C_n(\ast) & n \text{ odd},\\
+			0 & n \text{ even}.
+		}
+	\end{equation*}
+	Moreover
+	\begin{equation*}
+		\partial_{n+1}\sigma_{n + 1} = \sum_{k = 0}^{n + 1}(-1)^k \sigma_{n + 1} \circ \varphi^{n+1}_k = \sum_{k = 0}^{n + 1} (-1)^k \sigma_n = \ccases{
+			0 & n \text{ even},\\
+			\sigma_n & n \text{ odd}.
+		}
+	\end{equation*}
+	So
+	\begin{equation*}
+		\im \partial_{n + 1} = \ccases{
+			0 & n \text{ even},\\
+			C_n(\ast) & n \text{ odd},
+		}
+	\end{equation*}
+	and thus $H_n(\ast) = 0$ for all $n > 0$.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%The Homotopy Axiom																							%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{The Homotopy Axiom}
 \subsection*{The Acyclic Models Theorem}
 \begin{definition}[Models]
@@ -306,10 +465,54 @@ Aim of this section is to construct for each $n \in \omega$ a functor $H_n : \ma
 	Let $\mathcal{C}$ be a locally small category with family of models $(M_\alpha)_{\alpha \in A}$ and $K,L : \mathcal{C} \to \mathsf{AbGrp}$ two functors, where $L$ is free with basis in $(M_\alpha)_{\alpha \in A}$ and model basis $(g_\alpha)_{\alpha \in A}$ for $L$. Moreover, let $(h_\alpha)_{\alpha \in A}$ be a family such that $h_\alpha \in K(M_\alpha)$ for all $\alpha \in A$. Then there exists a uniqe natural transformation $\Phi : L \Rightarrow K$ such that $\Phi_{M_\alpha}(g_\alpha) = h_\alpha$ for all $\alpha \in A$.
 \end{proposition}
 
+\subsection*{Chain Homotopies and the Homotopy Axiom}
+\begin{definition}[Chain Homotopies]
+	Two chain maps $f_\bullet,g_\bullet : (C_\bullet,\partial_\bullet) \to (C_\bullet',\partial_\bullet')$ are said to be \bld{chain homotopic}, written $f_\bullet \simeq g_\bullet$, if there exists a sequence $(F_n)_{n \in \mathbb{Z}}$, such that $F_n \in \mathsf{AbGrp}(C_n,C_{n + 1}')$ and 
+	\begin{equation*}
+		\partial_{n + 1}' \circ F_n + F_{n - 1} \circ \partial_n = f_n - g_n,
+	\end{equation*}
+	\noindent for all $n \in \mathbb{Z}$. The sequence $(F_n)_{n \in \mathbb{Z}}$ is then called a \bld{chain homotopy} and is written $F : f_\bullet \simeq g_\bullet$.
+\end{definition}
+
+\begin{proposition}
+	\label{prop:inclusions}
+	Let $f_\bullet,g_\bullet \in \mathsf{Comp}(C_\bullet,C_\bullet')$ with $f \simeq g$. Then $H_n(f_\bullet) = H_n(g_\bullet)$ for all $n \in \mathbb{Z}$.
+\end{proposition}
+
+\begin{proof}
+	Assume $F : f_\bullet \simeq g_\bullet$ and let $\langle c \rangle \in H_n(C_\bullet) \to H_n(C_\bullet')$. Then
+	\begin{align*}
+		H_n(f_\bullet)\langle c \rangle &= \langle f_n(c) \rangle\\
+		&= \langle g_n(c) + \partial_{n + 1}'(F_n(c)) + F_{n - 1}(\partial_n(c)) \rangle\\
+		&= \langle g_n(c) + \partial_{n + 1}'(F_n(c)) \rangle\\
+		&= \langle g_n(c) \rangle\\
+		&= H_n(g_\bullet)\langle c \rangle
+	\end{align*}
+	\noindent since $c \in \ker \partial_n$.
+\end{proof}
+
+\begin{proposition}
+	Let $X$ be a topological space and define $\iota,\jota : X \to X \times I$ by 
+	\begin{equation*}
+		\iota(x) := (x,0) \qquad \text{and} \qquad \jota(x) := (x,1).
+	\end{equation*}
+	Then $H_n(\iota) = H_n(\jota)$ for all $n \in \omega$.
+\end{proposition}
+
 \begin{theorem}[The Homotopy Axiom]
-	Let $f,g \in \mathsf{Top}(X,Y)$ be freely homotopic. Then $H_n(f) = H_n(g)$ for all $n \in \mathbb{Z}$.
+	Let $f,g \in \mathsf{Top}(X,Y)$ be freely homotopic. Then $H_n(f) = H_n(g)$ for all $n \in \omega$.
 \end{theorem}
 
+\begin{proof}
+	Using the notation and the result from proposition \ref{prop:inclusions}, we get that
+	\begin{align*}
+		H_n(f) = H_n(F \circ \iota) = H_n(F) \circ H_n(\iota) = H_n(F) \circ H_n(\jota) = H_n(F \circ \jota) = H_n(g).
+	\end{align*}
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%The Hurewicz Theorem																						%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{The Hurewicz Theorem}
 \subsection*{Abelianizations}
 
@@ -569,6 +772,9 @@ Since elements of $H_1(X)$ are homology classes of loops, one might suspect that
 	Let $X \in \ob(\mathsf{Top})$ and $p \in X$. The homomorphism $h : \pi_1(X,p) \to H_1(X)$ defined in theorem \ref{thm:Hurewicz_theorem} is called the \bld{Hurewicz homomorphism}.
 \end{definition}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%																							%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Barycentric Subdivision}
 
 

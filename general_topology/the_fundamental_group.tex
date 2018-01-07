@@ -293,6 +293,19 @@
 	A topological space $X$ is said to be \bld{contractible}, if $\id_X$ is nullhomotopic.
 \end{definition}
 
+\begin{definition}[Reparametrization]
+	Let $u$ be a path in a topological space $X$. A \bld{reparametrization} of $u$ is a path $u \circ \varphi$, where $\varphi \in \mathsf{Top}(I,I)$ fixing $0$ and $1$.
+\end{definition}
+
+\begin{lemma}
+	\label{lem:reparametrization_homotopy}
+	let $u$ be a path in a topological space $x$ and $u \circ \varphi$ a reparametrization of $u$. Then $u \simeq_{\partial I} u \circ \varphi$.
+\end{lemma}
+
+\begin{proof}
+	Since $I$ is convex, we find a straight line homotopy $H : \id_I \simeq \varphi$. Now $u \circ H$ is the homotopy we are looking for.
+\end{proof}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Fundamental group																							%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -514,9 +527,22 @@
 	\noindent commutes. Since $\Phi_{F(p,\cdot)}$ is an isomorphism, $\pi_1(g \circ f)$ is an isomorphism, too. Hence $\pi_1(f)$ is injective. Using $G$ instead of $F$ and a similar argument yields that $\pi_1(f)$ is surjective.
 \end{proof}
 
-\begin{definition}
-		
-\end{definition}
+\begin{lemma}
+	\label{lem:induced_group_structure}
+	Let $G \in \ob(\mathsf{Grp})$, $S \in \mathsf{Set}$ and $\varphi : U(G) \to S$ a bijection. Then $S$ can be given a group structure such that $\varphi$ is an isomorphism.
+\end{lemma}
+
+\begin{proof}
+	It is easy to show that $xy := \varphi\del[1]{\varphi^{-1}(x)\varphi^{-1}(y)}$ defines a group structure on $S$ with the requested property.
+\end{proof}
+
+\begin{proposition}
+	Let $(X,p) \in \ob(\mathsf{Top}_\ast)$. Then $\pi_1(X,p) \cong \mathsf{hTop}_\ast\del[1]{(\mathbb{S}^1,1),(X,p)}$.
+\end{proposition}
+
+\begin{proof}
+	Let $u \in \Omega(X,p)$. Then $u$ passes to the quotient $\wtilde{u} : (\mathbb{S}^1,1) \to (X,p)$. Define now $\varphi\sbr{u} := \sbr[0]{\wtilde{u}} \in \mathsf{hTop}_\ast\del[1]{(\mathbb{S}^1,1),(X,p)}$. This is well defined, since if $H : u \simeq_{\partial I} v$, it is easy to see that $\wtilde{H} : \wtilde{u} \simeq_{\cbr{1}} \wtilde{v}$. Moreover, if $f \in \mathsf{hTop}_\ast\del[1]{\mathbb{S}^1,1),(X,p)}$, we define $\psi\sbr[0]{f} := \sbr[0]{f \circ \omega}$. Again, this is well defined since if $H : f \simeq_{\cbr{1}} g$, then $H \circ (\omega \times \id_I) : f \circ \omega \simeq_{\partial I} g \circ \omega$. It is easy to check that $\varphi$ and $\psi$ are inverses of each other and thus we have a bijection $\pi_1(X,p) \cong \mathsf{hTop}_\ast\del[1]{(\mathbb{S}^1,1),(X,p)}$ of sets. Hence an application of lemma \ref{lem:induced_group_structure} yields the result.	
+\end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Fundamental group of the Circle																			%
@@ -750,14 +776,14 @@
 \end{exercise}
 
 \begin{definition}[Amalgamated Free Product]
-	The pushout of a diagram
-		\begin{equation*}
-		\xymatrix{
-			G \ar[r]^{\varphi_1}\ar[d]_{\varphi_2} & H_1\\
-			H_2
-		}
-	\end{equation*}
-	\noindent in $\mathsf{Grp}$ is called the \bld{amalgamated free product of $H_1$ and $H_2$ along $(G,\varphi_1,\varphi_2)$}, written $H_1 \ast_{(G,\varphi_1,\varphi_2)} H_2$.
+The pushout of a diagram
+\begin{equation*}
+	\begin{tikzcd}
+		G \arrow[r,"\varphi_1"]\arrow[d,"\varphi_2"'] & H_1\\
+		H_2
+	\end{tikzcd}
+\end{equation*}
+\noindent in $\mathsf{Grp}$ is called the \bld{amalgamated free product of $H_1$ and $H_2$ along $(G,\varphi_1,\varphi_2)$}, written $H_1 \ast_{(G,\varphi_1,\varphi_2)} H_2$.
 \end{definition}
 
 \subsection*{The Seifert-Van Kampen Theorem and its Consequences}
@@ -792,10 +818,64 @@
 	\begin{equation*}
 		u_k(s) := u\del[0]{(1 - s)x_{k - 1} + sx_k}.
 	\end{equation*}
-	Moreover, for each $k = 1,\dots,n-1$ choose a path $\gamma_k$ in $U \cap V$ from $p$ to $x_k$ and set $\gamma_0, \gamma_n := c_p$. Define now
+	Moreover, for each $k = 1,\dots,n-1$ choose a path $\gamma_k$ in $U \cap V$ from $p$ to $u(x_k)$ and set $\gamma_0, \gamma_n := c_p$. Define now
 	\begin{equation}
-		\Phi\sbr{u} := \prod_{k = 1}^n \wtilde{\varphi} \sbr[0]{\gamma_{k - 1} \ast u_k \ast \wbar{\gamma}_k}.
+		\Phi\sbr{u} := \prod_{k = 1}^n \varphi_\bullet \sbr[0]{\gamma_{k - 1} \ast u_k \ast \wbar{\gamma}_k},
 		\label{eq:Phi}
 	\end{equation}
-
+	\noindent where $\varphi_\bullet$ denotes either $\varphi_U$ or $\varphi_V$ depending on whether $\gamma_{k - 1} \ast u_k \ast \wbar{\gamma}_k$ is a loop in $U$ or in $V$. If $u$ is a loop in $U \cap V$, we can choose either $\varphi_U$ or $\varphi_V$ since $(G,\varphi_U,\varphi_V)$ is a cocone of the diagram (\ref{diag:pushout_diagram}). Now there are some things to check.\\
+	\textit{$\Phi$ is a function.} Suppose $H : u \simeq_{\partial I} v$.\\
+	\textit{$\Phi\sbr{u}$ does not depend on the choice of $\gamma_k$.} Fix some $k = 1,\dots,n-1$ and suppose that $\gamma_k'$ is another path from $p$ to $u(x_k)$ in $U \cap V$. Then we have that
+	\begin{equation*}
+		\varphi_\bullet\sbr[0]{\gamma_{k-1} \ast u_k \ast \wbar{\gamma}_k} = \varphi_\bullet\sbr[0]{\gamma_{k-1} \ast u_k \ast \wbar{\gamma}_k' \ast \gamma_k' \ast \wbar{\gamma}_k} = \varphi_\bullet\sbr[0]{\gamma_{k-1} \ast u_k \ast \wbar{\gamma}_k'} \varphi_\bullet\sbr[0]{\gamma_k' \ast \wbar{\gamma}_k} 
+	\end{equation*}
+	\noindent and
+	\begin{align*}
+		\varphi_\bullet\sbr[0]{\gamma_k \ast u_{k + 1} \ast \wbar{\gamma}_{k + 1}} &= \varphi_\bullet\sbr[0]{\gamma_k \ast \wbar{\gamma}_k' \ast \gamma_k' \ast u_{k + 1} \ast \wbar{\gamma}_{k + 1}}\\
+		&= \varphi_\bullet\sbr[0]{\gamma_k \ast \wbar{\gamma}_k'}\varphi_\bullet\sbr[0]{\gamma_k' \ast u_{k + 1} \ast \wbar{\gamma}_{k + 1}}\\
+		&=\del[1]{\varphi_\bullet\sbr[0]{\gamma_k' \ast \wbar{\gamma}_k}}^{-1}\varphi_\bullet\sbr[0]{\gamma_k' \ast u_{k + 1} \ast \wbar{\gamma}_{k + 1}}.
+	\end{align*}
+	Since $\gamma_k' \ast \wbar{\gamma}_k$ is a loop in $U \cap V$, we have that 
+	\begin{equation*}
+		\varphi_\bullet\sbr[0]{\gamma_{k-1} \ast u_k \ast \wbar{\gamma}_k}\varphi_\bullet\sbr[0]{\gamma_k \ast u_{k + 1} \ast \wbar{\gamma}_{k + 1}} = \varphi_\bullet\sbr[0]{\gamma_{k-1} \ast u_k \ast \wbar{\gamma}_k'}\varphi_\bullet\sbr[0]{\gamma_k' \ast u_{k + 1} \ast \wbar{\gamma}_{k + 1}}.
+	\end{equation*}
+	\textit{$\Phi\sbr{u}$ does not depend on the choice of a partition of $I$.} Suppose $\mathcal{P}_1$ and $\mathcal{P}_2$ are both partitions of $I$, their union $\mathcal{P}_1 \cup \mathcal{P}_2$ is a refinement of both $\mathcal{P}_1$ and $\mathcal{P}_2$. If we can show that adding a single point to a partition $\mathcal{P}$ of $I$ does not affect the value $\Phi\sbr{u}$, then so it does not on $\mathcal{P}_1 \cup \mathcal{P}_2$ and hence is independent of the choice of a partition. Suppose we add $x_{k - 1} < y < x_k$. Let us denote by $u_y$ the reparametrized restriction of $u$ from $u(x_{k - 1})$ to $u(y)$ and by $u_k'$ the reparametrized restriction of $u$ from $u(y)$ to $u(x_k)$. Moreover, let $\gamma_y$ be a path from $p$ to $u(y)$ in $U \cap V$. We compute
+	\begin{align*}
+		\varphi_\bullet\sbr[0]{\gamma_{k - 1} \ast u_y \ast \wbar{\gamma}_y} \varphi_\bullet\sbr[0]{\gamma_y \ast u_k' \ast \wbar{\gamma}_k} &= \varphi_\bullet\sbr[0]{\gamma_{k - 1} \ast u_y \ast \wbar{\gamma}_y \ast \gamma_y \ast u_k' \ast \wbar{\gamma}_k}\\
+		&= \varphi_\bullet\sbr[0]{\gamma_{k - 1} \ast u_y \ast u_k' \ast \wbar{\gamma}_k}\\
+		&= \varphi_\bullet\sbr[0]{\gamma_{k - 1} \ast u_k \ast \wbar{\gamma}_k},
+	\end{align*}
+	\noindent since $u_y \ast u_k'$ is a reparametrization of $u_k$ and $\gamma_{k - 1} \ast u_y \ast \wbar{\gamma}_y$, $\gamma_y \ast u_k' \ast \wbar{\gamma}_k$ are both loops either in $U$ or in $V$.\\
+	\textit{$\Phi$ is a morphism of groups.} Let $\sbr{u},\sbr{v} \in \pi_1(X,p)$. Let $0 = x_0 < \dots < x_n = 1$ be a partition of $I$ as above. By invariance under a change of partitions, we may assume that $0 = x_0 < \dots < x_m = \frac{1}{2} < \dots < x_n = 1$. Clearly $(u \ast v)(x_m) = p \in U \cap V$. Now both $0 = 2x_0 < \dots < 2x_m = 1$ and $0 = 2x_m - 1 < \dots < 2x_n - 1 = 1$ are partitions of $I$ with $(u \ast v)_k = u_k$ for $k = 1,\dots,m$ and $(u \ast v)_k = v_k$ for $k = m + 1,\dots,n$. By using invariance of the choice of a partition again and invariance of the choice of the $\gamma_k$ yields
+	\begin{align*}
+		\Phi(\sbr{u}\sbr{v}) &= \Phi\sbr{u \ast v}\\
+		&= \prod_{k = 1}^n \varphi_\bullet \sbr[0]{\gamma_{k - 1} \ast (u\ast v)_k \ast \wbar{\gamma}_k}\\
+		&= \prod_{k = 1}^m \varphi_\bullet \sbr[0]{\gamma_{k - 1} \ast u_k \ast \wbar{\gamma}_k}\prod_{k = m + 1}^n \varphi_\bullet \sbr[0]{\gamma_{k - 1} \ast v_k \ast \wbar{\gamma}_k}\\
+		&= \Phi\sbr{u}\Phi\sbr{v}. 
+	\end{align*}
+	\textit{Checking commutativity.} We have to show that $\Phi \circ \pi_1(\jota_U) = \varphi_U$ and $\Phi \circ \pi_1(\jota_V) = \varphi_V$ hold. Let us show the first identity, the second is similar. Let $\sbr{u} \in \pi_1(U,p)$. Then we can choose the trivial partition $0 = x_0 < x_1 = 1$ of $I$ and thus get
+	\begin{equation*}
+		(\Phi \circ \pi_1(\jota_U))\sbr{u} = \Phi\sbr{u} = \varphi_U\sbr[0]{\gamma_0 \ast u_1 \ast \wbar{\gamma}_1} = \varphi_U\sbr{u}.
+	\end{equation*}
+	\textit{Showing uniqueness of $\Phi$.} Suppose $\Psi : \pi_1(X,p) \to G$ is another map with the smae properties as $\Phi$. Let $\sbr{u} \in \pi_1(X,p)$. They keypoint is to observe that
+	\begin{equation*}
+		\sbr{u} = \sbr[4]{\prod_{k = 1}^n (\gamma_{k - 1} \ast u_k \ast \wbar{\gamma}_k)} 
+	\end{equation*}
+	\noindent holds. Thus
+	\begin{align*}
+		\Psi\sbr{u} &= \Psi \sbr[4]{\prod_{k = 1}^n (\gamma_{k - 1} \ast u_k \ast \wbar{\gamma}_k)}\\
+		&= \prod_{k = 1}\Psi\sbr{\gamma_{k - 1} \ast u_k \ast \wbar{\gamma}_k}\\
+		&= \prod_{k = 1}^n \varphi_\bullet\sbr{\gamma_{k - 1} \ast u_k \ast \wbar{\gamma}_k}\\
+		&= \Phi\sbr{u}.
+	\end{align*}
 \end{proof}
+
+\begin{exercise}
+	In the proof of the Seifert-Van Kampen theorem, show that $u_y \ast u_k' = u_k \circ \varphi$, where $\varphi \in \mathsf{Top}(I,I)$ is given by
+	\begin{equation*}
+		\varphi(s) := \ccases{
+			2s(y - x_{k - 1})/(x_k - x_{k - 1}) & 0 \leq s \leq \frac{1}{2},\\
+			2(1 - s)(y - x_{k - 1})/(x_k - x_{k - 1}) + 2s - 1 & \frac{1}{2} \leq s \leq 1.
+		}
+	\end{equation*}
+\end{exercise}
