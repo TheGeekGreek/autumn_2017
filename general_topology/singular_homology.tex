@@ -2,8 +2,15 @@
 \section*{The Eilenberg-Steenrod Axioms}
 
 \begin{definition}[The Eilenberg-Steenrod Axioms]
-	A \bld{homology theory} consist of two sequences $(\mathcal{H}_n)_{n \in \omega}$ and $(\delta_n)_{n \in \omega}$, where for each $n \in \omega$, $\mathcal{H}_n : \mathsf{Top}^2 \to \mathsf{AbGrp}$ is a functor and $\delta_n : \mathcal{H}_n \to \mathcal{H}_{n - 1} \circ R$ is a natural transformation, with $R : \mathsf{Top}^2 \to \mathsf{Top}^2$ defined by $R(X,A) := (X,\varnothing)$, and subject to the following axioms:
+	A \bld{homology theory} consist of two sequences $(\mathcal{H}_n)_{n \in \omega}$ and $(\delta_n)_{n \in \omega}$, where for each $n \in \omega$, $\mathcal{H}_n : \mathsf{Top}^2 \to \mathsf{AbGrp}$ is a functor and $\delta_n : \mathcal{H}_n \Rightarrow \mathcal{H}_{n - 1} \circ R$ if $n > 0$ and $\delta_0 : \mathcal{H}_0 \Rightarrow 0$ is a natural transformation, with $R : \mathsf{Top}^2 \to \mathsf{Top}^2$ defined by $R(X,A) := (A,\varnothing)$, and subject to the following axioms:
 	\begin{itemize}[wide = 0pt]
+		\item \textbf{The Exact Sequence Axiom.} Let $(X,A) \in \ob(\mathsf{Top}^2)$. Then there exists a long exact sequence
+			\begin{equation*}
+				\begin{tikzcd}[column sep=7ex]
+					\cdots \arrow[r] & \mathcal{H}_n(A) \arrow[r,"\mathcal{H}_n(\iota_A)"] & \mathcal{H}_n(X) \arrow[r,"\mathcal{H}_n(\iota_X)"] & \mathcal{H}_n(X,A) \arrow[r,"\delta_n"] & \mathcal{H}_{n - 1}(A) \arrow[r] & \cdots
+				\end{tikzcd}
+			\end{equation*}
+			\noindent where $\iota_A : (A,\varnothing) \hookrightarrow (X,\varnothing)$ and $\iota_X : (X,\varnothing) \hookrightarrow (X,A)$ denote inclusions.
 		\item \textbf{The Dimension Axiom.} Let $\ast$ be the terminal object in $\mathsf{Top}$. Then $\mathcal{H}_0(\ast) \cong \mathbb{Z}$ and $\mathcal{H}_n(\ast) = 0$ for all $n \in \omega$, $n > 0$. 
 	\end{itemize}
 \end{definition}
@@ -16,8 +23,8 @@ Aim of this section is to construct for each $n \in \omega$ a functor $H_n : \ma
 \subsection*{Free Abelian Groups}
 
 \begin{proposition}
-	The forgetful functor $U : \mathsf{AbGrp} \to \mathsf{Set}$ admits a left adjoint.
 	\label{prop:F_set_abgrp}
+	The forgetful functor $U : \mathsf{AbGrp} \to \mathsf{Set}$ admits a left adjoint.	
 \end{proposition}
 
 \begin{proof}
@@ -219,7 +226,7 @@ Aim of this section is to construct for each $n \in \omega$ a functor $H_n : \ma
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Relative and Reduced Homology																				%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection*{Relative and Reduced Homology}
+\subsection*{Relative Homology}
 \begin{definition}[Subcomplex]
 	Let $(C_\bullet,\partial_\bullet)$ be a chain complex. A \bld{subcomplex} of $(C_\bullet,\partial_\bullet)$ is a chain complex $(C_\bullet',\partial_\bullet')$, such that $C_n' \subseteq C_n$ for all $n \in \mathbb{Z}$ and that $\iota : C_\bullet' \to C_\bullet$ defined by $\iota_n : C_n' \hookrightarrow C_n$ for all $n \in \mathbb{Z}$, is a chain map.
 \end{definition}
@@ -252,8 +259,12 @@ Aim of this section is to construct for each $n \in \omega$ a functor $H_n : \ma
 	\noindent is called the \bld{$n$-th reduced singular homology functor.}
 \end{definition}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%The Exact Sequence Axiom																					%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{The Exact Sequence Axiom}
 \begin{proposition}[Long Exact Sequence in Homology]
-	\label{thm:les_homology}
+	\label{prop:les_homology}
 	Let
 	\begin{equation*}
 		\begin{tikzcd}
@@ -271,12 +282,13 @@ Aim of this section is to construct for each $n \in \omega$ a functor $H_n : \ma
 
 \begin{proof}
 	Let $n \in \mathbb{Z}$ and consider the following diagram of induced morphisms:
-	\begin{equation*}
+	\begin{equation}
+		\label{eq:les_homology}
 		\begin{tikzcd}
 			& C_n/\im\partial_{n + 1} \arrow[r,"f_n"]\arrow[d,"\partial_n"] & C_n'/\im\partial'_{n + 1} \arrow[r,"g_n"]\arrow[d,"\partial'_n"] & C_n''/\im\partial_{n + 1}'' \arrow[r]\arrow[d,"\partial''_n"] & 0\\
 			0 \arrow[r] & \ker \partial_{n - 1} \arrow[r,"f_{n - 1}"'] & \ker \partial_{n - 1}' \arrow[r,"g_{n - 1}"'] & \ker\partial_{n - 1}''
 		\end{tikzcd}		
-	\end{equation*}
+	\end{equation}
 	It is left to the reader to show that the induced maps are actually well defined, the diagram commutes and the rows are exact. Hence an application of the snake lemma \ref{prop:snake_lemma} yields $\delta_n \in \mathsf{AbGrp}(\ker \partial_n'',\coker \partial_n)$ and an exact sequence
 	\begin{equation*}
 		\begin{tikzcd}
@@ -292,20 +304,107 @@ Aim of this section is to construct for each $n \in \omega$ a functor $H_n : \ma
 \end{proof}
 
 \begin{exercise}
-	In the proof of theorem \ref{thm:les_homology} in the diagram, show that the induced maps are actually well defined, the diagram commutes and the two rows are exact.
+	In the proof of theorem \ref{prop:les_homology} in the diagram, show that the induced maps are actually well defined, the diagram commutes and the two rows are exact.
 \end{exercise}
 
-\begin{corollary}[Long Exact Sequence in Reduced Homology]
-	Let $(X,A) \in \ob(\mathsf{Top}^2)$. Then there is a 
-\end{corollary}
-
 \begin{definition}[Connecting Homomorphism]
-	The sequence $(\delta_n)_{n \in \mathbb{Z}}$ of morphisms in $\mathsf{AbGrp}$ of theorem \ref{thm:les_homology} is called the \bld{connecting homomorphism of the short exact sequence $0 \to C_\bullet \to C_\bullet' \to C_\bullet'' \to 0$}.
+	The sequence $(\delta_n)_{n \in \mathbb{Z}}$ of morphisms in $\mathsf{AbGrp}$ of theorem \ref{prop:les_homology} is called the \bld{connecting homomorphism of the short exact sequence $0 \to C_\bullet \to C_\bullet' \to C_\bullet'' \to 0$}.
 \end{definition}
 
-\begin{theorem}[The Exact Sequence Axiom]
-		
-\end{theorem}
+\begin{proposition}[Naturality of the Connecting Homomorphism]
+	\label{prop:naturality_connecting_homomorphism}
+	Suppose we are given a commutative diagram with exact rows in $\mathsf{Comp}$:
+	\begin{equation*}
+		\begin{tikzcd}
+			0 \arrow[r] & A_\bullet \arrow[r,"f"]\arrow[d,"i"] & B_\bullet \arrow[r,"g"]\arrow[d,"j"] & C_\bullet \arrow[r]\arrow[d,"k"] & 0\\
+			0 \arrow[r] & A_\bullet' \arrow[r,"f'"'] & B_\bullet' \arrow[r,"g'"'] & C_\bullet' \arrow[r] & 0.
+		\end{tikzcd}
+	\end{equation*}
+	Then there is a commutative diagram with exact rows in $\mathsf{AbGrp}$:
+	\begin{equation*}
+		\begin{tikzcd}[column sep = 7ex]
+			\cdots \arrow[r] & H_n(A_\bullet) \arrow[r,"H_n(f)"]\arrow[d,"H_n(i)"] & H_n(B_\bullet) \arrow[r,"H_n(g)"]\arrow[d,"H_n(j)"] & H_n(C_\bullet) \arrow[r,"\delta_n"]\arrow[d,"H_n(k)"] & H_{n - 1}(A_\bullet) \arrow[r]\arrow[d,"H_{n - 1}(i)"] & \cdots\\
+			\cdots \arrow[r] & H_n(A_\bullet') \arrow[r,"H_n(f')"'] & H_n(B_\bullet') \arrow[r,"H_n(g')"'] & H_n(C'_\bullet) \arrow[r,"\delta'_n"'] & H_{n - 1}(A'_\bullet) \arrow[r] & \cdots,
+		\end{tikzcd}
+	\end{equation*}
+	\noindent where $\delta$ and $\delta'$ are the corresponding connecting homomorphisms.
+\end{proposition}
+
+\begin{proof}
+	That the rows are exact is the content of proposition \ref{prop:les_homology}. Moreover, the first two squares commute because $H_n$ is a functor. Hence left to check is only the commutativity of the third square. Let $\langle c \rangle \in H_n(C_\bullet)$. Using diagram \ref{eq:les_homology} and figure \ref{fig:definition_delta}, we have $\delta_n\langle c \rangle = \langle a \rangle$ as in figure \ref{fig:delta_n_c}. Hence
+	\begin{equation*}
+		\del[0]{H_{n - 1}(i) \circ \delta_n}\langle c \rangle = H_{n - 1}(i)\langle a \rangle = \langle i_{n - 1}(a)\rangle.
+	\end{equation*}
+	By the commutativity of the initial diagram and the fact that $j$ is a chain map, we have that
+	\begin{equation*}
+		\del[0]{f'_{n - 1} \circ i_{n - 1}}\langle a \rangle = \del[0]{j_{n - 1} \circ f_{n - 1}}\langle a \rangle = j_{n - 1}\partial_n(b) = \partial_nj_n(b).
+	\end{equation*}
+	Again, commutativity of the initial diagram implies $g_n'(j_n(b)) = k_n(g_n(b)) = k_n(c)$. Thus we get $\delta_n'\langle k_n(c)\rangle = \langle i_{n - 1}(a) \rangle$ as indicated in figure \ref{fig:delta_n_prime_k_c} and so
+	\begin{equation*}
+		\del[0]{H_{n - 1}(i) \circ \delta_n}\langle c \rangle = \langle i_{n - 1}(a)\rangle = \delta'_n \langle k_n(c) \rangle = \del[0]{\delta_n' \circ H_n(k)}\langle c \rangle.
+	\end{equation*}
+	\begin{figure}[h!tb]
+		\centering
+		\begin{subfigure}[b]{.5\textwidth}
+			\centering
+			\begin{tikzcd}
+				& & \langle c \rangle \arrow[d,mapsto]\\
+				& \langle b\rangle \arrow[d,mapsto,"\partial_n"]\arrow[r,mapsto,"g_n"]& \langle c\rangle\\
+				a \arrow[d,mapsto] \arrow[r,mapsto,"f_{n - 1}"'] & \partial_n b\\
+				\langle a \rangle
+			\end{tikzcd}		
+			\caption{$\delta_n\langle c \rangle$.}
+			\label{fig:delta_n_c}
+		\end{subfigure}
+		~
+		\begin{subfigure}[b]{.5\textwidth}
+			\centering
+			\begin{tikzcd}
+				& & \langle k(c) \rangle \arrow[d,mapsto]\\
+				& \langle j_n(b)\rangle \arrow[d,mapsto,"\partial_n"]\arrow[r,mapsto,"g_n'"] & \langle k_n(c)\rangle\\
+				i_{n - 1}(a) \arrow[r,mapsto,"f'_{n - 1}"']\arrow[d] & \partial_nj_n(b)\\
+				\langle i_{n - 1}(a)\rangle
+			\end{tikzcd}		
+			\caption{$\delta'\langle k_n(c) \rangle$.}
+			\label{fig:delta_n_prime_k_c}					
+		\end{subfigure}
+		\caption{}
+	\end{figure}
+\end{proof}
+
+\begin{corollary}[The Exact Sequence Axiom]
+	Consider the reduced homology functors $(H_n)_{n \in \omega}$. Moreover, for each $(X,A) \in \ob(\mathsf{Top})^2$, let $(\delta_{n,(X,A)})_{n \in \omega}$ be the sequence of connecting homomorphisms of the short exact sequence 
+	\begin{equation*}
+		\begin{tikzcd}[column sep = 7ex]
+			0 \arrow[r] & C_\bullet(A) \arrow[r,"C_\bullet(\iota_A)"] & C_\bullet(X) \arrow[r,"C_\bullet(\iota_X)"] & C_\bullet(X,A) \arrow[r] & 0,
+		\end{tikzcd}
+	\end{equation*}
+	\noindent where $\iota_A : (A,\varnothing) \hookrightarrow (X,\varnothing)$ and $\iota_X : (X,\varnothing) \hookrightarrow (X,A)$ denote inclusions. Then $\delta_n$ is a natural transformation for $n > 0$ and there is a long exact sequence
+\begin{equation*}
+	\begin{tikzcd}[column sep=7ex]
+	\cdots \arrow[r] & H_n(A) \arrow[r,"H_n(\iota_A)"] & H_n(X) \arrow[r,"H_n(\iota_X)"] & H_n(X,A) \arrow[r,"\delta_{n,(X,A)}"] & H_{n - 1}(A) \arrow[r] & \cdots
+	\end{tikzcd}
+\end{equation*}
+
+\end{corollary}
+
+\begin{proof}
+	The only thing to show is that $\delta_n : H_n \Rightarrow H_{n - 1} \circ R$ is a natural transformation for $n > 0$. Hence for any $f \in \mathsf{Top}^2\del[1]{(X,A),(Y,B)}$, we have to show that
+	\begin{equation*}
+		\begin{tikzcd}[column sep=7ex]
+			H_n(X,A) \arrow[r,"\delta_{n,(X,A)}"]\arrow[d,"H_n(f)"'] & H_{n - 1}(A)\arrow[d,"H_{n-1}(R(f))"]\\
+			H_n(Y,B) \arrow[r,"\delta_{n,(Y,B)}"']& H_{n - 1}(B)
+		\end{tikzcd}
+	\end{equation*}
+	\noindent commutes. To this end, consider the following commutative diagram with exact rows in $\mathsf{Comp}$: 
+	\begin{equation*}
+		\begin{tikzcd}[column sep=7ex]
+			0 \arrow[r] & C_\bullet(A) \arrow[r,"C_\bullet(\iota_A)"]\arrow[d,"C_\bullet(R(f))"] & C_\bullet(X) \arrow[r,"C_\bullet(\iota_X)"]\arrow[d,"C_\bullet(S(f))"] & C_\bullet(X,A) \arrow[r]\arrow[d,"C_\bullet(f)"] & 0\\
+			0 \arrow[r] & C_\bullet(\iota_B) \arrow[r,"C_\bullet(\iota_B)"'] & C_\bullet(Y) \arrow[r,"C_\bullet(\iota_Y)"'] & C_\bullet(Y,B) \arrow[r] & 0,
+		\end{tikzcd}
+	\end{equation*}
+	\noindent where $S : \mathsf{Top}^2 \to \mathsf{Top}^2$ is th functor defined by $S(X,A) := (X,\varnothing)$. Applying proposition \ref{prop:naturality_connecting_homomorphism} to the above diagram yields the result.
+\end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %First Properties of Singular Homology																		%
@@ -676,8 +775,8 @@ Since elements of $H_1(X)$ are homology classes of loops, one might suspect that
 	\end{proof}
 
 	\begin{lemma}
-		Let $u$ and $v$ be paths in $X$ from $p$ to $q$ and from $q$ to $r$, respectively. Then $\langle u \ast v \rangle = \langle u \rangle + \langle v \rangle$.
 		\label{lem:concatenation_addition}
+		Let $u$ and $v$ be paths in $X$ from $p$ to $q$ and from $q$ to $r$, respectively. Then $\langle u \ast v \rangle = \langle u \rangle + \langle v \rangle$.	
 	\end{lemma}
 
 	\begin{proof}
@@ -699,13 +798,13 @@ Since elements of $H_1(X)$ are homology classes of loops, one might suspect that
 	\end{proof}
 
 	\begin{corollary}
-		$h$ is a morphism of groups.
 		\label{cor:h_homomorphism}
+		$h$ is a morphism of groups.
 	\end{corollary}
 
 	\begin{corollary}
-		Let $u,v,w$ be composable paths in $X$. Then $\langle (u \ast v) \ast w \rangle = \langle u \ast (v \ast w) \rangle$.
 		\label{cor:composable_associative_homology}
+		Let $u,v,w$ be composable paths in $X$. Then $\langle (u \ast v) \ast w \rangle = \langle u \ast (v \ast w) \rangle$.
 	\end{corollary}
 
 	\begin{lemma}
@@ -732,8 +831,8 @@ Since elements of $H_1(X)$ are homology classes of loops, one might suspect that
 	Lastly, we want to show that $\ker h = \sbr[0]{\pi_1(X,p),\pi_1(X,p)}$. Since then the first isomorphism theorem implies $\Ab(\pi_1(X,p)) \cong H_1(X)$. Since $H_1(X)$ is abelian, clearly $\sbr[0]{\pi_1(X,p),\pi_1(X,p)} \subseteq \ker h$ and thus $h$ factors uniquely $\wtilde{h} : \Ab(\pi_1(X,p)) \to H_1(X)$. The next lemma will be useful.
 	
 	\begin{lemma}
-		Let $\sigma : \Delta^2 \to X$ be a singular $2$-simplex. Define $\sigma^{(k)} := \sigma \circ \varphi^2_k$ for $k = 0,1,2$. Then $\sbr[0]{\sigma^{(0)} \ast \overline{\sigma^{(1)}} \ast \sigma^{(2)}} = \sbr[0]{c_{\sigma(e_1)}}$.
 		\label{lem:nullhomotopic_loop}
+		Let $\sigma : \Delta^2 \to X$ be a singular $2$-simplex. Define $\sigma^{(k)} := \sigma \circ \varphi^2_k$ for $k = 0,1,2$. Then $\sbr[0]{\sigma^{(0)} \ast \overline{\sigma^{(1)}} \ast \sigma^{(2)}} = \sbr[0]{c_{\sigma(e_1)}}$.
 	\end{lemma}
 
 	\begin{proof}
@@ -743,8 +842,8 @@ Since elements of $H_1(X)$ are homology classes of loops, one might suspect that
 	Let $\sigma \in \mathsf{Top}(\Delta^1,X)$. Define $g(\sigma) := \sbr[0]{\gamma_{\sigma(0)} \ast \sigma \ast \overline{\gamma_{\sigma(1)}}}_{\Ab}$, where $\sbr{u}_{\Ab}$ denotes the equivalence class of $\sbr{u}$ in $\Ab(\pi_1(X,p))$. Since $\Ab(\pi_1(X,p))$ is abelian, extension by linearity yields a map $g : C_1(X) \to \Ab(\pi_1(X,p))$.
 
 	\begin{lemma}
-		$g$ vanishes on $\im \partial_2$.
 		\label{lem:g_vanishes_on_boundaries}
+		$g$ vanishes on $\im \partial_2$.	
 	\end{lemma}
 
 	\begin{proof}
@@ -771,6 +870,14 @@ Since elements of $H_1(X)$ are homology classes of loops, one might suspect that
 \begin{definition}[Hurewicz Homomorphism]
 	Let $X \in \ob(\mathsf{Top})$ and $p \in X$. The homomorphism $h : \pi_1(X,p) \to H_1(X)$ defined in theorem \ref{thm:Hurewicz_theorem} is called the \bld{Hurewicz homomorphism}.
 \end{definition}
+
+\begin{proposition}
+	Let $U : \mathsf{AbGrp} \to \mathsf{Grp}$ denote the forgetful functor. Then the Hurewicz homomorphism is a natural transformation $\pi_1 \Rightarrow U \circ H_1$.
+\end{proposition}
+
+\begin{proof}
+	
+\end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %																							%
