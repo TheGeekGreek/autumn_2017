@@ -146,6 +146,20 @@ In algebraic topology, there is a very useful construction on categories.
 	\end{equation}
 \end{remark}
 
+\subsection*{Filtered Colimits}
+\begin{definition}[Filtered Category]
+	A category $\mathcal{J}$ is \bld{filtered}, if $\mathcal{J}$ is not empty and
+	\begin{enumerate}[label = \textup{(}\alph*\textup{)},wide = 0pt]
+		\item To any two objects $j$ and $j'$ in $\mathcal{J}$ there exists $k \in \ob(\mathcal{J})$ and morphisms $j \to k$ and $j' \to k$.
+		\item To any two parallel arrows $u,v : i \to j$ in $\mathsf{J}$, there exists $k \in \ob(\mathcal{J})$ and a morphism $w : j \to k$ in $\mathcal{J}$, such that $w \circ u = w \circ v$.
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}[Filtered Colimit]
+	Let $\mathcal{C}$ be a category and $\mathcal{J}$ a small filtered category. A \bld{filtered diagram in $\mathcal{C}$} is a functor $D : \mathcal{J} \to \mathcal{C}$. A \bld{filtered colimit} is a colimit of a filtered diagram in $\mathcal{C}$, written $\colim D$
+\end{definition}
+
+
 \section*{Basic Algebra}
 \subsection*{The Isomorphism Theorems}
 
