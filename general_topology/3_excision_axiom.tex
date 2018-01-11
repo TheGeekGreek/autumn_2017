@@ -1,0 +1,102 @@
+\section*{The Excision Axiom}
+\subsection*{Barycentric Subdivision}
+
+\begin{definition}[Cone]
+	Let $m,n \in \omega$, $K \subseteq \mathbb{R}^m$ convex, $v_0,\dots,v_n,w \in K$ and suppose $\alpha := A(v_0,\dots,v_n)$ is an affine $n$-simplex. Then define the \bld{cone on $\alpha$ from $w$}, written $\Cone_w(\alpha)$, by
+	\begin{equation*}
+		\Cone_w(\alpha) := A(w,v_0,\dots,v_n).
+	\end{equation*}
+	Moreover, for an affine chain $c := \sum_{i}m_i \alpha_i$, define
+	\begin{equation*}
+		\Cone_w(c) := \sum_i m_i \Cone_w(\alpha_i).
+	\end{equation*}
+\end{definition}
+
+\begin{lemma}
+	\label{}
+	Let $m,n \in \omega$, $K \subseteq \mathbb{R}^m$ convex, $v_0,\dots,v_n,w \in K$ and $\alpha := A(v_0,\dots,v_n)$. Then
+	\begin{equation*}
+		\partial \Cone_w(\alpha) + \Cone_w(\partial \alpha) = \alpha.
+	\end{equation*}
+\end{lemma}
+
+\begin{proof}
+	We compute
+	\begin{align*}
+		\Cone_w(\partial \alpha) &= \sum_{k = 0}^n (-1)^k \Cone_w\del[1]{A(v_0,\dots,\what{v}_k,\dots,v_n)}\\
+		&= \sum_{k = 0}^n (-1)^kA(w,v_0,\dots,\what{v}_k,\dots,v_n),
+	\end{align*}
+	\noindent since $\alpha \circ \varphi_k^n = A(v_0,\dots,\what{v}_k,\dots,v_n)$. Thus
+	\begin{align*}
+		\partial \Cone_w(\alpha) &= \sum_{k = 0}^{n + 1} (-1)^k \Cone_w(\alpha) \circ \varphi_k^{n+1}\\
+		&= \alpha + \sum_{k = 1}^{n + 1} (-1)^k A(w,v_0,\dots,\what{v}_{k - 1},\dots,v_n)\\
+		&= \alpha - \sum_{k = 0}^n (-1)^k A(w,v_0,\dots,\what{v}_k,\dots,v_n)\\
+		&= \alpha - \Cone_w(\partial \alpha).
+	\end{align*}
+\end{proof}
+
+\begin{definition}[Barycenter]
+	Let $\sigma := \sbr[0]{v_0,\dots,v_k} \subseteq \mathbb{R}^n$. Define the \bld{barycenter of $\sigma$}, written $b_\sigma$, to be
+	\begin{equation*}
+		b_\sigma := \frac{1}{1 + k}\sum_{i = 0}^k v_i.
+	\end{equation*}
+\end{definition}
+
+\begin{definition}[Affine Barycentric Subdivision Operator]
+	Let $K \subseteq \mathbb{R}^m$ be convex. Define the \bld{affine barycentric subdivision operator} $s : C_n^{\mathrm{aff}}(K) \to C^{\mathrm{aff}}_n(K)$ inductively by
+	\begin{equation*}
+		s^{\mathrm{aff}}(\sigma) := \ccases{
+			\sigma & n = 0,\\
+			\Cone_{\sigma(b_n)}\del[1]{s^{\mathrm{aff}}(\partial\sigma)}, & n > 0,
+		}
+	\end{equation*}
+	\noindent on affine $n$-simplices $\sigma : \Delta^n \to K$, and where $b_n := b_{\Delta^n}$.
+\end{definition}
+
+\begin{exercise}
+	\label{ex:formula_affine_barycentric_subdivision}
+	Let $m,n \in \omega$, $K \subseteq \mathbb{R}^m$ convex, $v_0,\dots,v_n,w \in K$. Show that
+	\begin{equation*}
+		s^{\mathrm{aff}}(A(v_0,\dots,v_n)) = \sum_{\sigma \in S_{n + 1}} \sgn(\sigma) A(v_0^\sigma,\dots,v_n^\sigma),
+	\end{equation*}
+	\noindent where
+	\begin{equation*}
+		v_i^\sigma := \frac{1}{n - i + 1} \sum_{k = i}^n v_{\sigma(k)}.
+	\end{equation*}
+\end{exercise}
+
+\begin{definition}[Barycentric Subdivision Operator]
+	Let $X \in \ob(\mathsf{Top})$. Define the \bld{barycentric subdivision operator $s : C_n(X) \to C_n(X)$} by
+	\begin{equation*}
+		s(\sigma) := C_n(\sigma)\del[0]{s^{\mathrm{aff}}(\id_{\Delta^n})}
+	\end{equation*}
+	\noindent on $n$-simplices $\sigma$.
+\end{definition}
+
+\begin{proposition}
+	The barycentric subdivision operators $s : C_n(X) \to C_n(X)$ have the following properties:
+	\begin{enumerate}[label = \textup{(}\alph*\textup{)},wide = 0pt]
+		\item If $\alpha$ is any affine simplex, then $s(\alpha) = s^{\mathrm{aff}}(\alpha)$.
+		\item For any $f \in \mathsf{Top}(X,Y)$, we have that $s \circ C_n(f) = C_n(f) \circ s$.
+		\item $\partial \circ s = s \circ \partial$.
+	\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+	For proving (a), let $\alpha := A(v_0,\dots,v_n)$. Observe that exercise \ref{ex:formula_affine_barycentric_subdivision} yields
+	\begin{align*}
+		s(\alpha) &= C_n(\alpha)(s^{\mathrm{aff}}(\id_{\Delta^n}))\\
+		&= C_n(\alpha)\del[1]{s^{\mathrm{aff}}(A(e_0,\dots,e_n))}\\
+		&= \sum_{\sigma \in S_{n + 1}} \sgn(\sigma) \alpha \circ A(e_0^\sigma,\dots,e_n^\sigma)\\
+		&= \sum_{\sigma \in S_{n + 1}} \sgn(\sigma) A(v_0^\sigma,\dots,v_n^\sigma)\\
+		&= s^{\mathrm{aff}}(\alpha).
+	\end{align*}
+	For proving (b), let $\sigma : \Delta^n \to X$ be an $n$-simplex. Then by the functoriality of $C_n$ we get that
+	\begin{align*}
+		\del[0]{s \circ C_n(f)}(\sigma) &= s(f \circ \sigma)\\
+		&= C_n(f \circ \sigma)\del[0]{s(\id_{\Delta^n})}\\ 
+		&= \del[0]{C_n(f) \circ C_n(\sigma)}(s(\id_{\Delta^n})\\ 
+		&= (C_n(f) \circ s)(\sigma).
+	\end{align*}
+	For proving (c), we do an induction on $n$. For $n = 0$, this is trivially true. Hence assume (b) holds for some $n \in \omega$.
+\end{proof}

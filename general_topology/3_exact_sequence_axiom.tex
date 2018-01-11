@@ -1,0 +1,143 @@
+\section*{The Exact Sequence Axiom}
+\begin{proposition}[Long Exact Sequence in Homology]
+	\label{prop:les_homology}
+	Let
+	\begin{equation*}
+		\begin{tikzcd}
+			0 \arrow[r] & C_\bullet \arrow[r,"f_\bullet"] & C'_\bullet \arrow[r,"g_\bullet"] & C_\bullet'' \arrow[r] & 0
+		\end{tikzcd}
+	\end{equation*}
+	\noindent be a short exact sequence in $\mathsf{Comp}$. Then there exists a sequence $(\delta_n)_{n \in \mathbb{Z}}$, where for all $n \in \mathbb{Z}$, $\delta_n \in \mathsf{AbGrp}(H_n(C_\bullet''),H_{n - 1}(C_\bullet))$ and such that
+	\begin{equation*}
+		\begin{tikzcd}[column sep=7ex]
+			\cdots \arrow[r] & H_n(C_\bullet) \arrow[r,"H_n(f)"] & H_n(C'_\bullet) \arrow[r,"H_n(g)"] & H_n(C''_\bullet) \arrow[r,"\delta_n"] & H_{n - 1}(C_\bullet) \arrow[r] & \cdots
+		\end{tikzcd} 
+	\end{equation*}
+	\noindent is a long exact sequence in $\mathsf{AbGrp}$.
+\end{proposition}
+
+\begin{proof}
+	Let $n \in \mathbb{Z}$ and consider the following diagram of induced morphisms:
+	\begin{equation}
+		\label{eq:les_homology}
+		\begin{tikzcd}
+			& C_n/\im\partial_{n + 1} \arrow[r,"f_n"]\arrow[d,"\partial_n"] & C_n'/\im\partial'_{n + 1} \arrow[r,"g_n"]\arrow[d,"\partial'_n"] & C_n''/\im\partial_{n + 1}'' \arrow[r]\arrow[d,"\partial''_n"] & 0\\
+			0 \arrow[r] & \ker \partial_{n - 1} \arrow[r,"f_{n - 1}"'] & \ker \partial_{n - 1}' \arrow[r,"g_{n - 1}"'] & \ker\partial_{n - 1}''
+		\end{tikzcd}		
+	\end{equation}
+	It is left to the reader to show that the induced maps are actually well defined, the diagram commutes and the rows are exact. Hence an application of the snake lemma \ref{prop:snake_lemma} yields $\delta_n \in \mathsf{AbGrp}(\ker \partial_n'',\coker \partial_n)$ and an exact sequence
+	\begin{equation*}
+		\begin{tikzcd}
+			\ker \partial_n \arrow[r,"f_n"] & \ker \partial_n' \arrow[r,"g_n"] & \ker \partial_n'' \arrow[r,"\delta_n"] & \coker \partial_n \arrow[r,"f_{n - 1}"] & \coker \partial_n' \arrow[r,"g_{n - 1}"] & \coker \partial_n''
+		 \end{tikzcd}
+	\end{equation*}
+	It is easy to check that this exact sequence is the same as
+	\begin{equation*}
+		\begin{tikzcd}[column sep=3.5ex]
+			H_n(C_\bullet) \arrow[r,"H_n(f)"] & H_n(C'_\bullet) \arrow[r,"H_n(g)"] & H_n(C''_\bullet) \arrow[r,"\delta_n"] & H_{n - 1}(C_\bullet) \arrow[r,"H_{n-1}(f)"] & H_{n - 1}(C_\bullet') \arrow[r,"H_{n-1}(g)"] & H_{n - 1}(C_\bullet'').
+		 \end{tikzcd}
+	\end{equation*}
+\end{proof}
+
+\begin{exercise}
+	In the proof of theorem \ref{prop:les_homology} in the diagram, show that the induced maps are actually well defined, the diagram commutes and the two rows are exact.
+\end{exercise}
+
+\begin{definition}[Connecting Homomorphism]
+	The sequence $(\delta_n)_{n \in \mathbb{Z}}$ of morphisms in $\mathsf{AbGrp}$ of theorem \ref{prop:les_homology} is called the \bld{connecting homomorphism of the short exact sequence $0 \to C_\bullet \to C_\bullet' \to C_\bullet'' \to 0$}.
+\end{definition}
+
+\begin{proposition}[Naturality of the Connecting Homomorphism]
+	\label{prop:naturality_connecting_homomorphism}
+	Suppose we are given a commutative diagram with exact rows in $\mathsf{Comp}$:
+	\begin{equation*}
+		\begin{tikzcd}
+			0 \arrow[r] & A_\bullet \arrow[r,"f"]\arrow[d,"i"] & B_\bullet \arrow[r,"g"]\arrow[d,"j"] & C_\bullet \arrow[r]\arrow[d,"k"] & 0\\
+			0 \arrow[r] & A_\bullet' \arrow[r,"f'"'] & B_\bullet' \arrow[r,"g'"'] & C_\bullet' \arrow[r] & 0.
+		\end{tikzcd}
+	\end{equation*}
+	Then there is a commutative diagram with exact rows in $\mathsf{AbGrp}$:
+	\begin{equation*}
+		\begin{tikzcd}[column sep = 7ex]
+			\cdots \arrow[r] & H_n(A_\bullet) \arrow[r,"H_n(f)"]\arrow[d,"H_n(i)"] & H_n(B_\bullet) \arrow[r,"H_n(g)"]\arrow[d,"H_n(j)"] & H_n(C_\bullet) \arrow[r,"\delta_n"]\arrow[d,"H_n(k)"] & H_{n - 1}(A_\bullet) \arrow[r]\arrow[d,"H_{n - 1}(i)"] & \cdots\\
+			\cdots \arrow[r] & H_n(A_\bullet') \arrow[r,"H_n(f')"'] & H_n(B_\bullet') \arrow[r,"H_n(g')"'] & H_n(C'_\bullet) \arrow[r,"\delta'_n"'] & H_{n - 1}(A'_\bullet) \arrow[r] & \cdots,
+		\end{tikzcd}
+	\end{equation*}
+	\noindent where $\delta$ and $\delta'$ are the corresponding connecting homomorphisms.
+\end{proposition}
+
+\begin{proof}
+	That the rows are exact is the content of proposition \ref{prop:les_homology}. Moreover, the first two squares commute because $H_n$ is a functor. Hence left to check is only the commutativity of the third square. Let $\langle c \rangle \in H_n(C_\bullet)$. Using diagram \ref{eq:les_homology} and figure \ref{fig:definition_delta}, we have $\delta_n\langle c \rangle = \langle a \rangle$ as in figure \ref{fig:delta_n_c}. Hence
+	\begin{equation*}
+		\del[0]{H_{n - 1}(i) \circ \delta_n}\langle c \rangle = H_{n - 1}(i)\langle a \rangle = \langle i_{n - 1}(a)\rangle.
+	\end{equation*}
+	By the commutativity of the initial diagram and the fact that $j$ is a chain map, we have that
+	\begin{equation*}
+		\del[0]{f'_{n - 1} \circ i_{n - 1}}\langle a \rangle = \del[0]{j_{n - 1} \circ f_{n - 1}}\langle a \rangle = j_{n - 1}\partial_n(b) = \partial_nj_n(b).
+	\end{equation*}
+	Again, commutativity of the initial diagram implies $g_n'(j_n(b)) = k_n(g_n(b)) = k_n(c)$. Thus we get $\delta_n'\langle k_n(c)\rangle = \langle i_{n - 1}(a) \rangle$ as indicated in figure \ref{fig:delta_n_prime_k_c} and so
+	\begin{equation*}
+		\del[0]{H_{n - 1}(i) \circ \delta_n}\langle c \rangle = \langle i_{n - 1}(a)\rangle = \delta'_n \langle k_n(c) \rangle = \del[0]{\delta_n' \circ H_n(k)}\langle c \rangle.
+	\end{equation*}
+	\begin{figure}[h!tb]
+		\centering
+		\begin{subfigure}[b]{.5\textwidth}
+			\centering
+			\begin{tikzcd}
+				& & \langle c \rangle \arrow[d,mapsto]\\
+				& \langle b\rangle \arrow[d,mapsto,"\partial_n"]\arrow[r,mapsto,"g_n"]& \langle c\rangle\\
+				a \arrow[d,mapsto] \arrow[r,mapsto,"f_{n - 1}"'] & \partial_n b\\
+				\langle a \rangle
+			\end{tikzcd}		
+			\caption{$\delta_n\langle c \rangle$.}
+			\label{fig:delta_n_c}
+		\end{subfigure}
+		~
+		\begin{subfigure}[b]{.5\textwidth}
+			\centering
+			\begin{tikzcd}
+				& & \langle k(c) \rangle \arrow[d,mapsto]\\
+				& \langle j_n(b)\rangle \arrow[d,mapsto,"\partial_n"]\arrow[r,mapsto,"g_n'"] & \langle k_n(c)\rangle\\
+				i_{n - 1}(a) \arrow[r,mapsto,"f'_{n - 1}"']\arrow[d] & \partial_nj_n(b)\\
+				\langle i_{n - 1}(a)\rangle
+			\end{tikzcd}		
+			\caption{$\delta'\langle k_n(c) \rangle$.}
+			\label{fig:delta_n_prime_k_c}					
+		\end{subfigure}
+		\caption{}
+	\end{figure}
+\end{proof}
+
+\begin{corollary}[The Exact Sequence Axiom]
+	Consider the reduced homology functors $(H_n)_{n \in \omega}$. Moreover, for each $(X,A) \in \ob(\mathsf{Top})^2$, let $(\delta_{n,(X,A)})_{n \in \omega}$ be the sequence of connecting homomorphisms of the short exact sequence 
+	\begin{equation*}
+		\begin{tikzcd}[column sep = 7ex]
+			0 \arrow[r] & C_\bullet(A) \arrow[r,"C_\bullet(\iota_A)"] & C_\bullet(X) \arrow[r,"C_\bullet(\iota_X)"] & C_\bullet(X,A) \arrow[r] & 0,
+		\end{tikzcd}
+	\end{equation*}
+	\noindent where $\iota_A : (A,\varnothing) \hookrightarrow (X,\varnothing)$ and $\iota_X : (X,\varnothing) \hookrightarrow (X,A)$ denote inclusions. Then $\delta_n$ is a natural transformation for $n > 0$ and there is a long exact sequence
+\begin{equation*}
+	\begin{tikzcd}[column sep=7ex]
+	\cdots \arrow[r] & H_n(A) \arrow[r,"H_n(\iota_A)"] & H_n(X) \arrow[r,"H_n(\iota_X)"] & H_n(X,A) \arrow[r,"\delta_{n,(X,A)}"] & H_{n - 1}(A) \arrow[r] & \cdots
+	\end{tikzcd}
+\end{equation*}
+
+\end{corollary}
+
+\begin{proof}
+	The only thing to show is that $\delta_n : H_n \Rightarrow H_{n - 1} \circ R$ is a natural transformation for $n > 0$. Hence for any $f \in \mathsf{Top}^2\del[1]{(X,A),(Y,B)}$, we have to show that
+	\begin{equation*}
+		\begin{tikzcd}[column sep=7ex]
+			H_n(X,A) \arrow[r,"\delta_{n,(X,A)}"]\arrow[d,"H_n(f)"'] & H_{n - 1}(A)\arrow[d,"H_{n-1}(R(f))"]\\
+			H_n(Y,B) \arrow[r,"\delta_{n,(Y,B)}"']& H_{n - 1}(B)
+		\end{tikzcd}
+	\end{equation*}
+	\noindent commutes. To this end, consider the following commutative diagram with exact rows in $\mathsf{Comp}$: 
+	\begin{equation*}
+		\begin{tikzcd}[column sep=7ex]
+			0 \arrow[r] & C_\bullet(A) \arrow[r,"C_\bullet(\iota_A)"]\arrow[d,"C_\bullet(R(f))"] & C_\bullet(X) \arrow[r,"C_\bullet(\iota_X)"]\arrow[d,"C_\bullet(S(f))"] & C_\bullet(X,A) \arrow[r]\arrow[d,"C_\bullet(f)"] & 0\\
+			0 \arrow[r] & C_\bullet(\iota_B) \arrow[r,"C_\bullet(\iota_B)"'] & C_\bullet(Y) \arrow[r,"C_\bullet(\iota_Y)"'] & C_\bullet(Y,B) \arrow[r] & 0,
+		\end{tikzcd}
+	\end{equation*}
+	\noindent where $S : \mathsf{Top}^2 \to \mathsf{Top}^2$ is th functor defined by $S(X,A) := (X,\varnothing)$. Applying proposition \ref{prop:naturality_connecting_homomorphism} to the above diagram yields the result.
+\end{proof}

@@ -1,0 +1,28 @@
+\section*{The Jordan-Brouwer Separation Theorem}
+
+\begin{lemma}
+	\label{lem:topologizing_a_set}
+	Let $X \in \ob(\mathsf{Top})$, $S \in \ob(\mathsf{Set})$ and $f : U(X) \to S$ a bijection. Then $S$ can be equipped with a topology such that $f$ becomes a homeomorphism.
+\end{lemma}
+
+\begin{proof}
+	Let $\mathcal{T}$ be the topology on $X$. Then it is easy to see, that 
+	\begin{equation*}
+		\varphi(\mathcal{T}) := \cbr[0]{\varphi(U) : U \in \mathcal{T}}
+	\end{equation*}
+	\noindent is the right topology on $S$.
+\end{proof}
+
+\begin{lemma}
+	Given a sequential diagram 
+	\begin{equation*}
+		\begin{tikzcd}
+			X_0 \arrow[r,hook,"\iota_0"] & X_1 \arrow[r,hook,"\iota_1"] & X_2 \arrow[r,hook,"\iota_2"] & \cdots
+		\end{tikzcd}
+	\end{equation*}
+	\noindent in $\mathsf{Top}$, we have that $\colim_n X_n \cong \bigcup_{n \in \omega}X_n$.
+\end{lemma}
+
+\begin{proof}
+	Using the construction in proposition \ref{prop:filtered_colimits_set}, we have that a sequential colimit  in $\mathsf{Set}$ is given by $\coprod_{n \in \omega}X_n /{\sim}$, where it is easy to check that in this case $x \in X_n \sim y \in X_m$ if and only if $x = y$. Moreover, we have that $\coprod_{n \in \omega} X_n/{\sim} \cong \bigcup_{n \in \omega}X_n$ in $\mathsf{Set}$, as one can easily show by considering the map $\sbr[0]{x_n} \mapsto x_n$. Using lemma \ref{lem:topologizing_a_set}, we get that $\coprod_{n \in \omega} X_n/{\sim} \cong \bigcup_{n \in \omega}X_n$ in $\mathsf{Top}$. Moreover, it is easy to check that a set $U \subseteq \bigcup_{n \in \omega}X_n$ is open if and only if $U \cap X_n$ is open in $X_n$ for all $n \in \omega$.
+\end{proof}

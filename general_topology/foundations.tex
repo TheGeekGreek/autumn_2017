@@ -151,14 +151,65 @@ In algebraic topology, there is a very useful construction on categories.
 	A category $\mathcal{J}$ is \bld{filtered}, if $\mathcal{J}$ is not empty and
 	\begin{enumerate}[label = \textup{(}\alph*\textup{)},wide = 0pt]
 		\item To any two objects $j$ and $j'$ in $\mathcal{J}$ there exists $k \in \ob(\mathcal{J})$ and morphisms $j \to k$ and $j' \to k$.
-		\item To any two parallel arrows $u,v : i \to j$ in $\mathsf{J}$, there exists $k \in \ob(\mathcal{J})$ and a morphism $w : j \to k$ in $\mathcal{J}$, such that $w \circ u = w \circ v$.
+		\item To any two parallel arrows $u,v : i \to j$ in $\mathcal{J}$, there exists $k \in \ob(\mathcal{J})$ and a morphism $w : j \to k$ in $\mathcal{J}$, such that $w \circ u = w \circ v$.
 	\end{enumerate}
 \end{definition}
 
 \begin{definition}[Filtered Colimit]
-	Let $\mathcal{C}$ be a category and $\mathcal{J}$ a small filtered category. A \bld{filtered diagram in $\mathcal{C}$} is a functor $D : \mathcal{J} \to \mathcal{C}$. A \bld{filtered colimit} is a colimit of a filtered diagram in $\mathcal{C}$, written $\colim D$
+	Let $\mathcal{C}$ be a category. A \bld{filtered diagram in $\mathcal{C}$ of shape $\mathcal{J}$} is a diagram in $\mathcal{C}$ of shape $\mathcal{J}$, where $\mathcal{J}$ is a small filtered category. A \bld{filtered colimit of $D$} is a colimit of a filtered diagram $D$ in $\mathcal{C}$, written $\colim D$.
 \end{definition}
 
+\begin{proposition}
+	\label{prop:filtered_colimits_set}
+	In $\mathsf{Set}$, all filtered limits exist.
+\end{proposition}
+
+\begin{proof}
+	Let $D : \mathcal{J} \to \mathsf{Set}$ be a filtered diagram. Define
+	\begin{equation*}
+		X := \coprod_{j \in \ob(\mathcal{J})} D(j),
+	\end{equation*}
+	\noindent and define a relation $\sim$ on $X$ by
+	\begin{equation*}
+		x \in D(j)\sim y \in D(j') \> :\Leftrightarrow \> \exists f : j \to k,g : j' \to k \text{ such that } D(f)(x) = D(g)(y).
+	\end{equation*} 
+	Then it is easy to check that $\sim$ is an equivalence relation and that $\colim D \cong X/{\sim}$.
+\end{proof}
+
+\begin{proposition}
+	In $\mathsf{Top}$, all filtered colimits exist.
+\end{proposition}
+
+\begin{proof}
+	Let $D : \mathcal{J} \to \mathsf{Top}$ be a filtered diagram. If $U : \mathsf{Top} \to \mathsf{Set}$ denotes the forgetful functor, $U \circ D$ is a filtered diagram in $\mathsf{Set}$. Hence using proposition \ref{prop:filtered_colimits_set}, we know that $\colim (U \circ D)$ exists. Hence we get a limiting cocone $\del[1]{\colim (U \circ D),(q_j)_{j \in \ob(\mathcal{J})}}$ in $\mathsf{Set}$. Define a topology $\colim (U \circ D)$ by letting $U \subseteq \colim(U \circ D)$ to be open if and only if $q^{-1}_j(U)$ open in $U(D(j))$ for all $j \in \ob(\mathcal{J})$. Then it is easy to check that we have a limiting cocone in $\mathsf{Top}$.
+\end{proof}
+
+\begin{definition}[Preorder]
+	Let $P$ be a set. A \bld{preorder on $P$} is a reflexive and transitive binary relation $\preccurlyeq$ on $P$. A set equipped with a preorder is called a \bld{preordered set}.
+\end{definition}
+
+\begin{definition}[Directed Preorder]
+	A preorder $\preccurlyeq$ on a set $P$ is said to be \bld{directed} if for every two elements $p,q \in P$there exists $r \in P$, such that $p \preccurlyeq r$ and $q \preccurlyeq r$ holds. A set equipped with a directed preorder is called a \bld{directed set}. 
+\end{definition}
+
+\begin{lemma}
+	\label{lem:directed_preorder_filtered_category}
+	Let $(P,\preccurlyeq)$ be a directed set. Define 
+	\begin{itemize}[wide = 0pt]
+		\item $\ob(\mathcal{J}(P,\preccurlyeq)) := P$.
+		\item For $p,q \in P$, if $p \not\preccurlyeq q$ let $\mathcal{J}(P,\preccurlyeq)(p,q) := \varnothing$ and if $p \preccurlyeq q$ let $\mathcal{J}(P,\preccurlyeq)(p,q)$ be the unique arrow $p \to q$.
+		\item For $p,q,r \in P$, let $q \to r \circ p \to q := p \to r$.
+	\end{itemize}
+	Then $\mathcal{J}(P,\preccurlyeq)$ is a filtered category.
+\end{lemma}
+
+\begin{exercise}
+	Prove lemma \ref{lem:directed_preorder_filtered_category}.
+\end{exercise}
+
+\begin{definition}[Sequential Colimit]
+	A \bld{sequential colimit of $D$} is a colimit of a diagram $D$ of shape $(\omega,\leq)$. We will write $\colim_n D(n)$ for a sequential colimit of $D$.
+\end{definition}
 
 \section*{Basic Algebra}
 \subsection*{The Isomorphism Theorems}

@@ -1,0 +1,55 @@
+\section*{The Dimension Axiom}
+In general, it is hard to compute $H_n(X)$ for an arbitrary topological space $X$ and $n \in \omega$. However, as the next proposition shows, we can always compute $H_0(X)$ for a path connected space $X$. Combining this with lemma \ref{lem:H_n_direct_sum}, we know how $H_0(X)$ looks for an arbitrary topological space $X$.
+
+\begin{proposition}[Zeroth Singular Homology Group]
+	Let $X \in \ob(\mathsf{Top})$ be non empty and path connected. Then $H_0(X) \cong \mathbb{Z}$ and any generator is of the form $\langle x \rangle$ for some $x \in X$.
+\end{proposition}
+
+\begin{proof}
+	Since $\partial_0 : C_0(X) \to 0$, $\ker \partial_0 = C_0(X)$. Moreover, a map in $\mathsf{Top}(\Delta^0,X)$ can be identified with a point in $X$ and hence an element of $C_0(X)$ can be written as $\sum_{x \in X}m_x x$. Define a mapping $\Phi : C_0(X) \to \mathbb{Z}$ by $\Phi\del[1]{\sum_{x \in X}m_x x} := \sum_{x \in X}m_x$. This mapping is well defined since all but finitely many $m_x$ are zero. It is also easy to check, that $\Phi$ is a morphism of groups and that $\Phi$ is surjective. We claim that $\ker \Phi = \im \partial_1$. Indeed, if $\sum_{x \in X} m_x x \in \ker \Phi$, then $\sum_{x \in X}m_x = 0$. Let $p \in X$. Since $X$ is path connected, we find for each $x \in X$ a path $\sigma_x$ from $p$ to $x$. Consider the singular $1$-chain $\sum_{x \in X}m_x \sigma_x$. Then we have
+	\begin{equation*}
+		\partial_1 \del[4]{\sum_{x \in X}m_x \sigma_x} = \sum_{x \in X}m_x \del[1]{\sigma_x(1)- \sigma_x(0)} = \sum_{x \in X}m_x (x - p) = \sum_{x \in X} m_x x.
+	\end{equation*}
+	Hence $\sum_{x \in X}m_x x \in \im \partial_1$. Conversly, it is enough to show the claim on basis elements $\sigma \in \mathsf{Top}(\Delta^1,X)$. We have
+	\begin{equation*}
+		\Phi(\partial_1 \sigma) = \Phi\del[1]{\sigma(1) - \sigma(0)} = 1 - 1 = 0.
+	\end{equation*}
+	Hence the first isomorphism theorem \cite[23]{grillet:abstract_algebra:2007} implies that $H_0(X) \cong \mathbb{Z}$.
+	Let $x \in X$. Then $\mathbb{Z}\langle x \rangle = H_0(X)$. Indeed, if $\sum_{y \in X}m_y y \in C_0(X)$, we have that $\sum_{y \in X}m_y \langle y \rangle = \sum_{y \in X}m_y \langle x \rangle$, since $X$ is path connected we always find a path from $x$ to $y$ and hence $\langle x \rangle = \langle y \rangle$ for all $y \in X$. Suppose $\langle g \rangle$, where $g := \sum_{y \in X}m_y y \in C_0(X)$, is a generator of $H_0(X)$. Since isomorphisms map generators to generators,we have that $\Phi(g) = \pm 1$. Replacing $g$ with $-g$, if necessary, we can assume that $\Phi(g) = 1$. Moreover, $g = x + (g - x)$ for any $x \in X$. Then $g - x \in \im \partial_1$. Indeed, we have that $\Phi(g - x) = 1 - 1 = 0$.
+\end{proof}
+
+\begin{proposition}
+	Let $\ast \in \ob(\mathsf{Top})$ be a one point space. Then $H_n(\ast) = 0$ for all $n \in \omega$, $n > 0$.
+\end{proposition}
+
+\begin{proof}
+	Since $\ast$ is a one-point space, we have that there is only one singular $n$-simplex in $\ast$, say $\sigma_n$. We compute
+	\begin{equation*}
+		\partial_n \sigma_n = \sum_{k = 0}^n(-1)^k \sigma_n \circ \varphi^n_k = \sum_{k = 0}^n (-1)^k\sigma_{n - 1} = \ccases{
+			\sigma_{n - 1} & n \text{ even},\\
+			0 & n \text{ odd}.
+		}
+	\end{equation*}
+	Hence
+	\begin{equation*}
+		\ker \partial_n = \ccases{
+			C_n(\ast) & n \text{ odd},\\
+			0 & n \text{ even}.
+		}
+	\end{equation*}
+	Moreover
+	\begin{equation*}
+		\partial_{n+1}\sigma_{n + 1} = \sum_{k = 0}^{n + 1}(-1)^k \sigma_{n + 1} \circ \varphi^{n+1}_k = \sum_{k = 0}^{n + 1} (-1)^k \sigma_n = \ccases{
+			0 & n \text{ even},\\
+			\sigma_n & n \text{ odd}.
+		}
+	\end{equation*}
+	So
+	\begin{equation*}
+		\im \partial_{n + 1} = \ccases{
+			0 & n \text{ even},\\
+			C_n(\ast) & n \text{ odd},
+		}
+	\end{equation*}
+	and thus $H_n(\ast) = 0$ for all $n > 0$.
+\end{proof}

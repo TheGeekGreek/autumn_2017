@@ -1,0 +1,74 @@
+\section*{The Homotopy Axiom}
+\subsection*{The Acyclic Models Theorem}
+\begin{definition}[Models]
+	Let $\mathcal{C}$ be a category. A \bld{family of models for $\mathcal{C}$} is a set $A$ together with a family $(M_\alpha)_{\alpha \in A}$ of objects in $\mathcal{C}$.
+\end{definition}
+
+\begin{definition}[$K$-Models]
+	Let $\mathcal{C}$ be a category with family of models $(M_\alpha)_{\alpha \in A}$ and $K : \mathcal{C} \to \mathsf{AbGrp}$ a functor. A \bld{model for $K$} is a family $(g_\alpha)_{\alpha \in A}$ where $g_\alpha \in K(M_\alpha)$ for all $\alpha \in A$.
+\end{definition}
+
+\begin{definition}
+	Let $\mathcal{C}$ be a locally small category with family of models $(M_\alpha)_{\alpha \in A}$ and $K : \mathcal{C} \to \mathsf{AbGrp}$ a functor. $K$ is called \bld{free with basis in $(M_\alpha)_{\alpha \in A}$}, if there exists a model $(g_\alpha)_{\alpha \in A}$ for $K$ such that for all $X \in \ob(\mathcal{C})$
+	\begin{equation}
+		F\del[0]{\cbr[0]{K(f)(g_\alpha) : \alpha \in A, f \in \mathcal{C}(M_\alpha,X)}} \cong K(X),
+	\end{equation}
+	\noindent where $F : \mathsf{Set} \to \mathsf{AbGrp}$ is the free functor from proposition \ref{prop:F_set_abgrp}. The model $(g_\alpha)_{\alpha \in A}$ for $K$ is then called a \bld{model basis for $K$}.
+\end{definition}
+
+\begin{example}
+	Let $n \in \omega$. Then the one-element family $(\Delta^n)$ consisting of the standard $n$-simplex is a family of models for $\mathsf{Top}$. Moreover, let $C_n : \mathsf{Top} \to \mathsf{AbGrp}$ be the functor which assigns to each topological space $X$ the $n$-th singular chain group $C_n(X)$. Then $C_n$ is free with basis $(\id_{\Delta^n})$. Indeed, we have that
+\begin{equation*}
+	F\del[0]{\cbr[0]{C_n(\sigma)(\id_{\Delta^n}) : \sigma \in \mathsf{Top}(\Delta^n,X)}} = F\del[0]{\cbr[0]{\sigma : \sigma \in \mathsf{Top}(\Delta^n,X)}} = C_n(X).
+\end{equation*}
+\end{example}
+
+\begin{proposition}
+	Let $\mathcal{C}$ be a locally small category with family of models $(M_\alpha)_{\alpha \in A}$ and $K,L : \mathcal{C} \to \mathsf{AbGrp}$ two functors, where $L$ is free with basis in $(M_\alpha)_{\alpha \in A}$ and model basis $(g_\alpha)_{\alpha \in A}$ for $L$. Moreover, let $(h_\alpha)_{\alpha \in A}$ be a family such that $h_\alpha \in K(M_\alpha)$ for all $\alpha \in A$. Then there exists a uniqe natural transformation $\Phi : L \Rightarrow K$ such that $\Phi_{M_\alpha}(g_\alpha) = h_\alpha$ for all $\alpha \in A$.
+\end{proposition}
+
+\subsection*{Chain Homotopies and the Homotopy Axiom}
+\begin{definition}[Chain Homotopies]
+	Two chain maps $f_\bullet,g_\bullet : (C_\bullet,\partial_\bullet) \to (C_\bullet',\partial_\bullet')$ are said to be \bld{chain homotopic}, written $f_\bullet \simeq g_\bullet$, if there exists a sequence $(F_n)_{n \in \mathbb{Z}}$, such that $F_n \in \mathsf{AbGrp}(C_n,C_{n + 1}')$ and 
+	\begin{equation*}
+		\partial_{n + 1}' \circ F_n + F_{n - 1} \circ \partial_n = f_n - g_n,
+	\end{equation*}
+	\noindent for all $n \in \mathbb{Z}$. The sequence $(F_n)_{n \in \mathbb{Z}}$ is then called a \bld{chain homotopy} and is written $F : f_\bullet \simeq g_\bullet$.
+\end{definition}
+
+\begin{proposition}
+	\label{prop:inclusions}
+	Let $f_\bullet,g_\bullet \in \mathsf{Comp}(C_\bullet,C_\bullet')$ with $f \simeq g$. Then $H_n(f_\bullet) = H_n(g_\bullet)$ for all $n \in \mathbb{Z}$.
+\end{proposition}
+
+\begin{proof}
+	Assume $F : f_\bullet \simeq g_\bullet$ and let $\langle c \rangle \in H_n(C_\bullet) \to H_n(C_\bullet')$. Then
+	\begin{align*}
+		H_n(f_\bullet)\langle c \rangle &= \langle f_n(c) \rangle\\
+		&= \langle g_n(c) + \partial_{n + 1}'(F_n(c)) + F_{n - 1}(\partial_n(c)) \rangle\\
+		&= \langle g_n(c) + \partial_{n + 1}'(F_n(c)) \rangle\\
+		&= \langle g_n(c) \rangle\\
+		&= H_n(g_\bullet)\langle c \rangle
+	\end{align*}
+	\noindent since $c \in \ker \partial_n$.
+\end{proof}
+
+\begin{proposition}
+	Let $X$ be a topological space and define $\iota,\jota : X \to X \times I$ by 
+	\begin{equation*}
+		\iota(x) := (x,0) \qquad \text{and} \qquad \jota(x) := (x,1).
+	\end{equation*}
+	Then $H_n(\iota) = H_n(\jota)$ for all $n \in \omega$.
+\end{proposition}
+
+\begin{theorem}[The Homotopy Axiom]
+	Let $f,g \in \mathsf{Top}(X,Y)$ be freely homotopic. Then $H_n(f) = H_n(g)$ for all $n \in \omega$.
+\end{theorem}
+
+\begin{proof}
+	Using the notation and the result from proposition \ref{prop:inclusions}, we get that
+	\begin{align*}
+		H_n(f) = H_n(F \circ \iota) = H_n(F) \circ H_n(\iota) = H_n(F) \circ H_n(\jota) = H_n(F \circ \jota) = H_n(g).
+	\end{align*}
+\end{proof}
+

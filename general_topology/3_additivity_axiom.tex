@@ -1,0 +1,63 @@
+\section*{The Additivity Axiom}
+
+\begin{proposition}
+	In $\mathsf{Grp}$, all small products exist.
+\end{proposition}
+
+\begin{proof}
+	It is easy to show that if $(G_\alpha)_{\alpha \in A}$ is a family of objects in $\mathsf{Grp}$, then the cartesian product $\prod_{\alpha \in A}G_\alpha$ with componentwise product $(gh)_\alpha := g_\alpha h_\alpha$ together with the natural projections $\pi_\alpha : \prod_{\alpha \in A} G_\alpha \to G_\alpha$, is a universal cone.
+\end{proof}
+
+\begin{definition}[Direct Product]
+	Small products in $\mathsf{Grp}$ are called \bld{direct products}, written $\Pi_{\alpha \in A} G_\alpha$.
+\end{definition}
+
+\begin{proposition}
+	In $\mathsf{AbGrp}$, all small coproduct exist.
+\end{proposition}
+
+\begin{proof}
+	It is easy to show that if $(G_\alpha)_{\alpha \in A}$ is a family of objects in $\mathsf{AbGrp}$, then the subgroup of $\Pi_{\alpha \in A} G_\alpha$ defined by the elements which entries are almost all zero together with the natural inclusions $\iota_\alpha$ is a universal cocone.
+\end{proof}
+
+\begin{definition}[Direct Sum]
+	The small coproducts in $\mathsf{AbGrp}$ are called \bld{direct sums}, written $\bigoplus_{\alpha \in A}G_\alpha$.
+\end{definition}
+
+\begin{definition}[Direct Sum Chain Complex]
+	Let $(C^\alpha_\bullet,\partial_\bullet^\alpha)_{\alpha \in A}$ be a family of chain complexes. Then the chain complex $\del[1]{\bigoplus_{\alpha \in A}C^\alpha_\bullet, \bigoplus_{\alpha \in A}\partial^\alpha_\bullet}$ defined by
+	\begin{equation*}
+		\del[4]{\bigoplus_{\alpha \in A}C_\bullet^\alpha}_n := \bigoplus_{\alpha \in A} C_n^\alpha \qquad \text{and} \qquad \del[4]{\bigoplus_{\alpha \in A}\partial_\bullet^\alpha}_n := \bigoplus_{\alpha \in A}\partial_n^\alpha, 
+	\end{equation*}
+	\noindent for all $n \in \mathbb{Z}$, is called the \bld{direct sum chain complex} of the family $(C_\bullet^\alpha,\partial_\bullet^\alpha)_{\alpha \in A}$.
+\end{definition}
+
+\begin{lemma}
+	\label{lem:H_n_preserves_small_coproducts}
+	Let $(C_\bullet^\alpha,\partial_\bullet^\alpha)_{\alpha \in A}$ be a family in $\mathsf{Comp}$. Then
+	\begin{equation*}
+		H_n\del[4]{\bigoplus_{\alpha \in A}C_\bullet^\alpha} \cong \bigoplus_{\alpha \in A}H_n(C_\bullet^\alpha),
+	\end{equation*}
+	\noindent for all $n \in \mathbb{Z}$.
+\end{lemma}
+
+\begin{exercise}
+	Prove lemma \ref{lem:H_n_preserves_small_coproducts}.
+\end{exercise}
+
+\begin{lemma}
+	\label{lem:H_n_direct_sum}
+	Let $X$ be a topological space and let $\cbr{X_\alpha}_{\alpha \in A}$ denote the set of path components of $X$. Then
+\begin{equation*}
+	H_n(X) \cong \bigoplus_{\alpha \in A}H_n(X_\alpha)
+\end{equation*}
+\noindent for all $n \in \omega$.
+\end{lemma}
+
+\begin{proof}
+	Let $\iota_\alpha : X_\alpha \hookrightarrow X$ denote inclusion for all $\alpha \in A$. Consider 
+	\begin{equation*}
+		\sum_{\alpha \in A}C_n(\iota_\alpha) : \bigoplus_{\alpha \in A} C_n(X_\alpha) \to C_n(X)
+	\end{equation*}
+	\noindent and let $\varphi : C_n(X_\alpha) \to \bigoplus_{\alpha \in A}C_n(X_\alpha)$ the map extended by linearity defined as follows on elements $\sigma \in \mathsf{Top}(\Delta^n,X)$: since $\Delta^n$ is path connected, we have that $\sigma(\Delta^n) \subseteq X_\alpha$ for some unique $\alpha \in A$. Just set $x_\alpha := \sigma_k : \Delta^n \to X_\alpha$ if $\sigma(\Delta^n) \subseteq X_\alpha$ and $x_\alpha := 0$ else. Thus it is easy to show that $\bigoplus_{\alpha \in A}C_n(X_\alpha) \cong C_n(X)$. Then we have $\bigoplus_{\alpha \in A}C_\bullet(X_\alpha) \cong C_\bullet(X)$ as chain complexes, and since functors preserve isomorphisms, the result follows from lemma \ref{lem:H_n_preserves_small_coproducts}.
+\end{proof}

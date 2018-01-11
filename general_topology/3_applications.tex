@@ -1,0 +1,50 @@
+\section*{Applications}
+\subsection*{$\mathbb{S}^n$ is not contractible}
+
+\begin{definition}[Retract]
+	Let $X \in \ob(\mathsf{Top})$ and $S \subseteq X$ a subspace. We say that \bld{$S$ is a retract of $X$},  if the inclusion $\iota : S \hookrightarrow X$ admits a retraction in $\mathsf{Top}$.
+\end{definition}
+
+\begin{lemma}
+	Let $n \in \mathbb{Z}$, $n \geq 1$. Then $\mathbb{S}^n$ is not a retract of $\mathbb{B}^{n + 1}$. 	
+\end{lemma}
+
+\begin{proof}
+	
+\end{proof}
+
+\begin{proposition}
+	Let $n \in \omega$, $X \in \ob(\mathsf{Top})$ and $f \in \mathsf{Top}(\mathbb{S}^n,X)$. Then the followin conditions are equivalent:
+	\begin{enumerate}[label = \textup{(}\alph*\textup{)},wide = 0pt]
+		\item $f$ is nullhomotopic.
+		\item $f$ admits a continuous extension to $\mathbb{B}^{n+1}$.
+		\item Let $p \in \mathbb{S}^n$. Then $f \simeq_p c_{f(p)}$.
+	\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+	We show (a)$\Rightarrow$(b)$\Rightarrow$(c)$\Rightarrow$(a). Assume that (a) holds. Hence we have that $H : f \simeq c_p$ for some $p \in X$. Define $g : \mathbb{B}^{n+1} \to X$ by
+	\begin{equation*}
+		g(x) := \ccases{
+			p & 0 \leq \abs{x} \leq \frac{1}{2},\\
+			H(x/\abs{x},2 - 2 \abs{x}) & \frac{1}{2} \leq \abs{x} \leq 1.
+		}
+	\end{equation*}
+	Then $g \in \mathsf{Top}(\mathbb{B}^{n+1},X)$ by the gluing lemma and $g\vert_{\mathbb{S}^n} = f$. Assume that (b) holds. So let $g \in \mathsf{Top}(\mathbb{B}^{n+1},X)$ be an extension of $f$. Define $H : \mathbb{S}^n \times I \to X$ by
+	\begin{equation*}
+		H(x,t) := g((1 - t)x + tp,t).
+	\end{equation*}
+	Then it is easy to check that $H : f \simeq_p c_{f(p)}$. Finally, (c)$\Rightarrow$(a) is immediate.
+\end{proof}
+
+\subsection*{The Brouwer Fixed Point Theorem}
+\begin{theorem}[Brouwer Fixed Point Theorem]
+	Let $n \in \mathbb{Z}$, $n \geq 1$. Then every mapping $f \in \mathsf{Top}(\mathbb{B}^n,\mathbb{B}^n)$ has a fixed point.	
+	\label{thm:brouwer_fixed_point}
+\end{theorem}
+
+\begin{proof}
+	
+\end{proof}
+
+\subsection*{The Jordan-Brouwer Separation Theorem}
