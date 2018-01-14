@@ -16,7 +16,13 @@
 \tableofcontents
 
 \section{Introduction}
-Consider the following commutative diagram with exact rows in $\mathsf{AbGrp}$:
+Given a diagram
+\begin{equation*}
+	\begin{tikzcd}
+		A \arrow[r,"f"] & B \arrow[r,"g"] & C
+	\end{tikzcd}
+\end{equation*}
+\noindent in $\mathsf{AbGrp}$, we say that the diagram is \emph{exact at $B$}, if $\im f = \ker g$. Recall that the \emph{cokernel of $f$} is defined to be $\coker f := B/\im f$. Consider the following commutative diagram with exact rows in $\mathsf{AbGrp}$:
 \begin{equation*}
 	\begin{tikzcd}
 		& \bullet \arrow[r]\arrow[d,"f"] & \bullet \arrow[r]\arrow[d,"g"] & \bullet \arrow[r]\arrow[d,"h"] & 0\\
@@ -45,44 +51,116 @@ Let $G,H \in \ob(\mathsf{AbGrp})$ and $\varphi,\psi \in \mathsf{AbGrp}(G,H)$. De
 	\end{equation}
 \end{definition}
 
+\begin{remark}
+	In a preadditive category $\mathcal{C}$, we have that $\mathcal{C}(X,Y) \neq \varnothing$ for all $X,Y \in \ob(\mathcal{C})$.
+\end{remark}
+
+\begin{lemma}
+	\label{lem:composition_zero}
+	Let $\mathcal{C}$ be a preadditive category. Then compositions with the zero elements are again zero elements of the correpsonding abelian groups.	
+\end{lemma}
+
+\begin{proof}
+	This simply follows from $0 \circ f = (0 + 0) \circ f = 0 \circ f + 0 \circ f$. The other case is similar.
+\end{proof}
+
 \section{Additive Categories}
-Let us again consider $\mathsf{AbGrp}$. As in $\mathsf{Grp}$, the trivial group $0$ is both an initial and a terminal object. Unlike in $\mathsf{Grp}$, we have that $G \coprod H \cong G \prod H$ for all $G,H \in \ob(\mathsf{AbGrp})$. In a somewhat weaker sense, we will generalize this. Define $\iota_1 : G \to G \prod H$ and $\iota_2 : H \to G \prod H$ by
-\begin{equation*}
-	\iota_1(g) := (g,0) \qquad \text{and} \qquad \iota_2(h) := (0,h),
-\end{equation*}
-\noindent respectively. Then it is easy to verify that 
-\begin{equation*}
-	\pi_1\circ\iota_1 = \id_G, \quad \pi_2\circ\iota_2 = \id_H \quad \text{and} \quad \iota_1 \circ \pi_1 + \iota_2 \circ \pi_2 = \id_{G \prod H}
-\end{equation*}
-\noindent holds. Those observations motivate the following definitions.
+As in $\mathsf{Grp}$, the trivial group in $\mathsf{AbGrp}$ is both an initial and a terminal object. Objects with this property have a special name.
 
 \begin{definition}[Null Object \cite{maclane:categories:1978}]
 	Let $\mathcal{C}$ be a category. A \bld{null object in $\mathcal{C}$} is a an object of $\mathcal{C}$ which is both initial and terminal.
 \end{definition}
 
-\begin{definition}[Biproduct Diagram \cite{maclane:categories:1978}]
-	Let $\mathcal{C}$ be a preadditive category and $X,Y \in \ob(\mathcal{C})$. A \bld{biproduct diagram for $X$ and $Y$} is a diagram
-	\begin{equation*}
-		\begin{tikzcd}
-			X \arrow[r, shift right, "\iota_1"'] & Z \arrow[r,shift left, "\pi_2"]\arrow[l,shift right,"\pi_1"'] & Y \arrow[l,shift left,"\iota_2"] 
-		\end{tikzcd}
-	\end{equation*}
-	\noindent such that
-	\begin{equation*}
-		\pi_1\circ\iota_1 = \id_X, \quad \pi_2\circ\iota_2 = \id_Y \quad \text{and} \quad \iota_1 \circ \pi_1 + \iota_2 \circ \pi_2 = \id_Z
-	\end{equation*}
-	\noindent holds.
-\end{definition}
-
-\begin{definition}[Additive Category \cite{maclane:categories:1978}]
-	An \bld{additive category} is a preadditive category which has a null object and a biproduct for each pair of its objects.	
-\end{definition}
-
-\section{Abelian Categories}
-
 \begin{definition}[Zero Arrow \cite{maclane:categories:1978}]
 	Let $\mathcal{C}$ be a category with a null object $0$. For $X,Y \in \ob(\mathcal{C})$, the unique composition $X \to 0 \to Y$ is called the \bld{zero arrow from $X$ to $Y$}, denoted by $0 : X \to Y$.
 \end{definition}
+
+\begin{lemma}
+	\label{lem:zero_arrow}
+	Let $\mathcal{C}$ be a preadditive category with null object and $X,Y \in \ob(\mathcal{C})$. Then the zero arrow $0 : X \to Y$ is the zero element of the group $\mathcal{C}(X,Y)$.
+\end{lemma}
+
+\begin{proof}
+	The zero arrow $0 : X \to Y$ is the unique composition
+	\begin{equation*}
+		\begin{tikzcd}
+			X \arrow[r] & 0 \arrow[r] & Y.
+		\end{tikzcd}
+	\end{equation*}
+	However, since $0$ is a null object, we have that the two morphisms are the two zero objects in the corresponding abelian group structures. Hence lemma \ref{lem:composition_zero} yields the result.
+\end{proof}
+
+Let $A,B \in \ob(\mathsf{AbGrp})$. Then we have seen that $A \coprod B \cong A \prod B$. This can be generalized to preadditive categories.
+
+\begin{proposition}
+	\label{prop:products_and_coproducts_coincide}
+	Let $\mathcal{C}$ be a preadditive category admitting all finite coproducts. Then $\mathcal{C}$ admits all finite products which coincide with the finite coproducts. In particular, $\mathcal{C}$ has a null object.
+\end{proposition}
+
+\begin{proof}
+	\begin{enumerate}[label = \textit{Step \arabic*:},wide = 0pt] 
+		\item \textit{Zero-ary case \textup{\cite[194]{maclane:categories:1978}}.} Since $\mathcal{C}$ has the empty coproduct, $\mathcal{C}$ has an initial object $\varnothing$. Since $\varnothing$ is initial, there exists a unique map $\varnothing \to \varnothing$, namely $\id_\varnothing$. But $\mathcal{C}(\varnothing,\varnothing)$ is a group and thus $\id_\varnothing = 0$. Hence for any morphism $f : X \to \varnothing$, lemma \ref{lem:composition_zero} yields $f = \id_\varnothing \circ f = 0 \circ f = 0$.
+		\item \textit{Binary case.} By the zero-ary case we know that $\mathcal{C}$ admits a null object $0$. Let $X,Y \in \ob(\mathcal{C})$. We want to show that $X \coprod Y$ is also a product of $X$ and $Y$. By the universal property of the coproduct we have a commutative diagram
+			\begin{equation*}
+				\begin{tikzcd}[column sep=10ex,row sep=5ex]
+					& X\\
+					X \arrow[ur,"\id_X"]\arrow[dr,"0"']\arrow[r,"\iota_X"] & X \coprod Y \arrow[u,"{(\id_X,0)}"']\arrow[d,"{(0,\id_Y)}"] & Y \arrow[ul,"0"']\arrow[dl,"\id_Y"]\arrow[l,"\iota_Y"']\\
+					& Y.
+				\end{tikzcd}
+			\end{equation*}
+			Suppose $(Z,p_X,p_Y)$ is another product cone. Define $f : Z \to X \coprod Y$ by
+			\begin{equation*}
+				f := \iota_X \circ p_X + \iota_Y \circ p_Y.
+			\end{equation*}
+			Using lemma \ref{lem:zero_arrow} and \ref{lem:composition_zero}, we compute
+			\begin{align*}
+				(\id_X,0) \circ f &= (\id_X,0) \circ \iota_X \circ p_X + (\id_X,0) \circ \iota_Y \circ p_Y\\
+				&= \id_X \circ p_X + 0 \circ p_Y\\
+				&= p_X + 0\\
+				&= p_X,
+			\end{align*}
+			\noindent and simiarly $(0,\id_Y) \circ f = p_Y$. Now we have to check uniqueness. This is the hardest part of the proof and involves the \emph{Yoneda embedding} $\mathcal{\altY} : \mathcal{C} \hookrightarrow \sbr[0]{\mathcal{C}^{\mathrm{op}},\mathsf{Set}}$. We want to show that
+			\begin{equation*}
+				\iota_X \circ (\id_X,0) + \iota_Y \circ (0,\id_Y) = \id_{X \coprod Y}.
+			\end{equation*}
+			Applying the Yoneda embedding to the category $\mathcal{C}^\mathrm{op}$, we get that it is enough to show that
+			\begin{equation*}
+				f \circ \iota_X \circ (\id_X,0) + \iota_Y \circ (0,\id_Y) = f \circ \id_{X \coprod Y}
+			\end{equation*}
+			\noindent holds for all morphisms $f \in \mathcal{C}(X\coprod Y,C)$. Let $(\alpha,\beta) : X \coprod Y \to C$ be any morphism (where $(\alpha,\beta) \circ \iota_X) = \alpha$ and $(\alpha,\beta) \circ \iota_Y = \beta$). Using the universal property of the corpoduct it is easy to show that
+			\begin{equation*}
+				(\alpha,\beta) \circ \iota_X \circ (\id_X,0) = (\alpha,0) \quad \text{and} \quad (\alpha,\beta) \circ \iota_Y \circ (0,\id_Y) = (0,\beta),
+			\end{equation*} 
+			\noindent and moreover one can show that for any other morphism $(\alpha',\beta') : X \coprod Y \to C$ we have
+			\begin{equation*}
+				(\alpha,\beta) + (\alpha',\beta') = (\alpha + \alpha',\beta + \beta').
+			\end{equation*}
+			Thus
+			\begin{equation*}
+				(\alpha,\beta) \circ \id_{X \coprod Y} = (\alpha,\beta) = (\alpha,0) + (0,\beta) =(\alpha,\beta) \circ \del[1]{\iota_X \circ (\id_X,0) + \iota_Y \circ (0,\id_Y)}.
+			\end{equation*}
+			Now if $f' : Z \to X \coprod Y$ is another morphism making the diagram commute, we have that
+			\begin{align*}
+				f - f' &= \id_{X \coprod Y} \circ (f - f')\\
+				&= \del[1]{\iota_X \circ (\id_X,0) + \iota_Y \circ (0,\id_Y)} \circ (f - f')\\
+				&= \iota_X \circ (p_X - p_X) + \iota_Y \circ (p_Y - p_Y)\\
+				&= \iota_X \circ 0 + \iota_Y \circ 0\\
+				&= 0,
+			\end{align*}
+			\noindent by lemma \ref{lem:composition_zero}.
+		\item \textit{$n$-ary case.} Induction over $n \in \omega$.
+	\end{enumerate}
+\end{proof}
+
+\begin{definition}[Additive Category]
+	An \bld{additive category} is a preadditive category which admits all finite coproducts.	
+\end{definition}
+
+\begin{remark}
+	Let $\mathcal{C}$ be an additive category. Then by proposition \ref{prop:products_and_coproducts_coincide}, $\mathcal{C}$ admits all finite products which coincide with the coproducts.
+\end{remark}
+
+\section{Abelian Categories}
 
 \begin{definition}[Kernel and Cokernel \cite{maclane:categories:1978}]
 	Let $\mathcal{C}$ be a category with a null object $0$. A \bld{kernel of a morphism $f : X \to Y$} is defined to be an equalizer of
@@ -102,7 +180,7 @@ Let us again consider $\mathsf{AbGrp}$. As in $\mathsf{Grp}$, the trivial group 
 	Let $m : G \to H$ be a monic in $\mathsf{Grp}$. Consider the fork
 	\begin{equation*}
 		\begin{tikzcd}
-			G \arrow[r,"m"] & H \arrow[r,shift left,"\pi"]\arrow[r,shift right,"0"'] & H/m(G).
+			G \arrow[r,"m"] & H \arrow[r,shift left,"\pi"]\arrow[r,shift right,"0"'] & \coker m.
 		\end{tikzcd}
 	\end{equation*}
 	\noindent Then one can check that this is in fact a universal fork. Similarly, one can check that
@@ -143,6 +221,21 @@ A usefull application of the Mitchell embedding is that one can do proofs of bas
 
 \section{The Eilenberg-Watts Theorem and its Consequences}
 
+\begin{definition}[Bimodule]
+	Let $R$ and $S$ be two unital rings. An \bld{$R$-$S$-bimodule} is an abelian group $B$ such that:
+	\begin{enumerate}[label = \textup{(}\alph*\textup{)},wide = 0pt]
+		\item $B$ is a left $R$-module and a right $S$-module.
+		\item We have that $(rb)s = r(bs)$ for all $r \in R$, $s \in S$ and $b \in B$.
+	\end{enumerate}
+\end{definition}
+
+\begin{theorem}[Eilenberg-Watts]
+	Let $R$ and $S$ be unital rings and $B$ a $R$-$S$-bimodule. Then the tensor product functor
+	\begin{equation*}
+		(-)\otimes_R B : \mathsf{Mod}_R \to \mathsf{Mod}_S
+	\end{equation*}
+	\noindent is right exact and preserves small coproducts. Conversely, if $F : \mathsf{Mod}_R \to \mathsf{Mod}_S$ is right-exact and preserves small coproducts, then it is naturally isomorphic to tensoring with a bimodule.
+\end{theorem}
 
 \printbibliography
 \end{document}
