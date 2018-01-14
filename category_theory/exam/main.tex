@@ -270,12 +270,30 @@ In lemma \ref{lem:exactness_at_B}, the second condition involves statements abou
 	\end{equation*}
 \end{definition}
 
-
-\section{The Mitchell Embedding Theorem and its Consequences}
-
-\begin{definition}[Exact Functor \cite{maclane:categories:1978}]
-	A functor $F : \mathcal{C} \to \mathcal{D}$ between two abelian categories $\mathcal{C}$ and $\mathcal{D}$ is called \bld{exact}, if $F$ preserves all finite limits and all finite colimits.
+\begin{definition}[Left and Right Exactness]
+	Let $\mathcal{C}$ be an abelian category. A \bld{left exact sequence} is an exact sequence of the form
+	\begin{equation*}
+		\begin{tikzcd}
+			0 \arrow[r] & X \arrow[r] & Y \arrow[r] & Z.
+		\end{tikzcd}
+	\end{equation*}
+	Similarly, a \bld{right exact sequence} is an exact sequence
+	\begin{equation*}
+		\begin{tikzcd}
+			X \arrow[r] & Y \arrow[r] & Z \arrow[r] & 0.
+		\end{tikzcd}
+	\end{equation*}
 \end{definition}
+
+\begin{definition}[Exact Functor]
+	Let $\mathcal{C}$, $\mathcal{D}$ be abelian categories. A functor $F : \mathcal{C} \to \mathcal{D}$ is said to be a \bld{left exact functor}, if it preserves left exact sequences. Similarly, $F$ is called a \bld{right exact functor}, if it preserves right exact sequences. Finally, $F$ is called an \bld{exact functor}, if it preserves exact sequences.
+\end{definition}
+
+\begin{remark}
+	A functor between abelian categories is left exact if and only if it preserves kernels. Similarly, it is right exact if and only if it preserves cokernels. A functor between abelian categories is exact, if and only if it is both left and right exact.
+\end{remark}
+
+\section{The Mitchell Embedding Theorem}
 
 \begin{theorem}[Mitchell Embedding \cite{freyd:abelian_categories:1964}]
 	For every small abelian category there is an exact, full and faithful functor into $_{R}\mathsf{Mod}$ for some ring $R$.
@@ -284,7 +302,7 @@ In lemma \ref{lem:exactness_at_B}, the second condition involves statements abou
 
 A usefull application of the Mitchell embedding is that one can do proofs of basic homological algebra results in a familiar environment like $_{R}\mathsf{Mod}$ by diagram chasing. However, as \cite[202--208]{maclane:categories:1978} shows, this can also be done without using the Mitchell embedding.
 
-\section{The Eilenberg-Watts Theorem and its Consequences}
+\section{The Eilenberg-Watts Theorem}
 
 \begin{definition}[Bimodule]
 	Let $R$ and $S$ be two unital rings. An \bld{$R$-$S$-bimodule} is an abelian group $B$ such that:
