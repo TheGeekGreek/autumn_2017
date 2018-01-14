@@ -206,6 +206,71 @@ Let $A,B \in \ob(\mathsf{AbGrp})$. Then we have seen that $A \coprod B \cong A \
 	$\mathsf{AbGrp}$, $\mathsf{Vect}_K$, $_{R}\mathsf{Mod}$ and $\mathsf{Mod}_R$.	
 \end{examples}
 
+\section{Exact Sequences}
+\begin{lemma}
+	\label{lem:exactness_at_B}
+	Given a diagram
+	\begin{equation*}
+		\begin{tikzcd}
+			A \arrow[r,"f"] & B \arrow[r,"g"] & C
+		\end{tikzcd}
+	\end{equation*}
+	\noindent in $\mathsf{AbGrp}$, we have that above sequence is exact at $B$ if and only if $g \circ f = 0$ and
+	\begin{equation*}
+		\begin{tikzcd}
+			\ker g \arrow[r,hook,"\iota"] & B \arrow[r,"\pi"] & \coker f 
+		\end{tikzcd} = 0.
+	\end{equation*}
+\end{lemma}
+
+\begin{proof}
+	Trivial.
+\end{proof}
+
+In lemma \ref{lem:exactness_at_B}, the second condition involves statements about the kernel and the cokernel in the categorical sense. Indeed, in $\mathsf{Grp}$ we have that 
+\begin{equation*}
+	\begin{tikzcd}
+		\ker g \arrow[r,hook,"\iota"] & B \arrow[r, shift left, "g"]\arrow[r,shift right,"0"'] & C
+	\end{tikzcd}
+	\qquad \text{and} \qquad
+	\begin{tikzcd}
+		A \arrow[r, shift left, "f"]\arrow[r,shift right,"0"'] & B \arrow[r,"\pi"] & \coker f
+	\end{tikzcd}
+\end{equation*}
+\noindent are an equalizer and a coequalizer, respectively. Hence
+\begin{equation*}
+	\ker g = \begin{tikzcd}
+		\ker g \arrow[r,hook,"\iota"] & B
+	\end{tikzcd} \qquad \text{and} \qquad \coker f = \begin{tikzcd}
+		B \arrow[r,"\pi"] & \coker f.
+	\end{tikzcd}
+\end{equation*}
+
+\begin{definition}[Exactness]
+	Let $\mathcal{C}$ be an abelian category. A sequence
+	\begin{equation*}
+		\begin{tikzcd}
+			X \arrow[r] & Y \arrow[r] & Z
+		\end{tikzcd}
+	\end{equation*}
+	\noindent is said to be \bld{exact at $Y$}, if 
+	\begin{equation*}
+		\begin{tikzcd}
+			X \arrow[r] & Y \arrow[r] & Z 
+		\end{tikzcd} = 0 \qquad \text{and} \qquad
+		\begin{tikzcd}
+			K \arrow[r] & Y \arrow[r] & C
+		\end{tikzcd} = 0,
+	\end{equation*}
+	\noindent where
+	\begin{equation*}
+		K \to Y = \ker(Y \to Z)
+		\qquad \text{and} \qquad
+		Y \to C = \coker(X \to Y).
+	\end{equation*}
+\end{definition}
+
+
 \section{The Mitchell Embedding Theorem and its Consequences}
 
 \begin{definition}[Exact Functor \cite{maclane:categories:1978}]
