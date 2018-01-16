@@ -95,11 +95,36 @@
 	\end{align*}	
 \end{proof}
 
+\begin{lemma}
+	Let $\sigma := \sbr[0]{v_0,\dots,v_n} \subseteq \mathbb{R}^m$ be some $n$-simplex. Then for all $x,y \in \sigma$ we have that
+	\begin{equation*}
+		\abs[0]{x - y} \leq \sup_{k = 0,\dots,n} \abs[0]{v_k - y}.
+	\end{equation*}
+	Moreover
+	\begin{equation*}
+		\abs[0]{b_\sigma - v_k} \leq \frac{n}{n + 1}\diam \sigma = \max_{i,j = 0,\dots,n}\abs[0]{v_i - v_j},
+	\end{equation*}
+	\noindent for all $k = 0,\dots,n$.
+\end{lemma}
+
+\begin{proof}
+	Let $x,y \in \sigma$ and write $x = \sum_{k = 0}^n s_k v_k$. Since $\sum_{k = 0}^n s_k = 1$, we have that
+	\begin{equation*}
+		\abs[0]{x - y} = \abs[4]{\sum_{k = 0}^n s_k v_k - y} \leq \sum_{k = 0}^n s_k \abs[0]{v_k - y} \leq \sup_{k = 0,\dots,n} \abs[0]{v_k - y}.
+	\end{equation*}
+\end{proof}
+
+\begin{definition}[Mesh]
+	Let $K \subseteq \mathbb{R}^m$ convex and $c \in C_n^\mathrm{aff}(K)$. Define the \bld{mesh of $c$} to be the maximum of the diameters of the images of the affine simplices that appear in $c$.
+\end{definition}
+
 \begin{proposition}
+	\label{prop:properties_s_n}
 	The barycentric subdivision operators $(s_n)_{n \in \mathbb{Z}}$ have the following properties:
 	\begin{enumerate}[label = \textup{(}\alph*\textup{)},wide = 0pt]
 		\item For any $f \in \mathsf{Top}(X,Y)$, we have that $s_n \circ C_n(f) = C_n(f) \circ s_n$.
 		\item $\partial_n \circ s_n = s_{n - 1} \circ \partial_n$.
+		\item Given an open cover $\mathcal{U}$ of $X$ and some $c \in C_n(X)$, there exists $k \in \omega$, such that $s_n^k(c) \in C_n^\mathcal{U}(X)$.
 	\end{enumerate}
 \end{proposition}
 
@@ -123,10 +148,175 @@
 		&= s \partial C_{n + 1}(\sigma)(\id_{\Delta^{n + 1}})\\
 		&= (s \circ \partial)(\sigma),
 	\end{align*}
-	\noindent for any $n + 1$-simplex $\sigma$.
+	\noindent for any $n + 1$-simplex $\sigma$.\\
+	For proving (c), let $\sigma : \Delta^n \to X$ be any singular $n$-simplex. Then $\sigma^{-1}(\mathcal{U})$ is an open cover for $\Delta^n$ and hence there exists a Lebesgue number $\delta > 0$. 
 \end{proof}
 
 \begin{theorem}
-	\label{<++>}
 	For each $n \in \mathbb{Z}$, $H_n(s_n) = \id_{H_n}$.
 \end{theorem}
+
+
+\begin{theorem}
+	\label{thm:inclusion_U_small}
+	Let $\mathcal{U}$ be an open cover for a topologial space $X$. Then the inclusion $\iota_\bullet : C_\bullet^\mathcal{U}(X) \hookrightarrow C_\bullet(X)$ induces an isomorphism $H_n^\mathcal{U}(X) \to H_n(X)$.
+\end{theorem}
+
+\begin{proof}
+	\begin{enumerate}[label = \textit{Step \arabic*:},wide = 0pt]
+		\item \textit{Construction of a chain homotopy between $s_n$ and $\id$.} We define inductively $F_n : C_n(X) \to C_{n + 1}(X)$ by
+			\begin{equation*}
+				F_n\sigma := \ccases{
+					0 & n = 0,\\
+					C_{n + 1}(\sigma)\Cone_{b_n}(\id_{\Delta^n} - s_n\id_{\Delta^n} - F_{n - 1}\partial_n\id_{\Delta^n}) & n > 0.
+				}
+			\end{equation*}
+			We have to show now that
+			\begin{equation*}
+				\partial_{n + 1} \circ F_n + F_{n - 1} \circ \partial_n = \id - s_n
+			\end{equation*}
+			\noindent holds. We proceed by induction over $n \in \omega$. The case $n = 0$ is clear. Let us suppose that above identity holds for some $n - 1 \in \omega$. Then proposition \ref{prop:properties_s_n} and the induction hypothesis yields 
+			\begin{align*}
+				\partial F_n\sigma =& \partial C_{n + 1}(\sigma)\Cone_{b_n}(\id_{\Delta^n} - s_n\id_{\Delta^n} - F_{n - 1}\partial \id_{\Delta^n})\\
+				=& C_n(\sigma)\partial\Cone_{b_n}(\id_{\Delta^n} - s_n\id_{\Delta^n} - F_{n - 1}\partial\id_{\Delta^n})\\
+				=& \sigma - s_n\sigma - C_n(\sigma)F_{n - 1}\partial\id_{\Delta^n}\\
+				&- C_n(\sigma)\Cone_{b_n}\del[1]{\partial\id_{\Delta^n} - \partial s_n\id_{\Delta^n} - \partial F_{n - 1}\partial_n\id_{\Delta^n}}\\
+				=& \sigma - s_n\sigma - C_n(\sigma)F_{n - 1}\partial\id_{\Delta^n}\\
+				&- C_n(\sigma)\Cone_{b_n}\del[1]{\partial\id_{\Delta^n} - s_{n - 1}\partial\id_{\Delta^n} - \partial F_{n - 1}\partial_n\id_{\Delta^n} - F_{n - 2}\partial\partial\id_{\Delta^n}}\\
+				=& \sigma - s_n\sigma - C_n(\sigma)F_{n - 1}\partial\id_{\Delta^n}\\
+				=& \sigma - s_n\sigma - F_{n - 1}\partial \sigma,
+			\end{align*}
+			\noindent since for any continuous map $f : X \to X$ it is easy to show that 
+			\begin{equation*}
+				C_n(f) \circ F_{n - 1} = F_{n - 1} \circ C_{n - 1}(f).
+			\end{equation*}
+		\item \textit{Injectivity.} Let $\langle c \rangle \in \ker H_n^\mathcal{U}(X)$. Hence there exists some $b \in C_{n + 1}(X)$ such that $\partial b = c$. By part (c) of proposition \ref{prop:properties_s_n} we find $k \in \omega$ such that $s^k(b) \in C_{n + 1}^\mathcal{U}(X)$. Moreover, $\partial s^k b = s^k \partial b = s^kc$. Now using the chain homotopy of the first step and induction, one can show that $s^kc$ and $c$ differ by a boundary and hence that $\langle s^k c \rangle = \langle c \rangle$. Thus $\langle c \rangle = \langle \partial s^k b \rangle = 0$.
+		\item \textit{Surjectivity.} Let $\langle c \rangle \in H_n(X)$. Then by part (c) of proposition \ref{prop:properties_s_n} we find $k \in \omega$ such that $s^k c \in C_n^\mathcal{U}(X)$. Moreover, $\partial s^k c = s^k \partial c = 0$. Hence by the previous reasoning we have that $\langle s^kc \rangle = \langle c \rangle$.
+	\end{enumerate}
+\end{proof}
+
+\subsection*{The Excision Axiom}
+
+\begin{proposition}
+	Let $(X,A) \in \ob(\mathsf{Top}^2)$ and $\mathcal{U}$ an open cover for $X$. Then the inclusion $C_\bullet^\mathcal{U}(X,Y) \hookrightarrow C_\bullet(X,A)$, where $C_\bullet^\mathcal{U}(X,A) := C_\bullet^\mathcal{U}(X)/C_\bullet^{\mathcal{U} \cap A}(A)$, induces an ismorphism $H_n^\mathcal{U}(X,A) \cong H_n(X,A)$. 
+\end{proposition}
+
+\begin{theorem}[The Excision Axiom]
+	Let $U$ and $V$ be an open cover for a topological space $X$. Then the inclusion $(U,U \cap V) \hookrightarrow (X,V)$ induces an isomorphism in homology $H_n(U,U \cap V) \cong H_n(X,V)$
+\end{theorem}
+
+\begin{proof}
+	Let $\mathcal{U} := \cbr[0]{U,V}$. Then we have that $C_\bullet^\mathcal{U}(X) = C_\bullet(U) + C_\bullet(V)$. Consider the short exact sequence
+	\begin{equation*}
+		\begin{tikzcd}
+			0 \arrow[r] & C_\bullet(U) + C_\bullet(V) \arrow[r,"\iota_\bullet"] & C_\bullet(X) \arrow[r] & C_\bullet(X)/\del[0]{C_\bullet(U) + C_\bullet(V)} \arrow[r] & 0
+		\end{tikzcd}
+	\end{equation*}
+	\noindent in $\mathsf{Comp}$. Using proposition \ref{prop:les_homology} we get a long exact sequence in homology and theorem \ref{thm:inclusion_U_small} implies that $H_n(\iota_\bullet)$ is an isomorphism. Since this is every third map in the long exact sequence, it is easy to show that 
+	\begin{equation*}
+		H_n\del[1]{C_\bullet(X)/(C_\bullet(U) + C_\bullet(V))} = 0.
+	\end{equation*}
+	Moreover, let us consider the short exact sequence
+	\begin{equation*}
+		\begin{tikzcd}
+			0 \arrow[r] & \displaystyle\frac{C_\bullet(U) + C_\bullet(V)}{C_\bullet(V)} \arrow[r,"\iota_\bullet'"] & \displaystyle\frac{C_\bullet(X)}{C_\bullet(V)} \arrow[r] & \displaystyle\frac{C_\bullet(X)}{C_\bullet(U) + C_\bullet(V)} \arrow[r] & 0
+		\end{tikzcd}
+	\end{equation*}
+	\noindent in $\mathsf{Comp}$. Again, there is an associated long exact sequence in homology by proposition \ref{prop:les_homology}, where by the above, every third term is vanishing. Thus $H_n(\iota_\bullet')$ is an isomorphism. Now the second isomorphism theorem together with the fact that $C_\bullet(U \cap V) = C_\bullet(U) \cap C_\bullet(V)$ implies
+	\begin{equation*}
+		f_\bullet : \frac{C_\bullet(U)}{C_\bullet(U \cap V)} \cong \frac{C_\bullet(U) + C_\bullet(V)}{C_\bullet(V)}.
+	\end{equation*}
+	Thus for any $n \in \mathbb{Z}$, we have that 
+	\begin{equation*}
+		H_n(\iota_\bullet' \circ f_\bullet) = H_n(\iota_\bullet') \circ H_n(f_\bullet) : H_n\del[3]{\frac{C_\bullet(U)}{C_\bullet(U \cap V)}} \cong H_n\del[3]{\displaystyle\frac{C_\bullet(X)}{C_\bullet(V)}}.
+	\end{equation*}
+\end{proof}
+
+\subsection*{Reduced Homology}
+
+
+\subsection*{The Mayer-Vietoris Theorem}
+
+\begin{proposition}[Commutative Braid]
+	\label{prop:commutative_braid}
+	Consider the diagram
+	\begin{equation*}
+		\begin{tikzcd}[column sep=1.5ex, row sep=2ex]
+			\dots \arrow[dr,green]\arrow[rr,red, bend left] & & E_{n + 1}\arrow[rr,bend left]\arrow[dr,red] & & C_n \arrow[rr,blue,bend left]\arrow[dr,"i_n"] & & F_n \arrow[rr,green,bend left]\arrow[dr,blue] & & B_{n - 1}\arrow[dr,green]\arrow[rr,bend left,red] & & \dots\\
+			& D_{n + 1} \arrow[ur,"j_{n + 1}"]\arrow[dr,green] & & A_n \arrow[dr,red]\arrow[ur,blue] & & D_n \arrow[dr,"j_n"]\arrow[ur,green] & & A_{n - 1}\arrow[dr,blue]\arrow[ur,red] & & D_{n - 1} \arrow[dr,green]\arrow[ur,"j_{n - 1}"]\\
+			\dots \arrow[ur,"i_{n + 1}"]\arrow[rr,blue,bend right] & & F_{n + 1} \arrow[ur,blue]\arrow[rr,bend right, green] & & B_n \arrow[rr,bend right,red]\arrow[ur,green] & & E_n \arrow[rr,bend right]\arrow[ur,red] & & C_{n - 1}\arrow[rr,bend right, blue]\arrow[ur,"i_{n - 1}"] & & \dots
+		\end{tikzcd}
+	\end{equation*}
+	\noindent in $\mathsf{AbGrp}$, where the blue, green and red strands are long exact sequences. Moreover, assume that either
+	\begin{equation*}
+		\im i_n \subseteq \ker j_n \qquad \text{or} \qquad \ker j_n \subseteq \im i_n
+	\end{equation*}
+	\noindent holds for all $n \in \mathbb{Z}$. Then the black strand is also a long exact sequence.
+\end{proposition}
+
+\begin{proof}
+	\begin{enumerate}[label = \textit{Step \arabic*:}, wide = 0pt]
+		\item \textit{Exactness at $C_n$.} 
+			\begin{itemize}[wide = 0pt]
+				\item $\im(E_{n + 1} \to C_n) \subseteq \ker i_n$. Suppose $e_{n + 1} \mapsto c_n$. Then we have by commutativity that $e_{n + 1} \textcolor{red}{\mapsto} a_n \textcolor{blue}{\mapsto} c_n$. By exactness we have that $a_n \textcolor{red}{\mapsto} 0 \textcolor{green}{\mapsto} 0$ and thus again by commutativity, $a_n \textcolor{blue}{\mapsto} c_n \mapsto 0$. 
+				\item $\ker i_n \subseteq \im (E_{n + 1} \to C_n)$. Suppose $c_n \mapsto 0$. Then $c_n \mapsto 0 \textcolor{green}{\mapsto} 0$, hence by commutativity and exactness we find $a_n \textcolor{blue}{\mapsto} c_n$. Again, commutativity yields $a_n \textcolor{red}{\mapsto} b_n \textcolor{green}{\mapsto} 0$. Hence by exactness at $B_n$ we find $f_{n + 1} \textcolor{green}{\mapsto} b_n$ and by commutativity, $f_{n + 1} \textcolor{green}{\mapsto} a_n' \textcolor{red}{\mapsto} b_n$. Thus $a_n - a_n' \in \ker(A_n \textcolor{red}{\to} B_n)$ and thus $e_{n + 1} \textcolor{red}{\mapsto} a_n - a_n'$. By exactness at $A_n$, $e_{n + 1} \textcolor{red}{\mapsto} a_n - a_n' \textcolor{blue}{\mapsto} c_n$ and so by commutativity, $e_{n + 1} \mapsto c_n$. 
+			\end{itemize}
+		\item \textit{Exactness at $D_n$, assuming $\im i_n \subseteq \ker j_n$.} Left to show is that $\ker j_n \subseteq \im i_n$. Suppose $d_n \mapsto 0$. Then $d_n\mapsto 0 \textcolor{red}{\mapsto} 0$. Hence by commutativity, $d_n \textcolor{green}{\mapsto} f_n \textcolor{blue}{\mapsto} 0$. Thus exactness at $F_n$ implies $c_n \textcolor{blue}{\mapsto} f_n$. By commutativity, $c_n \mapsto d_n' \textcolor{green}{\mapsto} f_n$. By assumption, $d_n' \mapsto 0$. Now $d_n - d_n' \textcolor{green}{\mapsto} 0$ and thus by exactness at $D_n$, we have that $b_n \textcolor{green}{\mapsto} d_n - d_n'$. By commutativity, $b_n \textcolor{red}{\mapsto} 0$ and hence by exactness at $B_n$ we get that $a_n \textcolor{red}{\mapsto} b_n$. By commutativity, $a_n \textcolor{blue}{\mapsto} c_n' \mapsto d_n - d_n'$ and so $c_n + c_n'$ does the job.
+		\item \textit{Exactness at $D_n$, assuming $\ker j_n \subseteq \im i_n$.} 
+		\item \textit{Exactness at $E_n$.} 
+			\begin{itemize}[wide = 0pt]
+				\item $\im j_n \subseteq \ker(E_n \to C_{n - 1})$. Suppose $d_n \mapsto e_n$. Consider $d_n \textcolor{green}{\mapsto}f_n \textcolor{blue}{\mapsto} a_{n-1}$. Then by commutativity, $d_n \mapsto e_n \textcolor{red}{\mapsto} a_{n - 1}$. Hence by exactness $e_n \textcolor{red}{\mapsto} a_{n - 1} \textcolor{blue}{\mapsto} 0$ and thus by commutativity, $e_n \mapsto 0$.
+				\item $\ker(E_n \to C_{n - 1}) \subseteq \im j_n$. Suppose $e_n \mapsto 0$. Hence by commutativity $e_n \textcolor{red}{\mapsto} a_{n - 1} \textcolor{blue}{\mapsto} 0$. Hence by exactness at $A_{n - 1}$ we get that $f_n \textcolor{blue}{\mapsto} a_{n - 1}$. Again, exactness at $A_{n - 1}$ and commutativity implies that $f_n \textcolor{green}{\mapsto} 0$. Hence by exactness at $F_n$ we have that $d_n \textcolor{green}{\mapsto} f_n$. Commutatvity yields $d_n \mapsto e_n' \textcolor{red}{\mapsto} a_{n - 1}$ and hence $e_n - e_n' \textcolor{red}{\mapsto} 0$. Thus $b_n \textcolor{red}{\mapsto} e_n - e_n'$. Commutativity now implies that $b_n \textcolor{green}{\mapsto} d_n' \mapsto e_n - e_n'$ and hence $d_n + d_n'$ does the job. 
+			\end{itemize}
+	\end{enumerate}
+\end{proof}
+
+\begin{proposition}[Long Exact Sequence of Triples]
+	Let $X$ be a topological space and $X'' \subseteq X' \subseteq X$ subspaces. Then there is a long exact sequence
+	\begin{equation*}
+		\begin{tikzcd}[column sep=4ex]
+			\dots \arrow[r] & H_n(X',X'') \arrow[r] & H_n(X,X'') \arrow[r] & H_n(X,X')\arrow[r] & H_{n - 1}(X',X'') \arrow[r] & \dots
+		\end{tikzcd}
+	\end{equation*}
+\end{proposition}
+
+\begin{proof}
+	This immediately follows from proposition \ref{prop:commutative_braid} by considering the braid
+	\begin{equation*}
+		\begin{tikzcd}[column sep=1ex, row sep=2ex]
+			\dots \arrow[dr,green]\arrow[rr,red, bend left] & & H_{n + 1}(X,X')\arrow[rr,bend left]\arrow[dr,red] & & H_n(X',X'') \arrow[rr,blue,bend left]\arrow[dr] & & H_{n - 1}(X'')\arrow[rr,green,bend left]\arrow[dr,blue] & & \dots\\
+			& H_{n + 1}(X,X'') \arrow[ur]\arrow[dr,green] & & H_n(X') \arrow[dr,red]\arrow[ur,blue] & & H_n(X,X'') \arrow[dr]\arrow[ur,green] & & H_{n - 1}(X')\arrow[dr,blue]\arrow[ur,red]\\
+			\dots \arrow[ur]\arrow[rr,blue,bend right] & & H_n(X'') \arrow[ur,blue]\arrow[rr,bend right, green] & & H_n(X) \arrow[rr,bend right,red]\arrow[ur,green] & & H_n(X,X') \arrow[rr,bend right]\arrow[ur,red] & & \dots
+		\end{tikzcd}
+	\end{equation*}
+	\noindent where the red strand is the long exact sequence corresponding to the pair $(X,X')$, the green corresponds to $(X,X'')$ and the blue to $(X,X'')$. Commutativity follows from the fact that $H_n$ is a functor and that the connecting homomorphisms are natural. Hence an application of the commutative braid proposition yields the result.
+\end{proof}
+
+\begin{theorem}[Mayer-Vietoris]
+	\label{thm:Mayer_Vietoris}
+	Let $U$ and $V$ be an open cover for a topological space $X$. Define four inclusions 
+	\begin{equation*}
+		\iota_U : U \cap V \hookrightarrow U, \iota_V : U \cap V \hookrightarrow V, \jota_U : U \hookrightarrow X, \text{ and } \jota_V : V \hookrightarrow X.
+	\end{equation*}
+	Then there is a long exact sequence
+	\begin{equation*}
+		\begin{tikzcd}[column sep=10ex]
+			\dots \arrow[r] & H_n(U \cap V) \arrow[r,"{(H_n(\iota_U),H_n(\iota_V))}"] & H_n(U) \oplus H_n(V) \arrow[r,"{H_n(\jota_U)-H_n(\jota_V)}"] & H_n(X) \arrow[r,"D"] & \dots
+		\end{tikzcd}
+	\end{equation*}
+	\noindent where $D : H_n(X) \to H_{n - 1}(U \cap V)$.
+\end{theorem}
+
+\begin{proposition}[Homology of Spheres]
+	For $n \in \omega$, we have
+	\begin{equation*}
+		\wtilde{H}_k(\mathbb{S}^n) = \ccases{
+			\mathbb{Z} & k = n,\\
+			0 & k \neq n.
+		}
+	\end{equation*} 
+\end{proposition}
+
+\begin{proof}
+	
+\end{proof}<++>
