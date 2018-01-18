@@ -26,3 +26,78 @@
 \begin{proof}
 	Using the construction in proposition \ref{prop:filtered_colimits_set}, we have that a sequential colimit  in $\mathsf{Set}$ is given by $\coprod_{n \in \omega}X_n /{\sim}$, where it is easy to check that in this case $x \in X_n \sim y \in X_m$ if and only if $x = y$. Moreover, we have that $\coprod_{n \in \omega} X_n/{\sim} \cong \bigcup_{n \in \omega}X_n$ in $\mathsf{Set}$, as one can easily show by considering the map $\sbr[0]{x_n} \mapsto x_n$. Using lemma \ref{lem:topologizing_a_set}, we get that $\coprod_{n \in \omega} X_n/{\sim} \cong \bigcup_{n \in \omega}X_n$ in $\mathsf{Top}$. Moreover, it is easy to check that a set $U \subseteq \bigcup_{n \in \omega}X_n$ is open if and only if $U \cap X_n$ is open in $X_n$ for all $n \in \omega$.
 \end{proof}
+
+\begin{definition}[$T_1$]
+	A topological space $X$ is said to be a \bld{$T_1$-space}, if $\cbr{x}$ is closed in $X$ for every $x \in X$.
+\end{definition}
+
+\begin{definition}[Weakly Hausdorff]
+	A topological space $X$ is said to be a \bld{weakly Hausdorff space}, if for any map $f \in \mathsf{Top}(K,X)$ for a compact Hausdorff space $K$, $f(K)$ is closed in $X$.
+\end{definition}
+
+\begin{exercise}
+	\label{ex:inclusions_Hausdorff}
+	Show that any Hausdorff space is a weakly Hausdorff space and that any weakly Hausdorff space is a $T_1$-space, but both contraries are not true.
+\end{exercise}
+
+\begin{exercise}
+	\label{ex:compact_subspace}
+	Let $X$ be a weakly Hausdorff space. Assume that $f \in \mathsf{Top}(K,X)$ for a compact Hausdorff space $K$. Show that $f(K)$ is a compact subspace of $X$.
+\end{exercise}
+
+\begin{proposition}
+	Given a sequence 
+	\begin{equation*}
+		\begin{tikzcd}
+			X_0 \arrow[r,"i_0"] & X_1 \arrow[r,"i_1"] & X_2 \arrow[r,"i_2"] & \dots
+		\end{tikzcd}
+	\end{equation*}
+	\noindent of closed embeddings of weakly Hausdorff spaces, then
+	\begin{equation*}
+		\textstyle\colim_n C_\bullet(X_n) = C_\bullet \del[1]{\colim_nX_n}.
+	\end{equation*}
+\end{proposition}
+
+\begin{proof}
+	Let $X := \bigcup_{n \in \omega} X_n$. The main part is the following lemma:
+
+	\begin{lemma}
+		Let $f \in \mathsf{Top}(K,X)$ for a compact Hausdorff space $K$. Then $f(K)$ is contained in one of the $X_n$.	
+	\end{lemma}
+
+	\begin{proof}
+		Towards a contradiction, assume that $f(K)$ is not conatined in any $X_n$. Hence we find a sequence $(x_n)_{n \in \omega}$ in $K$, such that $f(x_n) \notin X_n$ for all $n \in \omega$. Define
+		\begin{equation*}
+			S_m := \cbr[0]{f(x_k) : k \geq m},
+		\end{equation*}
+		\noindent for $m \in \omega$. Then $S_{m + 1} \subseteq S_m$, $\bigcap_{m \in \omega} S_m = \varnothing$ and $S_m \cap X_n$ is finite for all $n \in \omega$. By exercise \ref{ex:inclusions_Hausdorff}, we get that $S_m \cap X_n$ is closed in $X_n$ for all $n \in \omega$. Hence by the definition of the colimit topology, $S_m$ is closed in $X$ for all $m \in \omega$. Thus $Y_m := X \setminus S_m$ is open in $X$ and easily seen to be an open cover for $X$. By construction, no finite subcover of it can cover $f(K)$, and hence we have a contradiction to the fact that $f(K)$ is compact by exercise \ref{ex:compact_subspace}.
+	\end{proof}\\
+	By the previous lemma, any singular $n$-simplex $\sigma : \Delta^n \to X$ is contained in some $X_n$ and so the result follows from the definition of the colimit in $\mathsf{Comp}$.
+\end{proof}
+
+\begin{proposition}
+	Let $X \subseteq \mathbb{S}^n$ homeomorphic to $I^m$, $0 \leq m \leq n$. Then $\wtilde{H}_k(\mathbb{S}^n \setminus X) = 0$ for $k \in \omega$.
+\end{proposition}
+
+\begin{proof}
+	If $m = 0$, then $X$ is a single point in $\mathbb{S}^n$. Hence $\mathbb{S}^n \setminus X \cong \mathbb{R}^n$ and thus $\wtilde{H}_k(\mathbb{S}^n \setminus X) = 0$, since $\mathbb{R}^n$ is contractible. Now let $0 < m \leq n$ and suppose the claim holds for $m - 1$. Let $f : X \to I^m$ be a homeomorphism and define 
+	\begin{equation*}
+		I^+ := \cbr[0]{x \in I^m : x_1 \geq 1/2} \qquad \text{and} \qquad I^- := \cbr[0]{x \in I^m : x_1 \leq 1/2}.
+	\end{equation*}
+	Moreover, define $X^{\pm} := f^{-1}(I^{\pm})$ and $Y := X^+ \cap X^-$. Then $Y \approx I^{m - 1}$ and $\mathbb{S}^n \setminus X^+$, $\mathbb{S}^n \setminus X^-$ is an open cover for $\mathbb{S}^n \setminus Y$. Since $\mathbb{S}^n \setminus X^+ \cap \mathbb{S}^n \setminus X^- = \mathbb{S}^n \setminus X$, by Mayer-Vietoris we get a long exact sequence in reduced homology:
+	\begin{equation*}
+		\begin{tikzcd}[column sep=2ex]
+			\dots\wtilde{H}_{k + 1}(\mathbb{S}^n \setminus Y) \arrow[r] & \wtilde{H}_k(\mathbb{S}^n\setminus X) \arrow[r] & \wtilde{H}_k(\mathbb{S}^n \setminus X^+) \oplus \wtilde{H}_k(\mathbb{S}^n \setminus X^-) \arrow[r] & \wtilde{H}_k(\mathbb{S}^n \setminus Y)\dots
+		\end{tikzcd}
+	\end{equation*}
+	By hypothesis, the end terms vanish and thus we get an isomorphism
+	\begin{equation*}
+		\begin{tikzcd}[column sep=15ex]
+			\wtilde{H}_k(\mathbb{S}^n\setminus X) \arrow[r,"{(H_k(\iota^+),H_k(\iota^-))}"] & \wtilde{H}_k(\mathbb{S}^n \setminus X^+) \oplus \wtilde{H}_k(\mathbb{S}^n \setminus X^-).
+		\end{tikzcd}
+	\end{equation*}
+	Now take some nonzero element $\langle c \rangle \in \wtilde{H}_k(\mathbb{S}^n \setminus X)$ (if there exists no nonzero element, we are done). Since we have an isomorphism, either $H_k(\iota^+)\langle c \rangle$ or $H_k(\iota^-)\langle c \rangle$ must be nonzero. Without loss of generality, assume $H_k(\iota^+)\langle c \rangle \neq 0$. In the same manner we can split $X^+$ in two parts and thus getting a decreasing sequence $(X_n)_{n \in \omega}$ of closed subsets of $\mathbb{S}^n$ such that $\langle c \rangle$ is taken to $\langle c_n \rangle \neq 0$ by the homomorphism on homology induced by inclusion. Now each $\mathbb{S}^n \setminus X_n$ is open, and thus we get
+	\begin{equation*}
+		\textstyle\wtilde{H}_k(\mathbb{S}^n \setminus \bigcap_{n \in \omega} X_n) = \colim_j\wtilde{H}_k(\mathbb{S}^n\setminus X_j).
+	\end{equation*}
+\end{proof}
