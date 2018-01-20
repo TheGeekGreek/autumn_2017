@@ -11,6 +11,7 @@
 \end{definition}
 
 \begin{lemma}
+	\label{lem:adjunction_space}
 	Let $X$ and $Y$ be topological spaces, $A \subseteq X$ a closed subspace and $f \in \mathsf{Top}(A,Y)$. Then:
 	\begin{enumerate}[label = \textup{(}\alph*\textup{)}]
 		\item $X \cup_f Y$ with obvious inclusions is the pushout of the diagram
@@ -50,3 +51,191 @@
 		\end{tikzcd}
 	\end{equation*}
 \end{proposition}
+
+\begin{proof}
+	By lemma \ref{lem:adjunction_space}, we know that $\mathbb{B}^n \cup_f Y = q(\mathbb{E}^n) \dot{\cup} q(Y)$. Hence we can write $\mathbb{B}^n \cup_f Y = U \cup V$, where
+	\begin{equation*}
+		U := q(\mathbb{B}^n_{1/2}) \qquad \text{and} \qquad V := (\mathbb{B}^n \cup_f Y) \setminus q(0),
+	\end{equation*}
+	\noindent where $0 \in \mathbb{B}^n$. We claim that $q(Y)$ is a deformation retract of $V$. Indeed, consider $H : V \times I \to V$ defined by
+	\begin{equation*}
+		H(v,t) := \ccases{
+			v & v \in q(Y),\\
+			q\del[1]{(1 - t)x + t x/\abs[0]{x}} & v = q(x) \in q(\mathbb{E}^n \setminus \cbr{0}).
+		}
+	\end{equation*}
+	By lemma \ref{lem:adjunction_space} (b), we can identify $q(Y)$ with $Y$. Since $U$ is contractible, Mayer-Vietoris yields a sequence
+	\begin{equation*}
+		\begin{tikzcd}
+			\dots H_k (U \cap V) \arrow[r] & H_k(V) \arrow[r] & H_k{\mathbb{B}^n \cup_f Y} \arrow[r] & H_{k - 1}(U \cap V)\dots
+		\end{tikzcd}
+	\end{equation*}
+	Since $U \cap V$ has the same homotopy type as $\mathbb{S}^{n - 1}$ and $H_k(Y) \cong H_k(V)$, we are almost done. Left to check is that $H_k(\iota_V)$ and $H_k(f)$ can be identified. To this end consider the commutative diagram
+	\begin{equation*}
+		\begin{tikzcd}
+			U \setminus \cbr{0} \arrow[d,hook]\arrow[r] & U \cap V \arrow[d,"\iota_V"]\\
+			\mathbb{B}^n \setminus \cbr{0} \arrow[r] & V\\
+			\mathbb{S}^{n - 1}\arrow[u,hook] \arrow[r,"f"'] & Y \arrow[u,hook].
+		\end{tikzcd}
+	\end{equation*}
+	We see that all the vertical maps and the top horizontal map induce isomorphisms on homology, thus we have
+	\begin{equation*}
+		\begin{tikzcd}
+			H_k(U \cap V) \arrow[d]\arrow[r,"H_k(\iota_V)"] & H_k(V)\\
+			H_k(\mathbb{S}^{n - 1}) \arrow[r,"H_k(f)"'] & H_k(Y) \arrow[u]
+		\end{tikzcd}
+	\end{equation*}
+	\noindent in homology, where the vertical maps are isomorphisms.
+\end{proof}
+
+\subsection*{The Relative Homeomorphism Theorem}
+
+\begin{definition}[Strong Deformation Retract]
+	Let $X$ be a topological space and $A \subseteq X$ a subspace. We say that \bld{$A$ is a strong deformation retract of $X$}, if $A$ is a deformation retract of $X$ and $\iota \circ r \simeq_A \id_X$.
+\end{definition}
+
+\begin{theorem}
+	\label{thm:quotient}
+	Let $X$ be a topological space and $A \subseteq X$ a closed subspace, such that there exists a neighbourhood $U$ of $A$ in $X$ such that $A$ is a strong deformation retract of $U$. If $q : X \to X/A$ denotes the quotient map and $\ast$ corresponds the equivalence relation of an element in $A$, we have that
+	\begin{equation*}
+		H_n(q) : H_n(X,A) \to H_n(X/A,\ast)
+	\end{equation*}
+	\noindent is an isomorphism.
+\end{theorem}
+
+\begin{proof}
+	There is an obvious commutative diagram comming from the long exact sequences of pairs in homology:
+	\begin{equation*}
+		\begin{tikzcd}
+			\dots H_n(A) \arrow[r]\arrow[d] & H_n(X) \arrow[r]\arrow[d,"\id"] & H_n(X,A) \arrow[r]\arrow[d] & H_{n - 1}(A) \arrow[r]\arrow[d] & H_{n - 1}(X)\arrow[d,"\id"]\dots\\
+			\dots H_n(U) \arrow[r] & H_n(X) \arrow[r] & H_n(X,U) \arrow[r] & H_{n - 1}(U) \arrow[r] & H_{n - 1}(X)\dots
+		\end{tikzcd}
+	\end{equation*}
+	Since all vertical maps except the middle one are isomorphisms, the five lemma yields that the middle one is also an isomorphism. Now $\cbr{\ast}$ is a strong deformation retract of $U/A$ in $X/A$. Indeed, if $H : U \times I \to U$ is the map corresponding to the strong deformation retract of $A$ in $U$, we see that $H : U \times I \to U/A$ passes to the quotient to yield a map $\wtilde{H} : U/A \times I \to U/A$ with the desired properties. Hence applying the above argument to the induced case, yields
+	\begin{equation*}
+		H_n(X/A,\ast) \cong H_n(X/A,U/A).
+	\end{equation*}
+	Consider
+	\begin{equation*}
+		\begin{tikzcd}
+			H_n(X,A)\arrow[d,"H_n(q)"']\arrow[r,leftrightarrow,"\cong"] & H_n(X,U)\arrow[r,leftrightarrow,"\cong"] & H_n(X\setminus A,U \setminus A) \arrow[d,"H_n(q)"]\\
+			H_n(X/A,\ast) \arrow[r,leftrightarrow,"\cong"'] & H_n(X/A,U/A)\arrow[r,leftrightarrow,"\cong"'] & H_n\del[1]{(X/A) \setminus \cbr{\ast},(U/A)\setminus \cbr{\ast}}.
+		\end{tikzcd}
+	\end{equation*}
+	Now the right-hand side $H_n(q)$ is an isomorphism since $q$ is a homeomorphism restricted to $X\setminus A$.
+\end{proof}
+
+\begin{definition}[Relative Homeomorphism]
+	Let $f \in \mathsf{Top}^2 \del[1]{(X,A),(Y,B)}$. We say that $f$ is a \bld{relative homeomorphism}, if $f : X \setminus A \to Y \setminus B$ is a homeomorphism.
+\end{definition}
+
+\begin{theorem}[The Relative Homeomorphism Theorem]
+	Let $f \in \mathsf{Top}^2 \del[1]{(X,A),(Y,B)}$ be a relative homeomorphism between a compact space $X$ and a compact Hausdorff space $Y$ and where $A$ and $B$ are closed subspaces. Moreover, assume that there exist neighbourhoods $U$ and $V$, such that $A$ and $B$ are strong deformation retracts of $U$ and $V$, respectively. Then
+	\begin{equation*}
+		H_n(f) : H_n(X,A) \to H_n(Y,B)
+	\end{equation*}
+	\noindent is an isomorphism for all $n \in \omega$.
+\end{theorem}
+
+\begin{proof}
+	The assumptions imply the existence of a well-defined continuous bijective map $\wtilde{f}$, such that the following diagram commutes:
+	\begin{equation*}
+		\begin{tikzcd}
+			(X,A) \arrow[d]\arrow[r,"f"] & (Y,B)\arrow[d]\\
+			(X/A,\ast) \arrow[r,"\wtilde{f}"'] & (Y/B,\ast).
+		\end{tikzcd}
+	\end{equation*}
+	Since every quotient of a compact space is compact (see \cite[96]{lee:topological_manifolds:2011}), we get that $X/A$ is compact. Moreover, by \cite[102]{lee:topological_manifolds:2011}, we have that $Y/B$ is Hausdorff. Hence the closed map lemma implies that $\wtilde{f}$ is a homeomorphism. Applying homology yields
+	\begin{equation*}
+		\begin{tikzcd}
+			H_n(X,A) \arrow[d]\arrow[r,"H_n(f)"] & H_n(Y,B)\arrow[d]\\
+			H_n(X/A,\ast) \arrow[r,"H_n(\wtilde{f})"'] & H_n(Y/B,\ast),
+		\end{tikzcd}
+	\end{equation*}
+	\noindent where the two vertical maps are isomorphisms by theorem \ref{thm:quotient}.	
+\end{proof}
+
+\section*{The Degree}
+\begin{definition}[Degree]
+	Let $n \geq 1$ and $f : \mathbb{S}^n \to \mathbb{S}^n$ continuous. Then since $H_n(\mathbb{S}^n)$ is infinite cyclic, there is a unique integer $\deg f$ such that $H_n(f)$ is the multiplication by $\deg f$. This integer is called the \bld{degree of $f$}.
+\end{definition}
+
+\begin{proposition}
+	Let $n \geq 1$ and $f,g \in \mathsf{Top}(\mathbb{S}^n,\mathbb{S}^n)$. Then:
+	\begin{enumerate}[label = \textup{(}\alph*\textup{)}]
+		\item $\deg(g \circ f) = \deg g \deg f$.
+		\item $\deg \id_{\mathbb{S}^n} = 1$.
+		\item If $f$ is constant, then $\deg f = 0$.
+		\item If $f \simeq g$, then $\deg f = \deg g$.
+		\item If $f$ is a homotopy equivalence, then $\deg f = \pm 1$.
+	\end{enumerate}
+\end{proposition}
+
+\section*{Cellular Homology}
+
+\begin{definition}[Cell-Like Filtration]
+	Let $X$ be a topological space. A \bld{cell-like filtration $\mathcal{F}$ of $X$} is an increasing sequence $\mathcal{F}$, $\varnothing =: F^{-1} \subseteq F^0 \subseteq F^1 \subseteq \dots$ of weakly Hausdorff closed subspaces such that $X = \bigcup_{n \in \omega} F^n$ and
+	\begin{equation*}
+		H_k(F^n,F^{n - 1}) = 0,
+	\end{equation*}
+	\noindent for all $k \neq n$.
+\end{definition}
+
+\begin{proposition}
+	Let $X$ be a topological space with cell-like filtration $\mathcal{F}$. Then:
+	\begin{enumerate}[label = \textup{(} \alph*\textup{)}]
+		\item $H_k(F^n) = 0$ for $k > n$.
+		\item The inclusion $F^n \hookrightarrow X$ induces isomorphisms $H_k(F^n) \cong H_k(X)$ for $k < n$.
+	\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+	For proving (a), we consider the long exact sequence associated to the pair $(F^n,F^{n-1})$:
+	\begin{equation*}
+		\begin{tikzcd}
+			\dots H_{k + 1}(F^n,F^{n - 1}) \arrow[r] & H_k(F^{n-1}) \arrow[r] & H_k(F^n) \arrow[r] & H_k(F^n,F^{n-1})\dots
+		\end{tikzcd}
+	\end{equation*}
+	If $k \neq n,n - 1$, both end terms vanish by definition of a cell-like filtration. Hence we get that
+	\begin{equation*}
+		H_k(F^{n - 1}) \cong H_k(F^n)
+	\end{equation*}
+	\noindent for all $k \neq n,n - 1$. In particular, if $k > n$ we get a chain of isomorphisms
+	\begin{equation*}
+		H_k(F^n) \cong H_k(F^{n-1}) \cong \dots \cong H_k(F^0) = H_k(F^0,\varnothing) = H_k(F^0,F^{-1}) = 0.
+	\end{equation*}
+	Also we have that $H_k(F^{k + m}) \cong H_k(F^{k + 1})$ for all $m \geq 1$. Hence
+	\begin{equation*}
+		\textstyle H_k(F^{k + 1}) \cong \colim_{n \geq k + 1} H_k(F^n) = H_k(X).
+	\end{equation*}
+\end{proof}
+
+\begin{theorem}
+	Let $X$ be a topological space with cell-like filtration $\mathcal{F}$. Then
+	\begin{equation*}
+		H_n(X) \cong H_n(X,\mathcal{F})
+	\end{equation*}
+	\noindent for all $n \geq 0$.
+\end{theorem}
+
+\begin{proof}
+	Consider
+	\begin{equation*}
+		\begin{tikzcd}
+			& H_{n + 1}(F^{n + 1},F^n)\arrow[d,"\delta_{n + 1}"']\arrow[dr,"\partial^\mathcal{F}_{n + 1}"] & & 0\arrow[d]\\
+			0 \arrow[r] & H_n(F^n)\arrow[d] \arrow[r,"\eta_n"] & H_n(F^n,F^{n - 1})\arrow[dr,"\partial^\mathcal{F}_n"'] \arrow[r,"\delta_n"] & H_{n - 1}(F^{n - 1})\arrow[d,"\eta_{n - 1}"]\\
+			& H_n(F^{n + 1})\arrow[d] & & H_{n - 1}(F^{n - 1},F^{n - 2})\\
+			& 0.
+		\end{tikzcd}
+	\end{equation*}
+	Then we have 
+	\begin{align*}
+		H_n(X) &\cong H_n(F^{n + 1})\\
+		&\cong H_n(F^n)/\im \delta_{n + 1}\\
+		&\cong \im \eta_n/\im \eta_n \circ \delta_{n + 1}\\
+		&\cong \ker \delta_n/\im \partial^\mathcal{F}_{n + 1}\\
+		&\cong \ker \eta_{n - 1}\circ \delta_n/ \im \partial^\mathcal{F}_{n + 1}\\
+		&\cong \ker \partial^\mathcal{F}_n/\im \partial^\mathcal{F}_{n + 1}\\
+		&= H_n(X,\mathcal{F}).
+	\end{align*}
+\end{proof}

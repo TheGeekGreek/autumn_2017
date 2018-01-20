@@ -76,6 +76,7 @@
 \end{proof}
 
 \begin{proposition}
+	\label{prop:I_m}
 	Let $X \subseteq \mathbb{S}^n$ homeomorphic to $I^m$, $0 \leq m \leq n$. Then $\wtilde{H}_k(\mathbb{S}^n \setminus X) = 0$ for $k \in \omega$.
 \end{proposition}
 
@@ -100,4 +101,61 @@
 	\begin{equation*}
 		\textstyle\wtilde{H}_k(\mathbb{S}^n \setminus \bigcap_{n \in \omega} X_n) = \colim_j\wtilde{H}_k(\mathbb{S}^n\setminus X_j).
 	\end{equation*}
+	Since $\wtilde{H}_k(\mathbb{S}^n \setminus X_j) \to \wtilde{H}_k(\mathbb{S}^n \setminus X_{j + 1})$ sends $\langle c_j \rangle$ to $\langle c_{j + 1} \rangle$, we end up with a nonzero element $\langle c_\infty \rangle$ in $\wtilde{H}_k(\mathbb{S}^n \setminus \bigcap_{n \in \omega}X_n)$. But $\bigcap_{n \in \omega} X_n$ is homeomorphic to $I^{m - 1}$. Hence by hypothesis, $\wtilde{H}_k(\mathbb{S}^n \setminus \bigcap_{n \in \omega}X_n)$, contradicting the existence of a nonzero element $\langle c_\infty \rangle$. 
+	ntradiction.
+\end{proof}
+
+\begin{corollary}
+	\label{cor:S_m}
+	Let $X \subseteq \mathbb{S}^n$ be homeomorphic to $\mathbb{S}^m$ for some $0 \leq m \leq n - 1$. Then
+	\begin{equation*}
+		\wtilde{H}_k(\mathbb{S}^n \setminus X) = \ccases{
+			\mathbb{Z} & k = n - m - 1,\\
+			0 & k \neq n - m - 1.
+		}
+	\end{equation*}
+\end{corollary}
+
+\begin{proof}
+	Let $m = 0$. Then $X$ consists of two distinct points and thus $\mathbb{S}^n \setminus X \approx \mathbb{S}^{n - 1}$. Hence 
+	\begin{equation*}
+		\wtilde{H}_k(\mathbb{S}^n \setminus X) = \wtilde{H}_k(\mathbb{S}^{n - 1}) = \ccases{
+			\mathbb{Z} & k = n - 1,\\
+			0 & k \neq n - 1.
+		}
+	\end{equation*}
+	Now suppose the claim holds for $m - 1$. Then if $X \approx \mathbb{S}^m$, write $X = X^+ \cup X^-$, where $X^{\pm}$ is homeomorphic to the upper an lower hemisphere of $\mathbb{S}^m$. Applying Mayer-Vietoris to the cover $\mathbb{S}^n \setminus X^+$ and $\mathbb{S}^n \setminus X^-$ of $\mathbb{S}^n \setminus Y$, where $Y := X^+ \cap X^-$, yields a long exact sequence
+	\begin{equation*}
+		\begin{tikzcd}
+			\dots\wtilde{H}_{k + 1}(\mathbb{S}^n \setminus X^+) \oplus \wtilde{H}_{k + 1}(\mathbb{S}^n\setminus X^-) \arrow[d, phantom, ""{coordinate, name=Z}]\arrow[r] & \wtilde{H}_{k + 1}(\mathbb{S}^n\setminus Y) \arrow[dl,rounded corners,
+				to path=
+				{ -- ([xshift=2ex]\tikztostart.east)
+				|- (Z) [near end]\tikztonodes
+				-| ([xshift=-2ex]\tikztotarget.west)
+				-- (\tikztotarget)}
+			] \\
+			\wtilde{H}_k(\mathbb{S}^n \setminus X) \arrow[r] & \wtilde{H}_k(\mathbb{S}^n \setminus X^+) \oplus \wtilde{H}_k(\mathbb{S}^n\setminus X^-)\dots
+		\end{tikzcd}
+	\end{equation*}
+	The end terms of above sequence both vanish by proposition \ref{prop:I_m} and thus we get an isomorphism
+	\begin{equation*}
+		\wtilde{H}_k(\mathbb{S}^n \setminus X) \cong \wtilde{H}_{k - 1}(\mathbb{S}^n \setminus Y).
+	\end{equation*}
+	Since $Y \approx \mathbb{S}^{m - 1}$, we are done.
+\end{proof}
+
+\begin{theorem}[The Jordan-Brouwer Separation Theorem]
+	Let $f \in \mathsf{Top}(\mathbb{S}^{n-1},\mathbb{S}^n)$ is an embedding. Then $\mathbb{S}^n \setminus f(\mathbb{S}^{n - 1})$ has two components, where $f(\mathbb{S}^{n - 1})$ is the boundary of each component.
+\end{theorem}
+
+\begin{proof}
+	Define $X := f(\mathbb{S}^{n - 1})$. Hence corollary \ref{cor:S_m} yields
+	\begin{equation*}
+		\wtilde{H}_k(\mathbb{S}^n \setminus X) = \ccases{
+			\mathbb{Z} & k = 0,\\
+			0 & k > 0.
+		}
+	\end{equation*}
+	Thus the dimension axiom together with additivity on path components implies that $\mathbb{S}^n \setminus X$ has two path-components. Since $X$ is closed by the closed map lemma, $\mathbb{S}^n \setminus X$ is open, and since $\mathbb{S}^n$ is a topological manifold, $\mathbb{S}^n$ is locally path-connected and thus by \cite[93]{lee:topological_manifolds:2011}, $\mathbb{S}^n \setminus X$ is locally path-connected and hence path-components and components coincide.\\
+	Let $X_1$ and $X_2$ denote the two components of $\mathbb{S}^n \setminus X$. Since $X \cup X_1$ is closed, the boundary of $\partial X_1$ is contained in $X$. Conversly, suppose $p \in X$ and let $U$ be a neighbourhood of $p$ in $\mathbb{S}^n$. Now there exists some $V \subseteq X \cap U$, such that $p \in V$ and $X \setminus V \approx \mathbb{B}^{n - 1}$ ($X$ is a copy of $\mathbb{S}^{n - 1}$). Since $\mathbb{B}^{n - 1} \approx \intcc{0,1}^{n - 1}$, we get by proposition \ref{prop:I_m}, that $\wtilde{H}_0(\mathbb{S}^n \setminus (X \setminus V)) = 0$ and hence the dimension axiom yields that $\mathbb{S}^n \setminus (X \setminus V)$ has one path component. Now for $x_1 \in X_1$ and $x_2 \in X_2$ we find a path with image in $\mathbb{S}^n \setminus (X \setminus V)$, since $X_1$ and $X_2$ are distinct path-components, we must have that the path intersects $V$. Hence $V$ contains points belonging to $\wbar{X}_1$ and $\wbar{X}_2$, thus $p \in \partial X_1$.
 \end{proof}
