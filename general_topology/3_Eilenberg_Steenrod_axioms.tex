@@ -13,3 +13,19 @@
 		\item \textbf{The Dimension Axiom.} Let $\ast$ be the terminal object in $\mathsf{Top}$. Then $\mathcal{H}_0(\ast) \cong \mathbb{Z}$ and $\mathcal{H}_n(\ast) = 0$ for all $n \in \omega$, $n > 0$. 
 	\end{itemize}
 \end{definition}
+
+\begin{theorem}[Baby Uniqueness Theorem]
+	Suppose $(\mathcal{H},\delta)$ and $(\mathcal{K},\varepsilon)$ satisfy the homotopy, exact sequence, excision and dimension axiom and suppose $\Phi_\bullet  : (\mathcal{H},\delta) \Rightarrow (\mathcal{K},\varepsilon)$ is a natural transformation such that $\Phi_0(\ast) : \mathcal{H}_0(\ast) \to \mathcal{K}_0(\ast)$ is an isomorphism. Then
+	\begin{equation*}
+		\Phi_n(X,X') : \mathcal{H}_n(X,X') \to \mathcal{K}_n(X,X')
+	\end{equation*}
+	\noindent is an isomorphism for all pairs $(X,X')$ consisting of a finite cell complex $X$ and a subcomplex $X'$.
+\end{theorem}
+
+\begin{proof}
+	\begin{enumerate}[label = \textit{Step \arabic*:},wide = 0pt]
+		\item \textit{$X = \mathbb{S}^0$ and $X' = \varnothing$.}
+		\item \textit{$X = \mathbb{S}^k$ and $X' = \varnothing$.}
+		\item \textit{General case.}
+	\end{enumerate}
+\end{proof}

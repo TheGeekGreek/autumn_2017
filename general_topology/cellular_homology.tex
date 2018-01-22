@@ -43,6 +43,16 @@
 	Let $n \in \omega$, $n \geq 1$. Then $\mathbb{E}^n := \mathbb{B}^n \setminus \mathbb{S}^{n-1}$ is called the \bld{standard $n$-cell}. If $X$ is a topological space and $E \subseteq X$ is homeomorphic to $\mathbb{E}^n$, then $E$ is called an \bld{$n$-cell in $X$}. Moreover, if $f \in \mathsf{Top}(\mathbb{S}^{n-1},Y)$, the adjunction space $\mathbb{B}^n \cup_f Y$ is said to be obtained from $Y$ by \bld{attaching an $n$-cell}. 
 \end{definition}
 
+\begin{examples}
+	~
+	\begin{enumerate}[label = \textup{(}\alph*\textup{)},wide = 0pt]
+		\item For all $n \geq 1$, $\mathbb{S}^n$ is obtained by attaching an $n$-cell to a point.
+		\item $\mathbb{RP}^n = E_0 \cup E_1 \cup \dots E_{n - 1} \cup E_n$.
+		\item $\mathbb{CP}^n = E_0 \cup E_2 \cup E_4 \cup \dots \cup E_{2n}$.
+		\item For any $m,n \in \omega$, the space $\mathbb{S}^m \times \mathbb{S}^n$ is obtained from $\mathbb{S}^m \vee \mathbb{S}^n$ by attaching a $m + n$-cell.
+	\end{enumerate}
+\end{examples}
+
 \begin{proposition}
 	Let $Y$ be a Hausdorff space, $n \in \omega$, $n > 0$, and $f \in \mathsf{Top}(\mathbb{S}^{n - 1},Y)$. Then if $\iota : Y \hookrightarrow  \mathbb{B}^n \cup_f Y$ denotes inclusion, there is a long exact sequence
 	\begin{equation*}
@@ -171,6 +181,48 @@
 	\end{enumerate}
 \end{proposition}
 
+\begin{proposition}
+	Let $n \geq 1$ and $A \in \mathrm{O}(n + 1)$. Set $f := A \vert_{\mathbb{S}^n}$. Then $\deg f = \det A$.
+\end{proposition}
+
+\begin{proof}
+	The group $\mathrm{O}(n + 1)$ has two connected components distinguished by $\det$. By homotopy invariance it is enough to check the result for one $A$ in each component. Since the identity matrix induces degree $1$, we have to check it only for the other component. We take $A$ the reflection in some hyperplane in $\mathbb{R}^{n + 1}$. Divide $\mathbb{S}^n$ in two hemispheres which are preserved by $A$. Then $f$ induces a reflection $f'$ in the equatorial $\mathbb{S}^{n - 1}$. Using Mayer-Vietorsi we obtain the commutative diagram
+	\begin{equation*}
+		\begin{tikzcd}
+			H_n(\mathbb{S}^n) \arrow[d,"H_n(f)"']\arrow[r,leftrightarrow,"\cong"] & H_{n - 1}(\mathbb{S}^{n - 1})\arrow[d,"H_{n - 1}(f')"]\\
+			H_n(\mathbb{S}^n) \arrow[r,leftrightarrow,"\cong"'] & H_{n - 1}(\mathbb{S}^{n - 1}).
+		\end{tikzcd}
+	\end{equation*}
+	Hence $\deg f = \deg f'$. Thus it suffices to prove the result for $n = 1$.
+\end{proof}
+
+\begin{corollary}
+	Let $n \geq 1$. Then the antipodal map $\alpha : \mathbb{S}^n \to \mathbb{S}^n$, $\alpha(x) := -x$, has degree $(-1)^{n + 1}$.
+\end{corollary}
+
+\begin{theorem}[The Hairy Ball Theorem]
+	There exists a nowhere vanishing vector field on $\mathbb{S}^n$ if and only if $n$ is odd.
+\end{theorem}
+
+\begin{proof}
+	Let $V$ be a nowhere vanishing vector field on $\mathbb{S}^n$. Define $H : \mathbb{S}^n \times I \to \mathbb{S}^n$ by
+	\begin{equation*}
+		H(x,t) := (\cos \pi t) x + (\sin \pi t) V(x)/\abs[0]{V(x)}.
+	\end{equation*}
+	It is easy to check that $H : \id_{\mathbb{S}^n} \simeq \alpha$, but then we have that 
+	\begin{equation*}
+		(-1)^{n + 1} = \deg \alpha = \deg \id_{\mathbb{S}^n} = 1,
+	\end{equation*}
+	\noindent which is only possible if $n$ is odd. Conversly, if $n = 2m - 1$, define $V : \mathbb{R}^{2m} \to \mathbb{R}^{2m}$ by
+	\begin{equation*}
+		V(x_1,y_1,\dots,x_m,y_m) := (-y_1,x_1,\dots,-y_m,x_m).
+	\end{equation*}
+\end{proof}
+
+\begin{theorem}
+	An odd map has odd degree.
+\end{theorem}
+
 \section*{Cellular Homology}
 
 \begin{definition}[Cell-Like Filtration]
@@ -239,3 +291,39 @@
 		&= H_n(X,\mathcal{F}).
 	\end{align*}
 \end{proof}
+
+\begin{definition}
+	Let $Y,Z \in \ob(\mathsf{Top})$ and $n \geq 1$. We say that \bld{$Z$ is obtained from $Y$ by attaching $n$-cells}, if there exists a pushout
+	\begin{equation*}
+		\begin{tikzcd}
+			\coprod_{\alpha \in A} \mathbb{S}_\alpha^{n - 1} \arrow[d,hook]\arrow[r,"f"] & Y \arrow[d]\\
+			\coprod_{\alpha \in A} \mathbb{B}^n_\alpha \arrow[r,"g"'] & Z.
+		\end{tikzcd}
+	\end{equation*}
+	Moreover, for all $\alpha \in A$ set $f_\alpha := f\vert_{\mathbb{S}^{n - 1}_\alpha}$ and $g_\alpha := g\vert_{\mathbb{B}^n_\alpha}$. We call $g_\alpha$ the \bld{characteristic map} of the $n$-cell $g(\mathbb{E}^n_\alpha)$ and $f_\alpha$ its \bld{attaching map}.
+\end{definition}
+
+\begin{definition}
+	Let $X$ be a cell-complex and $n \geq 1$. Moreover, suppose $e_\lambda$ is an $n$-cell and $e_\nu$ is an $n - 1$-cell. Define $h_{\lambda,\nu} : \mathbb{S}^{n - 1}_\lambda \to \mathbb{S}_\nu^{n - 1}$, where $\mathbb{S}_\nu^{n - 1} := g_\nu(\mathbb{B}^{n - 1}_\nu)/f_\nu(\partial \mathbb{B}^{n - 1}_\nu)$, to be the composition
+	\begin{equation*}
+		\begin{tikzcd}
+			\mathbb{S}_\lambda^{n - 1} \arrow[r,"f_\lambda"] & X^{n - 1} \arrow[r] & X^{n - 1}/X^{n - 1} \arrow[r,"q_\nu"] & \mathbb{S}^{n - 1}_\nu.
+		\end{tikzcd}
+	\end{equation*}
+	Also, define
+	\begin{equation*}
+		\sbr[0]{e_\lambda : e_\nu} := \deg(h_{\lambda,\nu}).
+	\end{equation*}
+\end{definition}
+
+\begin{theorem}[Cellular Boundary Formula]
+	Let $X$ be a cell-complex. Then the cellular boundary operator $\partial^{\mathrm{cell}} : C_n^{\mathrm{cell}}(X) \to C_{n - 1}^{\mathrm{cell}}(X)$ is given by
+	\begin{equation*}
+		\partial^{\mathrm{cell}}e_\lambda = \sum_\nu \sbr[0]{e_\lambda : e_\nu} e_\nu,
+	\end{equation*}
+	\noindent on generators.
+\end{theorem}
+
+\begin{proof}
+	
+\end{proof}<++>
