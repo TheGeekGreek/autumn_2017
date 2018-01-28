@@ -406,3 +406,19 @@ In algebraic topology, there is a very useful construction on categories.
 			\end{figure}
 	\end{enumerate}
 \end{proof}
+
+\begin{proposition}[Barratt-Whitehead]
+	Suppose we are given a commutative diagram with exact rows in $\mathsf{AbGrp}$:
+	\begin{equation*}
+		\begin{tikzcd}
+			\dots \arrow[r] & A_n \arrow[r,"i_n"]\arrow[d,"f_n"] & B_n \arrow[r,"j_n"]\arrow[d,"g_n"] & C_n \arrow[r,"k_n"]\arrow[d,"h_n"] & A_{n - 1} \arrow[r]\arrow[d,"f_{n - 1}"] & \dots\\
+			\dots \arrow[r] & A'_n \arrow[r,"i'_n"'] & B'_n \arrow[r,"j'_n"'] & C'_n \arrow[r,"k'_n"'] & A'_{n - 1} \arrow[r] & \dots
+		\end{tikzcd} 
+	\end{equation*}
+	\noindent where each $h_n$ is an isomorphism. Then there exists a long exact sequence
+	\begin{equation*}
+		\begin{tikzcd}[column sep=9ex]
+			\dots \arrow[r] & A_n \arrow[r,"{(i_n,f_n)}"] & B_n \oplus A_n' \arrow[r,"g_n - i_n'"] & B_n' \arrow[r,"k_nh_n^{-1}j_n'"] & A_{n - 1} \arrow[r] & \dots.
+		\end{tikzcd}
+	\end{equation*}
+\end{proposition}
